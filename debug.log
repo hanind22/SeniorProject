@@ -1,0 +1,36 @@
+Received POST data:
+Array
+(
+    [fullName] => Hanin
+    [userType] => doctor
+    [doctorSpecialty] => neurology
+    [licenseNumber] => 125478963
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71-175060
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for hanindiab22@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Ali Sobhi Diab
+    [userType] => patient
+    [doctorSpecialty] => neurology
+    [licenseNumber] => 
+    [Email] => alisobhidiab32@gmail.com
+    [Password] => 12345678
+    [phone] => 70-125487
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for alisobhidiab32@gmail.com

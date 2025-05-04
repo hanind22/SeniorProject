@@ -1,0 +1,37 @@
+=== LOGIN TRIGGERED ===
+POST Data: Array
+(
+    [email] => hanindiab22@gmail.com
+    [password] => 12345678
+)
+
+DB Connected to: medicare_system
+=== SIGNUP TRIGGERED ===
+Array
+(
+    [fullName] => Nader Saab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => Nader174@hotmail.com
+    [Password] => 12345678
+    [phone] => 76-985447
+)
+
+DB Connected to: medicare_system
+Received POST data:
+Array
+(
+    [fullName] => Nader Saab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => Nader174@hotmail.com
+    [Password] => 12345678
+    [phone] => 76-985447
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for Nader174@hotmail.com

@@ -1,6 +1,7 @@
 <?php
+
 session_start();
-require_once('db-config/connection.php');
+require_once('../db-config/connection.php');
 
 // Enable error reporting
 error_reporting(E_ALL);
@@ -106,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             file_put_contents('debug.log', "Registration successful for $email\n", FILE_APPEND);
             
             // Redirect
-            header("Location: " . ($user_type === 'doctor' ? 'doctor_dashboard.php' : 'patient_dashboard.php'));
+            header("Location: " . ($user_type === 'doctor' ? '../Doctor/doctor_dashboard.php' : '../Patient/patient_dashboard.php'));
             exit();
             
         } catch (Exception $e) {

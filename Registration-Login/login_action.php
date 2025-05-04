@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('db-config/connection.php');
+require_once('../db-config/connection.php');
 
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 // Redirect based on user type
                 if ($user['user_type'] === 'doctor') {
-                    header("Location: doctor_dashboard.php");
+                    header("Location: /fyp/Doctor/doctor_dashboard.php");
                 } else {
-                    header("Location: patient_dashboard.php");
+                    header("Location: ../Patient/patient_dashboard.php");
                 }
                 exit();
             } else {

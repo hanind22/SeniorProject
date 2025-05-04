@@ -22,9 +22,6 @@
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="Password" required>
-                    <span class="password-toggle" onclick="togglePassword('loginPassword', this)">
-                        <i class="fas fa-eye"></i>
-                    </span>
                 </div>
                 <div class="forgot-password">
                     <a href="#">Forgot Password?</a>
@@ -88,9 +85,6 @@
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="Password" name="Password" placeholder="Password" required>
-                    <span class="password-toggle" onclick="togglePassword('signupPassword', this)">
-                        <i class="fas fa-eye"></i>
-                    </span>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number" pattern="^[0-9\-]+$" required >

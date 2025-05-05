@@ -23,6 +23,11 @@ CREATE TABLE doctors (
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
+<!-- Create indexes for better performance -->
+CREATE INDEX idx_user_type ON users(user_type);
+CREATE INDEX idx_doctor_specialty ON doctors(specialty);
+
+
 <!-- Create patients table (additional patient-specific fields if needed) -->
 CREATE TABLE patients (
     patient_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,6 +36,19 @@ CREATE TABLE patients (
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
-<!-- Create indexes for better performance -->
-CREATE INDEX idx_user_type ON users(user_type);
-CREATE INDEX idx_doctor_specialty ON doctors(specialty);
+<!-- Second Step: After adding the health form that the patient must fill for 1 time only -->
+ALTER TABLE patients
+ADD COLUMN date_of_birth DATE,
+ADD COLUMN gender ENUM('male', 'female') NOT NULL,
+ADD COLUMN blood_type ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-') NOT NULL,
+ADD COLUMN allergies TEXT NOT NULL DEFAULT 'None',
+ADD COLUMN medical_conditions TEXT NOT NULL DEFAULT 'None',
+ADD COLUMN current_medications TEXT NOT NULL DEFAULT 'None',
+ADD COLUMN previous_surgeries TEXT NOT NULL DEFAULT 'None',
+ADD COLUMN family_history TEXT NOT NULL DEFAULT 'None',
+ADD COLUMN emergency_contact_name VARCHAR(100) NOT NULL,
+ADD COLUMN emergency_contact_relationship ENUM('Partner', 'parent', 'child', 'sibling', 'friend', 'other') NOT NULL,
+ADD COLUMN emergency_contact_phone VARCHAR(20) NOT NULL,
+ADD COLUMN insurance_provider VARCHAR(100),
+ADD COLUMN insurance_number VARCHAR(50),
+ADD COLUMN health_form_completed BOOLEAN NOT NULL DEFAULT FALSE;

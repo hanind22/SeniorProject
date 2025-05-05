@@ -35,3 +35,145 @@ Array
 )
 
 Registration successful for Nader174@hotmail.com
+Received POST data:
+Array
+(
+    [fullName] => Abbass Mossa
+    [userType] => doctor
+    [doctorSpecialty] => neurology
+    [licenseNumber] => 254781369
+    [Email] => abbassM@gmail.com
+    [Password] => 12345678
+    [phone] => 03-225552
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for abbassM@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Abbass Mossa
+    [userType] => doctor
+    [doctorSpecialty] => neurology
+    [licenseNumber] => 254781369
+    [Email] => abbassM@gmail.com
+    [Password] => 12345678
+    [phone] => 03-225552
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Jawad Shhadi
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => jawadShehazi22@gmail.com
+    [Password] => 12345678
+    [phone] => 71-587456
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for jawadShehazi22@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Akram njcdk
+    [userType] => doctor
+    [doctorSpecialty] => pediatrics
+    [licenseNumber] => 365984132103
+    [Email] => AkramKKK@gmail.com
+    [Password] => 789654123
+    [phone] => 71-587456
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for AkramKKK@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Akram njcdk
+    [userType] => patient
+    [doctorSpecialty] => pediatrics
+    [licenseNumber] => 365984132103
+    [Email] => AkramKKK@gmail.com
+    [Password] => 12345678
+    [phone] => 71-587456
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for AkramKKK@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Akram njcdk
+    [userType] => patient
+    [doctorSpecialty] => pediatrics
+    [licenseNumber] => 365984132103
+    [Email] => AkramKKK@gmail.com
+    [Password] => 12345678
+    [phone] => 71-587456
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Banin Shour
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => banin@gmail.com
+    [Password] => 12345678
+    [phone] => 71-297729
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for banin@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Fatimah Zaydan
+    [userType] => patient
+    [doctorSpecialty] => orthopedics
+    [licenseNumber] => 
+    [Email] => fatimahzaydan@gmail.com
+    [Password] => 12345678
+    [phone] => 71-569854
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for fatimahzaydan@gmail.com

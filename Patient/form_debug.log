@@ -1,0 +1,14 @@
+
+
+===== NEW SUBMISSION =====
+Raw POST: date_of_birth=2000-02-17&gender=female&blood_type=AB%2B&allergies=None&medical_conditions=None&current_medications=None&previous_surgeries=None&family_history=None&emergency_contact_name=Shadi+Shehazi&emergency_contact_relationship=parent&emergency_contact_phone=81-457714&insurance_provider=&insurance_number=
+
+
+===== NEW SUBMISSION =====
+Raw POST: date_of_birth=2000-02-17&gender=female&blood_type=AB%2B&allergies=None&medical_conditions=None&current_medications=None&previous_surgeries=None&family_history=None&emergency_contact_name=Shadi+Shehazi&emergency_contact_relationship=parent&emergency_contact_phone=81-457714&insurance_provider=&insurance_number=
+
+
+===== NEW SUBMISSION =====
+Raw POST: date_of_birth=2010-03-10&gender=male&blood_type=O%2B&allergies=Pollen+Allergy&medical_conditions=None&current_medications=Mometasone+&previous_surgeries=None&family_history=None&emergency_contact_name=Mohammad+Sobhi+Diab&emergency_contact_relationship=parent&emergency_contact_phone=03-605599&insurance_provider=&insurance_number=
+ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE user_id = ?' at line 15
+ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE user_id = ?' at line 15

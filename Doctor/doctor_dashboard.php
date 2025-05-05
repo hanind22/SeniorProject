@@ -6,7 +6,7 @@
     <title>Doctor's Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="doctor's_dashboard.css">
-    <link rel="stylesheet" href="Sidebar.css">
+    <link rel="stylesheet" href="../Sidebar.css">
 </head>
 <body>
     <?php

@@ -177,3 +177,38 @@ Array
 )
 
 Registration successful for fatimahzaydan@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Mohammad Sabbeh
+    [userType] => doctor
+    [doctorSpecialty] => cardiology
+    [licenseNumber] => 245871369
+    [Email] => sabbah.Mohammad321@gmail.com
+    [Password] => 12345678
+    [phone] => 71-963321
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for sabbah.Mohammad321@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Zainab Ayyad
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => zainab@gmail.com
+    [Password] => 12345678
+    [phone] => 71-896524
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for zainab@gmail.com

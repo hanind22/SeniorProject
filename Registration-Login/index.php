@@ -67,12 +67,12 @@
                     <div class="form-group">
                         <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" required>
                             <option value="" selected disabled>Select specialty</option>
-                            <option value="cardiology">Cardiology</option>
-                            <option value="neurology">Neurology</option>
-                            <option value="pediatrics">Pediatrics</option>
-                            <option value="orthopedics">Orthopedics</option>
-                            <option value="dermatology">Dermatology</option>
-                            <option value="general">General Practice</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="General">General Practice</option>
                         </select>
                     </div>
                     <div class="form-group">

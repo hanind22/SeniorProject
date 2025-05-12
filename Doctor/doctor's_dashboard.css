@@ -1,11 +1,9 @@
-
 .content {
-    overflow-y: auto;
     flex-grow: 1;
-    flex: 1;
     padding: 30px;
-    margin-left: 280px;
+    overflow-y: auto;
     height: 100vh;
+    background: #f8f9fa; /* Light background for content */
 }
 
 /* Notifications Section */
@@ -310,7 +308,7 @@
 }
 
 .chart-card {
-    width: 850px;
+    width: 100%;
     background-color: white;
     padding: 25px;
     border-radius: 10px;

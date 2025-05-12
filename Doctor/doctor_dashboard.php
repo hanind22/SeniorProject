@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <link rel="stylesheet" href="doctor's_dashboard.css">
-    <link rel="stylesheet" href="../Sidebar.css">
+    <link rel="stylesheet" href="Sidebar.css">
 </head>
 <body>
     <?php
@@ -58,7 +58,7 @@
                 <a href="doctor_dashboard.php" class="nav-item active">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
-                <a href="#" class="nav-item">
+                <a href="Dr_Appointment.php" class="nav-item">
                     <i class="fa-solid fa-calendar"></i> Appointments
                 </a>
                 <a href="patients.php" class="nav-item">
@@ -72,7 +72,7 @@
                 </a>
                 <a href="patients.php" class="nav-item">
                     <i class="fa-solid fa-bell"></i> Notifications
-                    <span class="alert-badge">3</span>
+                    <!-- <span class="alert-badge">3</span> -->
                 </a>
                 <a href="#" class="nav-item">
                     <i class="fas fa-user-md"></i> Profile
@@ -104,10 +104,6 @@
                 <div class="summary-card">
                     <h3><i class="fas fa-exclamation-triangle"></i> Critical Cases</h3>
                     <p>6</p>
-                </div>
-                <div class="summary-card">
-                    <h3><i class="fas fa-clipboard-list"></i> Test Results</h3>
-                    <p>2</p>
                 </div>
             </div>
             <!-- Notifications Section -->
@@ -159,8 +155,8 @@
          </div>
     </div>
 
-         </div>
-    </div>
+
+
 
 <script >
      document.addEventListener('DOMContentLoaded', function() {

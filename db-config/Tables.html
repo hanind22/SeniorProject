@@ -2,53 +2,121 @@
 CREATE DATABASE IF NOT EXISTS medicare_system;
 USE medicare_system;
 
-<!-- Create users table (common fields for both patients and doctors) -->
-CREATE TABLE users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    full_name VARCHAR(100) NOT NULL,
-    phone_number VARCHAR(20) NOT NULL,
-    user_type ENUM('patient', 'doctor') NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY,
+    full_name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(255),
+    phone_number VARCHAR(15),
+    user_type ENUM('patient', 'doctor') DEFAULT 'patient',
+    profile_image VARCHAR(255),
+    created_at DATETIME,
+    last_login DATETIME
 );
 
-<!-- Create doctors table (additional doctor-specific fields) -->
-CREATE TABLE doctors (
-    doctor_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    specialty VARCHAR(50) NOT NULL,
-    license_number VARCHAR(50) NOT NULL UNIQUE,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+CREATE TABLE Doctors (
+    doctor_id INT PRIMARY KEY,
+    user_id INT,
+    specialtyENUM('Cardiology', 'Dermatology', 'Neurology', 'Pediatrics', 'Orthopedics' , 'General Practice');
+    license_number VARCHAR(50),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-<!-- Create indexes for better performance -->
-CREATE INDEX idx_user_type ON users(user_type);
-CREATE INDEX idx_doctor_specialty ON doctors(specialty);
-
-
-<!-- Create patients table (additional patient-specific fields if needed) -->
-CREATE TABLE patients (
-    patient_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    -- Add any patient-specific fields here in the future
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+CREATE TABLE Patients (
+    patient_id INT PRIMARY KEY,
+    user_id INT,
+    date_of_birth DATE,
+    gender VARCHAR(10),
+    allergies TEXT,
+    medical_conditions TEXT,
+    current_medications TEXT,
+    previous_surgeries TEXT,
+    family_history TEXT,
+    insurance_provider VARCHAR(100),
+    insurance_number VARCHAR(50),
+    QR_code VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-<!-- Second Step: After adding the health form that the patient must fill for 1 time only -->
-ALTER TABLE patients
-ADD COLUMN date_of_birth DATE,
-ADD COLUMN gender ENUM('male', 'female') NOT NULL,
-ADD COLUMN blood_type ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-') NOT NULL,
-ADD COLUMN allergies TEXT NOT NULL DEFAULT 'None',
-ADD COLUMN medical_conditions TEXT NOT NULL DEFAULT 'None',
-ADD COLUMN current_medications TEXT NOT NULL DEFAULT 'None',
-ADD COLUMN previous_surgeries TEXT NOT NULL DEFAULT 'None',
-ADD COLUMN family_history TEXT NOT NULL DEFAULT 'None',
-ADD COLUMN emergency_contact_name VARCHAR(100) NOT NULL,
-ADD COLUMN emergency_contact_relationship ENUM('Partner', 'parent', 'child', 'sibling', 'friend', 'other') NOT NULL,
-ADD COLUMN emergency_contact_phone VARCHAR(20) NOT NULL,
-ADD COLUMN insurance_provider VARCHAR(100),
-ADD COLUMN insurance_number VARCHAR(50),
-ADD COLUMN health_form_completed BOOLEAN NOT NULL DEFAULT FALSE;
+CREATE TABLE Appointments (
+    appointment_id INT PRIMARY KEY,
+    doctor_id INT,
+    patient_id INT,
+    appointment_date DATE,
+    start_time TIME,
+    end_time TIME,
+    status VARCHAR(20),
+    reason_for_visit TEXT,
+    notes TEXT,
+    is_first_visit BOOLEAN,
+    created_at DATETIME,
+    updated_at DATETIME,
+    cancelled_by INT,
+    cancelled_reason TEXT,
+    FOREIGN KEY (doctor_id) REFERENCES Doctors(doctor_id),
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id),
+    FOREIGN KEY (cancelled_by) REFERENCES Users(user_id)
+);
+
+CREATE TABLE Medical_Records (
+    record_id INT PRIMARY KEY,
+    doctor_id INT,
+    patient_id INT,
+    appointment_id INT,
+    visit_date DATE,
+    diagnosis TEXT,
+    notes TEXT,
+    created_at DATETIME,
+    FOREIGN KEY (doctor_id) REFERENCES Doctors(doctor_id),
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id),
+    FOREIGN KEY (appointment_id) REFERENCES Appointments(appointment_id)
+);
+
+CREATE TABLE Prescriptions (
+    prescription_id INT PRIMARY KEY,
+    record_id INT,
+    medicine_name VARCHAR(100),
+    dosage VARCHAR(50),
+    duration VARCHAR(50),
+    instructions TEXT,
+    frequency VARCHAR(50),
+    FOREIGN KEY (record_id) REFERENCES Medical_Records(record_id)
+);
+
+CREATE TABLE Emergency_Contacts (
+    contact_id INT PRIMARY KEY,
+    patient_id INT,
+    emergency_contact_name VARCHAR(100),
+    emergency_contact_phone VARCHAR(20),
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id)
+);
+
+CREATE TABLE Work_Place (
+    work_place_id INT PRIMARY KEY,
+    doctor_id INT,
+    place_name VARCHAR(100),
+    FOREIGN KEY (doctor_id) REFERENCES Doctors(doctor_id)
+);
+
+CREATE TABLE Notifications (
+    notification_id INT PRIMARY KEY,
+    sender_id INT,
+    receiver_id INT,
+    message TEXT,
+    type_notification VARCHAR(50),
+    created_at DATETIME,
+    is_read BOOLEAN,
+    FOREIGN KEY (sender_id) REFERENCES Users(user_id),
+    FOREIGN KEY (receiver_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE PatientUploads (
+    upload_id INT PRIMARY KEY,
+    doctor_id INT,
+    patient_id INT,
+    report_type VARCHAR(100),
+    file_path VARCHAR(255),
+    uploaded_at DATETIME,
+    FOREIGN KEY (doctor_id) REFERENCES Doctors(doctor_id),
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id)
+);

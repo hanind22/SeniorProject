@@ -212,3 +212,90 @@ Array
 )
 
 Registration successful for zainab@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Ali Ahmad
+    [userType] => doctor
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => 59652677
+    [Email] => Ahmad.Ali@gmail.com
+    [Password] => 12345678
+    [phone] => 71-895741
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for Ahmad.Ali@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Alaa Kawtarani
+    [userType] => patient
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => 59652677
+    [Email] => Alaa213@gmail.com
+    [Password] => 12345678
+    [phone] => 71-895444
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for Alaa213@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Zainab Ayyad
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => zainab@gmail.com
+    [Password] => 12345678
+    [phone] => 71896524
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for zainab@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Fadel Makki
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => fadel22@gmail.com
+    [Password] => 12345678
+    [phone] => 71896724
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for fadel22@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Fatimah Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => Fatimahhh3@gmail.com
+    [Password] => 12345678
+    [phone] => 71-985555
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for Fatimahhh3@gmail.com

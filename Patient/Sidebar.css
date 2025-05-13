@@ -39,7 +39,7 @@ body {
 .sidebar .sidebar-header .logo{
     font-size: 1.8rem;
     font-weight: 550;
-    font-family:'Courier New', Courier, monospace;
+    font-family:'Courier New', Courier, monospace !important;
 }
 
 .speciality {

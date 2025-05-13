@@ -12,3 +12,10 @@ Raw POST: date_of_birth=2000-02-17&gender=female&blood_type=AB%2B&allergies=None
 Raw POST: date_of_birth=2010-03-10&gender=male&blood_type=O%2B&allergies=Pollen+Allergy&medical_conditions=None&current_medications=Mometasone+&previous_surgeries=None&family_history=None&emergency_contact_name=Mohammad+Sobhi+Diab&emergency_contact_relationship=parent&emergency_contact_phone=03-605599&insurance_provider=&insurance_number=
 ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE user_id = ?' at line 15
 ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE user_id = ?' at line 15
+ERROR: Unknown column 'emergency_contact_name' in 'field list'
+ERROR: Unknown column 'health_form_completed' in 'field list'
+ERROR: Unknown column 'health_form_completed' in 'field list'
+ERROR: Unknown column 'emergency_contact_relationship' in 'field list'
+ERROR: Unknown column 'emergency_contact_relationship' in 'field list'
+2025-05-13 10:42:56 ERROR: Unknown column 'emergency_contact_relationship' in 'field list'
+2025-05-13 10:43:17 ERROR: Unknown column 'emergency_contact_relationship' in 'field list'

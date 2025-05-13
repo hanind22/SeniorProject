@@ -6,12 +6,23 @@
     <title>My Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="patient_dashboard.css">
-    <link rel="stylesheet" href="../Sidebar.css">
+    <link rel="stylesheet" href="Sidebar.css">
 </head>
 <body>
     <?php
     session_start();
     include('../db-config/connection.php');
+
+
+if (isset($_SESSION['error'])) {
+    echo '<div class="alert alert-danger">'.$_SESSION['error'].'</div>';
+    unset($_SESSION['error']);
+}
+if (isset($_SESSION['success'])) {
+    echo '<div class="alert alert-success">'.$_SESSION['success'].'</div>';
+    unset($_SESSION['success']);
+}
+
 
     // Initialize patient data
     $patientData = [];
@@ -52,6 +63,7 @@
     } catch (Exception $e) {
         $error = "Error fetching patient data: " . $e->getMessage();
     }
+    $patientId = $patientData['patient_id'] ?? null;
     ?>
 
     <div class="container">
@@ -155,7 +167,7 @@
                             
                             <div class="qr-code-container">
                                 <div class="qr-code">
-                                    <img src="/api/placeholder/150/150" alt="QR Code">
+                                    <img src="../qrcodes/patient_<?php echo htmlspecialchars($patientId) ?>.png" alt="QR Code" width="150" height="150">
                                     <p>Health ID QR Code</p>
                                     <button class="btn btn-secondary" id="download-id-card-btn">
                                         <i class="fas fa-download"></i> Download ID Card

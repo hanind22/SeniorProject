@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_type'] = $user['user_type'];
                 
                 // Redirect based on user type
-                if ($user['user_type'] === 'doctor') {
+                if ($user['user_type'] === 'Doctor') {
                     header("Location: /fyp/Doctor/doctor_dashboard.php");
                 } else {
                     header("Location: ../Patient/patient_dashboard.php");

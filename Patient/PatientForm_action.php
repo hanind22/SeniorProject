@@ -1,45 +1,57 @@
 <?php
-// Start session first
 session_start();
-
 require_once('../db-config/connection.php');
+require_once '../libs/phpqrcode/qrlib.php';  // Include QR code library
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verify user is logged in
     if (!isset($_SESSION['user_id'])) {
         die("Error: User not logged in");
     }
 
     $userId = $_SESSION['user_id'];
-    
-    // Map ALL form fields correctly (notice the exact names matching your form)
-    $data = [
+
+    // Prepare data for Patients table
+    $patientData = [
         'date_of_birth' => $_POST['date_of_birth'] ?? '',
         'gender' => $_POST['gender'] ?? '',
         'blood_type' => $_POST['blood_type'] ?? '',
         'allergies' => $_POST['allergies'] ?? 'None',
-        'medical_conditions' => $_POST['medical_conditions'] ?? 'None',  // Changed from medicalConditions
-        'current_medications' => $_POST['current_medications'] ?? 'None', // Changed from medications
-        'previous_surgeries' => $_POST['previous_surgeries'] ?? 'None',  // Changed from surgeries
+        'medical_conditions' => $_POST['medical_conditions'] ?? 'None',
+        'current_medications' => $_POST['current_medications'] ?? 'None',
+        'previous_surgeries' => $_POST['previous_surgeries'] ?? 'None',
         'family_history' => $_POST['family_history'] ?? 'None',
-        'emergency_contact_name' => $_POST['emergency_contact_name'] ?? '', // Changed from emergencyName
-        'emergency_contact_relationship' => $_POST['emergency_contact_relationship'] ?? '', // Changed from emergencyRelationship
-        'emergency_contact_phone' => $_POST['emergency_contact_phone'] ?? '', // Changed from emergencyPhone
         'insurance_provider' => $_POST['insurance_provider'] ?? '',
         'insurance_number' => $_POST['insurance_number'] ?? '',
         'health_form_completed' => 1
     ];
-    
+
+    // Prepare data for Emergency_Contacts table
+    $emergencyContactData = [
+        'emergency_contact_name' => $_POST['emergency_contact_name'] ?? '',
+        'emergency_contact_phone' => $_POST['emergency_contact_phone'] ?? '',
+        'emergency_contact_relationship' => $_POST['emergency_contact_relationship'] ?? ''
+    ];
+
     try {
-        // First check if patient exists
-        $check = $conn->prepare("SELECT patient_id FROM patients WHERE user_id = ?");
-        $check->bind_param("i", $userId);
-        $check->execute();
-        $exists = $check->get_result()->num_rows > 0;
+        $conn->begin_transaction();
         
-        if ($exists) {
-            // UPDATE existing record
-            $sql = "UPDATE patients SET 
+        // Check if patient record exists
+        $checkPatient = $conn->prepare("SELECT patient_id FROM patients WHERE user_id = ?");
+        $checkPatient->bind_param("i", $userId);
+        if (!$checkPatient->execute()) {
+    throw new Exception("Check patient failed: " . $checkPatient->error);
+}
+        $patientResult = $checkPatient->get_result();
+        $patientExists = $patientResult->num_rows > 0;
+        $patientId = 0;
+        
+        if ($patientExists) {
+            // Get the existing patient_id
+            $patientRow = $patientResult->fetch_assoc();
+            $patientId = $patientRow['patient_id'];
+            
+            // Update existing patient
+            $patientSql = "UPDATE patients SET 
                     date_of_birth = ?,
                     gender = ?,
                     blood_type = ?,
@@ -48,97 +60,130 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     current_medications = ?,
                     previous_surgeries = ?,
                     family_history = ?,
-                    emergency_contact_name = ?,
-                    emergency_contact_relationship = ?,
-                    emergency_contact_phone = ?,
                     insurance_provider = ?,
                     insurance_number = ?,
                     health_form_completed = ?
                     WHERE user_id = ?";
-        } else {
-            // INSERT new record
-            $sql = "INSERT INTO patients SET 
-                    user_id = ?,
-                    date_of_birth = ?,
-                    gender = ?,
-                    blood_type = ?,
-                    allergies = ?,
-                    medical_conditions = ?,
-                    current_medications = ?,
-                    previous_surgeries = ?,
-                    family_history = ?,
-                    emergency_contact_name = ?,
-                    emergency_contact_relationship = ?,
-                    emergency_contact_phone = ?,
-                    insurance_provider = ?,
-                    insurance_number = ?,
-                    health_form_completed = ?";
-        }
-        
-        $stmt = $conn->prepare($sql);
-        if (!$stmt) {
-            throw new Exception("Prepare failed: " . $conn->error);
-        }
-        
-        // Bind parameters based on operation
-        if ($exists) {
-            $bind = $stmt->bind_param("ssssssssssssssi", 
-                $data['date_of_birth'],
-                $data['gender'],
-                $data['blood_type'],
-                $data['allergies'],
-                $data['medical_conditions'],
-                $data['current_medications'],
-                $data['previous_surgeries'],
-                $data['family_history'],
-                $data['emergency_contact_name'],
-                $data['emergency_contact_relationship'],
-                $data['emergency_contact_phone'],
-                $data['insurance_provider'],
-                $data['insurance_number'],
-                $data['health_form_completed'],
+                    
+            $patientStmt = $conn->prepare($patientSql);
+            $patientStmt->bind_param("sssssssssssi", 
+                $patientData['date_of_birth'],
+                $patientData['gender'],
+                $patientData['blood_type'],
+                $patientData['allergies'],
+                $patientData['medical_conditions'],
+                $patientData['current_medications'],
+                $patientData['previous_surgeries'],
+                $patientData['family_history'],
+                $patientData['insurance_provider'],
+                $patientData['insurance_number'],
+                $patientData['health_form_completed'],
                 $userId
             );
+            
+            $patientResult = $patientStmt->execute();
         } else {
-            $bind = $stmt->bind_param("isssssssssssss", 
+            // Insert new patient
+            $patientSql = "INSERT INTO patients (
+                    user_id, date_of_birth, gender, blood_type, allergies, 
+                    medical_conditions, current_medications, previous_surgeries, 
+                    family_history, insurance_provider, insurance_number, health_form_completed
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                
+            $patientStmt = $conn->prepare($patientSql);
+            $patientStmt->bind_param("issssssssssi", 
                 $userId,
-                $data['date_of_birth'],
-                $data['gender'],
-                $data['blood_type'],
-                $data['allergies'],
-                $data['medical_conditions'],
-                $data['current_medications'],
-                $data['previous_surgeries'],
-                $data['family_history'],
-                $data['emergency_contact_name'],
-                $data['emergency_contact_relationship'],
-                $data['emergency_contact_phone'],
-                $data['insurance_provider'],
-                $data['insurance_number'],
-                $data['health_form_completed']
+                $patientData['date_of_birth'],
+                $patientData['gender'],
+                $patientData['blood_type'],
+                $patientData['allergies'],
+                $patientData['medical_conditions'],
+                $patientData['current_medications'],
+                $patientData['previous_surgeries'],
+                $patientData['family_history'],
+                $patientData['insurance_provider'],
+                $patientData['insurance_number'],
+                $patientData['health_form_completed']
+            );
+            
+            $patientResult = $patientStmt->execute();
+            $patientId = $conn->insert_id;
+        }
+        
+        if (!$patientResult) {
+            throw new Exception("Patient data save failed: " . $patientStmt->error);
+        }
+        
+        // Now handle the Emergency_Contacts table
+        // First, make sure we have a valid patient_id
+        if ($patientId <= 0) {
+            throw new Exception("Invalid patient ID: " . $patientId);
+        }
+        
+        $checkContact = $conn->prepare("SELECT contact_id FROM emergency_contacts WHERE patient_id = ?");
+        $checkContact->bind_param("i", $patientId);
+        $checkContact->execute();
+        $contactResult = $checkContact->get_result();
+        $contactExists = $contactResult->num_rows > 0;
+        
+        if ($contactExists) {
+            // Update existing emergency contact
+            $contactSql = "UPDATE emergency_contacts SET 
+                    emergency_contact_name = ?,
+                    emergency_contact_phone = ?,
+                    emergency_contact_relationship = ?
+                    WHERE patient_id = ?";
+                    
+            $contactStmt = $conn->prepare($contactSql);
+            $contactStmt->bind_param("sssi", 
+                $emergencyContactData['emergency_contact_name'],
+                $emergencyContactData['emergency_contact_phone'],
+                $emergencyContactData['emergency_contact_relationship'],
+                $patientId
+            );
+        } else {
+            // Insert new emergency contact
+            $contactSql = "INSERT INTO emergency_contacts (
+                    patient_id, emergency_contact_name, emergency_contact_phone, emergency_contact_relationship
+                ) VALUES (?, ?, ?, ?)";
+                
+            $contactStmt = $conn->prepare($contactSql);
+            $contactStmt->bind_param("isss", 
+                $patientId,
+                $emergencyContactData['emergency_contact_name'],
+                $emergencyContactData['emergency_contact_phone'],
+                $emergencyContactData['emergency_contact_relationship']
             );
         }
         
-        if (!$bind) {
-            throw new Exception("Bind failed: " . $stmt->error);
+        $contactResult = $contactStmt->execute();
+        
+        if (!$contactResult) {
+            throw new Exception("Emergency contact save failed: " . $contactStmt->error);
         }
         
-        $result = $stmt->execute();
+        // Define the patient ID for QR generator
+        $_GET['patient_id'] = $patientId;
+       include('qr_generator.php');
+
         
-        if ($result) {
-            $_SESSION['health_form_completed'] = true;
-            $_SESSION['success'] = "Health profile completed successfully!";
-            header('Location: patient_dashboard.php');
-            exit();
-        } else {
-            throw new Exception("Execute failed: " . $stmt->error);
-        }
-    } catch (Exception $e) {
-        // Log detailed error
-        file_put_contents('form_debug.log', "ERROR: " . $e->getMessage() . "\n", FILE_APPEND);
-        $_SESSION['error'] = "Failed to save health information. Please try again.";
+
+        $conn->commit();
+        
+        $_SESSION['health_form_completed'] = true;
+        $_SESSION['success'] = "Health profile completed successfully!";
         header('Location: patient_dashboard.php');
         exit();
+        
+    } catch (Exception $e) {
+        $conn->rollback();
+        // More detailed error logging
+        file_put_contents('form_debug.log', date('Y-m-d H:i:s') . " ERROR: " . $e->getMessage() . "\n", FILE_APPEND);
+        $_SESSION['error'] = "Failed to save health information: " . $e->getMessage();
+        header('Location: patient_dashboard.php');
+        exit();
+
     }
 }
+
 ?>

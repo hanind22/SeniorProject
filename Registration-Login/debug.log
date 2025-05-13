@@ -299,3 +299,141 @@ Array
 )
 
 Registration successful for Fatimahhh3@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Alaa Kawtarafni
+    [userType] => patient
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => 59652677
+    [Email] => Alfaa213@gmail.com
+    [Password] => 12345678
+    [phone] => 71-895444
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for Alfaa213@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Abbass Mossa
+    [userType] => patient
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => 59652677
+    [Email] => abbassM@gmail.com
+    [Password] => 12345678
+    [phone] => 71-895444
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for abbassM@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Maryam Halawi
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => maryam@gmail.com
+    [Password] => 12345678
+    [phone] => 71-854753
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for maryam@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Monira Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => mimo@gmail.com
+    [Password] => 12345678
+    [phone] => 71-168447
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for mimo@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Monira Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => mimo@gmail.com
+    [Password] => 12345678
+    [phone] => 71-168447
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Monira Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => mimo@gmail.com
+    [Password] => 12345678
+    [phone] => 71-168447
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Monira Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => mimo@gmail.com
+    [Password] => 12345678
+    [phone] => 71-168447
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Monira Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => mimo@gmail.com
+    [Password] => 12345678
+    [phone] => 71-168447
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+

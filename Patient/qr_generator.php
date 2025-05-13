@@ -14,28 +14,45 @@ $query = "
     JOIN users u ON p.user_id = u.user_id 
     WHERE p.patient_id = ?
 ";
-$stmt = $conn->prepare($query);
-$stmt->bind_param('i', $patientId); // 'i' for integer parameter
-$stmt->execute();
-$result = $stmt->get_result();
-$patient = $result->fetch_assoc();
+$stmtPatient = $conn->prepare($query);
+$stmtPatient->bind_param('i', $patientId); // 'i' for integer parameter
+$stmtPatient->execute();
+$resultPatient = $stmtPatient->get_result();
+$patient = $resultPatient->fetch_assoc();
 if (!$patient) die("Patient not found.");
 
-// Fetch emergency contact (MySQLi)
-$query = "SELECT * FROM emergency_contacts WHERE patient_id = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param('i', $patientId);
-$stmt->execute();
-$result = $stmt->get_result();
-$contact = $result->fetch_assoc();
+// Directory for QR codes
+$qrCodeDir = '../qrcodes/';
+if (!file_exists($qrCodeDir)) {
+    mkdir($qrCodeDir, 0755, true);
+}
 
+// File path for QR code
+$fileName = 'patient_' . $patientId . '.png';
+$filePath = $qrCodeDir . $fileName;
 
-// QR code data now contains just a link to the patient's details page
+// QR code data - link to patient's details page
 $patientDetailsURL = "http://192.168.1.2/fyp/Patient/patient_details.php?patient_id=" . $patientId;
 
-$filePath = '../qrcodes/patient_' . $patientId . '.png';
-QRcode::png($patientDetailsURL, $filePath, QR_ECLEVEL_L, 6); // Lower error correction and higher size
+// Generate QR code
+QRcode::png($patientDetailsURL, $filePath, QR_ECLEVEL_L, 6);
 
+// Save QR code path to database
+$updateQuery = "UPDATE patients SET QR_code = ? WHERE patient_id = ?";
+$stmtUpdate = $conn->prepare($updateQuery);
+$relativePath = 'qrcodes/' . $fileName; // Relative path for web access
+$stmtUpdate->bind_param('si', $relativePath, $patientId);
+$stmtUpdate->execute();
+
+// Fetch emergency contact (MySQLi)
+$queryEmergency = "SELECT * FROM emergency_contacts WHERE patient_id = ?";
+$stmtEmergency = $conn->prepare($queryEmergency);
+$stmtEmergency->bind_param('i', $patientId);
+$stmtEmergency->execute();
+$resultEmergency = $stmtEmergency->get_result();
+$contact = $resultEmergency->fetch_assoc();
+
+// Display the QR code image
 echo "<h3>Patient QR Code</h3>";
 echo "<img src='$filePath' />";  // Show the QR code image
 

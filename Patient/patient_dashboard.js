@@ -14,9 +14,18 @@ document.addEventListener('DOMContentLoaded', function() {
     updateDateTime();
     setInterval(updateDateTime, 60000);
     
-    document.getElementById('download-id-card-btn').addEventListener('click', function() {
-        alert('ID Card would be downloaded here');
-    });
+document.getElementById('download-id-card-btn').addEventListener('click', function () {
+    const imagePath = new URL(document.getElementById('qr-image').getAttribute('src'), window.location.href).href;
+
+    const link = document.createElement('a');
+    link.href = imagePath;
+    link.setAttribute('download', 'ID_Card_QR.png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
+
+
     
     document.getElementById('mobileMenuBtn').addEventListener('click', function() {
         document.querySelector('.sidebar').classList.toggle('mobile-show');
@@ -96,3 +105,31 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Please complete your health profile to access the dashboard.');
     });
 });
+// Update Info Btn
+        document.addEventListener('DOMContentLoaded', function() {
+            const updateProfileBtn = document.getElementById('update-profile-btn');
+            const updateFormModal = document.getElementById('updateFormModal');
+            const closeUpdateForm = document.getElementById('closeUpdateForm');
+            const cancelUpdateBtn = document.getElementById('cancelUpdateBtn');
+            
+            // Show update form when button is clicked
+            updateProfileBtn.addEventListener('click', function() {
+                updateFormModal.style.display = 'flex';
+            });
+            
+            // Close update form
+            function closeUpdateModal() {
+                updateFormModal.style.display = 'none';
+            }
+            
+            closeUpdateForm.addEventListener('click', closeUpdateModal);
+            cancelUpdateBtn.addEventListener('click', closeUpdateModal);
+            
+            // Close modal when clicking outside the form
+            updateFormModal.addEventListener('click', function(e) {
+                if (e.target === updateFormModal) {
+                    closeUpdateModal();
+                }
+            });
+
+        });

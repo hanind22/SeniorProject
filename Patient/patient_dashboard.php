@@ -7,22 +7,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="patient_dashboard.css">
     <link rel="stylesheet" href="Sidebar.css">
+
 </head>
 <body>
     <?php
     session_start();
     include('../db-config/connection.php');
 
-
-if (isset($_SESSION['error'])) {
-    echo '<div class="alert alert-danger">'.$_SESSION['error'].'</div>';
-    unset($_SESSION['error']);
-}
-if (isset($_SESSION['success'])) {
-    echo '<div class="alert alert-success">'.$_SESSION['success'].'</div>';
-    unset($_SESSION['success']);
-}
-
+    if (isset($_SESSION['error'])) {
+        echo '<div class="alert alert-danger">'.$_SESSION['error'].'</div>';
+        unset($_SESSION['error']);
+    }
+    if (isset($_SESSION['success'])) {
+        echo '<div class="alert alert-success">'.$_SESSION['success'].'</div>';
+        unset($_SESSION['success']);
+    }
 
     // Initialize patient data
     $patientData = [];
@@ -114,6 +113,7 @@ if (isset($_SESSION['success'])) {
                         <h2>Profile Overview</h2>
                         <button class="btn btn-outline" id="update-profile-btn">Update Info</button>
                     </div>
+
                     <div class="section-content">
                         <div class="profile-overview">
                             <div class="profile-photo-container">
@@ -167,7 +167,7 @@ if (isset($_SESSION['success'])) {
                             
                             <div class="qr-code-container">
                                 <div class="qr-code">
-                                    <img src="../qrcodes/patient_<?php echo htmlspecialchars($patientId) ?>.png" alt="QR Code" width="150" height="150">
+                                    <img src="../qrcodes/patient_<?php echo htmlspecialchars($patientId) ?>.png" alt="QR Code" width="150" height="150" id="qr-image">
                                     <p>Health ID QR Code</p>
                                     <button class="btn btn-secondary" id="download-id-card-btn">
                                         <i class="fas fa-download"></i> Download ID Card
@@ -178,6 +178,70 @@ if (isset($_SESSION['success'])) {
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Update Info Modal Form -->
+    <div class="update-form-modal" id="updateFormModal">
+        <div class="update-form-container">
+            <div class="update-form-header">
+                <h2><i class="fas fa-user-edit"></i> Update Your Information</h2>
+                <button class="close-update-form" id="closeUpdateForm">&times;</button>
+            </div>
+            
+            <form id="updateInfoForm" action="update_patient_info.php" method="POST">
+                <div class="update-form-content">
+                    <div class="form-group">
+                        <label for="update-full-name">Full Name </label>
+                        <input type="text" id="update-full-name" name="full_name" value="<?php echo htmlspecialchars($patientData['full_name']); ?>" readonly >
+                    </div> <br>
+                    
+                    <div class="form-group">
+                        <label for="update-email">Email <span class="required">*</span></label>
+                        <input type="email" id="update-email" name="email" value="<?php echo htmlspecialchars($patientData['email']); ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="update-phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="update-phone" name="phone_number" value="<?php echo htmlspecialchars($patientData['phone_number']); ?>" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="update-insurance_provider">Insurance Provider</label>
+                        <input type="text" id="update-insurance_provider" name="insurance_provider" rows="3" value="<?php echo htmlspecialchars($patientData['insurance_provider']); ?>">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="update-insurance_number">Insurance Number</label>
+                        <input type="text" id="update-insurance_number" name="insurance_number" rows="3" value= "<?php echo htmlspecialchars($patientData['insurance_number']); ?>">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="update-allergies">Allergies</label>
+                        <textarea id="update-allergies" name="allergies" rows="3"><?php echo htmlspecialchars($patientData['allergies'] ?? ''); ?></textarea>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="update-medical-conditions">Medical Conditions</label>
+                        <textarea id="update-medical-conditions" name="medical_conditions" rows="3"><?php echo htmlspecialchars($patientData['medical_conditions'] ?? ''); ?></textarea>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="update-current-medications">Current Medications</label>
+                        <textarea id="update-current-medications" name="current_medications" rows="3"><?php echo htmlspecialchars($patientData['current_medications'] ?? ''); ?></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="update-current-medications">Previous Surgeries</label>
+                        <textarea id="update-previous_surgeries" name="previous_surgeries" rows="3"><?php echo htmlspecialchars($patientData['previous_surgeries'] ?? ''); ?></textarea>
+                    </div>
+                
+                    <div class="update-form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelUpdateBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -330,5 +394,6 @@ if (isset($_SESSION['success'])) {
     </div>
 
     <script src="patient_dashboard.js"></script>
+
 </body>
 </html>

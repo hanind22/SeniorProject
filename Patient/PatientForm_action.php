@@ -171,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->commit();
         
         $_SESSION['health_form_completed'] = true;
-        $_SESSION['success'] = "Health profile completed successfully!";
+        // $_SESSION['success'] = "Health profile completed successfully!";
         header('Location: patient_dashboard.php');
         exit();
         

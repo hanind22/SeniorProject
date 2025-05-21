@@ -38,6 +38,40 @@
             } else {
                 $error = "Doctor record not found";
             }
+
+            $totalPatients = 0;
+$appointmentsToday = 0;
+$urgentCases = 0;
+
+if (!empty($doctorData)) {
+    $doctorId = $doctorData['doctor_id'];
+
+    // Total Patients
+    $stmt = $conn->prepare("SELECT COUNT(DISTINCT patient_id) AS total FROM appointments WHERE doctor_id = ?");
+    $stmt->bind_param("i", $doctorId);
+    $stmt->execute();
+    $stmt->bind_result($totalPatients);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Appointments Today
+    $today = date('Y-m-d');
+    $stmt = $conn->prepare("SELECT COUNT(*) AS count FROM appointments WHERE doctor_id = ? AND DATE(appointment_date) = ?");
+    $stmt->bind_param("is", $doctorId, $today);
+    $stmt->execute();
+    $stmt->bind_result($appointmentsToday);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Urgent Cases
+    $stmt = $conn->prepare("SELECT COUNT(*) AS count FROM appointments WHERE doctor_id = ? AND appointment_type = 'Urgent Care'");
+    $stmt->bind_param("i", $doctorId);
+    $stmt->execute();
+    $stmt->bind_result($urgentCases);
+    $stmt->fetch();
+    $stmt->close();
+}
+
         }
 
     } catch (Exception $e) {
@@ -91,21 +125,22 @@
                     <h2>Dr. <?php echo htmlspecialchars($doctorData['full_name']); ?></h2>
                     <p class="doctor-title"> <?php echo htmlspecialchars($doctorData['specialty']); ?></p>
                     <p class="doctor-contact"> Contact: <?php echo htmlspecialchars($doctorData['email']); ?> | +961 <?php echo htmlspecialchars($doctorData['phone_number']); ?></p>
-                    </div>
-            <div class="summary-cards">
-                <div class="summary-card">
-                    <h3><i class="fas fa-users"></i> Total Patients</h3>
-                    <p>5</p>
-                </div>
-                <div class="summary-card">
-                    <h3><i class="fas fa-calendar-check"></i> Appointments Today</h3>
-                    <p>2</p>
-                </div>
-                <div class="summary-card">
-                    <h3><i class="fas fa-exclamation-triangle"></i> Critical Cases</h3>
-                    <p>6</p>
-                </div>
             </div>
+            <div class="summary-cards">
+    <div class="summary-card">
+        <h3><i class="fas fa-users"></i> Total Patients</h3>
+        <p><?php echo $totalPatients; ?></p>
+    </div>
+    <div class="summary-card">
+        <h3><i class="fas fa-calendar-check"></i> Appointments Today</h3>
+        <p><?php echo $appointmentsToday; ?></p>
+    </div>
+    <div class="summary-card">
+        <h3><i class="fas fa-exclamation-triangle"></i> Urgent Cases</h3>
+        <p><?php echo $urgentCases; ?></p>
+    </div>
+</div>
+
             <!-- Notifications Section -->
             <div class="notifications-card" id="notifications-section">
                 <h3><i class="fas fa-bell"></i> Recent Notifications</h3>
@@ -145,13 +180,14 @@
             
             <!-- Data Visualization Section -->
             <div class="data-section">
-                <div class="chart-card">
-                    <h3>Weekly Appointments</h3>
-                    <div class="chart-container">
-                        <canvas id="weeklyAppointmentsChart"></canvas>
-                    </div>
-                </div>
-            </div>
+               <div class="chart-card">
+                 <h3>Weekly Appointments</h3>
+                 <div class="chart-container" style="height: 300px;">
+                     <canvas id="weeklyAppointmentsChart"></canvas>
+        </div>
+    </div>
+</div>
+
          </div>
     </div>
 

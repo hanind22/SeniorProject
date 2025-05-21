@@ -437,3 +437,122 @@ Array
     [0] => Email already registered
 )
 
+Received POST data:
+Array
+(
+    [fullName] => Mohammad Sabbah
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => mhmd@gmail.com
+    [Password] => 12345678
+    [phone] => 71-123456
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for mhmd@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Hasan Chrab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => hasan@gmail.com
+    [Password] => 12345678
+    [phone] => 71-000212
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for hasan@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Zahraa Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => zahraa@gmail.com
+    [Password] => 12345678
+    [phone] => 71-985444
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for zahraa@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Banin Terro
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => banin@gmail.com
+    [Password] => 12345678
+    [phone] => 71-854752
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for banin@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Sara NourAldeen
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => sara@gmail.com
+    [Password] => 12345678
+    [phone] => 76-584000
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for sara@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Zainab Karaki
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => zainab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71-447521
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for zainab22@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => abdallah Saker
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => abdallah@gmail.com
+    [Password] => 12345678
+    [phone] => 71-000254
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for abdallah@gmail.com

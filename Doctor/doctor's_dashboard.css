@@ -335,6 +335,18 @@
 }
 
 @media (max-width: 768px) {
+    .edit-appointment-btn {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+    }
+    
+    .modal {
+        width: 95%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    
     .sidebar {
         width: 80px;
         padding: 15px 10px;

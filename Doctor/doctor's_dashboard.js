@@ -15,58 +15,88 @@ document.addEventListener('DOMContentLoaded', function() {
     updateDateTime();
     setInterval(updateDateTime, 60000);
 
-    
-    // Weekly appointments chart - now as a line chart
-const weeklyAppointmentsCtx = document.getElementById('weeklyAppointmentsChart').getContext('2d');
-const weeklyAppointmentsChart = new Chart(weeklyAppointmentsCtx, {
-    type: 'line',  // Changed from 'bar' to 'line'
-    data: {
-        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' , 'Sunday'],
-        datasets: [{
-            label: 'Appointments',
-            data: [4, 7, 5, 9, 6, 3 , 0],
-            backgroundColor: 'rgba(52, 152, 219, 0.2)',  // Lighter fill color
-            borderColor: '#3498db',  // Line color
-            borderWidth: 3,  // Thicker line
-            pointBackgroundColor: '#2980b9',  // Point color
-            pointRadius: 5,  // Point size
-            pointHoverRadius: 7,  // Point size on hover
-            fill: true,  // Fill area under line
-            tension: 0.3  // Smooth line curve (0 for straight lines)
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                max: 10,
-                ticks: {
-                    stepSize: 2
+    //For the chart
+
+    updateDateTime();
+    setInterval(updateDateTime, 60000);
+    fetchWeeklyAppointments();
+
+
+function updateDateTime() {
+    const now = new Date();
+    const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    document.getElementById('date-time').textContent = now.toLocaleDateString('en-US', options);
+}
+
+function fetchWeeklyAppointments() {
+    fetch('get_weekly_appointments.php')
+        .then(response => response.json())
+        .then(data => {
+            renderChart(data);
+        })
+        .catch(error => console.error('Error fetching chart data:', error));
+}
+
+function renderChart(appointmentData) {
+    const ctx = document.getElementById('weeklyAppointmentsChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            datasets: [{
+                label: 'Appointments',
+                data: appointmentData,
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                borderColor: '#3498db',
+                borderWidth: 3,
+                pointBackgroundColor: '#2980b9',
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.05)'
+                    }
                 },
-                grid: {
-                    color: 'rgba(0, 0, 0, 0.05)'  // Lighter grid lines
+                x: {
+                    grid: {
+                        display: false
+                    }
                 }
             },
-            x: {
-                grid: {
-                    display: false  // Remove vertical grid lines
-                }
-            }
-        },
-        plugins: {
-            legend: {
-                position: 'top',  // Position legend
-                labels: {
-                    boxWidth: 12,
-                    padding: 20
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        boxWidth: 12,
+                        padding: 20
+                    }
                 }
             }
         }
-    }
-});
-    
+    });
+}
+
+
+
     // Simulate real-time alerts
     function simulateAlert() {
         const alertBadge = document.querySelector('.alert-badge');

@@ -90,7 +90,7 @@
                 <a href="#" class="nav-item">
                     <i class="fa-solid fa-file-lines"></i> Health Reports
                 </a>
-                <a href="#" class="nav-item">
+                <a href="health_chatbot.php" class="nav-item">
                     <i class="fa-solid fa-comment-medical"></i> Health Chatbot
                 </a>
             </nav>
@@ -195,6 +195,16 @@
                         <label for="update-full-name">Full Name </label>
                         <input type="text" id="update-full-name" name="full_name" value="<?php echo htmlspecialchars($patientData['full_name']); ?>" readonly >
                     </div> <br>
+
+                    <div class="form-group full-width">
+                    <label for="profile-image">Profile Image</label>
+                    <?php if (!empty($patientData['profile_image'])): ?>
+                        <div style="margin-bottom: 10px;">
+                            <img src="<?php echo htmlspecialchars($patientData['profile_image']); ?>" alt="Current Profile Image" style="max-width: 150px; border: 1px solid #ccc;">
+                        </div>
+                    <?php endif; ?>
+                    <input type="file" id="profile-image" name="profile_image" accept="image/*">
+                </div>
                     
                     <div class="form-group">
                         <label for="update-email">Email <span class="required">*</span></label>

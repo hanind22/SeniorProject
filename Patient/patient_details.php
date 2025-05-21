@@ -70,7 +70,7 @@ $contact = $result->fetch_assoc();
         
         <!-- Patient Info -->
         <div class="patient-info">
-            <h3>Patient Information</h3>
+            <p><strong>ID:</strong><?php echo htmlspecialchars($patient['patient_id']); ?></p>
             <p><strong>Full Name:</strong> <?php echo htmlspecialchars($patient['full_name']); ?></p>
             <p><strong>Date of Birth:</strong> <?php echo htmlspecialchars($patient['date_of_birth']); ?></p>
             <p><strong>Blood Type:</strong> <?php echo htmlspecialchars($patient['blood_type']); ?></p>

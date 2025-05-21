@@ -32,7 +32,7 @@ $fileName = 'patient_' . $patientId . '.png';
 $filePath = $qrCodeDir . $fileName;
 
 // QR code data - link to patient's details page
-$patientDetailsURL = "http://192.168.1.2/fyp/Patient/patient_details.php?patient_id=" . $patientId;
+$patientDetailsURL = "http://192.168.1.4/fyp/Patient/patient_details.php?patient_id=" . $patientId;
 
 // Generate QR code
 QRcode::png($patientDetailsURL, $filePath, QR_ECLEVEL_L, 6);

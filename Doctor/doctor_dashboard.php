@@ -98,12 +98,11 @@ if (!empty($doctorData)) {
                 <a href="patients.php" class="nav-item">
                     <i class="fas fa-user-injured"></i> Patients
                 </a>
-                <a href="#" class="nav-item">
-                    <i class="fas fa-file-medical"></i> Medical Records
+                <a href="medical_records.php" class="nav-item">
+                    <i class="fas fa-file-medical"></i> 
+                    <span>Medical Records<br>& Prescription</span>
                 </a>
-                <a href="#" class="nav-item">
-                    <i class="fas fa-prescription-bottle-alt"></i> Presscriptions
-                </a>
+
                 <a href="patients.php" class="nav-item">
                     <i class="fa-solid fa-bell"></i> Notifications
                     <!-- <span class="alert-badge">3</span> -->

@@ -145,18 +145,14 @@ try {
                     <i class="fas fa-user-injured"></i>
                     <span>Patients</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="medical_records.php" class="nav-item">
                     <i class="fas fa-file-medical"></i>
-                    <span>Medical Records</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <i class="fas fa-prescription-bottle-alt"></i>
-                    <span>Prescriptions</span>
+                    <span>Medical Records<br>& Prescription</span>
                 </a>
                 <a href="#" class="nav-item">
                     <i class="fa-solid fa-bell"></i>
                     <span>Notifications</span>
-                    <span class="alert-badge">3</span>
+                    <!-- <span class="alert-badge">3</span> -->
                 </a>
                 <a href="#" class="nav-item">
                     <i class="fas fa-user-md"></i>
@@ -522,82 +518,70 @@ try {
     </div>
 </div>
 
-    <!-- Edit Health Info Modal -->
-    <div class="modal-overlay" id="edit-health-modal" style="display: none;">
-        <div class="modal">
-            <div class="modal-header">
-                <h3><i class="fas fa-edit"></i> Edit Patient Health Information</h3>
-                <button class="close-modal" id="close-edit-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="edit-health-form" action="update_health_info.php" method="post">
-                    <input type="hidden" id="edit-patient-id" name="patient_id">
-                    
-                    <div class="form-section">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="edit-blood-type">Blood Type</label>
-                                <select id="edit-blood-type" name="blood_type" class="form-control">
-                                    <option value="">Select</option>
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-status">Status</label>
-                                <select id="edit-status" name="status" class="form-control">
-                                    <option value="checkup">Checkup</option>
-                                    <option value="follow-up">Follow-up</option>
-                                    <option value="critical">Critical</option>
-                                    <option value="inactive">Inactive</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="edit-allergies">Allergies</label>
-                            <textarea id="edit-allergies" name="allergies" rows="3" class="form-control" placeholder="List all known allergies"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="edit-conditions">Medical Conditions</label>
-                            <textarea id="edit-conditions" name="medical_conditions" rows="3" class="form-control" placeholder="List any medical conditions"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="edit-medications">Current Medications</label>
-                            <textarea id="edit-medications" name="current_medications" rows="3" class="form-control" placeholder="List current medications"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="edit-surgeries">Previous Surgeries</label>
-                            <textarea id="edit-surgeries" name="previous_surgeries" rows="2" class="form-control" placeholder="List any previous surgeries"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="edit-family-history">Family History</label>
-                            <textarea id="edit-family-history" name="family_history" rows="2" class="form-control" placeholder="List relevant family medical history"></textarea>
+<!-- Edit Health Info Modal -->
+<div class="modal-overlay" id="edit-health-modal" style="display: none;">
+    <div class="modal" style="max-width: 600px;">
+        <div class="modal-header">
+            <h3><i class="fas fa-edit"></i> Edit Patient Health Information</h3>
+            <button class="close-modal" id="close-edit-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="edit-health-form" action="update_health_info.php" method="post">
+                <input type="hidden" id="edit-patient-id" name="patient_id">
+                
+                <div class="patient-info-header">
+                    <div class="patient-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="patient-meta">
+                        <h4 id="edit-patient-name">Loading patient...</h4>
+                        <div class="patient-details">
+                            <span id="edit-patient-age-gender"></span>
+                            <span id="edit-patient-blood-type" class="blood-badge"></span>
                         </div>
                     </div>
-                    
-                    <div class="form-navigation">
-                        <button type="button" class="cancel-btn" id="cancel-edit">
-                            Cancel
-                        </button>
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-save"></i> Save Changes
-                        </button>
+                </div>
+                
+                <div class="form-section" style="max-height: 400px; overflow-y: auto; padding-right: 10px; margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="edit-allergies">Allergies</label>
+                        <textarea id="edit-allergies" name="allergies" rows="3" class="form-control" placeholder="List all known allergies"></textarea>
                     </div>
-                </form>
-            </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-conditions">Medical Conditions</label>
+                        <textarea id="edit-conditions" name="medical_conditions" rows="3" class="form-control" placeholder="List any medical conditions"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-medications">Current Medications</label>
+                        <textarea id="edit-medications" name="current_medications" rows="3" class="form-control" placeholder="List current medications"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-surgeries">Previous Surgeries</label>
+                        <textarea id="edit-surgeries" name="previous_surgeries" rows="2" class="form-control" placeholder="List any previous surgeries"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-family-history">Family History</label>
+                        <textarea id="edit-family-history" name="family_history" rows="2" class="form-control" placeholder="List relevant family medical history"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-navigation" id="form-bottom">
+                    <button type="button" class="cancel-btn" id="cancel-edit">
+                        Cancel
+                    </button>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
 
     <!-- Notification toast -->
     <!-- <div class="toast-container">
@@ -614,27 +598,51 @@ try {
         </div> 
     </div> -->
 
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Add event listeners for edit buttons
-    document.querySelectorAll('.edit-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // -------------------------------
+    // General Modal Handling
+    // -------------------------------
+    const editModal = document.getElementById('edit-health-modal');
+
+    function closeEditModal() {
+        editModal.style.display = 'none';
+    }
+
+    // Open Add Modal
+    document.getElementById('open-add-modal').addEventListener('click', function () {
+        document.getElementById('patient-modal').style.display = 'flex';
+    });
+
+    // Close Add Modal
+    document.getElementById('close-modal').addEventListener('click', function () {
+        document.getElementById('patient-modal').style.display = 'none';
+    });
+
+    // Close Edit Modal
+    document.getElementById('close-edit-modal').addEventListener('click', closeEditModal);
+    document.getElementById('cancel-edit').addEventListener('click', closeEditModal);
+
+    // -------------------------------
+    // Edit Button Handling
+    // -------------------------------
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function () {
             const patientId = this.getAttribute('data-patient-id');
-            document.getElementById('edit-patient-id').value = patientId;
-            document.getElementById('edit-health-modal').style.display = 'flex';
+            openEditHealthModal(patientId);
         });
     });
 
-    // Close edit modal
-    document.getElementById('close-edit-modal').addEventListener('click', function() {
-        document.getElementById('edit-health-modal').style.display = 'none';
+    document.getElementById('edit-health-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        submitPatientHealthForm(); // Assume this is defined elsewhere
     });
 
-    document.getElementById('cancel-edit').addEventListener('click', function() {
-        document.getElementById('edit-health-modal').style.display = 'none';
-    });
-
-    // Search functionality
+    // -------------------------------
+    // Search Functionality
+    // -------------------------------
     document.getElementById("patient-search").addEventListener("input", function () {
         const searchTerm = this.value.toLowerCase();
         document.querySelectorAll("#patients-table-body tr").forEach(row => {
@@ -643,13 +651,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Date and time display
+    // -------------------------------
+    // Date & Time Display
+    // -------------------------------
     function updateDateTime() {
         const now = new Date();
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
             day: 'numeric',
             hour: '2-digit',
             minute: '2-digit'
@@ -659,129 +669,110 @@ document.addEventListener('DOMContentLoaded', function() {
     updateDateTime();
     setInterval(updateDateTime, 60000);
 
-    // Modal handling
-    document.getElementById('open-add-modal').addEventListener('click', function() {
-        document.getElementById('patient-modal').style.display = 'flex';
-    });
-
-    document.getElementById('close-modal').addEventListener('click', function() {
-        document.getElementById('patient-modal').style.display = 'none';
-    });
-
-    // Pagination handling
-    document.getElementById('next-page').addEventListener('click', function() {
+    // -------------------------------
+    // Pagination Placeholder
+    // -------------------------------
+    document.getElementById('next-page').addEventListener('click', function () {
         // Implement pagination logic here
     });
 
-    document.getElementById('prev-page').addEventListener('click', function() {
+    document.getElementById('prev-page').addEventListener('click', function () {
         // Implement pagination logic here
     });
 
-    // Lightbox functionality
+    // -------------------------------
+    // Lightbox for QR Code
+    // -------------------------------
     const lightboxOverlay = document.createElement('div');
     lightboxOverlay.className = 'lightbox-overlay';
-    
+
     const lightboxContent = document.createElement('div');
     lightboxContent.className = 'lightbox-content';
-    
+
     const lightboxTitle = document.createElement('div');
     lightboxTitle.className = 'lightbox-title';
-    
+
     lightboxOverlay.appendChild(lightboxContent);
     lightboxOverlay.appendChild(lightboxTitle);
     document.body.appendChild(lightboxOverlay);
-    
-    // Close lightbox when clicking outside
-    lightboxOverlay.addEventListener('click', function(e) {
+
+    lightboxOverlay.addEventListener('click', function (e) {
         if (e.target === lightboxOverlay) {
             lightboxOverlay.classList.remove('active');
         }
     });
-    
-    // Handle QR code clicks
+
     document.querySelectorAll('.qr-code-link').forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const img = document.createElement('img');
             img.src = this.href;
             img.alt = this.querySelector('img').alt;
-            
+
             lightboxContent.innerHTML = '';
             lightboxContent.appendChild(img);
-            
+
             lightboxTitle.textContent = this.dataset.title || 'QR Code';
-            
+
             lightboxOverlay.classList.add('active');
         });
     });
-    
-    // Close with ESC key
-    document.addEventListener('keydown', function(e) {
+
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             lightboxOverlay.classList.remove('active');
         }
     });
 
-    // Form step navigation
+    // -------------------------------
+    // Form Steps Navigation
+    // -------------------------------
     const formSteps = document.querySelectorAll('.form-step');
     const progressSteps = document.querySelectorAll('.progress-step');
-    
-    // Initialize - hide all steps except first
+
     formSteps.forEach((step, index) => {
-        if (index !== 0) {
-            step.style.display = 'none';
-        }
+        if (index !== 0) step.style.display = 'none';
     });
 
-    // Next button click handler
     document.querySelectorAll('.next-btn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const currentStep = document.querySelector('.form-step.active');
             const nextStepId = this.getAttribute('data-next');
             const nextStep = document.getElementById(`step-${nextStepId}`);
-            
-            // Validate current step before proceeding
+
             if (validateStep(currentStep)) {
-                // Hide current step
                 currentStep.classList.remove('active');
                 currentStep.style.display = 'none';
-                
-                // Show next step
+
                 nextStep.classList.add('active');
                 nextStep.style.display = 'block';
-                
-                // Update progress indicator
+
                 updateProgress(nextStepId);
             }
         });
     });
-    
-    // Previous button click handler
+
     document.querySelectorAll('.prev-btn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const currentStep = document.querySelector('.form-step.active');
             const prevStepId = this.getAttribute('data-prev');
             const prevStep = document.getElementById(`step-${prevStepId}`);
-            
-            // Hide current step
+
             currentStep.classList.remove('active');
             currentStep.style.display = 'none';
-            
-            // Show previous step
+
             prevStep.classList.add('active');
             prevStep.style.display = 'block';
-            
-            // Update progress indicator
+
             updateProgress(prevStepId);
         });
     });
-    
-    // Validate form step
+
     function validateStep(step) {
         const inputs = step.querySelectorAll('input[required], select[required], textarea[required]');
         let isValid = true;
-        
+
         inputs.forEach(input => {
             if (!input.value.trim()) {
                 input.style.borderColor = '#e74c3c';
@@ -790,11 +781,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 input.style.borderColor = '#ddd';
             }
         });
-        
+
         return isValid;
     }
-    
-    // Update progress indicator
+
     function updateProgress(activeStep) {
         progressSteps.forEach(step => {
             step.classList.remove('active');
@@ -804,6 +794,147 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-    </script>
+
+// -------------------------------
+// Improved Fetch and Modal Fill Function
+// -------------------------------
+// Safely sets a field's value by ID
+function setFieldValue(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.value = value;
+    else console.warn(`Element with ID "${id}" not found.`);
+}
+
+// Safely sets textContent by ID
+function setTextContent(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+    else console.warn(`Element with ID "${id}" not found.`);
+}
+
+// Function to close the modal
+function closeEditModal() {
+    const modal = document.getElementById('edit-health-modal');
+    if (modal) modal.style.display = 'none';
+}
+
+// Main function to open and populate the edit modal
+async function openEditHealthModal(patientId) {
+    console.log('Opening edit modal for patient:', patientId);
+
+    try {
+        const patientRow = document.querySelector(`.edit-btn[data-patient-id="${patientId}"]`)?.closest('tr');
+        if (!patientRow) throw new Error('Patient row not found in table');
+
+        const patientName = patientRow.querySelector('.patient-name')?.textContent;
+        const patientAgeGender = patientRow.querySelector('td:nth-child(2)')?.textContent;
+        const patientBloodType = patientRow.querySelector('.blood-badge')?.textContent;
+
+        if (!patientName || !patientAgeGender || !patientBloodType) {
+            throw new Error('Some patient info missing in table row');
+        }
+
+        setTextContent('edit-patient-name', patientName);
+        setTextContent('edit-patient-age-gender', patientAgeGender);
+        setTextContent('edit-patient-blood-type', patientBloodType);
+
+        const modal = document.getElementById('edit-health-modal');
+        if (!modal) throw new Error('Edit health modal not found');
+
+        const formFields = modal.querySelectorAll('textarea');
+        formFields.forEach(field => {
+            field.value = 'Loading...';
+            field.disabled = true;
+        });
+
+        modal.style.display = 'flex';
+
+        const response = await fetch(`get_patient_data.php?patient_id=${patientId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache'
+            }
+        });
+
+        const responseText = await response.text();
+        console.log('Raw response:', responseText);
+
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (err) {
+            console.error('Error parsing JSON:', err);
+            throw new Error('Invalid JSON received from server.');
+        }
+
+        if (!result.success) {
+            throw new Error(result.error || result.message || 'Unknown error from server');
+        }
+
+        const data = result.data;
+
+        // Enable fields and fill in actual data
+        formFields.forEach(field => field.disabled = false);
+
+        setFieldValue('edit-patient-id', data.patient_id);
+        setFieldValue('edit-allergies', data.allergies || '');
+        setFieldValue('edit-conditions', data.medical_conditions || data.conditions || '');
+        setFieldValue('edit-medications', data.current_medications || data.medications || '');
+        // setFieldValue('edit-notes', data.notes || '');
+
+    } catch (error) {
+        console.error('Error loading modal:', error);
+        alert('Failed to load patient health data. Check console for details.');
+        closeEditModal();
+    }
+}
+
+function submitPatientHealthForm() {
+    const form = document.getElementById('edit-health-form');
+    const formData = new FormData(form);
+    const patientId = formData.get('patient_id');
+
+    if (!patientId || isNaN(patientId)) {
+        alert('Invalid patient ID');
+        return;
+    }
+
+    const submitBtn = form.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Saving...';
+
+    fetch('update_health_info.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(text => { throw new Error(text || 'Network error'); });
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Update response:', data);
+        if (data.success) {
+            alert('Patient updated successfully!');
+            // update UI if needed
+            closeEditModal();
+        } else {
+            alert('Update failed: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error occurred: ' + error.message);
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Save Changes';
+    });
+}
+
+
+</script>
 </body>
 </html>

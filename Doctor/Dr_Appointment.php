@@ -108,18 +108,14 @@ if (isset($_SESSION['user_id'])) {
                     <i class="fas fa-user-injured"></i>
                     <span>Patients</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="medical_records.php" class="nav-item">
                     <i class="fas fa-file-medical"></i>
-                    <span>Medical Records</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <i class="fas fa-prescription-bottle-alt"></i>
-                    <span>Prescriptions</span>
+                    <span>Medical Records<br>& Prescription</span>
                 </a>
                 <a href="patients.php" class="nav-item">
                     <i class="fa-solid fa-bell"></i>
                     <span>Notifications</span>
-                    <span class="alert-badge">3</span>
+                    <!-- <span class="alert-badge">3</span> -->
                 </a>
                 <a href="#" class="nav-item">
                     <i class="fas fa-user-md"></i>

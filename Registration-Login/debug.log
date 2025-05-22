@@ -556,3 +556,20 @@ Array
 )
 
 Registration successful for abdallah@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Zainab Farhat
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => zainab222@gmail.com
+    [Password] => 12345678
+    [phone] => 71-1752636
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for zainab222@gmail.com

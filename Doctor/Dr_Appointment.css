@@ -30,7 +30,7 @@
 .main-content {
   flex-grow: 1;
   padding: 30px;
-  overflow-y: auto;
+  overflow-y: fixed;
   height: 100vh;
   background: #f8f9fa;
 }

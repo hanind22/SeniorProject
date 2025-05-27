@@ -86,6 +86,7 @@ if (isset($_SESSION['user_id'])) {
 
 </head>
 <body>
+    <?php include('notifications.php'); ?>
     <div class="container">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -112,12 +113,12 @@ if (isset($_SESSION['user_id'])) {
                     <i class="fas fa-file-medical"></i>
                     <span>Medical Records<br>& Prescription</span>
                 </a>
-                <a href="patients.php" class="nav-item">
+                <!-- <a href="notifications.php" class="nav-item">
                     <i class="fa-solid fa-bell"></i>
                     <span>Notifications</span>
-                    <!-- <span class="alert-badge">3</span> -->
-                </a>
-                <a href="#" class="nav-item">
+                    <-- <span class="alert-badge">3</span> --
+                </a> -->
+                <a href="profile.php" class="nav-item">
                     <i class="fas fa-user-md"></i>
                     <span>Profile</span>
                 </a>
@@ -223,7 +224,7 @@ if (isset($_SESSION['user_id'])) {
 
         <div class="form-container">
             <form id="appointment-form" action="process_appointment.php" method="POST">
-                <input type="hidden" name="doctor_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+                <input type="hidden" name="doctor_id" value="<?= htmlspecialchars($doctorData['doctor_id']) ?>">
                 
                 <div class="form-row">
                     <div class="form-group">
@@ -490,6 +491,20 @@ if (isset($_SESSION['user_id'])) {
         </form>
     </div>
 </div>
+
+
+<!-- Add this HTML right before the closing </body> tag -->
+<div class="logout-overlay" id="logoutOverlay">
+    <div class="logout-confirmation">
+        <h3>Confirm Logout</h3>
+        <p>Are you sure you want to logout ?</p>
+        <div class="logout-buttons">
+            <button class="logout-btn confirm-logout" id="confirmLogout">Yes, Logout</button>
+            <button class="logout-btn cancel-logout" id="cancelLogout">Cancel</button>
+        </div>
+    </div>
+</div>
+<!-- -------------- -->
 
 <script src="Appointment.js"></script>
 <!-- <script> window.appointmentsData = <?php echo json_encode($appointments); ?>;</script> -->

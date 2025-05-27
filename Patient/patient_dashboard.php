@@ -75,19 +75,19 @@
                 <p class="speciality">Your Health Journey Starts Here</p>
             </div>
             <nav class="nav-links">
-                <a href="doctor_dashboard.php" class="nav-item active">
+                <a href="patient_dashboard.php" class="nav-item active">
                     <i class="fa-solid fa-user"></i> Profile
                 </a>
-                <a href="#" class="nav-item">
+                <a href="appointment.php" class="nav-item">
                     <i class="fa-solid fa-calendar"></i> Appointments
                 </a>
-                <a href="#" class="nav-item">
-                    <i class="fa-solid fa-file-medical"></i> Medical History
+                <a href="medical_history.php" class="nav-item">
+                    <i class="fa-solid fa-file-medical"></i> Medical History &<br>Prescriptions
                 </a>
-                <a href="#" class="nav-item">
+                <!-- <a href="#" class="nav-item">
                     <i class="fas fa-prescription-bottle-alt"></i> Prescriptions
-                </a>
-                <a href="#" class="nav-item">
+                </a> -->
+                <a href="health_report.php" class="nav-item">
                     <i class="fa-solid fa-file-lines"></i> Health Reports
                 </a>
                 <a href="health_chatbot.php" class="nav-item">
@@ -101,7 +101,7 @@
 
         <div class="content">
             <div class="page-header">
-                <h1 class="page-title"><i class="fa-solid fa-hospital-user"></i> My Dashboard</h1>
+                <h2 class="page-title"><i class="fa-solid fa-hospital-user"></i> My Dashboard</h2>
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
                 </button>

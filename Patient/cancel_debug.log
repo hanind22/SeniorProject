@@ -1,0 +1,80 @@
+Array
+(
+    [appointment_id] => 189
+    [reason] => I no longer need this appointment
+)
+Array
+(
+    [appointment_id] => 189
+    [reason] => I no longer need this appointment
+)
+Array
+(
+    [appointment_id] => 189
+    [reason] => I no longer need this appointment
+)
+Array
+(
+)
+Method: POST
+Data: Array
+(
+    [appointment_id] => 189
+    [reason] => I no longer need this appointment
+)
+
+Method: POST
+Data: Array
+(
+    [appointment_id] => 189
+    [reason] => I no longer need this appointment
+)
+
+Method: GET
+Data: Array
+(
+)
+
+Method: POST
+Data: Array
+(
+    [appointment_id] => 189
+    [cancelled_by] => 18
+    [cancel_reason] => I no longer need this appointment
+)
+
+Method: GET
+Data: Array
+(
+)
+
+Array
+(
+    [appointment_id] => 189
+    [cancelled_by] => 18
+    [cancel_reason] => Personal reasons
+)
+Array
+(
+)
+Array
+(
+)
+Array
+(
+    [appointment_id] => 189
+    [cancelled_by] => 18
+    [cancel_reason] => I no longer need this appointment
+)
+Array
+(
+)
+Array
+(
+    [appointment_id] => 189
+    [cancelled_by] => 18
+    [cancel_reason] => Personal reasons
+)
+Array
+(
+)

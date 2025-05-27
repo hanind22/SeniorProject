@@ -1,1 +1,215 @@
 DB Connected to: medicare_system
+
+
+NEW REQUEST: 2025-05-25 23:45:44
+Doctor ID: 4
+POST data: Array
+(
+    [doctor_id] => 4
+    [speciality] => Cardiologist
+    [license_number] => 1585623752
+    [email] => mhmdKharoubi@gmail.com
+    [phone] => 71452117
+    [address] => ghazieh
+    [education] => 
+    [certifications] => 
+    [bio] => 
+    [availability] => Array
+        (
+            [Monday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Tuesday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Wednesday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Thursday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Friday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Saturday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Sunday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+        )
+
+)
+
+Deleted old work_place entries
+Final work_place count: 0
+
+
+NEW REQUEST: 2025-05-25 23:45:46
+Doctor ID: 4
+POST data: Array
+(
+    [doctor_id] => 4
+    [speciality] => Cardiologist
+    [license_number] => 1585623752
+    [email] => mhmdKharoubi@gmail.com
+    [phone] => 71452117
+    [address] => ghazieh
+    [education] => 
+    [certifications] => 
+    [bio] => 
+    [availability] => Array
+        (
+            [Monday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Tuesday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Wednesday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Thursday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Friday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Saturday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+            [Sunday] => Array
+                (
+                    [0] => Array
+                        (
+                            [status] => unavailable
+                            [start_time] => 09:00
+                            [end_time] => 17:00
+                            [place_name] => 
+                        )
+
+                )
+
+        )
+
+)
+
+Deleted old work_place entries
+Final work_place count: 0

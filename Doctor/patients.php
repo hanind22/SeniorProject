@@ -122,7 +122,7 @@ try {
 </head>
 
 <body>
-
+<?php include('notifications.php'); ?>
 <div class="container">
 <!-- Sidebar -->
         <aside class="sidebar">
@@ -149,12 +149,7 @@ try {
                     <i class="fas fa-file-medical"></i>
                     <span>Medical Records<br>& Prescription</span>
                 </a>
-                <a href="#" class="nav-item">
-                    <i class="fa-solid fa-bell"></i>
-                    <span>Notifications</span>
-                    <!-- <span class="alert-badge">3</span> -->
-                </a>
-                <a href="#" class="nav-item">
+                <a href="profile.php" class="nav-item">
                     <i class="fas fa-user-md"></i>
                     <span>Profile</span>
                 </a>
@@ -581,23 +576,18 @@ try {
         </div>
     </div>
 </div>
-
-
-    <!-- Notification toast -->
-    <!-- <div class="toast-container">
-         <div class="toast" id="notification-toast">
-            <div class="toast-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-             <div class="toast-content">
-                <p class="toast-message">Patient added successfully!</p>
-            </div> 
-            <button class="toast-close">
-                <i class="fas fa-times"></i>
-            </button>
-        </div> 
-    </div> -->
-
+<!-- Add this HTML right before the closing </body> tag -->
+<div class="logout-overlay" id="logoutOverlay">
+    <div class="logout-confirmation">
+        <h3>Confirm Logout</h3>
+        <p>Are you sure you want to logout ?</p>
+        <div class="logout-buttons">
+            <button class="logout-btn confirm-logout" id="confirmLogout">Yes, Logout</button>
+            <button class="logout-btn cancel-logout" id="cancelLogout">Cancel</button>
+        </div>
+    </div>
+</div>
+<!-- -------------- -->
 
 
 <script>
@@ -668,6 +658,28 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     updateDateTime();
     setInterval(updateDateTime, 60000);
+
+    // Notification bell functionality
+            const notificationBell = document.getElementById('notificationBell');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+
+            notificationBell.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationDropdown.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!notificationDropdown.contains(e.target)) {
+                    notificationDropdown.classList.remove('show');
+                }
+            });
+
+            // Prevent dropdown from closing when clicking inside it
+            notificationDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        
 
     // -------------------------------
     // Pagination Placeholder
@@ -934,7 +946,43 @@ function submitPatientHealthForm() {
     });
 }
 
+        
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the logout elements
+    const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
+    const logoutOverlay = document.getElementById('logoutOverlay');
+    const confirmLogout = document.getElementById('confirmLogout');
+    const cancelLogout = document.getElementById('cancelLogout');
 
+    // Show overlay when logout is clicked
+    logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        logoutOverlay.classList.add('show');
+    });
+
+    // Hide overlay when cancel is clicked
+    cancelLogout.addEventListener('click', function() {
+        logoutOverlay.classList.remove('show');
+    });
+
+    // Handle actual logout
+    confirmLogout.addEventListener('click', function() {
+        // In a real implementation, this would redirect to your logout script
+        window.location.href = '../Registration-Login/index.php';
+        
+        // For demonstration, we'll just show an alert
+        // alert('Logging out...');
+        // logoutOverlay.classList.remove('show');
+    });
+
+    // Close overlay when clicking outside the confirmation box
+    logoutOverlay.addEventListener('click', function(e) {
+        if (e.target === logoutOverlay) {
+            logoutOverlay.classList.remove('show');
+        }
+    });
+});
+    
 </script>
 </body>
 </html>

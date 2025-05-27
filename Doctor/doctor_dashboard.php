@@ -39,7 +39,7 @@
                 $error = "Doctor record not found";
             }
 
-            $totalPatients = 0;
+$totalPatients = 0;
 $appointmentsToday = 0;
 $urgentCases = 0;
 
@@ -79,6 +79,9 @@ if (!empty($doctorData)) {
     }
     ?>
 
+    <?php include('notifications.php'); ?>
+    
+
     <div class="container">
         <!-- Side-Navigationbar -->
          <aside class="sidebar">
@@ -103,14 +106,14 @@ if (!empty($doctorData)) {
                     <span>Medical Records<br>& Prescription</span>
                 </a>
 
-                <a href="patients.php" class="nav-item">
+                <!-- <a href="notifications.php" class="nav-item">
                     <i class="fa-solid fa-bell"></i> Notifications
-                    <!-- <span class="alert-badge">3</span> -->
-                </a>
-                <a href="#" class="nav-item">
+                    <-- <span class="alert-badge">3</span> --
+                </a> -->
+                <a href="profile.php" class="nav-item">
                     <i class="fas fa-user-md"></i> Profile
                 </a>
-                <a href="#" class="nav-item">
+                <a href="#" class="nav-item logout-btn">
                     <i class="fas fa-sign-out-alt"></i> Log out
                 </a>
             </nav>
@@ -181,18 +184,27 @@ if (!empty($doctorData)) {
             <div class="data-section">
                <div class="chart-card">
                  <h3>Weekly Appointments</h3>
-                 <div class="chart-container" style="height: 300px;">
+                 <div class="chart-container" style="height: 400px;">
                      <canvas id="weeklyAppointmentsChart"></canvas>
+                 </div>
+                </div>
+            </div>
+
+        </div>
+</div>
+
+<!-- Add this HTML right before the closing </body> tag -->
+<div class="logout-overlay" id="logoutOverlay">
+    <div class="logout-confirmation">
+        <h3>Confirm Logout</h3>
+        <p>Are you sure you want to logout ?</p>
+        <div class="logout-buttons">
+            <button class="logout-btn confirm-logout" id="confirmLogout">Yes, Logout</button>
+            <button class="logout-btn cancel-logout" id="cancelLogout">Cancel</button>
         </div>
     </div>
 </div>
-
-         </div>
-    </div>
-
-
-
-
+<!-- -------------- -->
 <script >
      document.addEventListener('DOMContentLoaded', function() {
     function updateDateTime() {
@@ -209,7 +221,56 @@ if (!empty($doctorData)) {
     }
     updateDateTime();
     setInterval(updateDateTime, 60000);
-    })
+
+    // Notification bell functionality
+            const notificationBell = document.getElementById('notificationBell');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+
+            notificationBell.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationDropdown.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!notificationDropdown.contains(e.target)) {
+                    notificationDropdown.classList.remove('show');
+                }
+            });
+
+            // Prevent dropdown from closing when clicking inside it
+            notificationDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
+    const logoutOverlay = document.getElementById('logoutOverlay');
+    const confirmLogout = document.getElementById('confirmLogout');
+    const cancelLogout = document.getElementById('cancelLogout');
+
+    logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        logoutOverlay.classList.add('show');
+    });
+
+    cancelLogout.addEventListener('click', function() {
+        logoutOverlay.classList.remove('show');
+    });
+
+    confirmLogout.addEventListener('click', function() {
+        window.location.href = '../Registration-Login/index.php';
+    });
+
+    logoutOverlay.addEventListener('click', function(e) {
+        if (e.target === logoutOverlay) {
+            logoutOverlay.classList.remove('show');
+        }
+    });
+});
+    
 </script>
 <script src="doctor's_dashboard.js"></script>
 </body>

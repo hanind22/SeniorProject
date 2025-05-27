@@ -573,3 +573,57 @@ Array
 )
 
 Registration successful for zainab222@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Jamal Shahrouri
+    [userType] => doctor
+    [doctorSpecialty] => Cardiology
+    [licenseNumber] => 84651326624
+    [Email] => jamal@gmail.com
+    [Password] => 12345678
+    [phone] => 81254789
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for jamal@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Mohammad Kharoubi
+    [userType] => doctor
+    [doctorSpecialty] => General
+    [licenseNumber] => 1585623752
+    [Email] => mhmdKharoubi@gmail.com
+    [Password] => 12345678
+    [phone] => 71452117
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for mhmdKharoubi@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Ali Abdallah
+    [userType] => doctor
+    [doctorSpecialty] => General
+    [licenseNumber] => 874269400056
+    [Email] => AlyAbdallah@gmail.com
+    [Password] => 12345678
+    [phone] => 03298547
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for AlyAbdallah@gmail.com

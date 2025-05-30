@@ -588,7 +588,57 @@ try {
     </div>
 </div>
 <!-- -------------- -->
-
+ <!-- Add this modal right before the closing </body> tag -->
+<!-- View Uploads Modal -->
+<div class="modal-overlay" id="view-uploads-modal" style="display: none;">
+    <div class="modal" style="max-width: 800px;">
+        <div class="modal-header">
+            <h3><i class="fas fa-file-upload"></i> Patient Uploads</h3>
+            <button class="close-modal" id="close-uploads-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="patient-info-header">
+                <div class="patient-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="patient-meta">
+                    <h4 id="uploads-patient-name">Loading patient...</h4>
+                    <div class="patient-details">
+                        <span id="uploads-patient-age-gender"></span>
+                        <span id="uploads-patient-blood-type" class="blood-badge"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="uploads-container" style="max-height: 400px; overflow-y: auto; margin-top: 20px;">
+                <table class="uploads-table">
+                    <thead>
+                        <tr>
+                            <th>Report Type</th>
+                            <th>Date of Test</th>
+                            <th>Uploaded At</th>
+                            <th>Notes</th>
+                            <th>File</th>
+                        </tr>
+                    </thead>
+                    <tbody id="uploads-table-body">
+                        <!-- Uploads will be loaded here -->
+                    </tbody>
+                </table>
+                <div id="no-uploads-message" style="text-align: center; padding: 20px; display: none;">
+                    <i class="fas fa-folder-open" style="font-size: 40px; color: #ccc;"></i>
+                    <p>No uploads found for this patient</p>
+                </div>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" class="cancel-btn" id="close-uploads-btn">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -893,6 +943,8 @@ async function openEditHealthModal(patientId) {
         setFieldValue('edit-allergies', data.allergies || '');
         setFieldValue('edit-conditions', data.medical_conditions || data.conditions || '');
         setFieldValue('edit-medications', data.current_medications || data.medications || '');
+        setFieldValue('edit-surgeries', data.previous_surgeries || data.surgeries || '');
+        setFieldValue('edit-family-history', data.family_history || '');
         // setFieldValue('edit-notes', data.notes || '');
 
     } catch (error) {
@@ -982,7 +1034,116 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-    
+    // Add to your existing JavaScript code
+
+// View Uploads Modal Handling
+const viewUploadsModal = document.getElementById('view-uploads-modal');
+
+function closeUploadsModal() {
+    viewUploadsModal.style.display = 'none';
+}
+
+// Close Uploads Modal
+document.getElementById('close-uploads-modal').addEventListener('click', closeUploadsModal);
+document.getElementById('close-uploads-btn').addEventListener('click', closeUploadsModal);
+
+// View Button Handling
+document.querySelectorAll('.view-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const patientId = this.getAttribute('data-patient-id');
+        openViewUploadsModal(patientId);
+    });
+});
+
+// Function to open and populate the view uploads modal
+async function openViewUploadsModal(patientId) {
+    console.log('Opening uploads modal for patient:', patientId);
+
+    try {
+        const patientRow = document.querySelector(`.view-btn[data-patient-id="${patientId}"]`)?.closest('tr');
+        if (!patientRow) throw new Error('Patient row not found in table');
+
+        const patientName = patientRow.querySelector('.patient-name')?.textContent;
+        const patientAgeGender = patientRow.querySelector('td:nth-child(2)')?.textContent;
+        const patientBloodType = patientRow.querySelector('.blood-badge')?.textContent;
+
+        if (!patientName || !patientAgeGender || !patientBloodType) {
+            throw new Error('Some patient info missing in table row');
+        }
+
+        setTextContent('uploads-patient-name', patientName);
+        setTextContent('uploads-patient-age-gender', patientAgeGender);
+        setTextContent('uploads-patient-blood-type', patientBloodType);
+
+        const modal = document.getElementById('view-uploads-modal');
+        if (!modal) throw new Error('View uploads modal not found');
+
+        // Show loading state
+        const uploadsTableBody = document.getElementById('uploads-table-body');
+        uploadsTableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Loading uploads...</td></tr>';
+        document.getElementById('no-uploads-message').style.display = 'none';
+
+        modal.style.display = 'flex';
+
+        // Fetch patient uploads
+        const response = await fetch(`get_patient_uploads.php?patient_id=${patientId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache'
+            }
+        });
+
+        const responseText = await response.text();
+        console.log('Raw uploads response:', responseText);
+
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (err) {
+            console.error('Error parsing JSON:', err);
+            throw new Error('Invalid JSON received from server.');
+        }
+
+        if (!result.success) {
+            throw new Error(result.error || result.message || 'Unknown error from server');
+        }
+
+        const uploads = result.data;
+
+        // Populate uploads table
+        uploadsTableBody.innerHTML = '';
+
+        if (uploads.length > 0) {
+            uploads.forEach(upload => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${upload.report_type || 'N/A'}</td>
+                    <td>${upload.DateOfTest ? new Date(upload.DateOfTest).toLocaleDateString() : 'N/A'}</td>
+                    <td>${upload.uploaded_at ? new Date(upload.uploaded_at).toLocaleString() : 'N/A'}</td>
+                    <td>${upload.notes || 'No notes'}</td>
+                    <td>
+                        ${upload.file_path ? 
+                            `<a href="${upload.file_path}" target="_blank" class="view-file-link">
+                                <i class="fas fa-file-download"></i> View
+                            </a>` : 
+                            'No file'}
+                    </td>
+                `;
+                
+                uploadsTableBody.appendChild(row);
+            });
+        } else {
+            document.getElementById('no-uploads-message').style.display = 'block';
+        }
+
+    } catch (error) {
+        console.error('Error loading uploads:', error);
+        const uploadsTableBody = document.getElementById('uploads-table-body');
+        uploadsTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Error loading uploads: ${error.message}</td></tr>`;
+    }
+}
 </script>
 </body>
 </html>

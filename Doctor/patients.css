@@ -1422,3 +1422,45 @@ select {
         justify-content: space-between;
         margin-top: 15px;
     }
+
+    /* Uploads Modal Styles */
+.uploads-container {
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    background: #f9f9f9;
+}
+
+.uploads-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.uploads-table th {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+.uploads-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.uploads-table tr:last-child td {
+    border-bottom: none;
+}
+
+.view-file-link {
+    color: #3498db;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.view-file-link:hover {
+    text-decoration: underline;
+}

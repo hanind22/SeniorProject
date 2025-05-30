@@ -1,0 +1,411 @@
+Array
+(
+    [full_name] => Shadi 
+    [date_of_birth] => 1994-10-13
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 70 452 145
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Mohammad Diab
+    [emergency_contact_relationship] => Father
+    [emergency_contact_phone] => 03 201 458
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+Array
+(
+    [full_name] => Shadi 
+    [date_of_birth] => 1994-10-13
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 70 452 145
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Mohammad Diab
+    [emergency_contact_relationship] => Father
+    [emergency_contact_phone] => 03 201 458
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+Array
+(
+    [full_name] => Shadi 
+    [date_of_birth] => 1994-10-13
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 70 452 145
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Mohammad Diab
+    [emergency_contact_relationship] => Father
+    [emergency_contact_phone] => 03 201 458
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+Array
+(
+)
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 70 145 266
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => mohammad diab
+    [emergency_contact_relationship] => Parent
+    [emergency_contact_phone] => 03 214 444
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 70 145 266
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => mohammad diab
+    [emergency_contact_relationship] => Parent
+    [emergency_contact_phone] => 03 214 444
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 70 145 266
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => mohammad diab
+    [emergency_contact_relationship] => Parent
+    [emergency_contact_phone] => 03 214 444
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 70 145 266
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => mohammad diab
+    [emergency_contact_relationship] => Parent
+    [emergency_contact_phone] => 03 214 444
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 70 145 266
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => mohammad diab
+    [emergency_contact_relationship] => Parent
+    [emergency_contact_phone] => 03 214 444
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB+
+    [phone_number] => 03 222 111
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => mohammad diab
+    [emergency_contact_relationship] => father
+    [emergency_contact_phone] => 03 254 789
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB+
+    [phone_number] => 03 222 111
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => mohammad diab
+    [emergency_contact_relationship] => father
+    [emergency_contact_phone] => 03 254 789
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Hanin Saber
+    [date_of_birth] => 2000-11-11
+    [gender] => female
+    [blood_type] => B-
+    [phone_number] => 03 754 125
+    [email] => hanin@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Mohammad Diab
+    [emergency_contact_relationship] => Father
+    [emergency_contact_phone] => 0325479
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Hanin Saber
+    [date_of_birth] => 2000-11-11
+    [gender] => female
+    [blood_type] => B-
+    [phone_number] => 03 754 125
+    [email] => hanin@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Mohammad Diab
+    [emergency_contact_relationship] => Father
+    [emergency_contact_phone] => 0325479
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Hanin Saber
+    [date_of_birth] => 2000-11-11
+    [gender] => female
+    [blood_type] => B-
+    [phone_number] => 03 754 125
+    [email] => hanin@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Mohammad Diab
+    [emergency_contact_relationship] => Father
+    [emergency_contact_phone] => 0325479
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Full name is required
+    [1] => Valid email is required
+    [2] => Password must be at least 8 characters
+    [3] => Phone number is required
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 03 254 789
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => mohamad
+    [emergency_contact_relationship] => Parent
+    [emergency_contact_phone] => 03 222 158
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Error: Unknown column 'emergency_contact_name' in 'field list'

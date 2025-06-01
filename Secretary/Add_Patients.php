@@ -1,211 +1,210 @@
 <?php
-session_start();
-require_once('../db-config/connection.php');
-
-// Enable error reporting
-error_reporting(E_ALL);
+// Enable maximum error reporting
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__.'/php_errors.log');
 
-// Set content type for JSON response
+ob_start();
+session_start();
 header('Content-Type: application/json');
 
-// Function to send JSON response
+require_once('../db-config/connection.php');
+require_once '../libs/phpqrcode/qrlib.php';
+
+function debugLog($message, $data = null) {
+    $log = "[".date('Y-m-d H:i:s')."] $message\n";
+    if ($data) $log .= print_r($data, true)."\n";
+    file_put_contents('debug.log', $log, FILE_APPEND);
+    echo "DEBUG: $message\n";
+    if ($data) echo "DATA: ".print_r($data, true)."\n";
+}
+
 function sendJsonResponse($success, $message, $data = null) {
-    echo json_encode([
+    $response = [
         'success' => $success,
         'message' => $message,
-        'data' => $data
-    ]);
+        'data' => $data,
+        'debug' => ob_get_clean()
+    ];
+    echo json_encode($response);
     exit();
 }
 
-// Debug received data
-file_put_contents('debug.log', "Received POST data:\n" . print_r($_POST, true) . "\n", FILE_APPEND);
+// Verify database connection
+if (!$conn) {
+    sendJsonResponse(false, "Database connection failed");
+}
 
-// Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Get form data with proper fallbacks
-        $full_name = trim($_POST['full_name'] ?? '');
-        $email = trim($_POST['email'] ?? '');
-        $password = $_POST['password'] ?? '';
-        $phone = trim($_POST['phone_number'] ?? '');
-        $date_of_birth = $_POST['date_of_birth'] ?? '';
-        $gender = $_POST['gender'] ?? '';
-        $blood_type = $_POST['blood_type'] ?? '';
+        // Extract and validate all input data
+        $required = [
+            'full_name', 'email', 'password', 'phone_number',
+            'date_of_birth', 'gender', 'blood_type',
+            'emergency_contact_name', 'emergency_contact_relationship', 'emergency_contact_phone'
+        ];
         
-        // Emergency contact info
-        $emergency_contact_name = trim($_POST['emergency_contact_name'] ?? '');
-        $emergency_contact_relationship = trim($_POST['emergency_contact_relationship'] ?? '');
-        $emergency_contact_phone = trim($_POST['emergency_contact_phone'] ?? '');
-        
-        // Insurance info
-        $insurance_provider = trim($_POST['insurance_provider'] ?? '');
-        $insurance_number = trim($_POST['insurance_number'] ?? '');
-        
-        // Medical info
-        $allergies = trim($_POST['allergies'] ?? '');
-        $medical_conditions = trim($_POST['medical_conditions'] ?? '');
-        $current_medications = trim($_POST['current_medications'] ?? '');
-        $previous_surgeries = trim($_POST['previous_surgeries'] ?? '');
-        $family_history = trim($_POST['family_history'] ?? '');
-
-        // Validate inputs
         $errors = [];
+        $data = [];
         
-        if (empty($full_name)) $errors[] = "Full name is required";
-        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Valid email is required";
-        if (empty($password) || strlen($password) < 8) $errors[] = "Password must be at least 8 characters";
-        if (empty($phone)) $errors[] = "Phone number is required";
-        if (empty($date_of_birth)) $errors[] = "Date of birth is required";
-        if (empty($gender)) $errors[] = "Gender is required";
-        if (empty($blood_type)) $errors[] = "Blood type is required";
-        if (empty($emergency_contact_name)) $errors[] = "Emergency contact name is required";
-        if (empty($emergency_contact_relationship)) $errors[] = "Emergency contact relationship is required";
-        if (empty($emergency_contact_phone)) $errors[] = "Emergency contact phone is required";
-
-        // Check if email exists only if no errors so far
-        if (empty($errors)) {
-            $stmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
-            if (!$stmt) {
-                throw new Exception("Database prepare failed: " . $conn->error);
+        foreach ($required as $field) {
+            $data[$field] = trim($_POST[$field] ?? '');
+            if (empty($data[$field])) {
+                $errors[] = ucfirst(str_replace('_', ' ', $field))." is required";
             }
-            
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->store_result();
-            
-            if ($stmt->num_rows > 0) {
-                $errors[] = "Email already registered";
-            }
-            $stmt->close();
         }
 
-        file_put_contents('debug.log', "Validation errors:\n" . print_r($errors, true) . "\n", FILE_APPEND);
+        // Additional validations
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Invalid email format";
+        }
 
-        // If there are validation errors, return them
+        if (strlen($data['password']) < 8) {
+            $errors[] = "Password must be at least 8 characters";
+        }
+
         if (!empty($errors)) {
             sendJsonResponse(false, implode(", ", $errors));
         }
 
-        // If no errors, proceed with registration
-        // Hash password using bcrypt
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        
-        if ($hashed_password === false) {
+        // Check email uniqueness
+        $stmt = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
+        $stmt->bind_param("s", $data['email']);
+        $stmt->execute();
+        if ($stmt->get_result()->num_rows > 0) {
+            sendJsonResponse(false, "Email already registered");
+        }
+        $stmt->close();
+
+        // Hash password
+        $hashed_password = password_hash($data['password'], PASSWORD_DEFAULT);
+        if (!$hashed_password) {
             throw new Exception("Password hashing failed");
         }
-        
+
+        // Verify doctor exists
+        $doctor_id = $_SESSION['doctor_id'] ?? null;
+        if (!$doctor_id) {
+            throw new Exception("Doctor ID not found in session");
+        }
+
+        $stmt = $conn->prepare("SELECT doctor_id FROM doctors WHERE user_id = ?");
+        $stmt->bind_param("i", $doctor_id);
+        $stmt->execute();
+        if (!$stmt->get_result()->fetch_assoc()) {
+            throw new Exception("Invalid doctor ID");
+        }
+        $stmt->close();
+
         // Start transaction
         $conn->begin_transaction();
-        
-        // Insert into users table
-        $stmt = $conn->prepare("INSERT INTO users (full_name, email, password_hash, phone_number, user_type) VALUES (?, ?, ?, ?, 'patient')");
-        if (!$stmt) {
-            throw new Exception("Database prepare failed: " . $conn->error);
-        }
-        
-        $stmt->bind_param("ssss", $full_name, $email, $hashed_password, $phone);
-        
-        if (!$stmt->execute()) {
-            throw new Exception("User insert failed: " . $stmt->error);
-        }
-        
-        $user_id = $conn->insert_id;
-        $stmt->close();
-        
-        // Insert into patients table (without emergency contact fields)
-        $stmt = $conn->prepare("
-            INSERT INTO patients (
+
+        try {
+            // Insert into users
+            $stmt = $conn->prepare("INSERT INTO users (full_name, email, password_hash, phone_number, user_type) 
+                                  VALUES (?, ?, ?, ?, 'patient')");
+            $stmt->bind_param("ssss", $data['full_name'], $data['email'], $hashed_password, $data['phone_number']);
+            if (!$stmt->execute()) {
+                throw new Exception("User insert failed: ".$stmt->error);
+            }
+            $user_id = $conn->insert_id;
+            $stmt->close();
+
+            // Assign optional fields to variables (required fix for bind_param)
+            $insurance_provider = $_POST['insurance_provider'] ?? '';
+            $insurance_number = $_POST['insurance_number'] ?? '';
+            $allergies = $_POST['allergies'] ?? '';
+            $medical_conditions = $_POST['medical_conditions'] ?? '';
+            $current_medications = $_POST['current_medications'] ?? '';
+            $previous_surgeries = $_POST['previous_surgeries'] ?? '';
+            $family_history = $_POST['family_history'] ?? '';
+
+            // Insert into patients
+            $stmt = $conn->prepare("INSERT INTO patients (
                 user_id, date_of_birth, gender, blood_type, 
                 insurance_provider, insurance_number,
                 allergies, medical_conditions, current_medications, 
                 previous_surgeries, family_history, health_form_completed
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
-        ");
-        
-        if (!$stmt) {
-            throw new Exception("Database prepare failed: " . $conn->error);
-        }
-        
-        $stmt->bind_param("issssssssss", 
-            $user_id, $date_of_birth, $gender, $blood_type,
-            $insurance_provider, $insurance_number,
-            $allergies, $medical_conditions, $current_medications,
-            $previous_surgeries, $family_history
-        );
-        
-        if (!$stmt->execute()) {
-            throw new Exception("Patient insert failed: " . $stmt->error);
-        }
-        
-        $patient_id = $conn->insert_id;
-        $stmt->close();
-        
-        // Insert into emergency_contacts table
-        $stmt = $conn->prepare("
-            INSERT INTO emergency_contacts (
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
+            
+            $stmt->bind_param("issssssssss", 
+                $user_id, $data['date_of_birth'], $data['gender'], $data['blood_type'],
+                $insurance_provider, $insurance_number, $allergies, $medical_conditions,
+                $current_medications, $previous_surgeries, $family_history
+            );
+
+            if (!$stmt->execute()) {
+                throw new Exception("Patient insert failed: ".$stmt->error);
+            }
+            $patient_id = $conn->insert_id;
+            $stmt->close();
+
+            // Insert emergency contact
+            $stmt = $conn->prepare("INSERT INTO emergency_contacts (
                 patient_id, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone
-            ) VALUES (?, ?, ?, ?)
-        ");
-        
-        if (!$stmt) {
-            throw new Exception("Database prepare failed: " . $conn->error);
-        }
-        
-        $stmt->bind_param("isss", 
-            $patient_id, $emergency_contact_name, $emergency_contact_relationship, $emergency_contact_phone
-        );
-        
-        if (!$stmt->execute()) {
-            throw new Exception("Emergency contact insert failed: " . $stmt->error);
-        }
-        
-        $stmt->close();
-        
-        // Commit transaction
-        $conn->commit();
-        
-        file_put_contents('debug.log', "Patient registration successful for $email with patient_id: $patient_id\n", FILE_APPEND);
-        
-        // Generate QR code (optional - you might want to do this separately)
-        // generateQRCode($patient_id);
-        
-        // Return success response
-        sendJsonResponse(true, "Patient registered successfully!", [
-            'patient_id' => $patient_id,
-            'user_id' => $user_id,
-            'full_name' => $full_name
-        ]);
-        
-    } catch (Exception $e) {
-        // Rollback transaction on error
-        if ($conn->inTransaction ?? false) {
+            ) VALUES (?, ?, ?, ?)");
+            
+            $stmt->bind_param("isss", 
+                $patient_id, $data['emergency_contact_name'], 
+                $data['emergency_contact_relationship'], $data['emergency_contact_phone']
+            );
+            
+            if (!$stmt->execute()) {
+                throw new Exception("Emergency contact insert failed: ".$stmt->error);
+            }
+            $stmt->close();
+
+            // Create doctor-patient relationship
+            $stmt = $conn->prepare("INSERT INTO doctorpatient (doctor_id, patient_id) VALUES (?, ?)");
+            $stmt->bind_param("ii", $doctor_id, $patient_id);
+            if (!$stmt->execute()) {
+                throw new Exception("Doctor-patient relationship failed: ".$stmt->error);
+            }
+            $stmt->close();
+
+            // Generate and save QR code
+            $qrCodePath = generateAndSaveQRCode($patient_id, $conn);
+
+            // Commit transaction
+            $conn->commit();
+
+            sendJsonResponse(true, "Patient registered successfully", [
+                'patient_id' => $patient_id,
+                'qr_code_path' => $qrCodePath
+            ]);
+
+        } catch (Exception $e) {
             $conn->rollback();
+            throw $e;
         }
-        
-        file_put_contents('debug.log', "Error: " . $e->getMessage() . "\n", FILE_APPEND);
-        sendJsonResponse(false, "Registration failed: " . $e->getMessage());
+
+    } catch (Exception $e) {
+        sendJsonResponse(false, "Registration failed: ".$e->getMessage());
     }
-    
 } else {
-    // If not POST request
     sendJsonResponse(false, "Invalid request method");
 }
 
-// Optional: Function to generate QR code
-function generateQRCode($patient_id) {
-    // You'll need to implement QR code generation here
-    // This is just a placeholder
-    try {
-        // Example using a QR code library
-        // $qr_data = "patient_id:" . $patient_id;
-        // $qr_file = "../qrcodes/patient_" . $patient_id . ".png";
-        // Generate QR code and save to file
-        return true;
-    } catch (Exception $e) {
-        file_put_contents('debug.log', "QR Code generation failed: " . $e->getMessage() . "\n", FILE_APPEND);
-        return false;
+function generateAndSaveQRCode($patientId, $conn) {
+    $qrDir = '../qrcodes/';
+    if (!file_exists($qrDir)) {
+        mkdir($qrDir, 0755, true);
     }
+
+    $fileName = 'patient_'.$patientId.'.png';
+    $filePath = $qrDir.$fileName;
+    $relativePath = 'qrcodes/'.$fileName;
+
+    $url = "http://yourdomain.com/patient_details.php?patient_id=".$patientId;
+    QRcode::png($url, $filePath, QR_ECLEVEL_L, 6);
+
+    $stmt = $conn->prepare("UPDATE patients SET QR_code = ? WHERE patient_id = ?");
+    $stmt->bind_param('si', $relativePath, $patientId);
+    $stmt->execute();
+    $stmt->close();
+
+    return $relativePath;
 }
 ?>

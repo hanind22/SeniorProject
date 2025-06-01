@@ -47,6 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_appointment'])) 
             throw new Exception("Error saving appointment: " . $stmt->error);
         }
 
+        // 🔄 Insert into DoctorPatient if not already linked
+        $linkStmt = $conn->prepare("INSERT IGNORE INTO DoctorPatient (doctor_id, patient_id) VALUES (?, ?)");
+        $linkStmt->bind_param("ii", $doctor_id, $patient_id);
+        $linkStmt->execute();
+
         // Redirect back with success message
         header("Location: Dr_Appointment.php?success=" . urlencode("Appointment saved successfully."));
         exit();

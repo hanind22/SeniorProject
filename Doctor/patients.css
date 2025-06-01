@@ -101,6 +101,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    
 }
 
 .search-input {
@@ -162,6 +163,7 @@
 
 /* Patients Table */
 .patients-table-container {
+    margin-top: 20px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -169,6 +171,7 @@
 }
 
 .patients-table {
+    margin-top: 30px;
     width: 100%;
     border-collapse: collapse;
 }
@@ -176,13 +179,15 @@
 .patients-table th {
     background-color: #f8f9fa;
     padding: 15px;
-    text-align: left;
+    text-align: center;
     font-weight: 600;
     color: #2c3e50;
     border-bottom: 1px solid #eee;
 }
 
 .patients-table td {
+    text-align: center;
+    font-size: 1rem;
     padding: 15px;
     border-bottom: 1px solid #eee;
     vertical-align: middle;

@@ -627,3 +627,1183 @@ Array
 )
 
 Registration successful for AlyAbdallah@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Hayat Ibrahim
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 1
+    [Email] => HayatIbrahim@gmail.com
+    [Password] => 123456789
+    [phone] => 71887184
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for HayatIbrahim@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Hayat Ibrahim
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 1
+    [Email] => HayatIbrahim@gmail.com
+    [Password] => 12345678
+    [phone] => 71887184
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Ali Ghaddar
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => GhaddarAli@gmail.com
+    [Password] => 12345678
+    [phone] => 71405060
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for GhaddarAli@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Hayat Ibrahim
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 1
+    [Email] => HayatIbrahim@gmail.com
+    [Password] => 12345678
+    [phone] => 71887184
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for HayatIbrahim@gmail.com
+[2025-05-30 23:29:41] Received POST data:
+Array
+(
+    [fullName] => Hayat Ibrahim
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 1
+    [Email] => HayatIbrahim@gmail.com
+    [Password] => 12345678
+    [phone] => 71887184
+)
+
+Secretary data - specialty: Cardiology, doctor: 1
+Validation errors:
+Array
+(
+)
+
+User inserted with ID: 39
+Looking up doctor: Cardiology / 1
+Error: Selected doctor not found for specialty: Cardiology and name: 1
+Received POST data:
+Array
+(
+    [fullName] => Hayat Ibrahim
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 1
+    [Email] => HayatIbrahim@gmail.com
+    [Password] => 12345678
+    [phone] => 71887184
+)
+
+Validation errors:
+Array
+(
+)
+
+Registration successful for HayatIbrahim@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Hayat Ibrahim
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 1
+    [Email] => HayatIbrahim@gmail.com
+    [Password] => 12345678
+    [phone] => 71887184
+)
+
+Secretary data - specialty: Cardiology, doctor: 1
+Validation errors:
+Array
+(
+)
+
+Registration successful for HayatIbrahim@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Lara Wehbi
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Neurology
+    [assignedDoctor] => 2
+    [Email] => WehbiLaraa@gmail.com
+    [Password] => 12345678
+    [phone] => 718871499
+)
+
+Secretary data - specialty: Neurology, doctor: 2
+Validation errors:
+Array
+(
+)
+
+Registration successful for WehbiLaraa@gmail.com
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+)
+
+Registration successful for alaa@gmail.coom
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+)
+
+Looking up doctor: Cardiology / 19
+Error: Selected doctor not found
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Orthopedics
+    [assignedDoctor] => 22
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Orthopedics, doctor: 22
+Validation errors:
+Array
+(
+)
+
+Looking up doctor: Orthopedics / 22
+Error: Selected doctor not found
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Pediatrics
+    [assignedDoctor] => 20
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Pediatrics, doctor: 20
+Validation errors:
+Array
+(
+)
+
+Registration successful for alaa@gmail.coom
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+)
+
+Registration successful for alaa@gmail.coom
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+)
+
+Looking up doctor: Cardiology / 19
+Error: Selected doctor not found
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+)
+
+Error: Selected doctor not found. Please check the doctor's name and specialty.
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+)
+
+Error: Selected doctor not found. Please check the doctor's name and specialty.
+Received POST data:
+Array
+(
+    [fullName] => dc
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => dfwef@gmail.com
+    [Password] => dwefc
+    [phone] => 71175040
+)
+
+Validation errors:
+Array
+(
+    [0] => Password must be at least 8 characters
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+)
+
+Error: No doctor found with specialty 'Cardiology' and name matching '19'
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Orthopedics
+    [assignedDoctor] => 22
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Orthopedics, doctor: 22
+Validation errors:
+Array
+(
+)
+
+Registration successful for alaa@gmail.coom
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => alaa@gmail.coom
+    [Password] => 12345678
+    [phone] => 81887584
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+)
+
+Registration successful for alaa@gmail.coom
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Pediatrics
+    [assignedDoctor] => 20
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Secretary registration detected
+Secretary data - specialty: Pediatrics, doctor: 20
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Secretary registration detected
+Secretary data - specialty: Cardiology, doctor: 19
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Neurology
+    [assignedDoctor] => 2
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Neurology
+    [assignedDoctor] => 2
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Neurology
+    [assignedDoctor] => 2
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Neurology
+    [assignedDoctor] => 2
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Raw POST data: fullName=Alaa+Abboud&userType=secretary&licenseNumber=&secretarySpecialty=Cardiology&assignedDoctor=19&Email=hanindiab22%40gmail.com&Password=12345678&phone=71175078
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345612
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => hanindiab22@gmail.com
+    [Password] => xdefwc
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Password must be at least 8 characters
+)
+
+Raw POST data: fullName=Alaa+Abboud&userType=secretary&licenseNumber=&secretarySpecialty=Neurology&assignedDoctor=2&Email=hanindiab22%40gmail.com&Password=12345678&phone=71175078
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Neurology
+    [assignedDoctor] => 2
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Raw POST data: fullName=Alaa+Abboud&userType=secretary&licenseNumber=&secretarySpecialty=Cardiology&assignedDoctor=1&Email=hanindiab22%40gmail.com&Password=12345678&phone=71175078
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 1
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Raw POST data: fullName=Alaa+Abboud&userType=secretary&licenseNumber=&secretarySpecialty=Cardiology&assignedDoctor=19&Email=hanindiab22%40gmail.com&Password=12345678&phone=71175078
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Raw POST data: fullName=Alaa+Abboud&userType=secretary&licenseNumber=&secretarySpecialty=Cardiology&assignedDoctor=1&Email=hanindiab22%40gmail.com&Password=12345678&phone=71175078
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 1
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Raw POST data: fullName=Alaa+Abboud&userType=patient&licenseNumber=&Email=hanindiab22%40gmail.com&Password=12345678&phone=71175078
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => 89563254
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => doctor
+    [doctorSpecialty] => Pediatrics
+    [licenseNumber] => 864513689
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => doctor
+    [doctorSpecialty] => Pediatrics
+    [licenseNumber] => 97864531248
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+[2025-05-31 08:31:13] Script started. Request method: POST
+[2025-05-31 08:31:13] Received POST data: Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => doctor
+    [doctorSpecialty] => Pediatrics
+    [licenseNumber] => 658798451232
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 71175078
+)
+
+[2025-05-31 08:31:13] Session data: Array
+(
+    [user_id] => 18
+    [email] => zainab222@gmail.com
+    [full_name] => Zainab Farhat
+    [user_type] => Patient
+    [doctor_id] => 1
+    [patient_id] => 18
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Alaa Abboud
+            [userType] => doctor
+            [doctorSpecialty] => Pediatrics
+            [licenseNumber] => 97864531248
+            [Email] => hanindiab22@gmail.com
+            [Password] => 12345678
+            [phone] => 71175078
+        )
+
+)
+
+[2025-05-31 08:31:13] Processed input data:
+[2025-05-31 08:31:13] Full Name: Alaa Abboud
+[2025-05-31 08:31:13] Email: hanindiab22@gmail.com
+[2025-05-31 08:31:13] Phone: 71175078
+[2025-05-31 08:31:13] User Type: doctor
+[2025-05-31 08:31:13] Specialty: Pediatrics
+[2025-05-31 08:31:13] License: 658798451232
+[2025-05-31 08:31:13] Secretary Specialty: 
+[2025-05-31 08:31:13] Assigned Doctor: 
+[2025-05-31 08:31:13] Validation errors: Array
+(
+)
+
+[2025-05-31 08:31:13] Redirecting back with errors
+[2025-05-31 08:31:59] Script started. Request method: POST
+[2025-05-31 08:31:59] Received POST data: Array
+(
+    [fullName] => Alaa Abboud
+    [userType] => doctor
+    [doctorSpecialty] => General
+    [licenseNumber] => 9564597
+    [Email] => hanindiab22@gmail.com
+    [Password] => 12345678
+    [phone] => 714585629
+)
+
+[2025-05-31 08:31:59] Session data: Array
+(
+    [user_id] => 18
+    [email] => zainab222@gmail.com
+    [full_name] => Zainab Farhat
+    [user_type] => Patient
+    [doctor_id] => 1
+    [patient_id] => 18
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Alaa Abboud
+            [userType] => doctor
+            [doctorSpecialty] => Pediatrics
+            [licenseNumber] => 658798451232
+            [Email] => hanindiab22@gmail.com
+            [Password] => 12345678
+            [phone] => 71175078
+        )
+
+)
+
+[2025-05-31 08:31:59] Processed input data:
+[2025-05-31 08:31:59] Full Name: Alaa Abboud
+[2025-05-31 08:31:59] Email: hanindiab22@gmail.com
+[2025-05-31 08:31:59] Phone: 714585629
+[2025-05-31 08:31:59] User Type: doctor
+[2025-05-31 08:31:59] Specialty: General
+[2025-05-31 08:31:59] License: 9564597
+[2025-05-31 08:31:59] Secretary Specialty: 
+[2025-05-31 08:31:59] Assigned Doctor: 
+[2025-05-31 08:31:59] Validation errors: Array
+(
+)
+
+[2025-05-31 08:31:59] Redirecting back with errors
+[2025-05-31 08:34:48] Script started. Request method: POST
+[2025-05-31 08:34:48] Received POST data: Array
+(
+    [fullName] => Lamya Tallous
+    [userType] => doctor
+    [doctorSpecialty] => Pediatrics
+    [licenseNumber] => 24587123
+    [Email] => lamya@gmail.com
+    [Password] => 12345678
+    [phone] => 71487526
+)
+
+[2025-05-31 08:34:48] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab22@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [doctor_id] => 1
+    [patient_id] => 18
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Alaa Abboud
+            [userType] => doctor
+            [doctorSpecialty] => General
+            [licenseNumber] => 9564597
+            [Email] => hanindiab22@gmail.com
+            [Password] => 12345678
+            [phone] => 714585629
+        )
+
+)
+
+[2025-05-31 08:34:48] Processed input data:
+[2025-05-31 08:34:48] Full Name: Lamya Tallous
+[2025-05-31 08:34:48] Email: lamya@gmail.com
+[2025-05-31 08:34:48] Phone: 71487526
+[2025-05-31 08:34:48] User Type: doctor
+[2025-05-31 08:34:48] Specialty: Pediatrics
+[2025-05-31 08:34:48] License: 24587123
+[2025-05-31 08:34:48] Secretary Specialty: 
+[2025-05-31 08:34:48] Assigned Doctor: 
+[2025-05-31 08:34:48] Validation errors: Array
+(
+)
+
+[2025-05-31 08:34:48] Transaction started
+[2025-05-31 08:34:48] Password hashed
+[2025-05-31 08:34:48] User inserted with ID: 55
+[2025-05-31 08:34:48] Doctor record inserted
+[2025-05-31 08:34:48] Transaction committed
+[2025-05-31 08:34:48] Session variables set. Registration successful for lamya@gmail.com
+[2025-05-31 08:34:48] Redirecting to: ../Doctor/doctor_dashboard.php
+[2025-05-31 08:35:42] Script started. Request method: POST
+[2025-05-31 08:35:42] Received POST data: Array
+(
+    [fullName] => Lamya Tallous
+    [userType] => patient
+    [doctorSpecialty] => Pediatrics
+    [licenseNumber] => 24587123
+    [Email] => lamya@gmail.com
+    [Password] => 12345678
+    [phone] => 71487526
+)
+
+[2025-05-31 08:35:42] Session data: Array
+(
+    [user_id] => 55
+    [email] => lamya@gmail.com
+    [full_name] => Lamya Tallous
+    [user_type] => Doctor
+    [doctor_id] => 1
+    [patient_id] => 18
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Alaa Abboud
+            [userType] => doctor
+            [doctorSpecialty] => General
+            [licenseNumber] => 9564597
+            [Email] => hanindiab22@gmail.com
+            [Password] => 12345678
+            [phone] => 714585629
+        )
+
+)
+
+[2025-05-31 08:35:42] Processed input data:
+[2025-05-31 08:35:42] Full Name: Lamya Tallous
+[2025-05-31 08:35:42] Email: lamya@gmail.com
+[2025-05-31 08:35:42] Phone: 71487526
+[2025-05-31 08:35:42] User Type: patient
+[2025-05-31 08:35:42] Specialty: 
+[2025-05-31 08:35:42] License: 
+[2025-05-31 08:35:42] Secretary Specialty: 
+[2025-05-31 08:35:42] Assigned Doctor: 
+[2025-05-31 08:35:42] Validation errors: Array
+(
+)
+
+[2025-05-31 08:35:42] Transaction started
+[2025-05-31 08:35:42] Password hashed
+[2025-05-31 08:35:42] User inserted with ID: 56
+[2025-05-31 08:35:42] Patient record inserted
+[2025-05-31 08:35:42] Transaction committed
+[2025-05-31 08:35:42] Session variables set. Registration successful for lamya@gmail.com
+[2025-05-31 08:35:42] Redirecting to: ../Patient/patient_dashboard.php
+[2025-05-31 08:36:26] Script started. Request method: POST
+[2025-05-31 08:36:26] Received POST data: Array
+(
+    [fullName] => Lamya Tallous
+    [userType] => secretary
+    [doctorSpecialty] => Pediatrics
+    [licenseNumber] => 24587123
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 19
+    [Email] => lamya@gmail.com
+    [Password] => 12345678
+    [phone] => 71487526
+)
+
+[2025-05-31 08:36:26] Session data: Array
+(
+    [user_id] => 56
+    [email] => lamya@gmail.com
+    [full_name] => Lamya Tallous
+    [user_type] => Patient
+    [doctor_id] => 1
+    [patient_id] => 18
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Alaa Abboud
+            [userType] => doctor
+            [doctorSpecialty] => General
+            [licenseNumber] => 9564597
+            [Email] => hanindiab22@gmail.com
+            [Password] => 12345678
+            [phone] => 714585629
+        )
+
+)
+
+[2025-05-31 08:36:26] Processed input data:
+[2025-05-31 08:36:26] Full Name: Lamya Tallous
+[2025-05-31 08:36:26] Email: lamya@gmail.com
+[2025-05-31 08:36:26] Phone: 71487526
+[2025-05-31 08:36:26] User Type: secretary
+[2025-05-31 08:36:26] Specialty: 
+[2025-05-31 08:36:26] License: 
+[2025-05-31 08:36:26] Secretary Specialty: Cardiology
+[2025-05-31 08:36:26] Assigned Doctor: 19
+[2025-05-31 08:36:26] Validation errors: Array
+(
+)
+
+[2025-05-31 08:36:26] Transaction started
+[2025-05-31 08:36:26] Password hashed
+[2025-05-31 08:36:26] User inserted with ID: 57
+[2025-05-31 08:36:26] Found doctor ID: 3
+[2025-05-31 08:36:26] Secretary record inserted
+[2025-05-31 08:36:26] Transaction committed
+[2025-05-31 08:36:26] Session variables set. Registration successful for lamya@gmail.com
+[2025-05-31 08:36:26] Redirecting to: ../Secretary/secretary_dashboard.php
+[2025-05-31 09:25:37] Script started. Request method: POST
+[2025-05-31 09:25:37] Received POST data: Array
+(
+    [fullName] => Lamya Tallous
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Neurology
+    [assignedDoctor] => 2
+    [Email] => lamya@gmail.com
+    [Password] => 12345678
+    [phone] => 81
+)
+
+[2025-05-31 09:25:37] Session data: Array
+(
+    [user_id] => 57
+    [email] => lamya@gmail.com
+    [full_name] => Lamya Tallous
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 18
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+)
+
+[2025-05-31 09:25:37] Processed input data:
+[2025-05-31 09:25:37] Full Name: Lamya Tallous
+[2025-05-31 09:25:37] Email: lamya@gmail.com
+[2025-05-31 09:25:37] Phone: 81
+[2025-05-31 09:25:37] User Type: secretary
+[2025-05-31 09:25:37] Specialty: 
+[2025-05-31 09:25:37] License: 
+[2025-05-31 09:25:37] Secretary Specialty: Neurology
+[2025-05-31 09:25:37] Assigned Doctor: 2
+[2025-05-31 09:25:37] Validation errors: Array
+(
+)
+
+[2025-05-31 09:25:37] Transaction started
+[2025-05-31 09:25:37] Password hashed
+[2025-05-31 09:25:37] User inserted with ID: 59
+[2025-05-31 09:25:37] Found doctor ID: 2
+[2025-05-31 09:25:37] Secretary record inserted
+[2025-05-31 09:25:37] Transaction committed
+[2025-05-31 09:25:37] Session variables set. Registration successful for lamya@gmail.com
+[2025-05-31 09:25:37] Redirecting to: ../Secretary/secretary_dashboard.php
+[2025-05-31 15:12:03] Script started. Request method: POST
+[2025-05-31 15:12:03] Received POST data: Array
+(
+    [fullName] => Narine Beauty
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Pediatrics
+    [assignedDoctor] => 20
+    [Email] => narine@gmail.com
+    [Password] => 12345678
+    [phone] => 81748877
+)
+
+[2025-05-31 15:12:03] Session data: Array
+(
+    [user_id] => 59
+    [email] => lamya@gmail.com
+    [full_name] => Lamya Tallous
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 59
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+)
+
+[2025-05-31 15:12:03] Processed input data:
+[2025-05-31 15:12:03] Full Name: Narine Beauty
+[2025-05-31 15:12:03] Email: narine@gmail.com
+[2025-05-31 15:12:03] Phone: 81748877
+[2025-05-31 15:12:03] User Type: secretary
+[2025-05-31 15:12:03] Specialty: 
+[2025-05-31 15:12:03] License: 
+[2025-05-31 15:12:03] Secretary Specialty: Pediatrics
+[2025-05-31 15:12:03] Assigned Doctor: 20
+[2025-05-31 15:12:03] Validation errors: Array
+(
+)
+
+[2025-05-31 15:12:03] Transaction started
+[2025-05-31 15:12:03] Password hashed
+[2025-05-31 15:12:03] User inserted with ID: 61
+[2025-05-31 15:12:03] Found doctor ID: 4
+[2025-05-31 15:12:03] Secretary record inserted
+[2025-05-31 15:12:03] Transaction committed
+[2025-05-31 15:12:03] Session variables set. Registration successful for narine@gmail.com
+[2025-05-31 15:12:03] Redirecting to: ../Secretary/secretary_dashboard.php
+[2025-05-31 15:40:35] Script started. Request method: POST
+[2025-05-31 15:40:35] Received POST data: Array
+(
+    [fullName] => Hayat Ibrahim
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Cardiology
+    [assignedDoctor] => 1
+    [Email] => HayatIbrahim@gmail.com
+    [Password] => 12345678
+    [phone] => 71887184
+)
+
+[2025-05-31 15:40:35] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab22@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+[2025-05-31 15:40:35] Processed input data:
+[2025-05-31 15:40:35] Full Name: Hayat Ibrahim
+[2025-05-31 15:40:35] Email: HayatIbrahim@gmail.com
+[2025-05-31 15:40:35] Phone: 71887184
+[2025-05-31 15:40:35] User Type: secretary
+[2025-05-31 15:40:35] Specialty: 
+[2025-05-31 15:40:35] License: 
+[2025-05-31 15:40:35] Secretary Specialty: Cardiology
+[2025-05-31 15:40:35] Assigned Doctor: 1
+[2025-05-31 15:40:35] Validation errors: Array
+(
+)
+
+[2025-05-31 15:40:35] Transaction started
+[2025-05-31 15:40:36] Password hashed
+[2025-05-31 15:40:36] User inserted with ID: 63
+[2025-05-31 15:40:36] Found doctor ID: 1
+[2025-05-31 15:40:36] Secretary record inserted
+[2025-05-31 15:40:36] Transaction committed
+[2025-05-31 15:40:36] Session variables set. Registration successful for HayatIbrahim@gmail.com
+[2025-05-31 15:40:36] Redirecting to: ../Secretary/secretary_dashboard.php

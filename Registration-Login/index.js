@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Form container and tab handling
     const formContainer = document.getElementById('formContainer');
     const showSignupBtn = document.getElementById('show-signup-btn');
     const showLoginBtn = document.getElementById('show-login-btn');
+    const signupForm = document.getElementById('signup-form');
     
-    // Initialize forms - make sure signup form is visible for transitions
-    document.getElementById('signup-form').style.display = 'block';
+    // Initialize forms
+    signupForm.style.display = 'block';
     
     // Tab click handlers
     showSignupBtn.addEventListener('click', function(e) {
@@ -16,9 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         formContainer.classList.remove('show-signup');
     });
-    
 
-    
     // Password toggle function
     window.togglePassword = function(inputId, element) {
         const input = document.getElementById(inputId);
@@ -50,34 +50,129 @@ document.addEventListener('DOMContentLoaded', function() {
     // Pre-fill login if user exists
     const storedUser = localStorage.getItem('medicareUser');
     if (storedUser) {
-        const user = JSON.parse(storedUser);
-        document.getElementById('loginEmail').value = user.email;
-    }
-    
-})
-
-document.addEventListener('DOMContentLoaded', function() {
-    const userTypeSelect = document.getElementById('userType');
-    const doctorFields = document.getElementById('doctorFields');
-    
-    if (userTypeSelect && doctorFields) {
-        userTypeSelect.addEventListener('change', function() {
-            if (this.value === 'doctor') {
-                doctorFields.style.display = 'block';
-                document.getElementById('doctorSpecialty').required = true;
-                document.getElementById('licenseNumber').required = true;
-            } else {
-                doctorFields.style.display = 'none';
-                document.getElementById('doctorSpecialty').required = false;
-                document.getElementById('licenseNumber').required = false;
+        try {
+            const user = JSON.parse(storedUser);
+            if (user.email) {
+                document.getElementById('loginEmail').value = user.email;
             }
-        });
+        } catch (e) {
+            console.error('Error parsing stored user:', e);
+        }
     }
+    
+    // Handle user type selection
+    document.getElementById('userType').addEventListener('change', function() {
+        const userType = this.value;
+        const doctorFields = document.getElementById('doctorFields');
+        const secretaryFields = document.getElementById('secretaryFields');
+        
+        // Hide all fields first
+        doctorFields.classList.add('hidden-fields');
+        secretaryFields.classList.add('hidden-fields');
+        
+        // Show relevant fields based on selection
+        if (userType === 'doctor') {
+            doctorFields.classList.remove('hidden-fields');
+            document.getElementById('doctorSpecialty').required = true;
+            document.getElementById('licenseNumber').required = true;
+            document.getElementById('secretarySpecialty').required = false;
+            document.getElementById('assignedDoctor').required = false;
+        } 
+        else if (userType === 'secretary') {
+            secretaryFields.classList.remove('hidden-fields');
+            document.getElementById('secretarySpecialty').required = true;
+            document.getElementById('assignedDoctor').required = true;
+            document.getElementById('doctorSpecialty').required = false;
+            document.getElementById('licenseNumber').required = false;
+        }
+        else {
+            // For patient, no additional fields needed
+            document.getElementById('doctorSpecialty').required = false;
+            document.getElementById('licenseNumber').required = false;
+            document.getElementById('secretarySpecialty').required = false;
+            document.getElementById('assignedDoctor').required = false;
+        }
+    });
 
+    // Phone number validation
     const phoneInput = document.getElementById('phone');
     if (phoneInput) {
         phoneInput.addEventListener('input', function(e) {
             this.value = this.value.replace(/[^0-9\-]/g, '');
         });
     }
+
+    // Form submission validation
+    signupForm.addEventListener('submit', function(e) {
+        // Log all form data before submission
+        const formData = new FormData(this);
+        console.log('Form submission data:', Object.fromEntries(formData));
+        
+        // Additional validation can be added here if needed
+        // For example, check if secretary has selected a doctor
+        const userType = document.getElementById('userType').value;
+        if (userType === 'secretary') {
+            const assignedDoctor = document.getElementById('assignedDoctor').value;
+            if (!assignedDoctor) {
+                e.preventDefault();
+                alert('Please select a doctor');
+                return false;
+            }
+        }
+        
+        return true;
+    });
+
+    // Update doctors dropdown when specialty is selected
+    document.getElementById('secretarySpecialty').addEventListener('change', async function() {
+        const specialty = this.value;
+        const doctorSelect = document.getElementById('assignedDoctor');
+        
+        // Clear existing options and show loading
+        doctorSelect.innerHTML = '<option value="" selected disabled>Loading doctors...</option>';
+        
+        if (specialty) {
+            try {
+                console.log(`Fetching doctors for specialty: ${specialty}`);
+                const response = await fetch('/fyp/Registration-Login/get_doctors.php?specialty=' + encodeURIComponent(specialty), {
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Server returned ${response.status}`);
+                }
+                
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('Invalid response format');
+                }
+                
+                const doctors = await response.json();
+                console.log('Received doctors:', doctors);
+                
+                // Clear and repopulate dropdown
+                doctorSelect.innerHTML = '<option value="" selected disabled>Select doctor</option>';
+                
+                if (doctors.length > 0) {
+                    doctors.forEach(doctor => {
+                        const option = document.createElement('option');
+                        option.value = doctor.user_id || doctor.doctor_id; // Handle both cases
+                        option.textContent = doctor.full_name;
+                        doctorSelect.appendChild(option);
+                    });
+                } else {
+                    doctorSelect.innerHTML = '<option value="" selected disabled>No doctors found</option>';
+                }
+            } catch (error) {
+                console.error('Error fetching doctors:', error);
+                doctorSelect.innerHTML = `<option value="" selected disabled>Error: ${error.message}</option>`;
+            }
+        } else {
+            doctorSelect.innerHTML = '<option value="" selected disabled>Select specialty first</option>';
+        }
+    });
+
+    
 });

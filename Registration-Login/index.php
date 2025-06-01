@@ -1,3 +1,58 @@
+<?php
+    session_start();
+    require_once('../db-config/connection.php');
+    
+    // Display errors if they exist
+    $error_message = '';
+    $success_message = '';
+    $form_data = [];
+    
+    if (isset($_SESSION['error'])) {
+        $error_message = $_SESSION['error'];
+        unset($_SESSION['error']);
+    }
+    
+    if (isset($_SESSION['success'])) {
+        $success_message = $_SESSION['success'];
+        unset($_SESSION['success']);
+    }
+    
+    if (isset($_SESSION['form_data'])) {
+        $form_data = $_SESSION['form_data'];
+        unset($_SESSION['form_data']);
+    }
+    
+    // Get patient data for secretaries
+    $patients = [];
+    if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'Secretary' && isset($_SESSION['user_id'])) {
+        try {
+            // Get the doctor_id this secretary is assigned to
+            $stmt = $conn->prepare("SELECT doctor_id FROM secretary WHERE user_id = ?");
+            $stmt->bind_param("i", $_SESSION['user_id']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows > 0) {
+                $secretary_info = $result->fetch_assoc();
+                $doctor_id = $secretary_info['doctor_id'];
+                
+                // Get all patients for this doctor
+                $stmt = $conn->prepare("
+                    SELECT p.patient_id, u.full_name, u.email, u.phone_number 
+                    FROM patients p
+                    JOIN users u ON p.user_id = u.user_id
+                    WHERE p.doctor_id = ?
+                ");
+                $stmt->bind_param("i", $doctor_id);
+                $stmt->execute();
+                $patients = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            }
+        } catch (Exception $e) {
+            error_log("Error fetching patients: " . $e->getMessage());
+        }
+    }
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +62,25 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="index.css">
+    <style>
+        .hidden-fields {
+            display: none;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875em;
+            margin-top: 0.25rem;
+        }
+        .success-message {
+            color: #28a745;
+            font-size: 0.875em;
+            margin-top: 0.25rem;
+        }
+        .patient-table {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="form-container" id="formContainer">
@@ -27,9 +101,8 @@
                     <a href="#">Forgot Password?</a>
                 </div>
 
-                    <button type="submit" class="btn btn-custom-active">Login</button>
-                    <button type="button" class="btn btn-custom" id="show-signup-btn">Sign Up</button>
-
+                <button type="submit" class="btn btn-custom-active">Login</button>
+                <button type="button" class="btn btn-custom" id="show-signup-btn">Sign Up</button>
             </form>
             <div class="social-login">
                 <div class="social-icon">
@@ -59,14 +132,14 @@
                         <option value="" selected disabled>Select user type</option>
                         <option value="patient">Patient</option>
                         <option value="doctor">Doctor</option>
-                        <option value="doctor">Secretary</option>
+                        <option value="secretary">Secretary</option>
                     </select>
                 </div>
         
                 <!-- Doctor-specific fields (hidden by default) -->
-                <div id="doctorFields" style="display: none;">
+                <div id="doctorFields" class="hidden-fields">
                     <div class="form-group">
-                        <select class="form-control" id="doctorSpecialty" name="doctorSpecialty" required>
+                        <select class="form-control" id="doctorSpecialty" name="doctorSpecialty">
                             <option value="" selected disabled>Select specialty</option>
                             <option value="Cardiology">Cardiology</option>
                             <option value="Neurology">Neurology</option>
@@ -77,7 +150,28 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="licenseNumber" name="licenseNumber" placeholder="License Number" required>
+                        <input type="text" class="form-control" id="licenseNumber" name="licenseNumber" placeholder="License Number">
+                    </div>
+                </div>
+        
+                <!-- Secretary-specific fields (hidden by default) -->
+                <div id="secretaryFields" class="hidden-fields">
+                    <div class="form-group">
+                        <select class="form-control" id="secretarySpecialty" name="secretarySpecialty">
+                            <option value="" selected disabled>Select doctor's specialty</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="General">General Practice</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="assignedDoctor" name="assignedDoctor">
+                            <option value="" selected disabled>Select doctor</option>
+                            <!-- Will be populated dynamically based on specialty selection -->
+                        </select>
                     </div>
                 </div>
         
@@ -131,6 +225,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="index.js"></script>

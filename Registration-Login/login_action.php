@@ -37,7 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($user['user_type'] === 'Doctor') {
                      $_SESSION['doctor_id'] = $user['user_id'];
                     header("Location: /fyp/Doctor/doctor_dashboard.php");
-                } else {
+                } elseif($user['user_type'] === 'Secretary'){
+                    $_SESSION['secretary_id'] = $user['user_id'];
+                    header("Location: ../Secretary/Secretary_dashboard.php");
+                }
+                else {
                      $_SESSION['patient_id'] = $user['user_id'];
                     header("Location: ../Patient/patient_dashboard.php");
                 }

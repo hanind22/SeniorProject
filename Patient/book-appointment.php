@@ -49,11 +49,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $insertStmt->bind_param("iisssss", $patientId, $doctorId, $date, $timeFormatted, $appointment_type, $purpose, $notes);
 
         if ($insertStmt->execute()) {
+            // 🔄 Insert into DoctorPatient if not already exists
+            $linkStmt = $conn->prepare("
+                INSERT IGNORE INTO DoctorPatient (doctor_id, patient_id) VALUES (?, ?)
+            ");
+            $linkStmt->bind_param("ii", $doctorId, $patientId);
+            $linkStmt->execute();
+
             $doctorName = 'the doctor';
             $doctorQuery = $conn->prepare("SELECT full_name FROM users WHERE user_id = ?");
             $doctorQuery->bind_param("i", $doctorId);
             $doctorQuery->execute();
             $result = $doctorQuery->get_result();
+            
             if ($result->num_rows > 0) {
                 $doctorRow = $result->fetch_assoc();
                 $doctorName = 'Dr. ' . $doctorRow['full_name'];

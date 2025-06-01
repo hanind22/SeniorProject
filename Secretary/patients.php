@@ -1,135 +1,156 @@
 <?php
-// Move session_start() to the very top - before any HTML output
-
+session_start();
 include('../db-config/connection.php');
 
 // Initialize data
+$secretaryData = [];
 $doctorData = [];
 $patients = [];
 $error = '';
+$doctor_id = null;
+$search_query = '';
+
+// Handle search functionality
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $search_query = trim($_GET['search']);
+}
 
 try {
     if (isset($_SESSION['user_id'])) {
         $userId = $_SESSION['user_id'];
-    
-        // Get doctor data including doctor_id
-        $stmt = $conn->prepare("
-            SELECT u.*, d.* 
-            FROM users u
-            JOIN doctors d ON u.user_id = d.user_id
-            WHERE u.user_id = ?
-        ");
+        
+        // Get secretary's basic info from users table
+        $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ?");
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
+        $secretaryData = $result->fetch_assoc();
+        $stmt->close();
 
-        if ($result->num_rows === 1) {
-            $doctorData = $result->fetch_assoc();
-            
-            // Get patients who have appointments with this doctor
-            $patientStmt = $conn->prepare("
-                SELECT 
-                    p.patient_id,
-                    p.user_id,
-                    u.full_name,
-                    p.date_of_birth,
-                    p.gender,
-                    p.blood_type,
-                    p.allergies,
-                    p.medical_conditions,
-                    p.current_medications,
-                    p.previous_surgeries,
-                    p.family_history,
-                    p.QR_code,
-                    p.health_form_completed,
-                    p.insurance_provider,
-                    MAX(a.appointment_date) as last_visit,
-                    CASE 
-                        WHEN MAX(a.appointment_date) > DATE_SUB(NOW(), INTERVAL 3 MONTH) THEN 'active'
-                        ELSE 'inactive'
-                    END as status
-                FROM patients p
-                JOIN users u ON p.user_id = u.user_id
-                JOIN appointments a ON p.patient_id = a.patient_id
-                WHERE a.doctor_id = ?
-                GROUP BY p.patient_id
-                ORDER BY u.full_name ASC
-            ");
-            
-            // Bind the doctor_id parameter
-            $patientStmt->bind_param("i", $doctorData['doctor_id']);
-            $patientStmt->execute();
-            $patientResult = $patientStmt->get_result();
-            
-            if ($patientResult->num_rows > 0) {
-                while ($row = $patientResult->fetch_assoc()) {
-                    // Calculate age from date_of_birth
-                    $dob = new DateTime($row['date_of_birth']);
-                    $now = new DateTime();
-                    $age = $dob->diff($now)->y;
+        if (!$secretaryData) {
+            $error = "Secretary record not found";
+        } else {
+            // Get the doctor_id assigned to this secretary
+            $stmt = $conn->prepare("SELECT doctor_id FROM secretary WHERE user_id = ?");
+            $stmt->bind_param("i", $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $secretaryInfo = $result->fetch_assoc();
+            $stmt->close();
+
+            if ($secretaryInfo && isset($secretaryInfo['doctor_id'])) {
+                $doctor_id = $secretaryInfo['doctor_id'];
+                
+                // Get doctor's details for display
+                $stmt = $conn->prepare("
+                    SELECT u.full_name, d.specialty 
+                    FROM users u
+                    JOIN doctors d ON u.user_id = d.user_id
+                    WHERE d.doctor_id = ?
+                ");
+                $stmt->bind_param("i", $doctor_id);
+                $stmt->execute();
+                $doctorData = $stmt->get_result()->fetch_assoc();
+                $stmt->close();
+
+                if ($doctorData) {
+                    // Base query for patients
+                    $patient_query = "
+                        SELECT 
+                            p.patient_id,
+                            u.user_id,
+                            u.full_name,
+                            u.email,
+                            u.phone_number,
+                            p.date_of_birth,
+                            p.gender,
+                            p.blood_type,
+                            p.allergies,
+                            p.medical_conditions,
+                            p.current_medications,
+                            p.previous_surgeries,
+                            p.family_history,
+                            p.QR_code,
+                            p.health_form_completed,
+                            p.insurance_provider,
+                            MAX(a.appointment_date) as last_visit_date
+                        FROM DoctorPatient dp
+                        JOIN patients p ON dp.patient_id = p.patient_id
+                        JOIN users u ON p.user_id = u.user_id
+                        LEFT JOIN appointments a ON p.patient_id = a.patient_id
+                        WHERE dp.doctor_id = ?
+                    ";
                     
-                    // Format last visit date if exists
-                    $last_visit = isset($row['last_visit']) && $row['last_visit'] ? 
-                        date('M j, Y', strtotime($row['last_visit'])) : 'Never';
+                    // Add search condition if search query exists
+                    if (!empty($search_query)) {
+                        $patient_query .= " AND (u.full_name LIKE ? OR u.email LIKE ? OR u.phone_number LIKE ?)";
+                    }
                     
-                    // Add calculated fields to patient data
-                    $row['age'] = $age;
-                    $row['last_visit_formatted'] = $last_visit;
-                    $patients[] = $row;
+                    $patient_query .= "
+                        GROUP BY 
+                            p.patient_id, u.user_id, u.full_name, u.email, u.phone_number, 
+                            p.date_of_birth, p.gender, p.blood_type, p.allergies, 
+                            p.medical_conditions, p.current_medications, p.previous_surgeries, 
+                            p.family_history, p.QR_code, p.health_form_completed, 
+                            p.insurance_provider
+                        ORDER BY u.full_name ASC
+                    ";
+                    
+                    $stmt = $conn->prepare($patient_query);
+                    
+                    // Bind parameters based on whether we have a search query
+                    if (!empty($search_query)) {
+                        $search_param = "%$search_query%";
+                        $stmt->bind_param("isss", $doctor_id, $search_param, $search_param, $search_param);
+                    } else {
+                        $stmt->bind_param("i", $doctor_id);
+                    }
+                    
+                    $stmt->execute();
+                    $patientResult = $stmt->get_result();
+                    
+                    if ($patientResult->num_rows > 0) {
+                        while ($row = $patientResult->fetch_assoc()) {
+                            // Calculate age from date_of_birth
+                            if ($row['date_of_birth']) {
+                                $dob = new DateTime($row['date_of_birth']);
+                                $now = new DateTime();
+                                $age = $dob->diff($now)->y;
+                            } else {
+                                $age = 'N/A';
+                            }
+                            
+                            // Format last visit date
+                            $last_visit_formatted = 'No visits';
+                            if ($row['last_visit_date']) {
+                                $last_visit = new DateTime($row['last_visit_date']);
+                                $last_visit_formatted = $last_visit->format('M j, Y');
+                            }
+                            
+                            // Add calculated fields to patient data
+                            $row['age'] = $age;
+                            $row['last_visit_formatted'] = $last_visit_formatted;
+                            $patients[] = $row;
+                        }
+                    } else {
+                        $error = "No patients found" . (!empty($search_query) ? " matching your search criteria" : "");
+                    }
+                } else {
+                    $error = "Doctor record not found";
                 }
             } else {
-                $error = "No patients found for this doctor";
+                $error = "No doctor assigned to this secretary";
             }
-        } else {
-            $error = "Doctor record not found";
         }
     } else {
         $error = "User not logged in";
+        header('Location: ../Register-Login/index.php');
+        exit();
     }
 } catch (Exception $e) {
     $error = "Error fetching data: " . $e->getMessage();
 }
-
-// Handle session messages - moved here to be before HTML output
-$session_error = '';
-$session_success = '';
-if (isset($_SESSION['error'])) {
-    $session_error = $_SESSION['error'];
-    unset($_SESSION['error']);
-}
-if (isset($_SESSION['success'])) {
-    $session_success = $_SESSION['success'];
-    unset($_SESSION['success']);
-}
-
-// Initialize patient data (this section seems misplaced in your original code)
-$patientData = [];
-try {
-    if (isset($_SESSION['user_id'])) {
-        $userId = $_SESSION['user_id'];
-    
-        // Join users and patients tables to get all needed data
-        $stmt = $conn->prepare("
-            SELECT u.*, p.* 
-            FROM users u
-            LEFT JOIN patients p ON u.user_id = p.user_id
-            WHERE u.user_id = ?
-        ");
-        $stmt->bind_param("i", $userId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 1) {
-            $patientData = $result->fetch_assoc();
-        }
-    }
-} catch (Exception $e) {
-    // Handle error silently or log it
-    error_log("Error fetching patient data: " . $e->getMessage());
-}
-$patientId = $patientData['patient_id'] ?? null;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,74 +158,12 @@ $patientId = $patientData['patient_id'] ?? null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secretary Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="patient_dashboard.css">
     <link rel="stylesheet" href="Sidebar.css">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="patient.css">
+    <!-- Add jQuery for AJAX functionality -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <?php
-    // Display session messages
-    if (!empty($session_error)) {
-        echo '<div class="alert alert-danger">' . htmlspecialchars($session_error) . '</div>';
-    }
-    if (!empty($session_success)) {
-        echo '<div class="alert alert-success">' . htmlspecialchars($session_success) . '</div>';
-    }
-
-    session_start();
-    include('../db-config/connection.php');
-
-    if (isset($_SESSION['error'])) {
-        echo '<div class="alert alert-danger">'.$_SESSION['error'].'</div>';
-        unset($_SESSION['error']);
-    }
-    if (isset($_SESSION['success'])) {
-        echo '<div class="alert alert-success">'.$_SESSION['success'].'</div>';
-        unset($_SESSION['success']);
-    }
-
-    // Initialize patient data
-    $patientData = [];
-    $error = '';
-
-    try {
-        if (isset($_SESSION['user_id'])) {
-            $userId = $_SESSION['user_id'];
-        
-            // Join users and patients tables to get all needed data
-            $stmt = $conn->prepare("
-                SELECT u.*, p.* 
-                FROM users u
-                LEFT JOIN patients p ON u.user_id = p.user_id
-                WHERE u.user_id = ?
-            ");
-            $stmt->bind_param("i", $userId);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows === 1) {
-                $patientData = $result->fetch_assoc();
-            } else {
-                $error = "Patient record not found";
-            }
-
-            // Check if health form needs to be shown
-            $showHealthForm = true; // Default to showing form
-            if (isset($patientData['health_form_completed']) && $patientData['health_form_completed']) {
-                $showHealthForm = false;
-            }
-        } else {
-            $error = "User not logged in";
-            // Consider redirecting to login page here
-            header('Location: ../Register-Login/index.php');
-            // exit();
-        }
-    } catch (Exception $e) {
-        $error = "Error fetching patient data: " . $e->getMessage();
-    }
-    $patientId = $patientData['patient_id'] ?? null;
-    ?>
-
     <div class="container">
         <!-- Side-Navigationbar -->
         <aside class="sidebar">
@@ -221,7 +180,7 @@ $patientId = $patientData['patient_id'] ?? null;
                 <a href="patients.php" class="nav-item active">
                     <i class="fa-solid fa-file-medical"></i> Patients
                 </a> 
-                <a href="#" class="nav-item">
+                <a href="appointments.php" class="nav-item">
                     <i class="fa-solid fa-calendar"></i> Appointments
                 </a>
             </nav>
@@ -233,8 +192,23 @@ $patientId = $patientData['patient_id'] ?? null;
          <!-- Main Content -->
         <div class="content">
 
-            <!-- Search and Add Patient -->
+        <div class="doctor-info-header">
+                <h2>Secretary: <?php echo htmlspecialchars($secretaryData['full_name'] ?? 'N/A'); ?></h2>
+                <?php if (!empty($doctorData)): ?>
+                    <p>Assigned to Dr. <?php echo htmlspecialchars($doctorData['full_name']); ?> | <?php echo htmlspecialchars($doctorData['specialty'] ?? 'N/A'); ?> </p>
+                <?php endif; ?>
+            </div>
+
+             <!-- Search and Add Patient -->
             <div class="patient-actions">
+                <form method="GET" class="search-form" id="search-form">
+                    <div class="search-container">
+                        <input type="text" name="search" id="search-input" placeholder="Search patients..." value="<?php echo htmlspecialchars($search_query); ?>">
+                        <div id="search-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </form>
                 <button class="add-patient-btn" id="open-add-modal">
                     <i class="fas fa-plus"></i> Add New Patient
                 </button>
@@ -242,82 +216,61 @@ $patientId = $patientData['patient_id'] ?? null;
 
             <!-- Patients Table -->
             <div class="patients-table-container">
-                <?php if (count($patients) > 0): ?>
-                <table class="patients-table">
-                    <thead>
-                        <tr>
-                            <th>Patient Name</th>
-                            <th>Age/Gender</th>
-                            <th>Blood Type</th>
-                            <th>Last Visit</th>
-                            <th>QR Code</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="patients-table-body">
-                        <?php foreach ($patients as $patient): ?>
-                        <tr>
-                            <td>
-                                <div class="patient-profile">
-                                    <span class="patient-name"><?php echo htmlspecialchars($patient['full_name']); ?></span>
-                                </div>
-                            </td>
-                            <td><?php echo $patient['age'] . ' / ' . htmlspecialchars($patient['gender']); ?></td>
-                            <td><span class="blood-badge"><?php echo htmlspecialchars($patient['blood_type']); ?></span></td>
-                            <td><?php echo $patient['last_visit_formatted']; ?></td>
-                            <td>
-                              <?php 
-                               $qrCodePath = '../qrcodes/patient_' . $patient['patient_id'] . '.png';
-                               if (file_exists($qrCodePath)): ?>
-                               <a href="<?php echo $qrCodePath; ?>" class="qr-code-link" data-lightbox="qr-code" data-title="QR Code for <?php echo htmlspecialchars($patient['full_name']); ?>">
-                                  <img src="<?php echo $qrCodePath; ?>" alt="QR Code for Patient <?php echo $patient['patient_id']; ?>" class="qr-code-img" width="50" height="50">
-                               </a>
-                              <?php else: ?>
-                               <span class="no-qr">No QR</span>
-                              <?php endif; ?>
-                           </td>
-                            <td class="action-cell">
-                                <button class="action-btn view-btn" data-patient-id="<?php echo $patient['patient_id']; ?>" title="View details">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="action-btn edit-btn" data-patient-id="<?php echo $patient['patient_id']; ?>" title="Edit health info">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <?php else: ?>
-                    <div class="no-patients">
-                        <i class="fas fa-user-slash"></i>
-                        <p>No patients found</p>
-                    </div>
-                <?php endif; ?>
-            </div>
-            
-            <!-- Pagination -->
-            <?php if (count($patients) > 0): ?>
-            <div class="pagination-container">
-                <div class="pagination">
-                    <button class="pagination-btn" id="prev-page" disabled>
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <div class="pagination-numbers" id="pagination-numbers">
-                        <button class="pagination-btn active">1</button>
-                        <?php if (count($patients) > 10): ?>
-                            <button class="pagination-btn">2</button>
-                        <?php endif; ?>
-                        <?php if (count($patients) > 20): ?>
-                            <button class="pagination-btn">3</button>
-                        <?php endif; ?>
-                    </div>
-                    <button class="pagination-btn" id="next-page" <?php echo count($patients) <= 10 ? 'disabled' : ''; ?>>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+                <div id="patients-table-wrapper">
+                    <?php if (count($patients) > 0): ?>
+                    <table class="patients-table">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Email</th>
+                                <th> ID</th>
+                                <th>Age / Gender</th>
+                                <th>Blood Type</th>
+                                <th>Last Visit</th>
+                                <th>QR Code</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patients-table-body">
+                            <?php foreach ($patients as $patient): ?>
+                            <tr>
+                                <td>
+                                    <div class="patient-profile">
+                                        <span class="patient-name"><?php echo htmlspecialchars($patient['full_name']); ?></span>
+                                    </div>
+                                </td>
+                                <td><?php echo htmlspecialchars($patient['email']); ?></td>
+                                <td><?php echo htmlspecialchars($patient['patient_id']); ?></td>
+                                <td><?php echo $patient['age'] . ' / ' . htmlspecialchars($patient['gender']); ?></td>
+                                <td><span class="blood-badge"><?php echo htmlspecialchars($patient['blood_type'] ?? 'N/A'); ?></span></td>
+                                <td><?php echo $patient['last_visit_formatted']; ?></td>
+                                <td>
+                                  <?php 
+                                   $qrCodePath = '../qrcodes/patient_' . $patient['patient_id'] . '.png';
+                                   if (file_exists($qrCodePath)): ?>
+                                   <a href="<?php echo $qrCodePath; ?>" class="qr-code-link" data-lightbox="qr-code" data-title="QR Code for <?php echo htmlspecialchars($patient['full_name']); ?>">
+                                      <img src="<?php echo $qrCodePath; ?>" alt="QR Code for Patient <?php echo $patient['patient_id']; ?>" class="qr-code-img" width="50" height="50">
+                                   </a>
+                                  <?php else: ?>
+                                   <span class="no-qr">No QR</span>
+                                  <?php endif; ?>
+                               </td>
+                                
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <?php else: ?>
+                        <div class="no-patients">
+                            <i class="fas fa-user-slash"></i>
+                            <p>No patients found</p>
+                            <?php if (!empty($error)): ?>
+                                <p style="color: #666; font-size: 14px;"><?php echo htmlspecialchars($error); ?></p>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
-            <?php endif; ?>
+            
         </div>
     </div>
 
@@ -448,8 +401,16 @@ $patientId = $patientData['patient_id'] ?? null;
                                     <input type="text" id="emergency-name" name="emergency_contact_name" required placeholder="Emergency contact name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="emergency-relation">Relationship <span class="required">*</span></label>
-                                    <input type="text" id="emergency-relation" name="emergency_contact_relationship" required placeholder="Spouse, Parent, etc.">
+                                   <label for="emergency-relation">Relationship <span class="required">*</span></label>
+                                   <select id="emergency-relation" name="emergency_contact_relationship" required>
+                                   <option value="">Select Relationship</option>
+                                    <option value="spouse">Husband/Wife</option>
+                                    <option value="parent">Parent</option>
+                                    <option value="child">Child</option>
+                                    <option value="sibling">Sibling</option>
+                                    <option value="friend">Friend</option>
+                                    <option value="other">Other</option>
+                                   </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -715,54 +676,233 @@ document.getElementById('patient-form').addEventListener('submit', async functio
     const form = this;
     const submitBtn = form.querySelector('.submit-btn');
     const formStatus = document.getElementById('form-status-message');
+    const modal = document.getElementById('patient-modal');
+    const qrCodeContainer = document.getElementById('qr-code-container'); // Add this container in your HTML
     
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    
     if (formStatus) {
         formStatus.style.display = 'none';
+        formStatus.textContent = '';
+        formStatus.className = '';
+    }
+    
+    // Clear previous QR code if exists
+    if (qrCodeContainer) {
+        qrCodeContainer.innerHTML = '';
     }
     
     try {
         const formData = new FormData(form);
-        
         const response = await fetch('Add_Patients.php', {
             method: 'POST',
             body: formData
         });
         
         const responseText = await response.text();
+        let responseData;
         
-        // Try to parse as JSON, but handle HTML responses gracefully
-        let result;
         try {
-            result = JSON.parse(responseText);
-        } catch (parseError) {
-            // If response is not JSON, it's likely an error page or redirect
-            console.error('Response was not JSON:', responseText);
-            throw new Error('Server returned an unexpected response. Please check the server logs.');
-        }
-        
-        if (result.success) {
-            formStatus.textContent = result.message || 'Patient saved successfully!';
-            formStatus.className = 'success';
-            formStatus.style.display = 'block';
+            responseData = JSON.parse(responseText);
             
-            setTimeout(() => {
-                window.location.reload();
-            }, 2000);
-        } else {
-            throw new Error(result.message || 'Failed to save patient');
+            if (responseData.success) {
+                // Show success message with QR code if available
+                showSuccessMessage(
+                    responseData.message || 'Patient saved successfully!', 
+                    modal, 
+                    formStatus,
+                    responseData.data?.qr_code_path,
+                    responseData.data?.patient_id
+                );
+            } else {
+                throw new Error(responseData.message || 'Failed to save patient');
+            }
+        } catch (e) {
+            // If JSON parsing fails but operation succeeded
+            if (responseText.toLowerCase().includes('success')) {
+                showSuccessMessage(
+                    'Patient saved successfully!', 
+                    modal, 
+                    formStatus
+                );
+            } else {
+                throw new Error('Server response error. Please check console for details.');
+            }
         }
     } catch (error) {
         console.error('Submission error:', error);
-        formStatus.textContent = 'Error: ' + error.message;
-        formStatus.className = 'error';
-        formStatus.style.display = 'block';
+        
+        if (formStatus) {
+            formStatus.textContent = error.message;
+            formStatus.className = 'error';
+            formStatus.style.display = 'block';
+            formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Patient';
     }
 });
+
+function showSuccessMessage(message, modal, formStatus, qrCodePath = null, patientId = null) {
+    // Show success message
+    if (formStatus) {
+        formStatus.textContent = message;
+        formStatus.className = 'success';
+        formStatus.style.display = 'block';
+        
+        // Display QR code if available
+        if (qrCodePath && patientId) {
+            const qrCodeHTML = `
+                <div class="qr-code-success">
+                    <h4>Patient QR Code</h4>
+                    <img src="${qrCodePath}" alt="Patient QR Code" class="qr-code-image">
+                    <p class="patient-id">Patient ID: ${patientId}</p>
+                    <button onclick="downloadQRCode('${qrCodePath}', 'patient_${patientId}_qrcode.png')" 
+                            class="download-qr-btn">
+                        <i class="fas fa-download"></i> Download QR Code
+                    </button>
+                </div>
+            `;
+            formStatus.insertAdjacentHTML('beforeend', qrCodeHTML);
+        }
+    }
+    
+    // Reset form
+    document.getElementById('patient-form').reset();
+    
+    // Close modal after 3 seconds (giving time to see QR code)
+    setTimeout(() => {
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Show toast notification
+        showToast(message);
+        
+        // Refresh the page to show updated data
+        window.location.reload();
+    }, 3000);
+}
+
+// Download QR code function
+function downloadQRCode(imagePath, fileName) {
+    const link = document.createElement('a');
+    link.href = imagePath;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Toast notification function
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast-notification ${type}`;
+    toast.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${message}</span>
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 500);
+    }, 3000);
+}
+
+// Real-time search functionality
+$(document).ready(function() {
+    // Add a loading indicator to the search input
+    const searchInput = $('#search-input');
+    const searchLoading = $('#search-loading');
+    const patientsTableWrapper = $('#patients-table-wrapper');
+    
+    // Variable to track the last search request
+    let lastSearchRequest = null;
+    
+    // Function to perform search
+    function performSearch(query) {
+        // Show loading indicator
+        searchLoading.show();
+        
+        // Cancel previous request if it exists
+        if (lastSearchRequest) {
+            lastSearchRequest.abort();
+        }
+        
+        // Make AJAX request
+        lastSearchRequest = $.ajax({
+            url: 'patients.php',
+            type: 'GET',
+            data: { search: query },
+            success: function(data) {
+                // Extract the table content from the response
+                const responseHTML = $(data);
+                const newTableContent = responseHTML.find('#patients-table-wrapper').html();
+                
+                // Update the table content
+                patientsTableWrapper.html(newTableContent);
+                
+                // Hide loading indicator
+                searchLoading.hide();
+            },
+            error: function(xhr, status, error) {
+                if (status !== 'abort') {
+                    console.error('Search error:', error);
+                    searchLoading.hide();
+                }
+            }
+        });
+    }
+    
+    // Event handler for search input
+    searchInput.on('input', function() {
+        const query = $(this).val().trim();
+        
+        // Only search if query is not empty or has at least 1 characters
+        if (query.length === 0 || query.length >= 1) {
+            performSearch(query);
+        }
+    });
+    
+    // Also trigger search when form is submitted (for browsers that don't support input event well)
+    $('#search-form').on('submit', function(e) {
+        e.preventDefault();
+        const query = searchInput.val().trim();
+        performSearch(query);
+    });
+    
+    // Add a small delay to prevent too many requests while typing
+    searchInput.on('input', $.debounce(300, function() {
+        const query = $(this).val().trim();
+        if (query.length === 0 || query.length >= 2) {
+            performSearch(query);
+        }
+    }));
+});
+
+// Debounce function to limit how often a function is called
+$.debounce = function(wait, func) {
+    let timeout;
+    return function() {
+        const context = this, args = arguments;
+        const later = function() {
+            timeout = null;
+            func.apply(context, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
 </script>
 
 </body>

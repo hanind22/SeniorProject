@@ -409,3 +409,4191 @@ Array
 )
 
 Error: Unknown column 'emergency_contact_name' in 'field list'
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 2000-10-13
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 71 295592
+    [email] => shadi@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Mohammad Diab
+    [emergency_contact_relationship] => Parent
+    [emergency_contact_phone] => 03 55 66 99
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Patient registration successful for shadi@gmail.com with patient_id: 20
+Received POST data:
+Array
+(
+    [full_name] => Dyala Makki
+    [date_of_birth] => 2000-05-21
+    [gender] => female
+    [blood_type] => O+
+    [phone_number] => 03 225487
+    [email] => dyala21Makki@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Ali Makki
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => 70 145825
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Patient registration successful for dyala21Makki@gmail.com with patient_id: 21
+Received POST data:
+Array
+(
+    [full_name] => Shadi Diab
+    [date_of_birth] => 1994-10-13
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 70 123 544
+    [email] => shadidiabb2@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Mohammad Diab
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => 71 222487
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Ahmad Ahmad
+    [date_of_birth] => 1988-05-04
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 70 111477
+    [email] => ahmadddds@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Malaak Naser
+    [emergency_contact_relationship] => spouse
+    [emergency_contact_phone] => 03 225874
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Ahmad Ahmad
+    [date_of_birth] => 1981-10-10
+    [gender] => male
+    [blood_type] => AB+
+    [phone_number] => 03 221 484
+    [email] => ahmadd11@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Alaa Makki
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 03 258741
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Ahmad Ahmad
+    [date_of_birth] => 1981-10-10
+    [gender] => male
+    [blood_type] => AB+
+    [phone_number] => 03 221 484
+    [email] => ahmadd11@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Alaa Makki
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 03 258741
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Ahmad Ahmad
+    [date_of_birth] => 1981-10-10
+    [gender] => male
+    [blood_type] => AB+
+    [phone_number] => 03 221 484
+    [email] => ahmadd11@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Alaa Makki
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 03 258741
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Ahmad Ahmad
+    [date_of_birth] => 1980-05-03
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 03 225 487
+    [email] => ahmadzz@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Alaa Makki
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 03 333 698
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Jawad Kadery
+    [date_of_birth] => 2004-02-10
+    [gender] => male
+    [blood_type] => AB+
+    [phone_number] => 03 225 784
+    [email] => jawadkaderyy@gmail.com
+    [password] => 123456789
+    [emergency_contact_name] => Loay Kadery
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 07 145874
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Shadia AlOkdi
+    [date_of_birth] => 1977-04-17
+    [gender] => female
+    [blood_type] => A-
+    [phone_number] => 71 547 888
+    [email] => AlOkdishadia@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Ali AlHaj
+    [emergency_contact_relationship] => spouse
+    [emergency_contact_phone] => 71 177 154
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Shadia AlOkdi
+    [date_of_birth] => 1977-04-17
+    [gender] => female
+    [blood_type] => A-
+    [phone_number] => 71 547 888
+    [email] => AlOkdishadia@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Ali AlHaj
+    [emergency_contact_relationship] => spouse
+    [emergency_contact_phone] => 71 177 154
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [full_name] => dfkwnefj
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 71 547 854
+    [email] => dML@gmal.com
+    [password] => 12345678
+    [emergency_contact_name] => dw34g5
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 71 458777
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => edfreg
+    [medical_conditions] => fgvrbth
+    [current_medications] => fvbgnhyj
+    [previous_surgeries] => dfvbgjhm
+    [family_history] => fvbghnjm
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => dfkwnefj
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 71 547 854
+    [email] => dML@gmal.com
+    [password] => 12345678
+    [emergency_contact_name] => dw34g5
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 71 458777
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => edfreg
+    [medical_conditions] => fgvrbth
+    [current_medications] => fvbgnhyj
+    [previous_surgeries] => dfvbgjhm
+    [family_history] => fvbghnjm
+)
+
+Validation errors:
+Array
+(
+    [0] => Email already registered
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Jamaly Raad
+    [date_of_birth] => 2000-12-15
+    [gender] => female
+    [blood_type] => B-
+    [phone_number] => 70 000 478
+    [email] => jamaly@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Hassan Cheaib
+    [emergency_contact_relationship] => spouse
+    [emergency_contact_phone] => 03 222 555
+    [insurance_provider] => Hasan Cheaib
+    [insurance_number] => 465236874153
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Alaa ABBOUD
+    [date_of_birth] => 1999-07-12
+    [gender] => female
+    [blood_type] => B-
+    [phone_number] => 71 478874
+    [email] => AlaaABBoud@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Hassan Abboud
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 03 333658
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Mohammad Danash
+    [date_of_birth] => 1985-05-03
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 71 865765
+    [email] => Danashmhmd@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Ali Danash
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 03 254789
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => Diabeties
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Amal Diab
+    [date_of_birth] => 1970-08-10
+    [gender] => female
+    [blood_type] => B-
+    [phone_number] => 71 000248
+    [email] => amaldiab32@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Souheil Reda
+    [emergency_contact_relationship] => child
+    [emergency_contact_phone] => 03 258888
+    [insurance_provider] => Souheil Reda
+    [insurance_number] => 706598463024
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Received POST data:
+Array
+(
+    [full_name] => Darine Diab
+    [date_of_birth] => 1999-10-10
+    [gender] => female
+    [blood_type] => A+
+    [phone_number] => 81 777 333
+    [email] => dadoDiab@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Sherine Diab
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 03 60 55 99
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Error: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+Received POST data:
+Array
+(
+    [full_name] => Darine Diab
+    [date_of_birth] => 2000-10-10
+    [gender] => female
+    [blood_type] => B+
+    [phone_number] => 70 452 147
+    [email] => darine@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => sherine
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 70 123456
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => deftrgyh
+    [medical_conditions] => defrgyh
+    [current_medications] => dcfvgh
+    [previous_surgeries] => dcfvbgh
+    [family_history] => sdfgh
+)
+
+Validation errors:
+Array
+(
+)
+
+Error: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+Received POST data:
+Array
+(
+    [full_name] => darine diab
+    [date_of_birth] => 2000-10-10
+    [gender] => female
+    [blood_type] => A-
+    [phone_number] => 70 445 332
+    [email] => diab@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => sherine diab
+    [emergency_contact_relationship] => child
+    [emergency_contact_phone] => 81 474 441
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+Validation errors:
+Array
+(
+)
+
+Error: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+[2025-05-31 15:53:52] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 15:53:52] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 15:53:52] POST Data Received
+Data: Array
+(
+    [full_name] => Darine Diab
+    [date_of_birth] => 2010-10-10
+    [gender] => female
+    [blood_type] => B-
+    [phone_number] => 70 1114584
+    [email] => dadao@gmail.com
+    [password] => 2345965
+    [emergency_contact_name] => shenfk
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 70 144 587
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => sdrf
+    [medical_conditions] => dfefvef
+    [current_medications] => fvcdxs
+    [previous_surgeries] => cdffvewr
+    [family_history] => dvevrwe
+)
+
+--------------------------------------------------
+[2025-05-31 15:53:52] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 15:53:52] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 15:53:52] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 15:53:52] Extracted Form Data
+Data: Array
+(
+    [full_name] => Darine Diab
+    [email] => dadao@gmail.com
+    [password_length] => 7
+    [phone] => 70 1114584
+    [date_of_birth] => 2010-10-10
+    [gender] => female
+    [blood_type] => B-
+    [emergency_contact_name] => shenfk
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 70 144 587
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => sdrf
+    [medical_conditions] => dfefvef
+    [current_medications] => fvcdxs
+    [previous_surgeries] => cdffvewr
+    [family_history] => dvevrwe
+)
+
+--------------------------------------------------
+[2025-05-31 15:53:52] Validation Error
+Data: Password validation failed, length: 7
+--------------------------------------------------
+[2025-05-31 15:53:52] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+            [0] => Password must be at least 8 characters
+        )
+
+    [error_count] => 1
+)
+
+--------------------------------------------------
+[2025-05-31 15:53:52] Validation Failed
+Data: Array
+(
+    [0] => Password must be at least 8 characters
+)
+
+--------------------------------------------------
+[2025-05-31 15:53:52] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Password must be at least 8 characters
+    [data] => 
+)
+
+--------------------------------------------------
+[2025-05-31 15:55:19] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 15:55:19] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 15:55:19] POST Data Received
+Data: Array
+(
+    [full_name] => tnbgrfvd
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 70145852
+    [email] => mnghfb@gmail.com
+    [password] => 8752582632
+    [emergency_contact_name] => rgebweyh
+    [emergency_contact_relationship] => other
+    [emergency_contact_phone] => 81 475 845
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => bgrfvsd
+    [medical_conditions] => bentrfvsd
+    [current_medications] => bervsdf
+    [previous_surgeries] => gbethrjn
+    [family_history] => ebghhgvf
+)
+
+--------------------------------------------------
+[2025-05-31 15:55:19] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 15:55:19] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 15:55:19] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 15:55:19] Extracted Form Data
+Data: Array
+(
+    [full_name] => tnbgrfvd
+    [email] => mnghfb@gmail.com
+    [password_length] => 10
+    [phone] => 70145852
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [emergency_contact_name] => rgebweyh
+    [emergency_contact_relationship] => other
+    [emergency_contact_phone] => 81 475 845
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => bgrfvsd
+    [medical_conditions] => bentrfvsd
+    [current_medications] => bervsdf
+    [previous_surgeries] => gbethrjn
+    [family_history] => ebghhgvf
+)
+
+--------------------------------------------------
+[2025-05-31 15:55:19] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 15:55:19] Email Check
+Data: Starting email uniqueness check for: mnghfb@gmail.com
+--------------------------------------------------
+[2025-05-31 15:55:19] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 15:55:19] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 15:55:19] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 15:55:20] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 15:55:20] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 15:55:20] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 15:55:20] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 15:55:20] User Insert Success
+Data: User inserted with ID: 67
+--------------------------------------------------
+[2025-05-31 15:55:20] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 15:55:20] Patient Insert Success
+Data: Patient inserted with ID: 49
+--------------------------------------------------
+[2025-05-31 15:55:20] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 15:55:20] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 15:55:20] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_id: 1, patient_id: 49
+--------------------------------------------------
+[2025-05-31 15:55:20] Transaction Error
+Data: Error in transaction: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 15:55:20] Transaction
+Data: Transaction rolled back
+--------------------------------------------------
+[2025-05-31 15:55:20] Fatal Error
+Data: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 15:55:20] Exception Trace
+Data: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(296): mysqli_stmt->execute()
+#1 {main}
+--------------------------------------------------
+[2025-05-31 15:55:20] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Registration failed: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+    [data] => 
+)
+
+--------------------------------------------------
+
+
+===== NEW REGISTRATION ATTEMPT =====
+Timestamp: 2025-05-31 16:16:13
+Session data:
+Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+Received POST data:
+Array
+(
+    [full_name] => bweb
+    [date_of_birth] => 2000-11-10
+    [gender] => male
+    [blood_type] => A-
+    [phone_number] => 70 145874
+    [email] => hanin@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => xscqwer
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 81 014521
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cdwercfdc
+    [medical_conditions] => wdcfqwdwe
+    [current_medications] => dqwsdqwed
+    [previous_surgeries] => dcwdwd
+    [family_history] => xdwdc
+)
+
+Transaction started
+User inserted with ID: 68
+Patient inserted with ID: 50
+Emergency contact inserted
+Doctor ID from session: 1
+Exception caught: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+JSON Response:
+Array
+(
+    [success] => 
+    [message] => Registration failed: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+    [data] => 
+)
+
+[2025-05-31 16:18:36] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 16:18:36] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 16:18:36] POST Data Received
+Data: Array
+(
+    [full_name] => h4tybe
+    [date_of_birth] => 2000-11-10
+    [gender] => male
+    [blood_type] => AB+
+    [phone_number] => 70 111 111
+    [email] => dkcj@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => sxswerfcqw
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 81 025 478
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cqerc
+    [medical_conditions] => dcfvqer
+    [current_medications] => dcwdf
+    [previous_surgeries] => dcdrcf
+    [family_history] => wdcds
+)
+
+--------------------------------------------------
+[2025-05-31 16:18:36] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 16:18:36] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1882
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundaryN8IsT4fvJuCE2upr
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 16:18:36] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 16:18:36] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 16:18:36] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 16:18:36] Extracted Form Data
+Data: Array
+(
+    [full_name] => h4tybe
+    [email] => dkcj@gmail.com
+    [password_length] => 8
+    [phone] => 70 111 111
+    [date_of_birth] => 2000-11-10
+    [gender] => male
+    [blood_type] => AB+
+    [emergency_contact_name] => sxswerfcqw
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 81 025 478
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cqerc
+    [medical_conditions] => dcfvqer
+    [current_medications] => dcwdf
+    [previous_surgeries] => dcdrcf
+    [family_history] => wdcds
+)
+
+--------------------------------------------------
+[2025-05-31 16:18:36] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 16:18:36] Email Check
+Data: Starting email uniqueness check for: dkcj@gmail.com
+--------------------------------------------------
+[2025-05-31 16:18:36] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 16:18:36] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 16:18:36] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 16:18:36] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 16:18:36] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 16:18:36] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 16:18:36] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 16:18:36] User Insert Success
+Data: User inserted with ID: 69
+--------------------------------------------------
+[2025-05-31 16:18:36] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 16:18:36] Patient Insert Success
+Data: Patient inserted with ID: 51
+--------------------------------------------------
+[2025-05-31 16:18:36] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 16:18:36] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 16:18:36] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_id: 1, patient_id: 51
+--------------------------------------------------
+[2025-05-31 16:18:36] Transaction Error
+Data: Error in transaction: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 16:18:36] Transaction
+Data: Transaction rolled back
+--------------------------------------------------
+[2025-05-31 16:18:36] Fatal Error
+Data: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 16:18:36] Exception Trace
+Data: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(316): mysqli_stmt->execute()
+#1 {main}
+--------------------------------------------------
+[2025-05-31 16:18:36] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Registration failed: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+    [data] => 
+    [timestamp] => 2025-05-31 16:18:36
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 16:19:56] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 16:19:56] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 16:19:56] POST Data Received
+Data: Array
+(
+    [full_name] => cdsfvfv
+    [date_of_birth] => 1999-10-10
+    [gender] => male
+    [blood_type] => AB+
+    [phone_number] => 71 000 000
+    [email] => wbgvtr@gmail.com
+    [password] => cxweccfd
+    [emergency_contact_name] => cddcv
+    [emergency_contact_relationship] => child
+    [emergency_contact_phone] => 71 000 214
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cwcd
+    [medical_conditions] => dcvdcv
+    [current_medications] => cddec
+    [previous_surgeries] => dcvsecdf
+    [family_history] => dcvdcv
+)
+
+--------------------------------------------------
+[2025-05-31 16:19:56] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 16:19:56] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1880
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundaryBfy5HN3evMqUJF6W
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 16:19:56] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 16:19:56] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 16:19:56] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 16:19:56] Extracted Form Data
+Data: Array
+(
+    [full_name] => cdsfvfv
+    [email] => wbgvtr@gmail.com
+    [password_length] => 8
+    [phone] => 71 000 000
+    [date_of_birth] => 1999-10-10
+    [gender] => male
+    [blood_type] => AB+
+    [emergency_contact_name] => cddcv
+    [emergency_contact_relationship] => child
+    [emergency_contact_phone] => 71 000 214
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cwcd
+    [medical_conditions] => dcvdcv
+    [current_medications] => cddec
+    [previous_surgeries] => dcvsecdf
+    [family_history] => dcvdcv
+)
+
+--------------------------------------------------
+[2025-05-31 16:19:56] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 16:19:56] Email Check
+Data: Starting email uniqueness check for: wbgvtr@gmail.com
+--------------------------------------------------
+[2025-05-31 16:19:56] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 16:19:56] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 16:19:56] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 16:19:57] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 16:19:57] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 16:19:57] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 16:19:57] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 16:19:57] User Insert Success
+Data: User inserted with ID: 70
+--------------------------------------------------
+[2025-05-31 16:19:57] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 16:19:57] Patient Insert Success
+Data: Patient inserted with ID: 52
+--------------------------------------------------
+[2025-05-31 16:19:57] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 16:19:57] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 16:19:57] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_id: 1, patient_id: 52
+--------------------------------------------------
+[2025-05-31 16:19:57] Transaction Error
+Data: Error in transaction: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 16:19:57] Transaction
+Data: Transaction rolled back
+--------------------------------------------------
+[2025-05-31 16:19:57] Fatal Error
+Data: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 16:19:57] Exception Trace
+Data: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(316): mysqli_stmt->execute()
+#1 {main}
+--------------------------------------------------
+[2025-05-31 16:19:57] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Registration failed: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+    [data] => 
+    [timestamp] => 2025-05-31 16:19:57
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 16:24:29] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 16:24:29] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 16:24:29] POST Data Received
+Data: Array
+(
+    [full_name] => Darine Diab
+    [date_of_birth] => 1980-03-15
+    [gender] => female
+    [blood_type] => A-
+    [phone_number] => 81 110  002
+    [email] => dado@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Sherine Diab
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 70 998 958
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => ....
+    [medical_conditions] => .....
+    [current_medications] => .....
+    [previous_surgeries] => .....
+    [family_history] => ......
+)
+
+--------------------------------------------------
+[2025-05-31 16:24:29] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 16:24:29] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1889
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundary3yNS68K1qFILthT5
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 16:24:29] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 16:24:29] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 16:24:29] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 16:24:29] Extracted Form Data
+Data: Array
+(
+    [full_name] => Darine Diab
+    [email] => dado@gmail.com
+    [password_length] => 8
+    [phone] => 81 110  002
+    [date_of_birth] => 1980-03-15
+    [gender] => female
+    [blood_type] => A-
+    [emergency_contact_name] => Sherine Diab
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 70 998 958
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => ....
+    [medical_conditions] => .....
+    [current_medications] => .....
+    [previous_surgeries] => .....
+    [family_history] => ......
+)
+
+--------------------------------------------------
+[2025-05-31 16:24:29] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 16:24:29] Email Check
+Data: Starting email uniqueness check for: dado@gmail.com
+--------------------------------------------------
+[2025-05-31 16:24:29] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 16:24:29] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 16:24:29] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 16:24:29] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 16:24:29] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 16:24:29] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 16:24:29] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 16:24:29] User Insert Success
+Data: User inserted with ID: 71
+--------------------------------------------------
+[2025-05-31 16:24:29] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 16:24:29] Patient Insert Success
+Data: Patient inserted with ID: 53
+--------------------------------------------------
+[2025-05-31 16:24:29] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 16:24:29] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 16:24:29] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_id: 1, user_id: 71 (not patient_id: 53)
+--------------------------------------------------
+[2025-05-31 16:24:29] DoctorPatient Insert Success
+Data: DoctorPatient relationship created successfully using user_id: 71
+--------------------------------------------------
+[2025-05-31 16:24:29] Transaction
+Data: Committing transaction
+--------------------------------------------------
+[2025-05-31 16:24:29] Transaction
+Data: Transaction committed successfully
+--------------------------------------------------
+[2025-05-31 16:24:29] QR Code Generation
+Data: Starting QR code generation for patient_id: 53
+--------------------------------------------------
+[2025-05-31 16:24:29] QR Function
+Data: generateAndSaveQRCode called for patient_id: 53
+--------------------------------------------------
+[2025-05-31 16:24:29] QR Paths
+Data: Array
+(
+    [fileName] => patient_53.png
+    [filePath] => ../qrcodes/patient_53.png
+    [relativePath] => qrcodes/patient_53.png
+)
+
+--------------------------------------------------
+[2025-05-31 16:24:29] QR URL
+Data: http://192.168.1.4/fyp/Patient/patient_details.php?patient_id=53
+--------------------------------------------------
+[2025-05-31 16:24:29] QR Generation
+Data: Generating QR code
+--------------------------------------------------
+[2025-05-31 16:24:30] QR Generation
+Data: QR code file generated successfully
+--------------------------------------------------
+[2025-05-31 16:24:30] QR Database Update
+Data: Updating patient record with QR code path
+--------------------------------------------------
+[2025-05-31 16:24:30] QR Database Update
+Data: QR code path saved to database successfully
+--------------------------------------------------
+[2025-05-31 16:24:30] QR Code Generation
+Data: QR code generated successfully: qrcodes/patient_53.png
+--------------------------------------------------
+[2025-05-31 16:24:30] Success
+Data: Patient registration completed successfully
+--------------------------------------------------
+[2025-05-31 16:24:30] Verification Check
+Data: Patient count in DB: 1
+--------------------------------------------------
+[2025-05-31 16:24:30] Sending JSON Response
+Data: Array
+(
+    [success] => 1
+    [message] => Patient registered successfully
+    [data] => Array
+        (
+            [patient_id] => 53
+            [user_id] => 71
+            [qr_code_path] => qrcodes/patient_53.png
+            [verified] => 1
+        )
+
+    [timestamp] => 2025-05-31 16:24:30
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 16:27:51] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 16:27:51] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 16:27:51] POST Data Received
+Data: Array
+(
+    [full_name] => Talal Hallel
+    [date_of_birth] => 1974-07-17
+    [gender] => male
+    [blood_type] => AB+
+    [phone_number] => 81 554521
+    [email] => tala333@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Rania Jaber
+    [emergency_contact_relationship] => spouse
+    [emergency_contact_phone] => 03 332547
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 16:27:51] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 16:27:51] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1882
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundary2I462YzA0Dg3iREA
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 16:27:51] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 16:27:51] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 16:27:51] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 16:27:51] Extracted Form Data
+Data: Array
+(
+    [full_name] => Talal Hallel
+    [email] => tala333@gmail.com
+    [password_length] => 8
+    [phone] => 81 554521
+    [date_of_birth] => 1974-07-17
+    [gender] => male
+    [blood_type] => AB+
+    [emergency_contact_name] => Rania Jaber
+    [emergency_contact_relationship] => spouse
+    [emergency_contact_phone] => 03 332547
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 16:27:52] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 16:27:52] Email Check
+Data: Starting email uniqueness check for: tala333@gmail.com
+--------------------------------------------------
+[2025-05-31 16:27:52] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 16:27:52] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 16:27:52] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 16:27:52] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 16:27:52] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 16:27:52] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 16:27:52] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 16:27:52] User Insert Success
+Data: User inserted with ID: 72
+--------------------------------------------------
+[2025-05-31 16:27:52] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 16:27:52] Patient Insert Success
+Data: Patient inserted with ID: 54
+--------------------------------------------------
+[2025-05-31 16:27:52] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 16:27:52] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 16:27:52] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_id: 1, user_id: 72 (not patient_id: 54)
+--------------------------------------------------
+[2025-05-31 16:27:52] DoctorPatient Insert Success
+Data: DoctorPatient relationship created successfully using user_id: 72
+--------------------------------------------------
+[2025-05-31 16:27:52] Transaction
+Data: Committing transaction
+--------------------------------------------------
+[2025-05-31 16:27:52] Transaction
+Data: Transaction committed successfully
+--------------------------------------------------
+[2025-05-31 16:27:52] QR Code Generation
+Data: Starting QR code generation for patient_id: 54
+--------------------------------------------------
+[2025-05-31 16:27:52] QR Function
+Data: generateAndSaveQRCode called for patient_id: 54
+--------------------------------------------------
+[2025-05-31 16:27:52] QR Paths
+Data: Array
+(
+    [fileName] => patient_54.png
+    [filePath] => ../qrcodes/patient_54.png
+    [relativePath] => qrcodes/patient_54.png
+)
+
+--------------------------------------------------
+[2025-05-31 16:27:52] QR URL
+Data: http://192.168.1.4/fyp/Patient/patient_details.php?patient_id=54
+--------------------------------------------------
+[2025-05-31 16:27:52] QR Generation
+Data: Generating QR code
+--------------------------------------------------
+[2025-05-31 16:27:52] QR Generation
+Data: QR code file generated successfully
+--------------------------------------------------
+[2025-05-31 16:27:52] QR Database Update
+Data: Updating patient record with QR code path
+--------------------------------------------------
+[2025-05-31 16:27:52] QR Database Update
+Data: QR code path saved to database successfully
+--------------------------------------------------
+[2025-05-31 16:27:52] QR Code Generation
+Data: QR code generated successfully: qrcodes/patient_54.png
+--------------------------------------------------
+[2025-05-31 16:27:52] Success
+Data: Patient registration completed successfully
+--------------------------------------------------
+[2025-05-31 16:27:52] Verification Check
+Data: Patient count in DB: 1
+--------------------------------------------------
+[2025-05-31 16:27:52] Sending JSON Response
+Data: Array
+(
+    [success] => 1
+    [message] => Patient registered successfully
+    [data] => Array
+        (
+            [patient_id] => 54
+            [user_id] => 72
+            [qr_code_path] => qrcodes/patient_54.png
+            [verified] => 1
+        )
+
+    [timestamp] => 2025-05-31 16:27:52
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 18:01:43] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 18:01:43] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 18:01:43] POST Data Received
+Data: Array
+(
+    [full_name] => Ali Iman
+    [date_of_birth] => 1993-06-16
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 03 440324
+    [email] => alidiab2@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Khodor Diab
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => 81 754211
+    [insurance_provider] => Khodor Diab
+    [insurance_number] =>  784512645126
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 18:01:43] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 18:01:43] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1902
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundarygEkGnatdTN5pkCw5
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 18:01:43] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 18:01:43] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 18:01:43] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 18:01:43] Extracted Form Data
+Data: Array
+(
+    [full_name] => Ali Iman
+    [email] => alidiab2@gmail.com
+    [password_length] => 8
+    [phone] => 03 440324
+    [date_of_birth] => 1993-06-16
+    [gender] => male
+    [blood_type] => B-
+    [emergency_contact_name] => Khodor Diab
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => 81 754211
+    [insurance_provider] => Khodor Diab
+    [insurance_number] => 784512645126
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 18:01:43] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 18:01:43] Email Check
+Data: Starting email uniqueness check for: alidiab2@gmail.com
+--------------------------------------------------
+[2025-05-31 18:01:43] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 18:01:43] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 18:01:43] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 18:01:43] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 18:01:43] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 18:01:43] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 18:01:43] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 18:01:44] User Insert Success
+Data: User inserted with ID: 73
+--------------------------------------------------
+[2025-05-31 18:01:44] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 18:01:44] Patient Insert Success
+Data: Patient inserted with ID: 55
+--------------------------------------------------
+[2025-05-31 18:01:44] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 18:01:44] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 18:01:44] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_id: 1, user_id: 73 (not patient_id: 55)
+--------------------------------------------------
+[2025-05-31 18:01:44] DoctorPatient Insert Success
+Data: DoctorPatient relationship created successfully using user_id: 73
+--------------------------------------------------
+[2025-05-31 18:01:44] Transaction
+Data: Committing transaction
+--------------------------------------------------
+[2025-05-31 18:01:44] Transaction
+Data: Transaction committed successfully
+--------------------------------------------------
+[2025-05-31 18:01:44] QR Code Generation
+Data: Starting QR code generation for patient_id: 55
+--------------------------------------------------
+[2025-05-31 18:01:44] QR Function
+Data: generateAndSaveQRCode called for patient_id: 55
+--------------------------------------------------
+[2025-05-31 18:01:44] QR Paths
+Data: Array
+(
+    [fileName] => patient_55.png
+    [filePath] => ../qrcodes/patient_55.png
+    [relativePath] => qrcodes/patient_55.png
+)
+
+--------------------------------------------------
+[2025-05-31 18:01:44] QR URL
+Data: http://192.168.1.4/fyp/Patient/patient_details.php?patient_id=55
+--------------------------------------------------
+[2025-05-31 18:01:44] QR Generation
+Data: Generating QR code
+--------------------------------------------------
+[2025-05-31 18:01:44] QR Generation
+Data: QR code file generated successfully
+--------------------------------------------------
+[2025-05-31 18:01:44] QR Database Update
+Data: Updating patient record with QR code path
+--------------------------------------------------
+[2025-05-31 18:01:44] QR Database Update
+Data: QR code path saved to database successfully
+--------------------------------------------------
+[2025-05-31 18:01:44] QR Code Generation
+Data: QR code generated successfully: qrcodes/patient_55.png
+--------------------------------------------------
+[2025-05-31 18:01:44] Success
+Data: Patient registration completed successfully
+--------------------------------------------------
+[2025-05-31 18:01:44] Verification Check
+Data: Patient count in DB: 1
+--------------------------------------------------
+[2025-05-31 18:01:44] Sending JSON Response
+Data: Array
+(
+    [success] => 1
+    [message] => Patient registered successfully
+    [data] => Array
+        (
+            [patient_id] => 55
+            [user_id] => 73
+            [qr_code_path] => qrcodes/patient_55.png
+            [verified] => 1
+        )
+
+    [timestamp] => 2025-05-31 18:01:44
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 22:49:56] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 22:49:56] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 22:49:56] POST Data Received
+Data: Array
+(
+    [full_name] => Shakira 
+    [date_of_birth] => 1980-08-08
+    [gender] => female
+    [blood_type] => B-
+    [phone_number] => 03 321123
+    [email] => shakira@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Ali Nasrallah
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 70 880 150
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 22:49:56] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 22:49:56] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1882
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundaryzXgwBL5sqEiAHqA1
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 22:49:56] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 22:49:56] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 22:49:56] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 22:49:56] Extracted Form Data
+Data: Array
+(
+    [full_name] => Shakira
+    [email] => shakira@gmail.com
+    [password_length] => 8
+    [phone] => 03 321123
+    [date_of_birth] => 1980-08-08
+    [gender] => female
+    [blood_type] => B-
+    [emergency_contact_name] => Ali Nasrallah
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 70 880 150
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 22:49:56] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 22:49:56] Email Check
+Data: Starting email uniqueness check for: shakira@gmail.com
+--------------------------------------------------
+[2025-05-31 22:49:56] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 22:49:56] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 22:49:56] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 22:49:57] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 22:49:57] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 22:49:57] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 22:49:57] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 22:49:57] User Insert Success
+Data: User inserted with ID: 74
+--------------------------------------------------
+[2025-05-31 22:49:57] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 22:49:57] Patient Insert Success
+Data: Patient inserted with ID: 56
+--------------------------------------------------
+[2025-05-31 22:49:57] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 22:49:57] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 22:49:57] ID Verification
+Data: Array
+(
+    [doctor_id] => 1
+    [user_id] => 74
+    [patient_id] => 56
+)
+
+--------------------------------------------------
+[2025-05-31 22:49:57] DoctorPatient Insert
+Data: Attempting to insert with doctor_id=1 and patient_id=56
+--------------------------------------------------
+[2025-05-31 22:49:57] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_id: 1, user_id: 74 (not patient_id: 56)
+--------------------------------------------------
+[2025-05-31 22:49:57] Transaction Error
+Data: Error in transaction: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 22:49:57] Transaction
+Data: Transaction rolled back
+--------------------------------------------------
+[2025-05-31 22:49:57] Fatal Error
+Data: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 22:49:57] Exception Trace
+Data: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(340): mysqli_stmt->execute()
+#1 {main}
+--------------------------------------------------
+[2025-05-31 22:49:57] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Registration failed: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+    [data] => 
+    [timestamp] => 2025-05-31 22:49:57
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 22:51:42] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 22:51:42] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 22:51:42] POST Data Received
+Data: Array
+(
+    [full_name] => AKRAM KXCSDJNC
+    [date_of_birth] => 2025-01-17
+    [gender] => female
+    [blood_type] => AB+
+    [phone_number] => 03254478
+    [email] => HFHYT@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Aega 
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => 70 1458744
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 22:51:42] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 22:51:42] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1878
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundarying7YikVjqfjtQpw
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 22:51:42] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 22:51:42] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 22:51:42] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 22:51:42] Extracted Form Data
+Data: Array
+(
+    [full_name] => AKRAM KXCSDJNC
+    [email] => HFHYT@gmail.com
+    [password_length] => 8
+    [phone] => 03254478
+    [date_of_birth] => 2025-01-17
+    [gender] => female
+    [blood_type] => AB+
+    [emergency_contact_name] => Aega
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => 70 1458744
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 22:51:42] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 22:51:42] Email Check
+Data: Starting email uniqueness check for: HFHYT@gmail.com
+--------------------------------------------------
+[2025-05-31 22:51:42] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 22:51:42] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 22:51:42] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 22:51:43] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 22:51:43] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 22:51:43] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 22:51:43] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 22:51:43] User Insert Success
+Data: User inserted with ID: 75
+--------------------------------------------------
+[2025-05-31 22:51:43] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 22:51:43] Patient Insert Success
+Data: Patient inserted with ID: 57
+--------------------------------------------------
+[2025-05-31 22:51:43] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 22:51:43] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 22:51:43] ID Verification
+Data: Array
+(
+    [doctor_id] => 1
+    [user_id] => 75
+    [patient_id] => 57
+)
+
+--------------------------------------------------
+[2025-05-31 22:51:43] DoctorPatient Insert
+Data: Attempting to insert with doctor_id=1 and patient_id=57
+--------------------------------------------------
+[2025-05-31 22:51:43] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_id: 1, user_id: 75 (not patient_id: 57)
+--------------------------------------------------
+[2025-05-31 22:51:43] Transaction Error
+Data: Error in transaction: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 22:51:43] Transaction
+Data: Transaction rolled back
+--------------------------------------------------
+[2025-05-31 22:51:43] Fatal Error
+Data: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 22:51:43] Exception Trace
+Data: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(340): mysqli_stmt->execute()
+#1 {main}
+--------------------------------------------------
+[2025-05-31 22:51:43] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Registration failed: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE)
+    [data] => 
+    [timestamp] => 2025-05-31 22:51:43
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 23:06:38] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 23:06:38] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 23:06:38] POST Data Received
+Data: Array
+(
+    [full_name] => Talal Berjewi
+    [date_of_birth] => 1980-06-16
+    [gender] => male
+    [blood_type] => A-
+    [phone_number] => 03 333 656
+    [email] => Tlala211@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Ali Berjawi
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 70 985478
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 23:06:38] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 23:06:38] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1885
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundarycf5arVRhUOWYXDpe
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 23:06:38] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 23:06:38] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 23:06:38] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 23:06:38] Extracted Form Data
+Data: Array
+(
+    [full_name] => Talal Berjewi
+    [email] => Tlala211@gmail.com
+    [password_length] => 8
+    [phone] => 03 333 656
+    [date_of_birth] => 1980-06-16
+    [gender] => male
+    [blood_type] => A-
+    [emergency_contact_name] => Ali Berjawi
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 70 985478
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => None
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 23:06:38] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 23:06:38] Email Check
+Data: Starting email uniqueness check for: Tlala211@gmail.com
+--------------------------------------------------
+[2025-05-31 23:06:38] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 23:06:38] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 23:06:38] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 23:06:38] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 23:06:38] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 23:06:38] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 23:06:38] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 23:06:38] User Insert Success
+Data: User inserted with ID: 76
+--------------------------------------------------
+[2025-05-31 23:06:38] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 23:06:38] Patient Insert Success
+Data: Patient inserted with ID: 58
+--------------------------------------------------
+[2025-05-31 23:06:38] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 23:06:38] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 23:06:38] ID Verification
+Data: Array
+(
+    [doctor_id] => 1
+    [user_id] => 76
+    [patient_id] => 58
+)
+
+--------------------------------------------------
+[2025-05-31 23:06:38] Doctor User ID Lookup
+Data: Getting user_id for doctor_id: 1
+--------------------------------------------------
+[2025-05-31 23:06:38] Doctor User ID Found
+Data: Doctor user_id: 1
+--------------------------------------------------
+[2025-05-31 23:06:38] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_user_id: 1, patient_user_id: 76
+--------------------------------------------------
+[2025-05-31 23:06:38] DoctorPatient Success
+Data: Successfully linked doctor user_id 1 to patient user_id 76
+--------------------------------------------------
+[2025-05-31 23:06:38] Transaction
+Data: Committing transaction
+--------------------------------------------------
+[2025-05-31 23:06:38] Transaction
+Data: Transaction committed successfully
+--------------------------------------------------
+[2025-05-31 23:06:38] QR Code Generation
+Data: Starting QR code generation for patient_id: 58
+--------------------------------------------------
+[2025-05-31 23:06:38] QR Function
+Data: generateAndSaveQRCode called for patient_id: 58
+--------------------------------------------------
+[2025-05-31 23:06:38] QR Paths
+Data: Array
+(
+    [fileName] => patient_58.png
+    [filePath] => ../qrcodes/patient_58.png
+    [relativePath] => qrcodes/patient_58.png
+)
+
+--------------------------------------------------
+[2025-05-31 23:06:38] QR URL
+Data: http://192.168.1.4/fyp/Patient/patient_details.php?patient_id=58
+--------------------------------------------------
+[2025-05-31 23:06:38] QR Generation
+Data: Generating QR code
+--------------------------------------------------
+[2025-05-31 23:06:38] QR Generation
+Data: QR code file generated successfully
+--------------------------------------------------
+[2025-05-31 23:06:38] QR Database Update
+Data: Updating patient record with QR code path
+--------------------------------------------------
+[2025-05-31 23:06:38] QR Database Update
+Data: QR code path saved to database successfully
+--------------------------------------------------
+[2025-05-31 23:06:38] QR Code Generation
+Data: QR code generated successfully: qrcodes/patient_58.png
+--------------------------------------------------
+[2025-05-31 23:06:38] Success
+Data: Patient registration completed successfully
+--------------------------------------------------
+[2025-05-31 23:06:38] Verification Check
+Data: Patient count in DB: 1
+--------------------------------------------------
+[2025-05-31 23:06:38] Sending JSON Response
+Data: Array
+(
+    [success] => 1
+    [message] => Patient registered successfully
+    [data] => Array
+        (
+            [patient_id] => 58
+            [user_id] => 76
+            [qr_code_path] => qrcodes/patient_58.png
+            [verified] => 1
+        )
+
+    [timestamp] => 2025-05-31 23:06:38
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 23:10:18] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 23:10:18] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 23:10:18] POST Data Received
+Data: Array
+(
+    [full_name] => Mikel Jordan
+    [date_of_birth] => 1977-12-10
+    [gender] => male
+    [blood_type] => O-
+    [phone_number] => 70 147 852
+    [email] => jordans@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Amalya Jordan
+    [emergency_contact_relationship] => spouse
+    [emergency_contact_phone] => 03 252 123
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => tgtetrg
+    [medical_conditions] => rtgr
+    [current_medications] => trgwertg
+    [previous_surgeries] => gwrtgtr
+    [family_history] => gwrtg
+)
+
+--------------------------------------------------
+[2025-05-31 23:10:18] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 23:10:18] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1896
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundarycnodR2k46WIxElMW
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 23:10:18] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 23:10:18] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 23:10:18] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 23:10:18] Extracted Form Data
+Data: Array
+(
+    [full_name] => Mikel Jordan
+    [email] => jordans@gmail.com
+    [password_length] => 8
+    [phone] => 70 147 852
+    [date_of_birth] => 1977-12-10
+    [gender] => male
+    [blood_type] => O-
+    [emergency_contact_name] => Amalya Jordan
+    [emergency_contact_relationship] => spouse
+    [emergency_contact_phone] => 03 252 123
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => tgtetrg
+    [medical_conditions] => rtgr
+    [current_medications] => trgwertg
+    [previous_surgeries] => gwrtgtr
+    [family_history] => gwrtg
+)
+
+--------------------------------------------------
+[2025-05-31 23:10:18] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 23:10:18] Email Check
+Data: Starting email uniqueness check for: jordans@gmail.com
+--------------------------------------------------
+[2025-05-31 23:10:18] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 23:10:18] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 23:10:18] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 23:10:18] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 23:10:18] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 23:10:18] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 23:10:18] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 23:10:18] User Insert Success
+Data: User inserted with ID: 77
+--------------------------------------------------
+[2025-05-31 23:10:18] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 23:10:18] Patient Insert Success
+Data: Patient inserted with ID: 59
+--------------------------------------------------
+[2025-05-31 23:10:18] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 23:10:18] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 23:10:18] ID Verification
+Data: Array
+(
+    [doctor_id] => 1
+    [user_id] => 77
+    [patient_id] => 59
+)
+
+--------------------------------------------------
+[2025-05-31 23:10:18] Doctor User ID Lookup
+Data: Getting user_id for doctor_id: 1
+--------------------------------------------------
+[2025-05-31 23:10:18] Doctor User ID Found
+Data: Doctor user_id: 1
+--------------------------------------------------
+[2025-05-31 23:10:18] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_user_id: 1, patient_user_id: 77
+--------------------------------------------------
+[2025-05-31 23:10:18] DoctorPatient Success
+Data: Successfully linked doctor user_id 1 to patient user_id 77
+--------------------------------------------------
+[2025-05-31 23:10:18] Transaction
+Data: Committing transaction
+--------------------------------------------------
+[2025-05-31 23:10:18] Transaction
+Data: Transaction committed successfully
+--------------------------------------------------
+[2025-05-31 23:10:18] QR Code Generation
+Data: Starting QR code generation for patient_id: 59
+--------------------------------------------------
+[2025-05-31 23:10:18] QR Function
+Data: generateAndSaveQRCode called for patient_id: 59
+--------------------------------------------------
+[2025-05-31 23:10:18] QR Paths
+Data: Array
+(
+    [fileName] => patient_59.png
+    [filePath] => ../qrcodes/patient_59.png
+    [relativePath] => qrcodes/patient_59.png
+)
+
+--------------------------------------------------
+[2025-05-31 23:10:18] QR URL
+Data: http://192.168.1.4/fyp/Patient/patient_details.php?patient_id=59
+--------------------------------------------------
+[2025-05-31 23:10:18] QR Generation
+Data: Generating QR code
+--------------------------------------------------
+[2025-05-31 23:10:18] QR Generation
+Data: QR code file generated successfully
+--------------------------------------------------
+[2025-05-31 23:10:18] QR Database Update
+Data: Updating patient record with QR code path
+--------------------------------------------------
+[2025-05-31 23:10:18] QR Database Update
+Data: QR code path saved to database successfully
+--------------------------------------------------
+[2025-05-31 23:10:18] QR Code Generation
+Data: QR code generated successfully: qrcodes/patient_59.png
+--------------------------------------------------
+[2025-05-31 23:10:18] Success
+Data: Patient registration completed successfully
+--------------------------------------------------
+[2025-05-31 23:10:18] Verification Check
+Data: Patient count in DB: 1
+--------------------------------------------------
+[2025-05-31 23:10:18] Sending JSON Response
+Data: Array
+(
+    [success] => 1
+    [message] => Patient registered successfully
+    [data] => Array
+        (
+            [patient_id] => 59
+            [user_id] => 77
+            [qr_code_path] => qrcodes/patient_59.png
+            [verified] => 1
+        )
+
+    [timestamp] => 2025-05-31 23:10:18
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 23:43:24] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 23:43:24] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 23:43:24] POST Data Received
+Data: Array
+(
+    [full_name] => Hasan Diab
+    [date_of_birth] => 1999-05-04
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 70 123 123
+    [email] => hassanDiabb@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Ali Sobhi Diab
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => 03 332 010
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => Peanuts
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 23:43:24] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 23:43:24] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1892
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundaryGv5BdrDdARSIkYdM
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php?search=
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 23:43:24] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 23:43:24] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 23:43:24] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 23:43:24] Extracted Form Data
+Data: Array
+(
+    [full_name] => Hasan Diab
+    [email] => hassanDiabb@gmail.com
+    [password_length] => 8
+    [phone] => 70 123 123
+    [date_of_birth] => 1999-05-04
+    [gender] => male
+    [blood_type] => AB-
+    [emergency_contact_name] => Ali Sobhi Diab
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => 03 332 010
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => Peanuts
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 23:43:24] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 23:43:24] Email Check
+Data: Starting email uniqueness check for: hassanDiabb@gmail.com
+--------------------------------------------------
+[2025-05-31 23:43:24] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 23:43:24] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 23:43:24] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 23:43:24] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 23:43:24] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 23:43:24] Transaction
+Data: Starting database transaction
+--------------------------------------------------
+[2025-05-31 23:43:24] User Insert
+Data: Preparing user insert query
+--------------------------------------------------
+[2025-05-31 23:43:24] User Insert Success
+Data: User inserted with ID: 78
+--------------------------------------------------
+[2025-05-31 23:43:24] Patient Insert
+Data: Preparing patient insert query
+--------------------------------------------------
+[2025-05-31 23:43:24] Patient Insert Success
+Data: Patient inserted with ID: 60
+--------------------------------------------------
+[2025-05-31 23:43:24] Emergency Contact Insert
+Data: Preparing emergency contact insert query
+--------------------------------------------------
+[2025-05-31 23:43:24] Emergency Contact Insert Success
+Data: Emergency contact inserted successfully
+--------------------------------------------------
+[2025-05-31 23:43:24] ID Verification
+Data: Array
+(
+    [doctor_id] => 1
+    [user_id] => 78
+    [patient_id] => 60
+)
+
+--------------------------------------------------
+[2025-05-31 23:43:24] Doctor User ID Lookup
+Data: Getting user_id for doctor_id: 1
+--------------------------------------------------
+[2025-05-31 23:43:24] Doctor User ID Found
+Data: Doctor user_id: 1
+--------------------------------------------------
+[2025-05-31 23:43:24] DoctorPatient Insert
+Data: Preparing DoctorPatient insert query with doctor_user_id: 1, patient_user_id: 78
+--------------------------------------------------
+[2025-05-31 23:43:24] Transaction Error
+Data: Error in transaction: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 23:43:24] Transaction
+Data: Transaction rolled back
+--------------------------------------------------
+[2025-05-31 23:43:24] Fatal Error
+Data: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+--------------------------------------------------
+[2025-05-31 23:43:24] Exception Trace
+Data: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(340): mysqli_stmt->execute()
+#1 {main}
+--------------------------------------------------
+[2025-05-31 23:43:24] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Registration failed: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`doctorpatient`, CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+    [data] => 
+    [timestamp] => 2025-05-31 23:43:24
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 23:49:03] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 23:49:03] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 23:49:03] POST Data Received
+Data: Array
+(
+    [full_name] => Hasan Diab
+    [date_of_birth] => 1981-12-08
+    [gender] => male
+    [blood_type] => O+
+    [phone_number] => 71 511487
+    [email] => hassanDiabb@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => Ali Sobhi Diab
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => +96171123456
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => Peanuts
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 23:49:03] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 23:49:03] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1892
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundarykKYnFiV1ijIHAt6e
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php?search=
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 23:49:03] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 23:49:03] Database Connection Status
+Data: Connected successfully
+--------------------------------------------------
+[2025-05-31 23:49:03] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 23:49:03] Extracted Form Data
+Data: Array
+(
+    [full_name] => Hasan Diab
+    [email] => hassanDiabb@gmail.com
+    [password_length] => 8
+    [phone] => 71 511487
+    [date_of_birth] => 1981-12-08
+    [gender] => male
+    [blood_type] => O+
+    [emergency_contact_name] => Ali Sobhi Diab
+    [emergency_contact_relationship] => parent
+    [emergency_contact_phone] => +96171123456
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => Peanuts
+    [medical_conditions] => None
+    [current_medications] => None
+    [previous_surgeries] => None
+    [family_history] => None
+)
+
+--------------------------------------------------
+[2025-05-31 23:49:03] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 23:49:03] Email Check
+Data: Starting email uniqueness check for: hassanDiabb@gmail.com
+--------------------------------------------------
+[2025-05-31 23:49:03] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 23:49:03] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 23:49:03] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 23:49:04] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 23:49:04] Doctor ID Check
+Data: Doctor ID from session: 1
+--------------------------------------------------
+[2025-05-31 23:49:04] Doctor Verification
+Data: Verifying doctor exists with ID: 1
+--------------------------------------------------
+[2025-05-31 23:49:04] Exception Rollback
+Data: Rolling back transaction due to exception
+--------------------------------------------------
+[2025-05-31 23:49:04] Fatal Error
+Data: Unknown column 'id' in 'field list'
+--------------------------------------------------
+[2025-05-31 23:49:04] Exception Trace
+Data: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(228): mysqli->prepare('SELECT id FROM ...')
+#1 {main}
+--------------------------------------------------
+[2025-05-31 23:49:04] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Registration failed: Unknown column 'id' in 'field list'
+    [data] => 
+    [timestamp] => 2025-05-31 23:49:04
+    [debug_info] => Response from registration script
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 23:55:41] POST Data Received
+Data: Array
+(
+    [full_name] => xwerfreg
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 71 024520
+    [email] => drfqec@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => dcqwerf
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 70 124887
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cqwercr
+    [medical_conditions] => cfqerf
+    [current_medications] => rfqwdfwe
+    [previous_surgeries] => edcqwecde
+    [family_history] => fqwedfqed
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1891
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundaryxIzenYYixo9y0d9u
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php?search=
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 23:55:41] Database Connection Test
+Data: SUCCESS - Test query returned: Array
+(
+    [test] => 1
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] Database Connection Status
+Data: Array
+(
+    [status] => Connected successfully
+    [host_info] => localhost via TCP/IP
+    [server_info] => 10.4.32-MariaDB
+    [protocol_version] => 10
+    [character_set] => utf8mb4
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 23:55:41] Extracted Form Data
+Data: Array
+(
+    [full_name] => xwerfreg
+    [email] => drfqec@gmail.com
+    [password_length] => 8
+    [phone] => 71 024520
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => B-
+    [emergency_contact_name] => dcqwerf
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 70 124887
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cqwercr
+    [medical_conditions] => cfqerf
+    [current_medications] => rfqwdfwe
+    [previous_surgeries] => edcqwecde
+    [family_history] => fqwedfqed
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] Email Check
+Data: Starting email uniqueness check for: drfqec@gmail.com
+--------------------------------------------------
+[2025-05-31 23:55:41] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 23:55:41] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 23:55:41] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 23:55:41] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 23:55:41] Doctor ID Check
+Data: Array
+(
+    [doctor_id_from_session] => 1
+    [session_contents] => Array
+        (
+            [user_id] => 63
+            [email] => HayatIbrahim@gmail.com
+            [full_name] => Hayat Ibrahim
+            [user_type] => Secretary
+            [doctor_id] => 1
+            [patient_id] => 61
+            [errors] => Array
+                (
+                    [0] => Email already registered
+                )
+
+            [secretary_id] => 61
+        )
+
+    [session_id] => 0elq2o1n6g5sm44ve6dsvv75gc
+    [session_status] => 2
+)
+
+--------------------------------------------------
+[2025-05-31 23:55:41] Doctor Verification
+Data: Starting verification for doctor_id: 1
+--------------------------------------------------
+[2025-05-31 23:55:41] Exception Rollback
+Data: Rolling back transaction due to exception
+--------------------------------------------------
+[2025-05-31 23:55:41] Fatal Error
+Data: Unknown column 'id' in 'field list'
+--------------------------------------------------
+[2025-05-31 23:55:41] Exception Trace
+Data: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(297): mysqli->prepare('SELECT id, user...')
+#1 {main}
+--------------------------------------------------
+[2025-05-31 23:55:41] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Registration failed: Unknown column 'id' in 'field list'
+    [data] => 
+    [timestamp] => 2025-05-31 23:55:41
+    [debug_info] => Response from registration script
+    [captured_output] => DEBUG: Session Data at Start
+DATA: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+------------------------------
+DEBUG: Request Method
+DATA: POST
+------------------------------
+DEBUG: POST Data Received
+DATA: Array
+(
+    [full_name] => xwerfreg
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => B-
+    [phone_number] => 71 024520
+    [email] => drfqec@gmail.com
+    [password] => 12345678
+    [emergency_contact_name] => dcqwerf
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 70 124887
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cqwercr
+    [medical_conditions] => cfqerf
+    [current_medications] => rfqwdfwe
+    [previous_surgeries] => edcqwecde
+    [family_history] => fqwedfqed
+)
+
+------------------------------
+DEBUG: GET Data Received
+DATA: Array
+(
+)
+
+------------------------------
+DEBUG: Request Headers
+DATA: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1891
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundaryxIzenYYixo9y0d9u
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php?search=
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+------------------------------
+DEBUG: Raw POST Data
+DATA: 
+------------------------------
+DEBUG: Database Connection Test
+DATA: SUCCESS - Test query returned: Array
+(
+    [test] => 1
+)
+
+------------------------------
+DEBUG: Database Connection Status
+DATA: Array
+(
+    [status] => Connected successfully
+    [host_info] => localhost via TCP/IP
+    [server_info] => 10.4.32-MariaDB
+    [protocol_version] => 10
+    [character_set] => utf8mb4
+)
+
+------------------------------
+DEBUG: Processing POST Request
+DATA: Starting patient registration
+------------------------------
+DEBUG: Extracted Form Data
+DATA: Array
+(
+    [full_name] => xwerfreg
+    [email] => drfqec@gmail.com
+    [password_length] => 8
+    [phone] => 71 024520
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => B-
+    [emergency_contact_name] => dcqwerf
+    [emergency_contact_relationship] => friend
+    [emergency_contact_phone] => 70 124887
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cqwercr
+    [medical_conditions] => cfqerf
+    [current_medications] => rfqwdfwe
+    [previous_surgeries] => edcqwecde
+    [family_history] => fqwedfqed
+)
+
+------------------------------
+DEBUG: Validation Results
+DATA: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+------------------------------
+DEBUG: Email Check
+DATA: Starting email uniqueness check for: drfqec@gmail.com
+------------------------------
+DEBUG: Email Check Result
+DATA: Found 0 existing emails
+------------------------------
+DEBUG: Validation Passed
+DATA: All validations successful, proceeding with registration
+------------------------------
+DEBUG: Password Hashing
+DATA: Starting password hash
+------------------------------
+DEBUG: Password Hashing
+DATA: Password hashed successfully
+------------------------------
+DEBUG: Doctor ID Check
+DATA: Array
+(
+    [doctor_id_from_session] => 1
+    [session_contents] => Array
+        (
+            [user_id] => 63
+            [email] => HayatIbrahim@gmail.com
+            [full_name] => Hayat Ibrahim
+            [user_type] => Secretary
+            [doctor_id] => 1
+            [patient_id] => 61
+            [errors] => Array
+                (
+                    [0] => Email already registered
+                )
+
+            [secretary_id] => 61
+        )
+
+    [session_id] => 0elq2o1n6g5sm44ve6dsvv75gc
+    [session_status] => 2
+)
+
+------------------------------
+DEBUG: Doctor Verification
+DATA: Starting verification for doctor_id: 1
+------------------------------
+DEBUG: Exception Rollback
+DATA: Rolling back transaction due to exception
+------------------------------
+DEBUG: Fatal Error
+DATA: Unknown column 'id' in 'field list'
+------------------------------
+DEBUG: Exception Trace
+DATA: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(297): mysqli->prepare('SELECT id, user...')
+#1 {main}
+------------------------------
+
+    [php_version] => 8.2.12
+    [memory_usage] => 1010448
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:35] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:35] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 23:56:35] POST Data Received
+Data: Array
+(
+    [full_name] => cdre4gf
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 71 024587
+    [email] => cdsckj@gmail.com
+    [password] => 12xsacqwe
+    [emergency_contact_name] => cdrecfw
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 71 214587
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cdwe
+    [medical_conditions] => cdqwdc
+    [current_medications] => wdcqwdc
+    [previous_surgeries] => dcdcwd
+    [family_history] => cwdcwd
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:35] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:35] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1883
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundary3n9ERHUJI7UowbWY
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php?search=
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:35] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 23:56:35] Database Connection Test
+Data: SUCCESS - Test query returned: Array
+(
+    [test] => 1
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:35] Database Connection Status
+Data: Array
+(
+    [status] => Connected successfully
+    [host_info] => localhost via TCP/IP
+    [server_info] => 10.4.32-MariaDB
+    [protocol_version] => 10
+    [character_set] => utf8mb4
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:35] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 23:56:35] Extracted Form Data
+Data: Array
+(
+    [full_name] => cdre4gf
+    [email] => cdsckj@gmail.com
+    [password_length] => 9
+    [phone] => 71 024587
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [emergency_contact_name] => cdrecfw
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 71 214587
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cdwe
+    [medical_conditions] => cdqwdc
+    [current_medications] => wdcqwdc
+    [previous_surgeries] => dcdcwd
+    [family_history] => cwdcwd
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:35] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:35] Email Check
+Data: Starting email uniqueness check for: cdsckj@gmail.com
+--------------------------------------------------
+[2025-05-31 23:56:35] Email Check Result
+Data: Found 0 existing emails
+--------------------------------------------------
+[2025-05-31 23:56:35] Validation Passed
+Data: All validations successful, proceeding with registration
+--------------------------------------------------
+[2025-05-31 23:56:35] Password Hashing
+Data: Starting password hash
+--------------------------------------------------
+[2025-05-31 23:56:36] Password Hashing
+Data: Password hashed successfully
+--------------------------------------------------
+[2025-05-31 23:56:36] Doctor ID Check
+Data: Array
+(
+    [doctor_id_from_session] => 1
+    [session_contents] => Array
+        (
+            [user_id] => 63
+            [email] => HayatIbrahim@gmail.com
+            [full_name] => Hayat Ibrahim
+            [user_type] => Secretary
+            [doctor_id] => 1
+            [patient_id] => 61
+            [errors] => Array
+                (
+                    [0] => Email already registered
+                )
+
+            [secretary_id] => 61
+        )
+
+    [session_id] => 0elq2o1n6g5sm44ve6dsvv75gc
+    [session_status] => 2
+)
+
+--------------------------------------------------
+[2025-05-31 23:56:36] Doctor Verification
+Data: Starting verification for doctor_id: 1
+--------------------------------------------------
+[2025-05-31 23:56:36] Exception Rollback
+Data: Rolling back transaction due to exception
+--------------------------------------------------
+[2025-05-31 23:56:36] Fatal Error
+Data: Unknown column 'id' in 'field list'
+--------------------------------------------------
+[2025-05-31 23:56:36] Exception Trace
+Data: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(297): mysqli->prepare('SELECT id, user...')
+#1 {main}
+--------------------------------------------------
+[2025-05-31 23:56:36] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Registration failed: Unknown column 'id' in 'field list'
+    [data] => 
+    [timestamp] => 2025-05-31 23:56:36
+    [debug_info] => Response from registration script
+    [captured_output] => DEBUG: Session Data at Start
+DATA: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+------------------------------
+DEBUG: Request Method
+DATA: POST
+------------------------------
+DEBUG: POST Data Received
+DATA: Array
+(
+    [full_name] => cdre4gf
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [phone_number] => 71 024587
+    [email] => cdsckj@gmail.com
+    [password] => 12xsacqwe
+    [emergency_contact_name] => cdrecfw
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 71 214587
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cdwe
+    [medical_conditions] => cdqwdc
+    [current_medications] => wdcqwdc
+    [previous_surgeries] => dcdcwd
+    [family_history] => cwdcwd
+)
+
+------------------------------
+DEBUG: GET Data Received
+DATA: Array
+(
+)
+
+------------------------------
+DEBUG: Request Headers
+DATA: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1883
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundary3n9ERHUJI7UowbWY
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php?search=
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+------------------------------
+DEBUG: Raw POST Data
+DATA: 
+------------------------------
+DEBUG: Database Connection Test
+DATA: SUCCESS - Test query returned: Array
+(
+    [test] => 1
+)
+
+------------------------------
+DEBUG: Database Connection Status
+DATA: Array
+(
+    [status] => Connected successfully
+    [host_info] => localhost via TCP/IP
+    [server_info] => 10.4.32-MariaDB
+    [protocol_version] => 10
+    [character_set] => utf8mb4
+)
+
+------------------------------
+DEBUG: Processing POST Request
+DATA: Starting patient registration
+------------------------------
+DEBUG: Extracted Form Data
+DATA: Array
+(
+    [full_name] => cdre4gf
+    [email] => cdsckj@gmail.com
+    [password_length] => 9
+    [phone] => 71 024587
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => AB-
+    [emergency_contact_name] => cdrecfw
+    [emergency_contact_relationship] => sibling
+    [emergency_contact_phone] => 71 214587
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => cdwe
+    [medical_conditions] => cdqwdc
+    [current_medications] => wdcqwdc
+    [previous_surgeries] => dcdcwd
+    [family_history] => cwdcwd
+)
+
+------------------------------
+DEBUG: Validation Results
+DATA: Array
+(
+    [errors] => Array
+        (
+        )
+
+    [error_count] => 0
+)
+
+------------------------------
+DEBUG: Email Check
+DATA: Starting email uniqueness check for: cdsckj@gmail.com
+------------------------------
+DEBUG: Email Check Result
+DATA: Found 0 existing emails
+------------------------------
+DEBUG: Validation Passed
+DATA: All validations successful, proceeding with registration
+------------------------------
+DEBUG: Password Hashing
+DATA: Starting password hash
+------------------------------
+DEBUG: Password Hashing
+DATA: Password hashed successfully
+------------------------------
+DEBUG: Doctor ID Check
+DATA: Array
+(
+    [doctor_id_from_session] => 1
+    [session_contents] => Array
+        (
+            [user_id] => 63
+            [email] => HayatIbrahim@gmail.com
+            [full_name] => Hayat Ibrahim
+            [user_type] => Secretary
+            [doctor_id] => 1
+            [patient_id] => 61
+            [errors] => Array
+                (
+                    [0] => Email already registered
+                )
+
+            [secretary_id] => 61
+        )
+
+    [session_id] => 0elq2o1n6g5sm44ve6dsvv75gc
+    [session_status] => 2
+)
+
+------------------------------
+DEBUG: Doctor Verification
+DATA: Starting verification for doctor_id: 1
+------------------------------
+DEBUG: Exception Rollback
+DATA: Rolling back transaction due to exception
+------------------------------
+DEBUG: Fatal Error
+DATA: Unknown column 'id' in 'field list'
+------------------------------
+DEBUG: Exception Trace
+DATA: #0 C:\xampp\htdocs\fyp\Secretary\Add_Patients.php(297): mysqli->prepare('SELECT id, user...')
+#1 {main}
+------------------------------
+
+    [php_version] => 8.2.12
+    [memory_usage] => 1010384
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] Session Data at Start
+Data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] Request Method
+Data: POST
+--------------------------------------------------
+[2025-05-31 23:57:24] POST Data Received
+Data: Array
+(
+    [full_name] => cdwferf
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => O+
+    [phone_number] => 71 12526846
+    [email] => 345cadc6@gmail.com
+    [password] => 6487465
+    [emergency_contact_name] => cdecedc
+    [emergency_contact_relationship] => child
+    [emergency_contact_phone] => 71 021458
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => dscsdc
+    [medical_conditions] => cdscs
+    [current_medications] => csdcsdcs
+    [previous_surgeries] => sdcdcwd
+    [family_history] => cwdcwdc
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] GET Data Received
+Data: Array
+(
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] Request Headers
+Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1886
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundaryfFZsPNZ3B7He2pHB
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php?search=
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] Raw POST Data
+Data: 
+--------------------------------------------------
+[2025-05-31 23:57:24] Database Connection Test
+Data: SUCCESS - Test query returned: Array
+(
+    [test] => 1
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] Database Connection Status
+Data: Array
+(
+    [status] => Connected successfully
+    [host_info] => localhost via TCP/IP
+    [server_info] => 10.4.32-MariaDB
+    [protocol_version] => 10
+    [character_set] => utf8mb4
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] Processing POST Request
+Data: Starting patient registration
+--------------------------------------------------
+[2025-05-31 23:57:24] Extracted Form Data
+Data: Array
+(
+    [full_name] => cdwferf
+    [email] => 345cadc6@gmail.com
+    [password_length] => 7
+    [phone] => 71 12526846
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => O+
+    [emergency_contact_name] => cdecedc
+    [emergency_contact_relationship] => child
+    [emergency_contact_phone] => 71 021458
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => dscsdc
+    [medical_conditions] => cdscs
+    [current_medications] => csdcsdcs
+    [previous_surgeries] => sdcdcwd
+    [family_history] => cwdcwdc
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] Validation Error
+Data: Password validation failed, length: 7
+--------------------------------------------------
+[2025-05-31 23:57:24] Validation Results
+Data: Array
+(
+    [errors] => Array
+        (
+            [0] => Password must be at least 8 characters
+        )
+
+    [error_count] => 1
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] Validation Failed
+Data: Array
+(
+    [0] => Password must be at least 8 characters
+)
+
+--------------------------------------------------
+[2025-05-31 23:57:24] Sending JSON Response
+Data: Array
+(
+    [success] => 
+    [message] => Password must be at least 8 characters
+    [data] => 
+    [timestamp] => 2025-05-31 23:57:24
+    [debug_info] => Response from registration script
+    [captured_output] => DEBUG: Session Data at Start
+DATA: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [doctor_id] => 1
+    [patient_id] => 61
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [secretary_id] => 61
+)
+
+------------------------------
+DEBUG: Request Method
+DATA: POST
+------------------------------
+DEBUG: POST Data Received
+DATA: Array
+(
+    [full_name] => cdwferf
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => O+
+    [phone_number] => 71 12526846
+    [email] => 345cadc6@gmail.com
+    [password] => 6487465
+    [emergency_contact_name] => cdecedc
+    [emergency_contact_relationship] => child
+    [emergency_contact_phone] => 71 021458
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => dscsdc
+    [medical_conditions] => cdscs
+    [current_medications] => csdcsdcs
+    [previous_surgeries] => sdcdcwd
+    [family_history] => cwdcwdc
+)
+
+------------------------------
+DEBUG: GET Data Received
+DATA: Array
+(
+)
+
+------------------------------
+DEBUG: Request Headers
+DATA: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 1886
+    [sec-ch-ua-platform] => "Windows"
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0
+    [sec-ch-ua] => "Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"
+    [Content-Type] => multipart/form-data; boundary=----WebKitFormBoundaryfFZsPNZ3B7He2pHB
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/fyp/Secretary/patients.php?search=
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-GB,en;q=0.9,en-US;q=0.8,de-DE;q=0.7,de;q=0.6
+    [Cookie] => chtl_cus_3691567812=eyJ1dWlkIjoiM2ZjNjAzNzctOGY2Yi00MmIxLThkMGMtMWFmN2MxNmU3NjZlIn0=; chtl_opened_3691567812=true; PHPSESSID=0elq2o1n6g5sm44ve6dsvv75gc; chtl_chats_3691567812=W3siY2hhdF9naWQiOiIxNDc5OTg3NzI2IiwiY2hhdGJvdF92ZXJzaW9uIjoiMi4wIiwiY3JlYXRlZF9hdCI6MTc0ODY3MTkxNzExMX1d
+)
+
+------------------------------
+DEBUG: Raw POST Data
+DATA: 
+------------------------------
+DEBUG: Database Connection Test
+DATA: SUCCESS - Test query returned: Array
+(
+    [test] => 1
+)
+
+------------------------------
+DEBUG: Database Connection Status
+DATA: Array
+(
+    [status] => Connected successfully
+    [host_info] => localhost via TCP/IP
+    [server_info] => 10.4.32-MariaDB
+    [protocol_version] => 10
+    [character_set] => utf8mb4
+)
+
+------------------------------
+DEBUG: Processing POST Request
+DATA: Starting patient registration
+------------------------------
+DEBUG: Extracted Form Data
+DATA: Array
+(
+    [full_name] => cdwferf
+    [email] => 345cadc6@gmail.com
+    [password_length] => 7
+    [phone] => 71 12526846
+    [date_of_birth] => 2000-10-10
+    [gender] => male
+    [blood_type] => O+
+    [emergency_contact_name] => cdecedc
+    [emergency_contact_relationship] => child
+    [emergency_contact_phone] => 71 021458
+    [insurance_provider] => 
+    [insurance_number] => 
+    [allergies] => dscsdc
+    [medical_conditions] => cdscs
+    [current_medications] => csdcsdcs
+    [previous_surgeries] => sdcdcwd
+    [family_history] => cwdcwdc
+)
+
+------------------------------
+DEBUG: Validation Error
+DATA: Password validation failed, length: 7
+------------------------------
+DEBUG: Validation Results
+DATA: Array
+(
+    [errors] => Array
+        (
+            [0] => Password must be at least 8 characters
+        )
+
+    [error_count] => 1
+)
+
+------------------------------
+DEBUG: Validation Failed
+DATA: Array
+(
+    [0] => Password must be at least 8 characters
+)
+
+------------------------------
+
+    [php_version] => 8.2.12
+    [memory_usage] => 1004880
+)
+
+--------------------------------------------------

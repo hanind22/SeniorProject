@@ -105,9 +105,73 @@ body {
     align-items: start;
 }
 
+
+/* Modern Initials Circle */
 .profile-photo-container {
     display: flex;
     justify-content: center;
+    margin: 1.5rem 0;
+    margin-top: 60px;
+    --circle-size: 120px;
+    --primary-color: #2c3e50;
+    --accent-color: #38e4c1;
+}
+
+.initials-circle {
+    width: var(--circle-size);
+    height: var(--circle-size);
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--accent-color), #16a085);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: calc(var(--circle-size) * 0.4);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 
+        0 4px 8px rgba(44, 62, 80, 0.267),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: default;
+}
+
+.initials-circle::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    opacity: 0.15;
+    transition: all 0.3s ease;
+}
+
+.initials-circle:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 6px 12px rgba(44, 62, 80, 0.25),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+.initials-circle:hover::after {
+    opacity: 0.25;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .profile-photo-container {
+        --circle-size: 80px;
+    }
 }
 
 .profile-photo {
@@ -149,6 +213,7 @@ body {
     background-color: var(--primary-dark);
     transform: scale(1.1);
 }
+
 
 .profile-info h3 {
     font-size: 1.75rem;
@@ -675,15 +740,18 @@ textarea.form-control {
         }
         
         .update-form-container {
-            background-color: white;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 700px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
         
         .update-form-header {
             display: flex;

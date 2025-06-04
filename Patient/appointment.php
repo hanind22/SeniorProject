@@ -35,37 +35,6 @@ if (isset($_SESSION['user_id'])) {
         
         if (!$patientData) {
             $error = "Patient profile not found.";
-        } else {
-            // Fetch appointments with pagination
-            $stmt = $conn->prepare("
-                SELECT a.*, u.full_name AS doctor_name, d.specialty
-                FROM appointments a
-                JOIN doctors d ON a.doctor_id = d.doctor_id
-                JOIN users u ON d.user_id = u.user_id
-                WHERE a.patient_id = ?
-                ORDER BY a.appointment_date, a.appointment_time
-                LIMIT 20
-            ");
-            $stmt->bind_param("i", $patientData['patient_id']);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            
-            while ($row = $result->fetch_assoc()) {
-                $date = $row['appointment_date'];
-                $time = date('H:i', strtotime($row['appointment_time'])); 
-                
-                $appointments[$date][] = [
-                    'id' => $row['appointment_id'],
-                    'time' => $time,
-                    'formatted_time' => date('g:i A', strtotime($row['appointment_time'])), // Add formatted time
-                    'doctorName' => $row['doctor_name'],
-                    'specialty' => $row['specialty'],
-                    'type' => $row['appointment_type'],
-                    'purpose' => $row['reason_for_visit'],
-                    'status' => $row['status'],
-                    'notes' => $row['notes'] ?? ''
-                ];
-            }
         }
     } catch (Exception $e) {
         $error = "Error fetching data: " . $e->getMessage();
@@ -167,850 +136,480 @@ if (isset($_SESSION['user_id'])) {
            margin-bottom: 20px;
          }
         
+        /* Appointment preview styles */
+        .appointment-previews {
+            margin-top: 5px;
+        }
+        
+        .appointment-preview {
+            font-size: 0.75rem;
+            padding: 2px 5px;
+            margin: 2px 0;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .appointment-preview .appointment-time {
+            margin-right: 5px;
+        }
+        
+        .appointment-count {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+        
+        /* Cancelled appointment styling */
+        .cancelled {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .strikethrough {
+            text-decoration: line-through;
+        }
+        
+        /* Appointment card styles */
+        .appt-card {
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+        
+        .appt-card__header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .appt-time {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .appt-time i {
+            margin-right: 5px;
+        }
+        
+        .appt-type {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .appt-card__body {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .patient-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .patient-info {
+            flex: 1;
+        }
+        
+        .patient-name {
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        .patient-purpose {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        .appt-card__footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .appt-action {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .appt-action:hover {
+            background-color: rgba(74, 111, 165, 0.1);
+        }
+        
+        .cancelled-appointment {
+            opacity: 0.7;
+            background-color: #f5f5f5;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Side-Navigationbar -->
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <div class="logo">
-          <i class="fas fa-heartbeat me-2"></i> MediTrack
-        </div>
-        <p class="speciality">Your Health Journey Starts Here</p>
-      </div>
-      <nav class="nav-links">
-        <a href="patient_dashboard.php" class="nav-item">
-          <i class="fa-solid fa-user"></i> Profile
-        </a>
-        <a href="appointment.php" class="nav-item active">
-          <i class="fa-solid fa-calendar"></i> Appointments
-        </a>
-        <a href="medical_history.php" class="nav-item">
-          <i class="fa-solid fa-file-medical"></i> Medical History &<br>Prescriptions
-        </a>
-        <!-- <a href="#" class="nav-item">
-          <i class="fas fa-prescription-bottle-alt"></i> Prescriptions
-        </a> -->
-        <a href="health_report.php" class="nav-item">
-          <i class="fa-solid fa-file-lines"></i> Health Reports
-        </a>
-        <a href="health_chatbot.php" class="nav-item ">
-          <i class="fa-solid fa-comment-medical"></i> Health Chatbot
-        </a>
-      </nav>
-      <div class="date-time-box">
-        <p id="date-time"></p>
-      </div>
-    </aside>
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat me-2"></i> MediTrack
+                </div>
+                <p class="speciality">Your Health Journey Starts Here</p>
+            </div>
+            <nav class="nav-links">
+                <a href="patient_dashboard.php" class="nav-item">
+                    <i class="fa-solid fa-user"></i> Profile
+                </a>
+                <a href="appointment.php" class="nav-item active">
+                    <i class="fa-solid fa-calendar"></i> Appointments
+                </a>
+                <a href="medical_history.php" class="nav-item">
+                    <i class="fa-solid fa-file-medical"></i> Medical History &<br>Prescriptions
+                </a>
+                <a href="health_report.php" class="nav-item">
+                    <i class="fa-solid fa-file-lines"></i> Health Reports
+                </a>
+                <a href="health_chatbot.php" class="nav-item">
+                    <i class="fa-solid fa-comment-medical"></i> Health Chatbot
+                </a>
+            </nav>
+            <div class="date-time-box">
+                <p id="date-time"></p>
+            </div>
+        </aside>
 
         <!-- Main Content -->
         <div class="main-content">
-             <h2><i class="fas fa-calendar-plus"></i> Book a New Appointment</h2>
-            <!-- Doctor Selection Process -->
-            <div class="doctor-selection-container">  
-                <!-- Progress Steps -->
-                <div class="doctor-selection-steps">
-                    <div class="step active" id="step1">
-                        <div class="step-indicator">1</div>
-                        <div>Select Specialty</div>
-                    </div>
-                    <div class="step" id="step2">
-                        <div class="step-indicator">2</div>
-                        <div>Choose Doctor</div>
-                    </div>
-                    <div class="step" id="step3">
-                        <div class="step-indicator">3</div>
-                        <div>Select Time</div>
-                    </div>
-                    <div class="step" id="step4">
-                        <div class="step-indicator">4</div>
-                        <div>Confirm</div>
-                    </div>
-                    <div class="step-connector">
-                        <div class="step-connector-progress" id="stepProgress"></div>
-                    </div>
-                </div>
-                
-                <div class="selection-content">
-                    <!-- Step 1: Select Specialty -->
-                    <div id="step1-content" class="step-content fade-in">
-                        <div class="form-group">
-                            <label for="specialty-select"><i class="fas fa-stethoscope"></i> Select a medical specialty:</label>
-                            <select class="form-control" id="specialty-select" required>
-                                <option value="">-- Choose your needed specialty --</option>
-                                <?php
-                                // Fetch all specialties from the database
-                                $specialtyQuery = $conn->query("SELECT DISTINCT specialty FROM doctors WHERE specialty IS NOT NULL AND specialty != '' ORDER BY specialty");
-                                while ($specialty = $specialtyQuery->fetch_assoc()) {
-                                    echo "<option value='" . htmlspecialchars($specialty['specialty']) . "'>" . htmlspecialchars($specialty['specialty']) . "</option>";
-                                }
-                                ?>
-                            </select>
-                            <button id="next-to-doctors" class="btn btn-primary next-step-btn" disabled>
-                                 Next <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 2: Choose Doctor -->
-                    <div id="step2-content" class="step-content" style="display: none;">
-                        <div id="doctors-list">
-                            <div class="empty-state">
-                                <i class="fas fa-user-md"></i>
-                                <p>Please select a specialty first.</p>
-                            </div>
-                        </div>
-                        <div class="step-navigation">
-                            <button id="back-to-specialty" class="btn btn-outline">
-                                <i class="fas fa-arrow-left"></i> Back
-                            </button>
-                            <button id="next-to-time" class="btn btn-primary next-step-btn" disabled>
-                                Next <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 3: Select Time -->
-                    <div id="step3-content" class="step-content" style="display: none;">
-                        <div id="doctor-selected-info" class="doctor-card selected">
-                            <div class="doctor-avatar" id="selected-doctor-avatar">DR</div>
-                            <div class="doctor-info">
-                                <h4 class="doctor-name" id="selected-doctor-name">Doctor Name</h4>
-                                <p class="doctor-specialty" id="selected-doctor-specialty">Specialty</p>
-                                <p class="doctor-contact" id="selected-doctor-email">Email: loading...</p>
-                                <p class="doctor-contact" id="selected-doctor-phone">Phone: loading...</p>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="appointment-date"><i class="fas fa-calendar-alt"></i> Select a date:</label>
-                            <input type="date" class="form-control" id="appointment-date" min="<?php echo date('Y-m-d'); ?>">
-                        </div>
-                        
-                        <div id="time-slots-container">
-                            <div class="empty-state">
-                                <i class="fas fa-clock"></i>
-                                <p>Please select a date to see available time slots.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="step-navigation">
-                            <button id="back-to-doctors" class="btn btn-outline">
-                                <i class="fas fa-arrow-left"></i> Back
-                            </button>
-                            <button id="next-to-confirm" class="btn btn-primary next-step-btn" disabled>
-                                Next <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 4: Confirmation -->
-                    <div id="step4-content" class="step-content" style="display: none;">
-                        <h3><i class="fas fa-clipboard-check"></i> Confirm Your Appointment</h3><br>
-                        
-                        <div class="confirmation-details">
-                        <div class="detail-row">
-                             <div class="detail-label">Doctor:</div>
-                             <div class="detail-value" id="confirm-doctor-name">Not selected</div>
-                        </div>
-                        <div class="detail-row">
-                           <div class="detail-label">Specialty:</div>
-                           <div class="detail-value" id="confirm-specialty">Not selected</div>
-                        </div>
-                        <div class="detail-row">
-                             <div class="detail-label">Date:</div>
-                             <div class="detail-value" id="confirm-date">June 15, 2023</div>
-                        </div>
-                        <div class="detail-row">
-                             <div class="detail-label">Time:</div>
-                             <div class="detail-value" id="confirm-time">10:30 AM</div>
-                        </div>
-                     </div>
-
-                         <div class="form-group">
-                           <label for="appointment-type">Appointment Type:</label>
-                           <select class="form-control" id="appointment-type" required>
-                              <option value="">-- Select the type of your Appointment --</option>
-                              <option value="Regular checkup">Regular checkup</option>
-                              <option value="Follow-up">Follow-up</option>
-                              <option value="Consultation">Consultation</option>
-                              <option value="Urgent care">Urgent care</option>
-                              <option value="Other">Other</option>
-                          </select>
-                        </div>
-
-                        
-                        <div class="form-group">
-                            <label for="appointment-purpose"><i class="fas fa-clipboard-list"></i> Purpose of Visit:</label>
-                            <input type="text" class="form-control" id="appointment-purpose" placeholder="Briefly describe the reason for your visit" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="appointment-notes"><i class="fas fa-sticky-note"></i> Additional Notes (optional):</label>
-                            <textarea class="form-control" id="appointment-notes" rows="3" placeholder="Any additional information you'd like to share"></textarea>
-                        </div>
-                        
-                        <div class="step-navigation">
-                            <button id="back-to-time" class="btn btn-outline">
-                                <i class="fas fa-arrow-left"></i> Back
-                            </button>
-                            <button id="confirm-appointment" class="btn btn-success">
-                                <i class="fas fa-calendar-check"></i> Confirm Appointment
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Existing Appointments -->
+            <!-- Calendar Navigation -->
             <div class="calendar-nav">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h3><i class="fas fa-calendar-week"></i> Your Upcoming Appointments</h3>
-                    <button id="refresh-appointments" class="btn btn-outline">
-                        <i class="fas fa-sync-alt"></i> Refresh
+                <div class="month-nav">
+                    <button id="prev-month" class="month-nav-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <h3 id="current-month">May 2025</h3>
+                    <button id="next-month" class="month-nav-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="calendar-actions">
+                    <button id="add-appointment-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> New Appointment
                     </button>
                 </div>
             </div>
-            
+
+            <!-- Calendar Grid -->
             <div class="calendar-wrapper">
-                <?php if (!empty($error)): ?>
-                    <div class="alert alert-error">
-                        <?php echo htmlspecialchars($error); ?>
-                        <span class="alert-close">&times;</span>
-                    </div>
-                <?php endif; ?>
-                
-                <?php if (!empty($appointments)): ?>
-                  <div class="appointments-list">
-                   <?php foreach ($appointments as $date => $dayAppointments): ?>
-                  <div class="appointment-date-header">
-                     <h4><i class="fas fa-calendar-day"></i> <?php echo date('F j, Y', strtotime($date)); ?></h4>
-                  </div>
-               <?php foreach ($dayAppointments as $appointment): ?>
-                 <!-- Updated appointment card with data attributes -->
-                 <div class="appt-card <?php echo strtolower(str_replace(' ', '-', $appointment['status'])); ?> slide-up"
-                     data-appointment='<?php echo json_encode([
-                        'id' => $appointment['id'],
-                        'time' => $appointment['time'],
-                        'formatted_time' => $appointment['formatted_time'],
-                        'doctor' => $appointment['doctorName'],
-                        'specialty' => $appointment['specialty'],
-                        'type' => $appointment['type'],
-                        'status' => $appointment['status'],
-                        'purpose' => $appointment['purpose'],
-                        'notes' => $appointment['notes']
-                     ]); ?>'>
-                    <div class="appt-card__header">
-                        <div class="appt-time">
-                            <i class="fas fa-clock"></i>
-                            <?php echo $appointment['formatted_time']; ?>
-                            <span class="appointment-status-badge" style="
-                                background: <?php 
-                                    if ($appointment['status'] == 'scheduled') echo '#dbeafe';
-                                    elseif ($appointment['status'] == 'confirmed') echo '#d1fae5';
-                                    elseif ($appointment['status'] == 'completed') echo '#e5e7eb';
-                                    else echo '#fee2e2';
-                                ?>;
-                                color: <?php 
-                                    if ($appointment['status'] == 'scheduled') echo '#1e40af';
-                                    elseif ($appointment['status'] == 'confirmed') echo '#065f46';
-                                    elseif ($appointment['status'] == 'completed') echo '#4b5563';
-                                    else echo '#991b1b';
-                                ?>;
-                            ">
-                                <?php echo ucfirst($appointment['status']); ?>
-                            </span>
-                        </div>
-                        <div class="appt-type">
-                            <?php echo $appointment['type']; ?>
-                        </div>
-                    </div>
-                    <div class="appt-card__body">
-                        <div class="patient-avatar">
-                            <?php 
-                                $initials = '';
-                                $nameParts = explode(' ', $appointment['doctorName']);
-                                foreach ($nameParts as $part) {
-                                    $initials .= strtoupper(substr($part, 0, 1));
-                                }
-                                echo $initials;
-                            ?>
-                        </div>
-                        <div class="patient-info">
-                            <h4 class="patient-name">Dr. <?php echo $appointment['doctorName']; ?></h4>
-                            <p class="patient-purpose"><?php echo $appointment['specialty']; ?></p>
-                            <p class="patient-purpose"><?php echo $appointment['purpose']; ?></p>
-                        </div>
-                    </div>
-                    <div class="appt-card__footer">
-    <?php if ($appointment['status'] !== 'Cancelled'): ?>
-        <button class="btn btn-danger cancelAppointmentBtn">
-            <i class="fas fa-times"></i> Cancel Appointment
-        </button>
-        <?php if ($appointment['status'] == 'scheduled' || $appointment['status'] == 'confirmed'): ?>
-            <button class="appt-action btn-reschedule" data-appointment-id="<?php echo $appointment['id']; ?>">
-                <i class="fas fa-calendar-alt"></i> Reschedule
-            </button>
-        <?php endif; ?>
-    <?php else: ?>
-        <div class="cancelled-message">
-            <i class="fas fa-ban"></i> Appointment Cancelled
-        </div>
-    <?php endif; ?>
-</div>
+                <!-- Weekday headers -->
+                <div class="weekday-header">
+                    <div class="weekday">Sun</div>
+                    <div class="weekday">Mon</div>
+                    <div class="weekday">Tue</div>
+                    <div class="weekday">Wed</div>
+                    <div class="weekday">Thu</div>
+                    <div class="weekday">Fri</div>
+                    <div class="weekday">Sat</div>
                 </div>
-            <?php endforeach; ?>
-        <?php endforeach; ?>
-    </div>
-<?php else: ?>
-    <div class="empty-state">
-        <i class="fas fa-calendar-times"></i>
-        <h4>No Appointments Yet</h4>
-        <p>You don't have any upcoming appointments. Book one now!</p>
-    </div>
-<?php endif; ?>
+
+                <!-- Calendar Grid -->
+                <div id="calendar-grid">
+                     <!-- JavaScript will populate this -->
+                </div>
             </div>
         </div>
 
+        <!-- Appointment Details Overlay -->
+        <div id="appointment-overlay" class="overlay">
+            <div class="overlay-content">
+                <div class="overlay-header">
+                    <h3 class="overlay-title" id="overlay-date">May 10, 2025</h3>
+                    <button id="close-overlay" class="close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
 
-<!-- Cancel Appointment Modal -->
-<div class="overlay" id="cancelAppointmentModal">
-    <div class="modal">
-        <button class="close-btn" id="cancelModalCloseButton" aria-label="Close modal">
+                <div class="appointments-container" id="appointments-container">
+                    <!-- Appointment cards will be generated here -->
+                </div>
+                
+                <div class="overlay-footer">
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-indicator" style="background-color: var(--regular-bg);"></div>
+                            Regular appointments
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-indicator" style="background-color: var(--urgent-bg);"></div>
+                            Urgent appointments
+                        </div>
+                    </div>
+                    <button id="add-appointment-day-btn" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i> Add Appointment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- New Appointment Modal -->
+<div class="overlay-appoinr" id="newAppointmentModal" style="display: none;">
+    <div class="modal-new">
+        <button class="close-btn" id="newModalCloseButton" aria-label="Close modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
-        <h2 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Cancel Appointment</h2>
+        <h2 class="modal-title">New Appointment</h2>
         
-        <form id="cancel-appointment-form">
-            <div class="appointment-meta">
-                <div class="meta-item">
-                    <i class="fas fa-user-md"></i>
-                    <div>
-                        <span class="meta-label">Doctor</span>
-                        <span class="meta-value" id="cancelDoctorName">
-                            <?php echo isset($appointment['doctorName']) ? htmlspecialchars($appointment['doctorName']) : 'No doctor name'; ?>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="meta-item">
-                    <i class="fas fa-clock"></i>
-                    <div>
-                        <span class="meta-label">Time</span>
-                        <span class="meta-value" id="cancelAppointmentTime"><?php echo isset($appointment['formatted_time']) ? htmlspecialchars($appointment['formatted_time']) : 'No Time'; ?></span>
-                    </div>
-                </div>
+        <form id="new-appointment-form" data-patient-id="<?php echo $_SESSION['user_id'] ?? 0; ?>">
+            <!-- Speciality Dropdown -->
+            <div class="form-group">
+                <label for="speciality">Speciality:</label>
+                <select id="speciality" name="speciality" required class="form-control">
+                    <option value="">Select a speciality</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="General">General Practice</option>
+                </select>
+            </div>
+            
+            <!-- Doctor Dropdown (will be populated dynamically) -->
+            <div class="form-group">
+                <label for="doctor">Doctor:</label>
+                <select id="doctor" name="doctor_id" required class="form-control" disabled>
+                    <option value="">Select a doctor</option>
+                </select>
+            </div>
+            
+            <!-- Date and Time -->
+            <div class="form-group">
+                <label for="appointment-date">Date:</label>
+                <input type="date" id="appointment-date" name="date" required class="form-control" min="">
             </div>
             
             <div class="form-group">
-                <label for="cancel-reason"><i class="fas fa-question-circle"></i> Reason for cancellation:</label>
-                <select id="cancel-reason" name="cancelled_reason" required class="form-control">
-                    <option value="">Select a reason...</option>
-                    <option value="I no longer need this appointment">I no longer need this appointment</option>
-                    <option value="Personal reasons">Personal reasons</option>
+                <label for="appointment-time">Time:</label>
+                <input type="time" id="appointment-time" name="time" required class="form-control">
+            </div>
+            
+            <!-- Appointment Details -->
+            <div class="form-group">
+                <label for="appointment-type">Appointment Type:</label>
+                <select id="appointment-type" name="appointment_type" required class="form-control">
+                    <option value="Regular Checkup">Regular Checkup</option>
+                    <option value="Follow-up">Follow-up</option>
+                    <option value="Urgent Care">Urgent Care</option>
+                    <option value="Consultation">Consultation</option>
                     <option value="Other">Other</option>
                 </select>
             </div>
             
-            <div class="form-group" id="other-reason-container" style="display: none;">
-                <label for="other-reason">Please specify:</label>
-                <input type="text" id="other-reason" name="other_reason" class="form-control" placeholder="Enter your reason...">
+            <div class="form-group">
+                <label for="appointment-purpose">Purpose:</label>
+                <input type="text" id="appointment-purpose" name="purpose" required class="form-control" placeholder="Briefly describe the reason for your visit">
             </div>
             
-            <input type="hidden" id="cancel-appointment-id" name="appointment_id" value="<?php echo isset($appointment['id']) ? htmlspecialchars($appointment['id']) : ''; ?>">
-            <input type="hidden" id="cancelled-by" name="cancelled_by" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+            <div class="form-group">
+                <label for="appointment-notes">Notes:</label>
+                <textarea id="appointment-notes" name="notes" class="form-control" rows="3" placeholder="Any additional information..."></textarea>
+            </div>
             
-            <div class="appointment-actions">
-                <button type="button" class="btn btn-outline" id="cancelCancelBtn">
-                    <i class="fas fa-arrow-left"></i> Go Back
+            <div class="form-actions">
+                <button type="button" class="btn btn-outline" id="cancelNewAppointment">
+                    Cancel
                 </button>
-                <button type="submit" class="btn btn-danger">
-                    <i class="fas fa-times"></i> Confirm Cancellation
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Book Appointment
                 </button>
             </div>
         </form>
     </div>
 </div>
 
-
-
-<!-- message for successfully setting an appointment -->
-        <?php if (!empty($message)): ?>
-            <div class="alert alert-success">
-              <?php echo htmlspecialchars($message); ?>
+<!-- Appointment Details Overlay Modal -->
+<div class="overlay" id="appointmentModal">
+    <div class="modal">
+    <button class="close-btn" id="modalCloseButton"  aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+    </button> 
+    <h2 class="modal-title">Appointment Details</h2>
+        
+        <div class="appointment-header">
+            <div class="patient-info">
+                <div class="patient-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="patient-details">
+                    <h3 class="doctor-name" id="modalPatientName">No doctor name</h3>
+                    <p class="doctor-id" id="modalPatientId">Doctor ID: N/A</p>
+                    <p class="appointment-id" id="modalAppointmentId">Appointment ID: N/A</p>
+                </div>
             </div>
-        <?php endif; ?>
-
-
-    <!-- Add jQuery for AJAX functionality -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $(document).ready(function () {
-    // Initialization variables
-    let currentStep = 1;
-    let selectedSpecialty = '';
-    let selectedDoctor = null;
-    let selectedDate = '';
-    let selectedTime = '';
-    let currentAppointmentId = null;
-
-    // DOM elements
-    const $notification = $('#notification');
-    const $notificationMessage = $('#notification-message');
-    const $appointmentModal = $('#appointmentModal');
-    const $cancelAppointmentModal = $('#cancelAppointmentModal');
-
-    // Initialize everything
-    initEventListeners();
-    updateStepProgress();
-
-    function initEventListeners() {
-        // General UI listeners
-        $('.alert-close').click(function () {
-            $(this).parent().fadeOut();
-        });
-        setTimeout(() => $('.alert').fadeOut(), 5000);
-
-        // Appointment booking flow
-        $('#specialty-select').change(handleSpecialtyChange);
-        $('#next-to-doctors').click(handleNextToDoctors);
-        $('#back-to-specialty').click(() => showStep(1));
-        $('#next-to-time').click(handleNextToTime);
-        $('#appointment-date').change(handleDateChange);
-        $('#back-to-doctors').click(() => showStep(2));
-        $('#next-to-confirm').click(handleNextToConfirm);
-        $('#back-to-time').click(() => showStep(3));
-        $('#confirm-appointment').click(handleConfirmAppointment);
-
-        // Appointment management
-        $(document).on('click', '.view-details', handleViewDetails);
-        $(document).on('click', '.btn-reschedule', handleReschedule);
-        $(document).on('click', '#refresh-appointments', () => location.reload());
-
-        // Time slot selection
-        $(document).on('click', '.time-slot:not(.booked)', function () {
-            $('.time-slot').removeClass('selected');
-            $(this).addClass('selected');
-            selectedTime = $(this).data('time');
-            $('#next-to-confirm').prop('disabled', false);
-            updateConfirmationDisplay();
-        });
-
-        // Doctor selection
-        $(document).on('click', '.doctor-card', function () {
-            $('.doctor-card').removeClass('selected');
-            $(this).addClass('selected');
-            selectedDoctor = $(this).data('doctor-id');
-
-            const name = $(this).data('name') || '';
-            const specialty = $(this).data('specialty') || '';
-            const email = $(this).data('email') || '';
-            const phone = $(this).data('phone') || '';
-
-            $('#selected-doctor-name').text(name);
-            $('#selected-doctor-specialty').text(specialty);
-            $('#selected-doctor-email').text(`Email: ${email}`);
-            $('#selected-doctor-phone').text(`Phone: ${phone}`);
-
-            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
-            $('#selected-doctor-avatar').text(initials);
-
-            $('#next-to-time').prop('disabled', false);
-        });
-
-        // Cancel appointment modal
-        $(document).on('click', '.cancelAppointmentBtn', showCancelModal);
-        $('#cancel-reason').change(handleCancelReasonChange);
-        $('#cancel-appointment-form').submit(handleCancelAppointment);
-        $('#cancelCancelBtn').click(() => {
-            $cancelAppointmentModal.hide();
-            $appointmentModal.show();
-        });
-
-        // Modal close buttons
-        $('#modalCloseButton, #cancelModalCloseButton').click(() => {
-            $appointmentModal.hide();
-            $cancelAppointmentModal.hide();
-        });
-    }
-
-    function updateStepProgress() {
-        const progress = ((currentStep - 1) / 3) * 100;
-        $('#stepProgress').css('width', progress + '%');
-
-        $('.step').removeClass('active completed');
-        for (let i = 1; i <= 4; i++) {
-            const $step = $('#step' + i);
-            if (i < currentStep) $step.addClass('completed');
-            else if (i === currentStep) $step.addClass('active');
-        }
-    }
-
-    function showStep(step) {
-        $('.step-content').hide();
-        $('#step' + step + '-content').fadeIn();
-        currentStep = step;
-        updateStepProgress();
-        $('html, body').animate({
-            scrollTop: $('.doctor-selection-container').offset().top - 20
-        }, 300);
-    }
-
-    function updateConfirmationDisplay() {
-        const [hoursRaw, minutes] = selectedTime.split(':');
-        let hours = parseInt(hoursRaw);
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12 || 12;
-        const formattedTime = `${hours}:${minutes} ${ampm}`;
-
-        const dateObj = new Date(selectedDate);
-        const formattedDate = dateObj.toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        });
-
-        $('#confirm-date').text(formattedDate);
-        $('#confirm-time').text(formattedTime);
+        </div>
         
-        // Add these lines to update doctor info
-        $('#confirm-doctor-name').text($('#selected-doctor-name').text());
-        $('#confirm-specialty').text($('#selected-doctor-specialty').text());
-    }
-
-    function handleSpecialtyChange() {
-        selectedSpecialty = $(this).val();
-        $('#next-to-doctors').prop('disabled', !selectedSpecialty);
-    }
-
-    function handleNextToDoctors() {
-        if (!selectedSpecialty) return;
-
-        $.ajax({
-            url: 'fetch-doctors.php',
-            type: 'POST',
-            data: { specialty: selectedSpecialty },
-            beforeSend: () => {
-                $('#doctors-list').html(`
-                    <div class="loading-container">
-                        <div class="loading-spinner"></div>
-                        <p>Loading doctors...</p>
-                    </div>
-                `);
-            },
-            success: (response) => {
-                $('#doctors-list').html(response);
-                selectedDoctor = null;
-                $('#next-to-time').prop('disabled', true);
-                showStep(2);
-            },
-            error: () => {
-                showNotification('Error loading doctors. Please try again.', 'error');
-                $('#doctors-list').html(`
-                    <div class="alert alert-error">
-                        Error loading doctors. Please try again.
-                        <span class="alert-close">&times;</span>
-                    </div>
-                `);
-            }
-        });
-    }
-
-    function handleNextToTime() {
-        if (!selectedDoctor) {
-            showNotification('Please select a doctor', 'error');
-            return;
-        }
-        showStep(3);
-        $('#next-to-confirm').prop('disabled', true);
-        selectedDate = '';
-        selectedTime = '';
-        $('#appointment-date').val('');
-        $('#time-slots-container').empty();
-    }
-
-    function handleDateChange() {
-        selectedDate = $(this).val();
-        if (!selectedDate || !selectedDoctor) return;
-
-        $.ajax({
-            url: 'fetch-timeslots.php',
-            type: 'POST',
-            data: {
-                doctor_id: selectedDoctor,
-                date: selectedDate
-            },
-            beforeSend: () => {
-                $('#time-slots-container').html(`
-                    <div class="loading-container">
-                        <div class="loading-spinner"></div>
-                        <p>Loading available time slots...</p>
-                    </div>
-                `);
-            },
-            success: (response) => {
-                $('#time-slots-container').html(response);
-            },
-            error: () => {
-                showNotification('Error loading time slots. Please try again.', 'error');
-                $('#time-slots-container').html(`
-                    <div class="alert alert-error">
-                        Error loading time slots. Please try again.
-                        <span class="alert-close">&times;</span>
-                    </div>
-                `);
-            }
-        });
-    }
-
-    function handleNextToConfirm() {
-        if (!selectedTime) {
-            showNotification('Please select a time slot', 'error');
-            return;
-        }
-        // Add these lines to update doctor info in confirmation step
-        $('#confirm-doctor-name').text($('#selected-doctor-name').text());
-        $('#confirm-specialty').text($('#selected-doctor-specialty').text());
-        showStep(4);
-    }
-
-    function handleConfirmAppointment() {
-        const purpose = $('#appointment-purpose').val().trim();
-        const notes = $('#appointment-notes').val().trim();
-        const appointment_type = $('#appointment-type').val();
-
-        if (!purpose) {
-            alert('Please enter the purpose of your visit');
-            $('#appointment-purpose').focus();
-            return;
-        }
-
-        const $btn = $(this);
-        $btn.html('<span class="loading"></span> Processing...').prop('disabled', true);
-
-        setTimeout(() => {
-            $.ajax({
-                url: 'book-appointment.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    patient_id: <?php echo json_encode($patientData['patient_id'] ?? 0); ?>,
-                    doctor_id: selectedDoctor,
-                    date: selectedDate,
-                    time: selectedTime,
-                    appointment_type: appointment_type,
-                    purpose: purpose,
-                    notes: notes
-                },
-                success: (response) => {
-                    if (response?.success) {
-                        $('body').append(`
-                            <div id="success-popup" style="
-                                position: fixed;
-                                top: 50%;
-                                left: 50%;
-                                transform: translate(-50%, -50%);
-                                background-color: #28a745;
-                                color: white;
-                                padding: 20px 40px;
-                                font-size: 18px;
-                                border-radius: 10px;
-                                z-index: 9999;
-                                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                            ">
-                                Appointment has been booked successfully
-                            </div>
-                        `);
-
-                        setTimeout(() => location.reload(), 2000);
-                    } else {
-                        alert("Error: " + (response?.message || 'Unknown error'));
-                        $btn.html('<i class="fas fa-calendar-check"></i> Confirm Appointment').prop('disabled', false);
-                    }
-                },
-                error: () => {
-                    alert('Error booking appointment. Please try again.');
-                    $btn.html('<i class="fas fa-calendar-check"></i> Confirm Appointment').prop('disabled', false);
-                }
-            });
-        }, 2000);
-    }
-
-    function handleViewDetails() {
-        currentAppointmentId = $(this).data('appointment-id');
-
-        $.ajax({
-            url: 'fetch-appointment-details.php',
-            type: 'POST',
-            dataType: 'json',
-            data: { appointment_id: currentAppointmentId },
-            beforeSend: () => {
-                $appointmentModal.find('.modal-body').html(`
-                    <div class="loading-container">
-                        <div class="loading-spinner"></div>
-                        <p>Loading appointment details...</p>
-                    </div>
-                `);
-                $appointmentModal.show();
-            },
-            success: (response) => {
-                if (response?.success) {
-                    const data = response.data;
-                    $appointmentModal.find('.modal-body').html(`
-                        <h3>Appointment Details</h3>
-                        <p><strong>Doctor:</strong> ${data.doctor_name}</p>
-                        <p><strong>Patient:</strong> ${data.patient_name}</p>
-                        <p><strong>Date:</strong> ${data.date}</p>
-                        <p><strong>Time:</strong> ${data.appointment_time}</p>
-                        <p><strong>Purpose:</strong> ${data.purpose}</p>
-                        <p><strong>Notes:</strong> ${data.notes}</p>
-                    `);
-                } else {
-                    $appointmentModal.find('.modal-body').html(`
-                        <div class="alert alert-error">Failed to load details.</div>
-                    `);
-                }
-            },
-            error: () => {
-                $appointmentModal.find('.modal-body').html(`
-                    <div class="alert alert-error">Error loading details.</div>
-                `);
-            }
-        });
-    }
-
-    function handleReschedule() {
-        $appointmentModal.hide();
-        showNotification("Reschedule feature coming soon!", "info");
-    }
-
-    function showCancelModal() {
-        const appointmentCard = $(this).closest('.appt-card');
-        const appointmentData = JSON.parse(appointmentCard.attr('data-appointment'));
+        <div class="appointment-meta">
+            <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <span class="meta-label">Time</span>
+                    <span class="meta-value" id="modalTime">No time specified</span>
+                </div>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-stethoscope"></i>
+                <div>
+                    <span class="meta-label">Type</span>
+                    <span class="meta-value" id="modalType">No type specified</span>
+                </div>
+            </div>
+        </div>
         
-        currentAppointmentId = appointmentData.id;
-        
-        // Set modal content
-        $('#cancelDoctorName').text(appointmentData.doctor || "No doctor name");
-        $('#cancelAppointmentTime').text(appointmentData.formatted_time || "No time specified");
-        $('#cancel-appointment-id').val(currentAppointmentId);
-        $('#cancelled-by').val(<?php echo json_encode($_SESSION['user_id'] ?? ''); ?>);
-        
-        // Reset form
-        $('#cancel-reason').val('');
-        $('#other-reason').val('');
-        $('#other-reason-container').hide();
-        
-        $appointmentModal.hide();
-        $cancelAppointmentModal.show();
-    }
-
-    function handleCancelReasonChange() {
-        const reason = $(this).val();
-        $('#submitCancelBtn').prop('disabled', !reason);
-    }
-
-   
-function handleCancelAppointment(e) {
-    e.preventDefault();
-    
-    const formData = {
-        appointment_id: $('#cancel-appointment-id').val(),
-        cancelled_by: $('#cancelled-by').val(),
-        cancel_reason: $('#cancel-reason').val() === 'Other' 
-                      ? $('#other-reason').val() 
-                      : $('#cancel-reason').val()
-    };
-
-    const $submitBtn = $(this).find('button[type="submit"]');
-    $submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Processing...');
-
-    $.ajax({
-        url: 'cancel_appointment.php',
-        type: 'POST',
-        dataType: 'json',
-        data: formData,
-        success: function(response) {
-            if (response.success) {
-                $('#cancelAppointmentModal').hide();
-                
-                // More reliable selector using data attribute
-                const appointmentCard = $(`.appt-card[data-appointment*='"id":"${formData.appointment_id}"']`);
-                
-                if (appointmentCard.length) {
-                    // Update status classes
-                    appointmentCard.removeClass('scheduled confirmed completed').addClass('canceled');
-                    
-                    // Update status badge
-                    const statusBadge = appointmentCard.find('.appointment-status-badge');
-                    if (statusBadge.length) {
-                        statusBadge.text('Canceled')
-                            .css({
-                                'background': '#fee2e2',
-                                'color': '#991b1b'
-                            });
-                    }
-                    
-                    // Remove action buttons more reliably
-                    appointmentCard.find('.appt-card__footer').html(`
-                        <div class="cancelled-message">
-                            <i class="fas fa-ban"></i> Appointment Cancelled
-                        </div>
-                    `);
-                }
-                
-                showNotification('Appointment cancelled successfully!', 'success');
-            } else {
-                showNotification(response.message || 'Failed to cancel appointment', 'error');
-            }
-        },
-        error: function(xhr) {
-            showNotification('An error occurred. Please try again.', 'error');
-            console.error("Error:", xhr.responseText);
-        },
-        complete: function() {
-            $submitBtn.prop('disabled', false).html('<i class="fas fa-times"></i> Confirm Cancellation');
-        }
-    });
-}
-
-
-// ✅ Helper notification function
-function showNotification(message, type = 'success') {
-    $('#notification-message').text(message);
-    $('#notification').removeClass('error success info').addClass(`${type} show`);
-    setTimeout(() => $('#notification').removeClass('show'), 5000);
-}
-
-
-    // Helper function to show notifications
-    function showNotification(message, type = 'success') {
-        $notificationMessage.text(message);
-        $notification.removeClass('error success info').addClass(`${type} show`);
-        setTimeout(() => $notification.removeClass('show'), 5000);
-    }
-});
- // Update date and time display
-            function updateDateTime() {
-                const now = new Date();
-                const options = {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                };
-                document.getElementById('date-time').textContent = now.toLocaleDateString('en-US', options);
-            }
+        <div class="appointment-content">
+            <div class="content-section">
+                <span class="section-title">
+                    <i class="fas fa-clipboard"></i> <span class="meta-label"> Purpose</span>
+                </span>
+                <span class="section-content" id="modalPurpose">No purpose specified</span>
+            </div>
             
-            updateDateTime();
-            setInterval(updateDateTime, 60000); // Update every minute
-          
-    </script>
+            <div class="content-section" id="modalNotesSection" style="display: none;">
+                <span class="section-title">
+                    <i class="fas fa-notes-medical"></i> Notes
+                </span>
+                <p class="section-content" id="modalNotes"></p>
+            </div>
+        </div>
+        
+        <div class="edit-appointment-btn"  id="editAppointmentControls">
+            <button class="btn btn-outline" id="editAppointmentBtn">
+                <i class="fas fa-edit"></i> Edit Details
+            </button>
+            <button class="cancel-appointment-btn" id="cancelAppointmentBtn">
+                <i class="fas fa-times"></i> Cancel Appointment
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Cancel Confirmation Modal -->
+<div class="overlay" id="cancelModal" style="display: none;">
+    <div class="modal small">
+        <button class="close-btn" id="cancelModalCloseBtn" aria-label="Close cancel modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+        </button>
+        <h3 class="modal-title">Confirm Cancellation</h3>
+        <p id="cancelWarningText">
+            You are about to cancel this appointment with <strong id="cancelDoctorName">Dr. N/A</strong> 
+            on <strong id="cancelDate">DATE</strong> at <strong id="cancelTime">TIME</strong>.
+            <br>This step cannot be undone. Are you sure?
+        </p>
+
+        <label for="cancelReasonInput">Select a reason for cancellation:</label>
+        <select id="cancelReasonInput" class="form-control" style="margin: 10px 0;">
+            <option value="">-- Select a reason --</option>
+            <option value="No Longer Need the appointment">No longer needed</option>
+            <option value="Need to reschedule another appointment">Need to reschedule</option>
+            <option value="Emergency case">Unexpected emergency</option>
+            <option value="Otehrs">Other</option>
+        </select>
+
+        <div style="margin-top: 10px; display: flex; gap: 10px;">
+            <button id="confirmCancelBtn" class="btn btn-danger">Yes, Cancel</button>
+            <button id="denyCancelBtn" class="btn btn-secondary">No</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Appointment Modal (hidden by default) -->
+<div class="overlay" id="editAppointmentModal" style="display: none;">
+    <div class="modal">
+        <button class="close-btn" id="editModalCloseButton" aria-label="Close modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <h2 class="modal-title">Edit Appointment</h2>
+        
+        <form id="edit-appointment-form"  method="POST" action="update_appointment.php">
+            <input type="hidden" name="appointment_id" value="...">
+            <div class="appointment-meta">
+                <div class="meta-item">
+                    <i class="fas fa-user"></i>
+                    <div>
+                        <span class="meta-label">Doctor</span>
+                        <span class="meta-value" id="editDoctorName">No doctor selected</span>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span class="meta-label">Current Time</span>
+                        <span class="meta-value" id="editCurrentTime">No time selected</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="edit-appointment-time">New Time:</label>
+                <div class="time-selection">
+                    <input type="time" id="edit-appointment-time" name="appointment_time" required class="form-control">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="edit-appointment-notes">Notes:</label>
+                <textarea id="edit-appointment-notes" name="notes" class="form-control" rows="3" placeholder="Add any additional notes..."></textarea>
+            </div>
+            
+            <input type="hidden" id="edit-appointment-id" name="appointment_id">
+            
+            <div class="appointment-actions">
+                <button type="button" class="btn btn-outline" id="cancelEditBtn">
+                    <i class="fas fa-arrow-left"></i> Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="notification-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+<script src="Appointments.js"></script>
 </body>
 </html>

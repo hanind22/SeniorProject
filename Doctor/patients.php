@@ -179,28 +179,14 @@ try {
                 <h1 class="page-title"><i class="fas fa-user-injured"></i> Patients</h1>
                 <div class="patient-stats">
                     <span class="stat-badge total-patients"><i class="fas fa-users"></i> <?php echo count($patients); ?> Total</span>
-                    <span class="stat-badge active-patients"><i class="fas fa-heartbeat"></i> <?php echo count(array_filter($patients, function($p) { return $p['status'] === 'active'; })); ?> Active</span>
-                    <span class="stat-badge critical-patients"><i class="fas fa-exclamation-triangle"></i> <?php echo count(array_filter($patients, function($p) { return $p['status'] === 'critical'; })); ?> Critical</span>
                 </div>
             </div>
 
             <!-- Search and Add Patient -->
             <div class="patient-actions">
                 <div class="search-container">
-                    <i class="fas fa-search search-icon"></i>
                     <input type="text" class="search-input" id="patient-search" placeholder="Search patients by name">
-                    <div class="filter-dropdown">
-                        <select class="filter-select" id="patient-filter">
-                            <option value="all">All Patients</option>
-                            <option value="active">Active</option>
-                            <option value="critical">Critical</option>
-                            <option value="recent">Recent (7 days)</option>
-                        </select>
-                    </div>
                 </div>
-                <button class="add-patient-btn" id="open-add-modal">
-                    <i class="fas fa-plus"></i> Add New Patient
-                </button>
             </div>
 
             <!-- Patients Table -->
@@ -214,7 +200,7 @@ try {
                             <th>Blood Type</th>
                             <th>Last Visit</th>
                             <th>QR Code</th>
-                            <th>Actions</th>
+                            <th>Patient's Medical Uploads<br>& Edit Info</th>
                         </tr>
                     </thead>
                     <tbody id="patients-table-body">
@@ -230,14 +216,16 @@ try {
                             <td><?php echo $patient['last_visit_formatted']; ?></td>
                             <td>
                               <?php 
-                               $qrCodePath = '../qrcodes/patient_' . $patient['patient_id'] . '.png';
-                               if (file_exists($qrCodePath)): ?>
-                               <a href="<?php echo $qrCodePath; ?>" class="qr-code-link" data-lightbox="qr-code" data-title="QR Code for <?php echo htmlspecialchars($patient['full_name']); ?>">
-                                  <img src="<?php echo $qrCodePath; ?>" alt="QR Code for Patient <?php echo $patient['patient_id']; ?>" class="qr-code-img" width="50" height="50">
-                               </a>
-                              <?php else: ?>
-                               <span class="no-qr">No QR</span>
-                              <?php endif; ?>
+                                     $qrCodePath = '../qrcodes/patient_' . $patient['patient_id'] . '.png';
+                                     if (file_exists($qrCodePath)): ?>
+                                     <div class="qr-code-container">
+                                          <a href="#" class="qr-code-link" onclick="event.preventDefault(); showQRCode('<?php echo $qrCodePath; ?>', '<?php echo htmlspecialchars($patient['full_name']); ?>')">
+                                          <img src="<?php echo $qrCodePath; ?>" alt="QR Code for Patient <?php echo $patient['patient_id']; ?>" class="qr-code-img" width="50" height="50">
+                                     </a>
+                                     </div>
+                                     <?php else: ?>
+                                      <span class="no-qr">No QR</span>
+                                    <?php endif; ?>
                            </td>
                             <td class="action-cell">
                                 <button class="action-btn view-btn" data-patient-id="<?php echo $patient['patient_id']; ?>" title="View details">
@@ -258,267 +246,16 @@ try {
                     </div>
                 <?php endif; ?>
             </div>
-            
-            <!-- Pagination -->
-            <?php if (count($patients) > 0): ?>
-            <div class="pagination-container">
-                <div class="pagination">
-                    <button class="pagination-btn" id="prev-page" disabled>
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <div class="pagination-numbers" id="pagination-numbers">
-                        <button class="pagination-btn active">1</button>
-                        <?php if (count($patients) > 10): ?>
-                            <button class="pagination-btn">2</button>
-                        <?php endif; ?>
-                        <?php if (count($patients) > 20): ?>
-                            <button class="pagination-btn">3</button>
-                        <?php endif; ?>
-                    </div>
-                    <button class="pagination-btn" id="next-page" <?php echo count($patients) <= 10 ? 'disabled' : ''; ?>>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-               
-            </div>
-            <?php endif; ?>
         </div>
     </div>
 
-<!-- Add Patient Modal -->
-<div class="modal-overlay" id="patient-modal" style="display: none;">
-    <div class="modal">
-        <div class="modal-header">
-            <h3><i class="fas fa-user-plus"></i> Add New Patient</h3>
-            <button class="close-modal" id="close-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <form id="patient-form" action="add_patient.php" method="post">
-                <!-- Progress indicator -->
-                <div class="form-progress">
-                    <div class="progress-step active" data-step="1">
-                        <div class="step-number">1</div>
-                        <div class="step-info">
-                            <div class="step-icon"><i class="fas fa-user"></i></div>
-                            <span class="step-text">Personal Info</span>
-                        </div>
-                    </div>
-                    <div class="progress-connector"></div>
-                    <div class="progress-step" data-step="2">
-                        <div class="step-number">2</div>
-                        <div class="step-info">
-                            <div class="step-icon"><i class="fas fa-phone"></i></div>
-                            <span class="step-text">Contact Details</span>
-                        </div>
-                    </div>
-                    <div class="progress-connector"></div>
-                    <div class="progress-step" data-step="3">
-                        <div class="step-number">3</div>
-                        <div class="step-info">
-                            <div class="step-icon"><i class="fas fa-heartbeat"></i></div>
-                            <span class="step-text">Medical Info</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Form steps -->
-                <div class="form-step-container">
-                    <!-- Step 1: Personal Information -->
-                    <div class="form-step active" id="step-1">
-                        <div class="form-section">
-                            <h4><i class="fas fa-user-circle"></i> Personal Information</h4>
-                            
-                            <div class="form-group">
-                                <label for="patient-name">Full Name <span class="required">*</span></label>
-                                <input type="text" id="patient-name" name="name" required placeholder="John Doe">
-                                <div class="help-text">Patient's legal full name</div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="patient-dob">Date of Birth <span class="required">*</span></label>
-                                    <div class="input-with-icon">
-                                        <input type="date" id="patient-dob" name="date_of_birth" required>
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="patient-gender">Gender <span class="required">*</span></label>
-                                    <div class="select-wrapper">
-                                        <select id="patient-gender" name="gender" required>
-                                            <option value="">Select Gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                        <i class="fas fa-chevron-down"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="patient-blood">Blood Type <span class="required">*</span></label>
-                                <div class="select-wrapper">
-                                    <select id="patient-blood" name="blood_type" required>
-                                        <option value="">Select Blood Type</option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                    </select>
-                                    <i class="fas fa-tint"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-navigation">
-                            <div></div>
-                            <button type="button" class="btn btn-primary next-btn" data-next="2">
-                                Next <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 2: Contact Information -->
-                    <div class="form-step" id="step-2" style="display: none;">
-                        <div class="form-section">
-                            <div class="form-group">
-                                <label for="patient-phone">Phone Number <span class="required">*</span></label>
-                                <div class="input-with-icon">
-                                    <input type="tel" id="patient-phone" name="phone" required placeholder="+961 70 123 456">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="patient-address">Email <span class="required">*</span></label>
-                                <div class="input-with-icon">
-                                    <input type="email" id="patient-address" rows="2" name="address" required placeholder="John21@gmail.com"></input>
-                                    <i class="fa-solid fa-envelope"></i>
-                                </div>
-                            </div>
-
-                            <h4><i class="fas fa-exclamation-triangle"></i> Emergency Contact</h4>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="emergency-name">Name <span class="required">*</span></label>
-                                    <input type="text" id="emergency-name" name="emergency_contact_name" required placeholder="Emergency contact name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="emergency-relation">Relationship <span class="required">*</span></label>
-                                    <input type="text" id="emergency-relation" name="emergency_contact_relationship" required placeholder="Spouse, Parent, etc.">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="emergency-phone">Phone Number <span class="required">*</span></label>
-                                <div class="input-with-icon">
-                                    <input type="tel" id="emergency-phone" name="emergency_contact_phone" required placeholder="+961 70 987 654">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                            </div>
-                            
-                            <h4><i class="fas fa-shield-alt"></i> Insurance Information</h4>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="insurance-provider">Insurance Provider</label>
-                                    <input type="text" id="insurance-provider" name="insurance_provider" placeholder="Insurance company name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="insurance-number">Insurance Number</label>
-                                    <input type="text" id="insurance-number" name="insurance_number" placeholder="Policy number">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-navigation">
-                            <button type="button" class="btn btn-outline prev-btn" data-prev="1">
-                                <i class="fas fa-arrow-left"></i> Previous
-                            </button>
-                            <button type="button" class="btn btn-primary next-btn" data-next="3">
-                                Next <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 3: Medical Information -->
-                    <div class="form-step" id="step-3" style="display: none;">
-                        <div class="form-section">
-                            <h4><i class="fas fa-heartbeat"></i> Medical Information</h4>
-                            
-                            <div class="form-group">
-                                <label for="patient-status">Status <span class="required">*</span></label>
-                                <div class="select-wrapper">
-                                    <select id="patient-status" name="status" required>
-                                        <option value="checkup">Checkup</option>
-                                        <option value="follow-up">Follow-up</option>
-                                        <option value="critical">Critical</option>
-                                        <option value="inactive">Inactive</option>
-                                    </select>
-                                    <i class="fas fa-info-circle"></i>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="patient-allergies">Allergies</label>
-                                <textarea id="patient-allergies" rows="2" name="allergies" placeholder="Penicillin, Peanuts, etc."></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="patient-conditions">Existing Medical Conditions</label>
-                                <textarea id="patient-conditions" rows="2" name="medical_conditions" placeholder="Diabetes, Hypertension, etc."></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="patient-medications">Current Medications</label>
-                                <textarea id="patient-medications" rows="2" name="current_medications" placeholder="Medication names with dosages"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="previous-surgeries">Previous Surgeries</label>
-                                <textarea id="previous-surgeries" rows="2" name="previous_surgeries" placeholder="List any previous surgeries"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="family-history">Family Medical History</label>
-                                <textarea id="family-history" rows="2" name="family_history" placeholder="Any significant family medical history"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="voice-notes"><i class="fas fa-microphone"></i> Additional Notes</label>
-                                <div class="voice-recorder">
-                                    <button type="button" id="record-btn" class="btn btn-outline voice-btn">
-                                        <i class="fas fa-microphone"></i> Start Recording
-                                    </button>
-                                    <button type="button" id="stop-btn" class="btn btn-outline voice-btn" disabled>
-                                        <i class="fas fa-stop"></i> Stop
-                                    </button>
-                                    <span id="recording-status" class="recording-status">Ready to record</span>
-                                </div>
-                                <textarea id="voice-notes" rows="3" name="voice_notes" placeholder="Record any additional notes..."></textarea>
-                            </div>
-                        </div>
-                        <div class="form-navigation">
-                            <button type="button" class="btn btn-outline prev-btn" data-prev="2">
-                                <i class="fas fa-arrow-left"></i> Previous
-                            </button>
-                            <button type="submit" class="btn btn-success submit-btn">
-                                <i class="fas fa-save"></i> Save Patient
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- Edit Health Info Modal -->
 <div class="modal-overlay" id="edit-health-modal" style="display: none;">
     <div class="modal" style="max-width: 600px;">
         <div class="modal-header">
             <h3><i class="fas fa-edit"></i> Edit Patient Health Information</h3>
-            <button class="close-modal" id="close-edit-modal">&times;</button>
+            <!-- <button class="close-modal" id="close-edit-modal">&times;</button> -->
         </div>
         <div class="modal-body">
             <form id="edit-health-form" action="update_health_info.php" method="post">
@@ -576,19 +313,7 @@ try {
         </div>
     </div>
 </div>
-<!-- Add this HTML right before the closing </body> tag -->
-<div class="logout-overlay" id="logoutOverlay">
-    <div class="logout-confirmation">
-        <h3>Confirm Logout</h3>
-        <p>Are you sure you want to logout ?</p>
-        <div class="logout-buttons">
-            <button class="logout-btn confirm-logout" id="confirmLogout">Yes, Logout</button>
-            <button class="logout-btn cancel-logout" id="cancelLogout">Cancel</button>
-        </div>
-    </div>
-</div>
-<!-- -------------- -->
- <!-- Add this modal right before the closing </body> tag -->
+
 <!-- View Uploads Modal -->
 <div class="modal-overlay" id="view-uploads-modal" style="display: none;">
     <div class="modal" style="max-width: 800px;">
@@ -640,277 +365,400 @@ try {
     </div>
 </div>
 
+<!-- Add this HTML right before the closing </body> tag -->
+<div class="logout-overlay" id="logoutOverlay">
+    <div class="logout-confirmation">
+        <h3>Confirm Logout</h3>
+        <p>Are you sure you want to logout ?</p>
+        <div class="logout-buttons">
+            <button class="logout-btn confirm-logout" id="confirmLogout">Yes, Logout</button>
+            <button class="logout-btn cancel-logout" id="cancelLogout">Cancel</button>
+        </div>
+    </div>
+</div>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded');
+    
     // -------------------------------
-    // General Modal Handling
+    // Modal Elements
     // -------------------------------
     const editModal = document.getElementById('edit-health-modal');
-
-    function closeEditModal() {
-        editModal.style.display = 'none';
+    const viewUploadsModal = document.getElementById('view-uploads-modal');
+    
+    // Check if modals exist
+    if (!editModal) {
+        console.error('Edit health modal element not found!');
+    }
+    
+    // -------------------------------
+    // Search Functionality - Fixed
+    // -------------------------------
+    const searchInput = document.getElementById("patient-search");
+    if (searchInput) {
+        searchInput.addEventListener("input", function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            const tableRows = document.querySelectorAll("#patients-table-body tr");
+            
+            console.log('Searching for:', searchTerm);
+            
+            tableRows.forEach(row => {
+                const patientNameElement = row.querySelector(".patient-name");
+                if (patientNameElement) {
+                    const patientName = patientNameElement.textContent.toLowerCase();
+                    const shouldShow = patientName.includes(searchTerm);
+                    row.style.display = shouldShow ? "" : "none";
+                    
+                    // Optional: highlight matching text
+                    if (searchTerm && shouldShow) {
+                        row.style.backgroundColor = "#f8f9fa";
+                    } else {
+                        row.style.backgroundColor = "";
+                    }
+                } else {
+                    console.warn('Patient name element not found in row:', row);
+                }
+            });
+            
+            // Show "No results" message if no rows are visible
+            const visibleRows = Array.from(tableRows).filter(row => row.style.display !== "none");
+            const noResultsMsg = document.getElementById('no-search-results');
+            
+            if (visibleRows.length === 0 && searchTerm) {
+                if (!noResultsMsg) {
+                    const tableBody = document.getElementById('patients-table-body');
+                    const noResultsRow = document.createElement('tr');
+                    noResultsRow.id = 'no-search-results';
+                    noResultsRow.innerHTML = '<td colspan="6" style="text-align: center; padding: 20px; color: #666;"><i class="fas fa-search"></i> No patients found matching your search</td>';
+                    tableBody.appendChild(noResultsRow);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        });
+    } else {
+        console.error('Search input element not found!');
     }
 
-    // Open Add Modal
-    document.getElementById('open-add-modal').addEventListener('click', function () {
-        document.getElementById('patient-modal').style.display = 'flex';
-    });
-
-    // Close Add Modal
-    document.getElementById('close-modal').addEventListener('click', function () {
-        document.getElementById('patient-modal').style.display = 'none';
-    });
-
-    // Close Edit Modal
-    document.getElementById('close-edit-modal').addEventListener('click', closeEditModal);
-    document.getElementById('cancel-edit').addEventListener('click', closeEditModal);
-
     // -------------------------------
-    // Edit Button Handling
+    // Edit Button Functionality - Fixed
     // -------------------------------
-    document.querySelectorAll('.edit-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const patientId = this.getAttribute('data-patient-id');
-            openEditHealthModal(patientId);
+    function attachEditButtonListeners() {
+        const editButtons = document.querySelectorAll('.edit-btn');
+        console.log('Found edit buttons:', editButtons.length);
+        
+        editButtons.forEach((button, index) => {
+            // Remove existing listeners to prevent duplicates
+            button.removeEventListener('click', handleEditClick);
+            
+            // Add new listener
+            button.addEventListener('click', handleEditClick);
+            console.log(`Attached listener to edit button ${index + 1}`);
         });
-    });
-
-    document.getElementById('edit-health-form').addEventListener('submit', function (e) {
+    }
+    
+    function handleEditClick(e) {
         e.preventDefault();
-        submitPatientHealthForm(); // Assume this is defined elsewhere
-    });
+        e.stopPropagation();
+        
+        const button = e.currentTarget;
+        const patientId = button.getAttribute('data-patient-id');
+        
+        console.log('Edit button clicked for patient:', patientId);
+        
+        if (!patientId) {
+            console.error('No patient ID found on button');
+            alert('Error: Patient ID not found');
+            return;
+        }
+        
+        openEditHealthModal(patientId);
+    }
+    
+    // Initialize edit button listeners
+    attachEditButtonListeners();
+    
+    // -------------------------------
+    // View Button Functionality
+    // -------------------------------
+    function attachViewButtonListeners() {
+        const viewButtons = document.querySelectorAll('.view-btn');
+        console.log('Found view buttons:', viewButtons.length);
+        
+        viewButtons.forEach((button, index) => {
+            button.removeEventListener('click', handleViewClick);
+            button.addEventListener('click', handleViewClick);
+            console.log(`Attached listener to view button ${index + 1}`);
+        });
+    }
+    
+    function handleViewClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const button = e.currentTarget;
+        const patientId = button.getAttribute('data-patient-id');
+        
+        console.log('View button clicked for patient:', patientId);
+        
+        if (!patientId) {
+            console.error('No patient ID found on view button');
+            alert('Error: Patient ID not found');
+            return;
+        }
+        
+        openViewUploadsModal(patientId);
+    }
+    
+    // Initialize view button listeners
+    attachViewButtonListeners();
 
     // -------------------------------
-    // Search Functionality
+    // Modal Close Functionality
     // -------------------------------
-    document.getElementById("patient-search").addEventListener("input", function () {
-        const searchTerm = this.value.toLowerCase();
-        document.querySelectorAll("#patients-table-body tr").forEach(row => {
-            const name = row.querySelector(".patient-name").textContent.toLowerCase();
-            row.style.display = name.includes(searchTerm) ? "" : "none";
+    function setupModalClosing() {
+        // Edit Modal Close
+        const closeEditModalBtn = document.getElementById('close-edit-modal');
+        const cancelEditBtn = document.getElementById('cancel-edit');
+        
+        if (closeEditModalBtn) {
+            closeEditModalBtn.addEventListener('click', closeEditModal);
+        }
+        
+        if (cancelEditBtn) {
+            cancelEditBtn.addEventListener('click', closeEditModal);
+        }
+        
+        // View Uploads Modal Close
+        const closeUploadsModalBtn = document.getElementById('close-uploads-modal');
+        const closeUploadsBtnBottom = document.getElementById('close-uploads-btn');
+        
+        if (closeUploadsModalBtn) {
+            closeUploadsModalBtn.addEventListener('click', closeUploadsModal);
+        }
+        
+        if (closeUploadsBtnBottom) {
+            closeUploadsBtnBottom.addEventListener('click', closeUploadsModal);
+        }
+        
+        // Close modals when clicking outside
+        if (editModal) {
+            editModal.addEventListener('click', function(e) {
+                if (e.target === editModal) {
+                    closeEditModal();
+                }
+            });
+        }
+        
+        if (viewUploadsModal) {
+            viewUploadsModal.addEventListener('click', function(e) {
+                if (e.target === viewUploadsModal) {
+                    closeUploadsModal();
+                }
+            });
+        }
+    }
+    
+    setupModalClosing();
+
+    // -------------------------------
+    // Form Submission
+    // -------------------------------
+    const editHealthForm = document.getElementById('edit-health-form');
+    if (editHealthForm) {
+        editHealthForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitPatientHealthForm();
         });
-    });
+    }
 
     // -------------------------------
     // Date & Time Display
     // -------------------------------
     function updateDateTime() {
-        const now = new Date();
-        const options = {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        };
-        document.getElementById('date-time').textContent = now.toLocaleDateString('en-US', options);
+        const dateTimeElement = document.getElementById('date-time');
+        if (dateTimeElement) {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            dateTimeElement.textContent = now.toLocaleDateString('en-US', options);
+        }
     }
+    
     updateDateTime();
     setInterval(updateDateTime, 60000);
 
-    // Notification bell functionality
-            const notificationBell = document.getElementById('notificationBell');
-            const notificationDropdown = document.getElementById('notificationDropdown');
+    // -------------------------------
+    // Logout Functionality
+    // -------------------------------
+    function setupLogout() {
+        const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
+        const logoutOverlay = document.getElementById('logoutOverlay');
+        const confirmLogout = document.getElementById('confirmLogout');
+        const cancelLogout = document.getElementById('cancelLogout');
 
+        if (logoutLink && logoutOverlay) {
+            logoutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutOverlay.classList.add('show');
+            });
+        }
+
+        if (cancelLogout && logoutOverlay) {
+            cancelLogout.addEventListener('click', function() {
+                logoutOverlay.classList.remove('show');
+            });
+        }
+
+        if (confirmLogout) {
+            confirmLogout.addEventListener('click', function() {
+                window.location.href = '../Registration-Login/index.php';
+            });
+        }
+
+        if (logoutOverlay) {
+            logoutOverlay.addEventListener('click', function(e) {
+                if (e.target === logoutOverlay) {
+                    logoutOverlay.classList.remove('show');
+                }
+            });
+        }
+    }
+    
+    setupLogout();
+
+    // -------------------------------
+    // Notification Handling
+    // -------------------------------
+    function setupNotifications() {
+        const notificationBell = document.getElementById('notificationBell');
+        const notificationDropdown = document.getElementById('notificationDropdown');
+
+        if (notificationBell && notificationDropdown) {
             notificationBell.addEventListener('click', function(e) {
                 e.stopPropagation();
                 notificationDropdown.classList.toggle('show');
             });
 
-            // Close dropdown when clicking outside
             document.addEventListener('click', function(e) {
                 if (!notificationDropdown.contains(e.target)) {
                     notificationDropdown.classList.remove('show');
                 }
             });
 
-            // Prevent dropdown from closing when clicking inside it
             notificationDropdown.addEventListener('click', function(e) {
                 e.stopPropagation();
             });
-        
-
-    // -------------------------------
-    // Pagination Placeholder
-    // -------------------------------
-    document.getElementById('next-page').addEventListener('click', function () {
-        // Implement pagination logic here
-    });
-
-    document.getElementById('prev-page').addEventListener('click', function () {
-        // Implement pagination logic here
-    });
-
-    // -------------------------------
-    // Lightbox for QR Code
-    // -------------------------------
-    const lightboxOverlay = document.createElement('div');
-    lightboxOverlay.className = 'lightbox-overlay';
-
-    const lightboxContent = document.createElement('div');
-    lightboxContent.className = 'lightbox-content';
-
-    const lightboxTitle = document.createElement('div');
-    lightboxTitle.className = 'lightbox-title';
-
-    lightboxOverlay.appendChild(lightboxContent);
-    lightboxOverlay.appendChild(lightboxTitle);
-    document.body.appendChild(lightboxOverlay);
-
-    lightboxOverlay.addEventListener('click', function (e) {
-        if (e.target === lightboxOverlay) {
-            lightboxOverlay.classList.remove('active');
         }
-    });
-
-    document.querySelectorAll('.qr-code-link').forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            const img = document.createElement('img');
-            img.src = this.href;
-            img.alt = this.querySelector('img').alt;
-
-            lightboxContent.innerHTML = '';
-            lightboxContent.appendChild(img);
-
-            lightboxTitle.textContent = this.dataset.title || 'QR Code';
-
-            lightboxOverlay.classList.add('active');
-        });
-    });
-
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-            lightboxOverlay.classList.remove('active');
-        }
-    });
-
-    // -------------------------------
-    // Form Steps Navigation
-    // -------------------------------
-    const formSteps = document.querySelectorAll('.form-step');
-    const progressSteps = document.querySelectorAll('.progress-step');
-
-    formSteps.forEach((step, index) => {
-        if (index !== 0) step.style.display = 'none';
-    });
-
-    document.querySelectorAll('.next-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const currentStep = document.querySelector('.form-step.active');
-            const nextStepId = this.getAttribute('data-next');
-            const nextStep = document.getElementById(`step-${nextStepId}`);
-
-            if (validateStep(currentStep)) {
-                currentStep.classList.remove('active');
-                currentStep.style.display = 'none';
-
-                nextStep.classList.add('active');
-                nextStep.style.display = 'block';
-
-                updateProgress(nextStepId);
-            }
-        });
-    });
-
-    document.querySelectorAll('.prev-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const currentStep = document.querySelector('.form-step.active');
-            const prevStepId = this.getAttribute('data-prev');
-            const prevStep = document.getElementById(`step-${prevStepId}`);
-
-            currentStep.classList.remove('active');
-            currentStep.style.display = 'none';
-
-            prevStep.classList.add('active');
-            prevStep.style.display = 'block';
-
-            updateProgress(prevStepId);
-        });
-    });
-
-    function validateStep(step) {
-        const inputs = step.querySelectorAll('input[required], select[required], textarea[required]');
-        let isValid = true;
-
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                input.style.borderColor = '#e74c3c';
-                isValid = false;
-            } else {
-                input.style.borderColor = '#ddd';
-            }
-        });
-
-        return isValid;
     }
-
-    function updateProgress(activeStep) {
-        progressSteps.forEach(step => {
-            step.classList.remove('active');
-            if (parseInt(step.getAttribute('data-step')) <= parseInt(activeStep)) {
-                step.classList.add('active');
-            }
-        });
-    }
+    
+    setupNotifications();
 });
 
 // -------------------------------
-// Improved Fetch and Modal Fill Function
+// Helper Functions
 // -------------------------------
-// Safely sets a field's value by ID
 function setFieldValue(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.value = value;
-    else console.warn(`Element with ID "${id}" not found.`);
+    const element = document.getElementById(id);
+    if (element) {
+        element.value = value || '';
+    } else {
+        console.warn(`Element with ID "${id}" not found.`);
+    }
 }
 
-// Safely sets textContent by ID
 function setTextContent(id, text) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = text;
-    else console.warn(`Element with ID "${id}" not found.`);
+    const element = document.getElementById(id);
+    if (element) {
+        element.textContent = text || '';
+    } else {
+        console.warn(`Element with ID "${id}" not found.`);
+    }
 }
 
-// Function to close the modal
 function closeEditModal() {
     const modal = document.getElementById('edit-health-modal');
-    if (modal) modal.style.display = 'none';
+    if (modal) {
+        modal.style.display = 'none';
+        console.log('Edit modal closed');
+    }
 }
 
-// Main function to open and populate the edit modal
+function closeUploadsModal() {
+    const modal = document.getElementById('view-uploads-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        console.log('Uploads modal closed');
+    }
+}
+
+// -------------------------------
+// Main Modal Functions
+// -------------------------------
 async function openEditHealthModal(patientId) {
     console.log('Opening edit modal for patient:', patientId);
 
+    if (!patientId) {
+        console.error('No patient ID provided');
+        alert('Error: No patient ID provided');
+        return;
+    }
+
     try {
-        const patientRow = document.querySelector(`.edit-btn[data-patient-id="${patientId}"]`)?.closest('tr');
-        if (!patientRow) throw new Error('Patient row not found in table');
+        // Find the patient row using the edit button
+        const editButton = document.querySelector(`.edit-btn[data-patient-id="${patientId}"]`);
+        if (!editButton) {
+            throw new Error('Edit button not found for patient ID: ' + patientId);
+        }
+        
+        const patientRow = editButton.closest('tr');
+        if (!patientRow) {
+            throw new Error('Patient row not found in table');
+        }
 
-        const patientName = patientRow.querySelector('.patient-name')?.textContent;
-        const patientAgeGender = patientRow.querySelector('td:nth-child(2)')?.textContent;
-        const patientBloodType = patientRow.querySelector('.blood-badge')?.textContent;
+        // Extract patient info from the table row
+        const patientNameElement = patientRow.querySelector('.patient-name');
+        const ageGenderElement = patientRow.querySelector('td:nth-child(2)');
+        const bloodTypeElement = patientRow.querySelector('.blood-badge');
 
-        if (!patientName || !patientAgeGender || !patientBloodType) {
+        if (!patientNameElement || !ageGenderElement || !bloodTypeElement) {
             throw new Error('Some patient info missing in table row');
         }
 
+        const patientName = patientNameElement.textContent.trim();
+        const patientAgeGender = ageGenderElement.textContent.trim();
+        const patientBloodType = bloodTypeElement.textContent.trim();
+
+        // Update modal header with patient info
         setTextContent('edit-patient-name', patientName);
         setTextContent('edit-patient-age-gender', patientAgeGender);
         setTextContent('edit-patient-blood-type', patientBloodType);
 
         const modal = document.getElementById('edit-health-modal');
-        if (!modal) throw new Error('Edit health modal not found');
+        if (!modal) {
+            throw new Error('Edit health modal not found');
+        }
 
+        // Show loading state
         const formFields = modal.querySelectorAll('textarea');
         formFields.forEach(field => {
             field.value = 'Loading...';
             field.disabled = true;
         });
 
+        // Show the modal
         modal.style.display = 'flex';
+        console.log('Modal displayed');
 
+        // Fetch patient data
+        console.log('Fetching patient data...');
         const response = await fetch(`get_patient_data.php?patient_id=${patientId}`, {
             method: 'GET',
             headers: {
@@ -919,15 +767,20 @@ async function openEditHealthModal(patientId) {
             }
         });
 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const responseText = await response.text();
         console.log('Raw response:', responseText);
 
         let result;
         try {
             result = JSON.parse(responseText);
-        } catch (err) {
-            console.error('Error parsing JSON:', err);
-            throw new Error('Invalid JSON received from server.');
+        } catch (parseError) {
+            console.error('Error parsing JSON:', parseError);
+            console.error('Response text:', responseText);
+            throw new Error('Invalid JSON received from server. Check server logs.');
         }
 
         if (!result.success) {
@@ -935,153 +788,72 @@ async function openEditHealthModal(patientId) {
         }
 
         const data = result.data;
+        console.log('Patient data loaded:', data);
 
-        // Enable fields and fill in actual data
+        // Enable fields and populate with actual data
         formFields.forEach(field => field.disabled = false);
 
         setFieldValue('edit-patient-id', data.patient_id);
-        setFieldValue('edit-allergies', data.allergies || '');
-        setFieldValue('edit-conditions', data.medical_conditions || data.conditions || '');
-        setFieldValue('edit-medications', data.current_medications || data.medications || '');
-        setFieldValue('edit-surgeries', data.previous_surgeries || data.surgeries || '');
-        setFieldValue('edit-family-history', data.family_history || '');
-        // setFieldValue('edit-notes', data.notes || '');
+        setFieldValue('edit-allergies', data.allergies);
+        setFieldValue('edit-conditions', data.medical_conditions || data.conditions);
+        setFieldValue('edit-medications', data.current_medications || data.medications);
+        setFieldValue('edit-surgeries', data.previous_surgeries || data.surgeries);
+        setFieldValue('edit-family-history', data.family_history);
+
+        console.log('Modal populated successfully');
 
     } catch (error) {
         console.error('Error loading modal:', error);
-        alert('Failed to load patient health data. Check console for details.');
+        alert(`Failed to load patient health data: ${error.message}`);
         closeEditModal();
     }
 }
 
-function submitPatientHealthForm() {
-    const form = document.getElementById('edit-health-form');
-    const formData = new FormData(form);
-    const patientId = formData.get('patient_id');
-
-    if (!patientId || isNaN(patientId)) {
-        alert('Invalid patient ID');
-        return;
-    }
-
-    const submitBtn = form.querySelector('.submit-btn');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = 'Saving...';
-
-    fetch('update_health_info.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.text().then(text => { throw new Error(text || 'Network error'); });
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Update response:', data);
-        if (data.success) {
-            alert('Patient updated successfully!');
-            // update UI if needed
-            closeEditModal();
-        } else {
-            alert('Update failed: ' + (data.message || 'Unknown error'));
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error occurred: ' + error.message);
-    })
-    .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Save Changes';
-    });
-}
-
-        
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the logout elements
-    const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
-    const logoutOverlay = document.getElementById('logoutOverlay');
-    const confirmLogout = document.getElementById('confirmLogout');
-    const cancelLogout = document.getElementById('cancelLogout');
-
-    // Show overlay when logout is clicked
-    logoutLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        logoutOverlay.classList.add('show');
-    });
-
-    // Hide overlay when cancel is clicked
-    cancelLogout.addEventListener('click', function() {
-        logoutOverlay.classList.remove('show');
-    });
-
-    // Handle actual logout
-    confirmLogout.addEventListener('click', function() {
-        // In a real implementation, this would redirect to your logout script
-        window.location.href = '../Registration-Login/index.php';
-        
-        // For demonstration, we'll just show an alert
-        // alert('Logging out...');
-        // logoutOverlay.classList.remove('show');
-    });
-
-    // Close overlay when clicking outside the confirmation box
-    logoutOverlay.addEventListener('click', function(e) {
-        if (e.target === logoutOverlay) {
-            logoutOverlay.classList.remove('show');
-        }
-    });
-});
-    // Add to your existing JavaScript code
-
-// View Uploads Modal Handling
-const viewUploadsModal = document.getElementById('view-uploads-modal');
-
-function closeUploadsModal() {
-    viewUploadsModal.style.display = 'none';
-}
-
-// Close Uploads Modal
-document.getElementById('close-uploads-modal').addEventListener('click', closeUploadsModal);
-document.getElementById('close-uploads-btn').addEventListener('click', closeUploadsModal);
-
-// View Button Handling
-document.querySelectorAll('.view-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        const patientId = this.getAttribute('data-patient-id');
-        openViewUploadsModal(patientId);
-    });
-});
-
-// Function to open and populate the view uploads modal
 async function openViewUploadsModal(patientId) {
     console.log('Opening uploads modal for patient:', patientId);
 
     try {
-        const patientRow = document.querySelector(`.view-btn[data-patient-id="${patientId}"]`)?.closest('tr');
-        if (!patientRow) throw new Error('Patient row not found in table');
+        const viewButton = document.querySelector(`.view-btn[data-patient-id="${patientId}"]`);
+        if (!viewButton) {
+            throw new Error('View button not found for patient ID: ' + patientId);
+        }
+        
+        const patientRow = viewButton.closest('tr');
+        if (!patientRow) {
+            throw new Error('Patient row not found in table');
+        }
 
-        const patientName = patientRow.querySelector('.patient-name')?.textContent;
-        const patientAgeGender = patientRow.querySelector('td:nth-child(2)')?.textContent;
-        const patientBloodType = patientRow.querySelector('.blood-badge')?.textContent;
+        const patientNameElement = patientRow.querySelector('.patient-name');
+        const ageGenderElement = patientRow.querySelector('td:nth-child(2)');
+        const bloodTypeElement = patientRow.querySelector('.blood-badge');
 
-        if (!patientName || !patientAgeGender || !patientBloodType) {
+        if (!patientNameElement || !ageGenderElement || !bloodTypeElement) {
             throw new Error('Some patient info missing in table row');
         }
+
+        const patientName = patientNameElement.textContent.trim();
+        const patientAgeGender = ageGenderElement.textContent.trim();
+        const patientBloodType = bloodTypeElement.textContent.trim();
 
         setTextContent('uploads-patient-name', patientName);
         setTextContent('uploads-patient-age-gender', patientAgeGender);
         setTextContent('uploads-patient-blood-type', patientBloodType);
 
         const modal = document.getElementById('view-uploads-modal');
-        if (!modal) throw new Error('View uploads modal not found');
+        if (!modal) {
+            throw new Error('View uploads modal not found');
+        }
 
         // Show loading state
         const uploadsTableBody = document.getElementById('uploads-table-body');
-        uploadsTableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Loading uploads...</td></tr>';
-        document.getElementById('no-uploads-message').style.display = 'none';
+        if (uploadsTableBody) {
+            uploadsTableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Loading uploads...</td></tr>';
+        }
+        
+        const noUploadsMessage = document.getElementById('no-uploads-message');
+        if (noUploadsMessage) {
+            noUploadsMessage.style.display = 'none';
+        }
 
         modal.style.display = 'flex';
 
@@ -1094,14 +866,18 @@ async function openViewUploadsModal(patientId) {
             }
         });
 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const responseText = await response.text();
         console.log('Raw uploads response:', responseText);
 
         let result;
         try {
             result = JSON.parse(responseText);
-        } catch (err) {
-            console.error('Error parsing JSON:', err);
+        } catch (parseError) {
+            console.error('Error parsing JSON:', parseError);
             throw new Error('Invalid JSON received from server.');
         }
 
@@ -1112,37 +888,146 @@ async function openViewUploadsModal(patientId) {
         const uploads = result.data;
 
         // Populate uploads table
-        uploadsTableBody.innerHTML = '';
+        if (uploadsTableBody) {
+            uploadsTableBody.innerHTML = '';
 
-        if (uploads.length > 0) {
-            uploads.forEach(upload => {
-                const row = document.createElement('tr');
-                
-                row.innerHTML = `
-                    <td>${upload.report_type || 'N/A'}</td>
-                    <td>${upload.DateOfTest ? new Date(upload.DateOfTest).toLocaleDateString() : 'N/A'}</td>
-                    <td>${upload.uploaded_at ? new Date(upload.uploaded_at).toLocaleString() : 'N/A'}</td>
-                    <td>${upload.notes || 'No notes'}</td>
-                    <td>
-                        ${upload.file_path ? 
-                            `<a href="${upload.file_path}" target="_blank" class="view-file-link">
-                                <i class="fas fa-file-download"></i> View
-                            </a>` : 
-                            'No file'}
-                    </td>
-                `;
-                
-                uploadsTableBody.appendChild(row);
-            });
-        } else {
-            document.getElementById('no-uploads-message').style.display = 'block';
+            if (uploads.length > 0) {
+                uploads.forEach(upload => {
+                    const row = document.createElement('tr');
+                    
+                    row.innerHTML = `
+                        <td>${upload.report_type || 'N/A'}</td>
+                        <td>${upload.DateOfTest ? new Date(upload.DateOfTest).toLocaleDateString() : 'N/A'}</td>
+                        <td>${upload.uploaded_at ? new Date(upload.uploaded_at).toLocaleString() : 'N/A'}</td>
+                        <td>${upload.notes || 'No notes'}</td>
+                        <td>
+                            ${upload.file_path ? 
+                                `<a href="${upload.file_path}" target="_blank" class="view-file-link">
+                                    <i class="fas fa-file-download"></i> View
+                                </a>` : 
+                                'No file'}
+                        </td>
+                    `;
+                    
+                    uploadsTableBody.appendChild(row);
+                });
+            } else {
+                if (noUploadsMessage) {
+                    noUploadsMessage.style.display = 'block';
+                }
+            }
         }
 
     } catch (error) {
         console.error('Error loading uploads:', error);
         const uploadsTableBody = document.getElementById('uploads-table-body');
-        uploadsTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Error loading uploads: ${error.message}</td></tr>`;
+        if (uploadsTableBody) {
+            uploadsTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Error loading uploads: ${error.message}</td></tr>`;
+        }
     }
+}
+
+function submitPatientHealthForm() {
+    const form = document.getElementById('edit-health-form');
+    if (!form) {
+        console.error('Form not found');
+        return;
+    }
+    
+    const formData = new FormData(form);
+    const patientId = formData.get('patient_id');
+
+    if (!patientId || isNaN(patientId)) {
+        alert('Invalid patient ID');
+        return;
+    }
+
+    const submitBtn = form.querySelector('.submit-btn');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    }
+
+    fetch('update_health_info.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(text => { 
+                throw new Error(text || 'Network error'); 
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Update response:', data);
+        if (data.success) {
+            alert('Patient health information updated successfully!');
+            closeEditModal();
+        } else {
+            alert('Update failed: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error occurred: ' + error.message);
+    })
+    .finally(() => {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+        }
+    });
+}
+
+// QR Code Functions
+    function showQRCode(qrCodePath, patientName) {
+        const qrModal = document.createElement('div');
+        qrModal.className = 'qr-modal-overlay';
+        qrModal.innerHTML = `
+            <div class="qr-modal-content">
+                <div class="qr-modal-header">
+                    <h3>QR Code for ${patientName}</h3>
+                </div>
+                <div class="qr-modal-body">
+                    <img src="${qrCodePath}" alt="QR Code for ${patientName}" class="qr-code-full">
+                </div>
+                <div class="qr-modal-footer">
+                    <button onclick="downloadQRCode('${qrCodePath}', 'patient_${patientName.replace(/\s+/g, '_')}_qrcode.png')" class="download-qr-btn">
+                        <i class="fas fa-download"></i> Download QR Code
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Close modal when clicking outside
+        qrModal.addEventListener('click', function(e) {
+            if (e.target === qrModal) {
+                document.body.removeChild(qrModal);
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.body.contains(qrModal)) {
+                document.body.removeChild(qrModal);
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        document.body.appendChild(qrModal);
+        document.body.style.overflow = 'hidden';
+    }
+
+function downloadQRCode(imagePath, fileName) {
+    const link = document.createElement('a');
+    link.href = imagePath;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 </script>
 </body>

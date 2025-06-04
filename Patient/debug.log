@@ -1,0 +1,2399 @@
+2025-06-04 01:43:43 - Script started
+2025-06-04 01:43:43 - Raw POST data: Array
+(
+)
+
+2025-06-04 01:43:43 - Raw input: {"patient_id":"14","doctor_id":"1","date":"2025-06-05","time":"23:00","purpose":"fbgv ","notes":"hbgfv","appointment_type":"Regular Checkup"}
+2025-06-04 01:43:43 - Database connection file included
+2025-06-04 01:43:43 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 01:43:43 - Patient ID from session: 14
+2025-06-04 01:43:43 - Received form data:
+2025-06-04 01:43:43 -  - doctor_id: 
+2025-06-04 01:43:43 -  - date: 
+2025-06-04 01:43:43 -  - time: 
+2025-06-04 01:43:43 -  - purpose: 
+2025-06-04 01:43:43 -  - notes: 
+2025-06-04 01:43:43 -  - appointment_type: Consultation
+2025-06-04 01:43:43 - Missing required fields: doctor_id, date, time, purpose
+2025-06-04 01:43:58 - Script started
+2025-06-04 01:43:58 - Raw POST data: Array
+(
+)
+
+2025-06-04 01:43:58 - Raw input: {"patient_id":"14","doctor_id":"1","date":"2025-06-05","time":"23:00","purpose":"fbgv ","notes":"hbgfv","appointment_type":"Regular Checkup"}
+2025-06-04 01:43:58 - Database connection file included
+2025-06-04 01:43:58 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 01:43:58 - Patient ID from session: 14
+2025-06-04 01:43:58 - Received form data:
+2025-06-04 01:43:58 -  - doctor_id: 
+2025-06-04 01:43:58 -  - date: 
+2025-06-04 01:43:58 -  - time: 
+2025-06-04 01:43:58 -  - purpose: 
+2025-06-04 01:43:58 -  - notes: 
+2025-06-04 01:43:58 -  - appointment_type: Consultation
+2025-06-04 01:43:58 - Missing required fields: doctor_id, date, time, purpose
+2025-06-04 01:48:02 - Script started
+2025-06-04 01:48:02 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-05
+    [time] => 23:00
+    [appointment_type] => Regular Checkup
+    [purpose] => bhgffvd
+    [notes] => cadfv
+    [patient_id] => 14
+)
+
+2025-06-04 01:48:02 - Raw input: 
+2025-06-04 01:48:04 - Script started
+2025-06-04 01:48:04 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-05
+    [time] => 23:00
+    [appointment_type] => Regular Checkup
+    [purpose] => bhgffvd
+    [notes] => cadfv
+    [patient_id] => 14
+)
+
+2025-06-04 01:48:04 - Raw input: 
+2025-06-04 01:48:08 - Script started
+2025-06-04 01:48:08 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-05
+    [time] => 23:00
+    [appointment_type] => Regular Checkup
+    [purpose] => bhgffvd
+    [notes] => cadfv
+    [patient_id] => 14
+)
+
+2025-06-04 01:48:08 - Raw input: 
+2025-06-04 01:48:45 - Script started
+2025-06-04 01:48:45 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-05
+    [time] => 23:00
+    [appointment_type] => Regular Checkup
+    [purpose] => bhgffvd
+    [notes] => cadfv
+    [patient_id] => 14
+)
+
+2025-06-04 01:48:45 - Raw input: 
+2025-06-04 01:49:19 - Script started
+2025-06-04 01:49:19 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-06
+    [time] => 23:00
+    [appointment_type] => Follow-up
+    [purpose] => Sick & Tires
+    [notes] => Nothing ..
+    [patient_id] => 14
+)
+
+2025-06-04 01:49:19 - Raw input: 
+2025-06-04 01:50:55 - Script started
+2025-06-04 01:50:55 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-06
+    [time] => 23:00
+    [appointment_type] => Urgent Care
+    [purpose] => sick
+    [notes] => nothing
+    [patient_id] => 14
+)
+
+2025-06-04 01:50:55 - Raw input: 
+2025-06-04 01:50:55 - Database connection file included
+2025-06-04 01:50:55 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 01:50:55 - Patient ID from session: 14
+2025-06-04 01:50:55 - Received form data:
+2025-06-04 01:50:55 -  - doctor_id: 1
+2025-06-04 01:50:55 -  - date: 2025-06-06
+2025-06-04 01:50:55 -  - time: 23:00
+2025-06-04 01:50:55 -  - purpose: sick
+2025-06-04 01:50:55 -  - notes: nothing
+2025-06-04 01:50:55 -  - appointment_type: Urgent Care
+2025-06-04 01:50:55 - Starting appointment processing
+2025-06-04 01:50:55 - Formatted time: 23:00:00
+2025-06-04 01:50:55 - Appointment datetime: 2025-06-06 23:00:00
+2025-06-04 01:50:55 - Current datetime: 2025-06-04 01:50:55
+2025-06-04 01:50:55 - Appointment day: Friday
+2025-06-04 01:50:55 - Starting database transaction
+2025-06-04 01:50:55 - Checking doctor's schedule for doctor_id: 1 on day: Friday
+2025-06-04 01:50:55 - Doctor schedule: Array
+(
+    [status] => available
+    [start_time] => 08:00:00
+    [end_time] => 19:30:00
+)
+
+2025-06-04 01:50:55 - Doctor availability: 08:00:00 to 19:30:00
+2025-06-04 01:50:55 - Requested time 23:00:00 is outside working hours
+2025-06-04 01:50:55 - Transaction rolled back due to error: Doctor is only available between 08:00:00 and 19:30:00 on Friday
+2025-06-04 01:50:55 - Script completed
+2025-06-04 01:51:05 - Script started
+2025-06-04 01:51:05 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-06
+    [time] => 16:00
+    [appointment_type] => Urgent Care
+    [purpose] => sick
+    [notes] => nothing
+    [patient_id] => 14
+)
+
+2025-06-04 01:51:05 - Raw input: 
+2025-06-04 01:51:05 - Database connection file included
+2025-06-04 01:51:05 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 01:51:05 - Patient ID from session: 14
+2025-06-04 01:51:05 - Received form data:
+2025-06-04 01:51:05 -  - doctor_id: 1
+2025-06-04 01:51:05 -  - date: 2025-06-06
+2025-06-04 01:51:05 -  - time: 16:00
+2025-06-04 01:51:05 -  - purpose: sick
+2025-06-04 01:51:05 -  - notes: nothing
+2025-06-04 01:51:05 -  - appointment_type: Urgent Care
+2025-06-04 01:51:05 - Starting appointment processing
+2025-06-04 01:51:05 - Formatted time: 16:00:00
+2025-06-04 01:51:05 - Appointment datetime: 2025-06-06 16:00:00
+2025-06-04 01:51:05 - Current datetime: 2025-06-04 01:51:05
+2025-06-04 01:51:05 - Appointment day: Friday
+2025-06-04 01:51:05 - Starting database transaction
+2025-06-04 01:51:05 - Checking doctor's schedule for doctor_id: 1 on day: Friday
+2025-06-04 01:51:05 - Doctor schedule: Array
+(
+    [status] => available
+    [start_time] => 08:00:00
+    [end_time] => 19:30:00
+)
+
+2025-06-04 01:51:05 - Doctor availability: 08:00:00 to 19:30:00
+2025-06-04 01:51:05 - Checking for existing appointments at 2025-06-06 16:00:00
+2025-06-04 01:51:05 - Inserting new appointment
+2025-06-04 01:51:05 - Appointment created successfully
+2025-06-04 01:51:05 - Linking doctor and patient if needed
+2025-06-04 01:51:05 - Getting doctor details
+2025-06-04 01:51:05 - Transaction rolled back due to error: Unknown column 'd.title' in 'field list'
+2025-06-04 01:51:05 - Script completed
+2025-06-04 01:52:47 - Script started
+2025-06-04 01:52:47 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-06
+    [time] => 11:30
+    [appointment_type] => Urgent Care
+    [purpose] => gfdv
+    [notes] => rvfcds
+    [patient_id] => 14
+)
+
+2025-06-04 01:52:47 - Raw input: 
+2025-06-04 01:52:47 - Database connection file included
+2025-06-04 01:52:47 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 01:52:47 - Patient ID from session: 14
+2025-06-04 01:52:47 - Received form data:
+2025-06-04 01:52:47 -  - doctor_id: 1
+2025-06-04 01:52:47 -  - date: 2025-06-06
+2025-06-04 01:52:47 -  - time: 11:30
+2025-06-04 01:52:47 -  - purpose: gfdv
+2025-06-04 01:52:47 -  - notes: rvfcds
+2025-06-04 01:52:47 -  - appointment_type: Urgent Care
+2025-06-04 01:52:47 - Starting appointment processing
+2025-06-04 01:52:47 - Formatted time: 11:30:00
+2025-06-04 01:52:47 - Appointment datetime: 2025-06-06 11:30:00
+2025-06-04 01:52:47 - Current datetime: 2025-06-04 01:52:47
+2025-06-04 01:52:47 - Appointment day: Friday
+2025-06-04 01:52:47 - Starting database transaction
+2025-06-04 01:52:47 - Checking doctor's schedule for doctor_id: 1 on day: Friday
+2025-06-04 01:52:47 - Doctor schedule: Array
+(
+    [status] => available
+    [start_time] => 08:00:00
+    [end_time] => 19:30:00
+)
+
+2025-06-04 01:52:47 - Doctor availability: 08:00:00 to 19:30:00
+2025-06-04 01:52:47 - Checking for existing appointments at 2025-06-06 11:30:00
+2025-06-04 01:52:47 - Inserting new appointment
+2025-06-04 01:52:47 - Appointment created successfully
+2025-06-04 01:52:47 - Linking doctor and patient if needed
+2025-06-04 01:52:47 - Getting doctor details
+2025-06-04 01:52:47 - Doctor name: Dr. Hanin Diab
+2025-06-04 01:52:47 - Transaction committed successfully
+2025-06-04 01:52:47 - Sending success response
+2025-06-04 01:52:47 - Script completed
+2025-06-04 02:01:13 - Script started
+2025-06-04 02:01:13 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-14
+    [time] => 10:30
+    [appointment_type] => Regular Checkup
+    [purpose] => bggfvd
+    [notes] => rvfe
+    [patient_id] => 14
+)
+
+2025-06-04 02:01:13 - Database connection file included
+2025-06-04 02:01:13 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:01:13 - Patient ID from session: 14
+2025-06-04 02:01:14 - Received form data:
+2025-06-04 02:01:14 -  - doctor_id: 1
+2025-06-04 02:01:14 -  - date: 2025-06-14
+2025-06-04 02:01:14 -  - time: 10:30
+2025-06-04 02:01:14 -  - purpose: bggfvd
+2025-06-04 02:01:14 -  - notes: rvfe
+2025-06-04 02:01:14 -  - appointment_type: Regular Checkup
+2025-06-04 02:01:14 - Starting appointment processing
+2025-06-04 02:01:14 - Formatted time: 10:30:00
+2025-06-04 02:01:14 - Appointment day: Saturday
+2025-06-04 02:01:14 - Starting database transaction
+2025-06-04 02:01:14 - Checking doctor's schedule for doctor_id: 1 on day: Saturday
+2025-06-04 02:01:14 - Script completed
+2025-06-04 02:05:02 - Script started
+2025-06-04 02:05:02 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-05
+    [time] => 11:30
+    [appointment_type] => Consultation
+    [purpose] => fqercfeqrcf
+    [notes] => eqrcfercf
+    [patient_id] => 14
+)
+
+2025-06-04 02:05:02 - Database connection file included
+2025-06-04 02:05:02 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:05:02 - Script completed
+2025-06-04 02:17:13 - Script started
+2025-06-04 02:17:13 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-10
+    [time] => 14:15
+    [appointment_type] => Urgent Care
+    [purpose] => nhb fvd
+    [notes] => bgvdf
+    [patient_id] => 14
+)
+
+2025-06-04 02:17:13 - Database connection file included
+2025-06-04 02:17:13 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:17:13 - Script completed
+2025-06-04 02:23:29 - Script started
+2025-06-04 02:23:29 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 22:30
+    [appointment_type] => Regular Checkup
+    [purpose] => tbgf
+    [notes] => tnhbgfv
+    [patient_id] => 14
+)
+
+2025-06-04 02:23:29 - Database connection file included
+2025-06-04 02:23:29 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:23:29 - Script completed
+2025-06-04 02:23:30 - Script started
+2025-06-04 02:23:30 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 22:30
+    [appointment_type] => Regular Checkup
+    [purpose] => tbgf
+    [notes] => tnhbgfv
+    [patient_id] => 14
+)
+
+2025-06-04 02:23:30 - Database connection file included
+2025-06-04 02:23:30 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:23:30 - Script completed
+2025-06-04 02:23:31 - Script started
+2025-06-04 02:23:31 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 22:30
+    [appointment_type] => Regular Checkup
+    [purpose] => tbgf
+    [notes] => tnhbgfv
+    [patient_id] => 14
+)
+
+2025-06-04 02:23:31 - Database connection file included
+2025-06-04 02:23:31 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:23:31 - Script completed
+2025-06-04 02:23:39 - Script started
+2025-06-04 02:23:39 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 22:30
+    [appointment_type] => Regular Checkup
+    [purpose] => tbgf
+    [notes] => tnhbgfv
+    [patient_id] => 14
+)
+
+2025-06-04 02:23:39 - Database connection file included
+2025-06-04 02:23:39 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:23:39 - Script completed
+2025-06-04 02:30:11 - Script started
+2025-06-04 02:30:11 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-04
+    [time] => 22:30
+    [appointment_type] => Regular Checkup
+    [purpose] => fvdc
+    [notes] => s
+    [patient_id] => 14
+)
+
+2025-06-04 02:30:11 - Database connection file included
+2025-06-04 02:30:11 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:30:11 - Script completed
+2025-06-04 02:30:17 - Script started
+2025-06-04 02:30:17 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-04
+    [time] => 10:30
+    [appointment_type] => Regular Checkup
+    [purpose] => fvdc
+    [notes] => s
+    [patient_id] => 14
+)
+
+2025-06-04 02:30:17 - Database connection file included
+2025-06-04 02:30:17 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:30:17 - Script completed
+2025-06-04 02:35:53 - Script started
+2025-06-04 02:35:53 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-18
+    [time] => 00:12
+    [appointment_type] => Regular Checkup
+    [purpose] => caq
+    [notes] => cdd
+    [patient_id] => 14
+)
+
+2025-06-04 02:35:53 - Database connection file included
+2025-06-04 02:35:53 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:35:53 - Script completed
+2025-06-04 02:39:23 - Script started
+2025-06-04 02:39:23 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 3
+    [date] => 2025-06-17
+    [time] => 17:30
+    [appointment_type] => Regular Checkup
+    [purpose] => nhgb
+    [notes] => bherfvs
+    [patient_id] => 14
+)
+
+2025-06-04 02:39:23 - Database connection file included
+2025-06-04 02:39:23 - Doctor not available on Tuesday
+2025-06-04 02:47:40 - Script started
+2025-06-04 02:47:40 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 
+    [date] => 2025-06-17
+    [time] => 23:00
+    [appointment_type] => Regular Checkup
+    [purpose] => jh
+    [notes] => yhtgrf
+    [patient_id] => 14
+)
+
+2025-06-04 02:47:40 - Database connection file included
+2025-06-04 02:47:40 - Missing fields: doctor_id
+2025-06-04 02:48:19 - Script started
+2025-06-04 02:48:19 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-24
+    [time] => 23:00
+    [appointment_type] => Regular Checkup
+    [purpose] => mjhrfdgh
+    [notes] => enet
+    [patient_id] => 14
+)
+
+2025-06-04 02:48:19 - Database connection file included
+2025-06-04 02:48:19 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:48:19 - Script completed
+2025-06-04 02:48:28 - Script started
+2025-06-04 02:48:28 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-21
+    [time] => 23:00
+    [appointment_type] => Regular Checkup
+    [purpose] => mjhrfdgh
+    [notes] => enet
+    [patient_id] => 14
+)
+
+2025-06-04 02:48:28 - Database connection file included
+2025-06-04 02:48:28 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:48:28 - Script completed
+2025-06-04 02:58:52 - Script started
+2025-06-04 02:58:52 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-18
+    [time] => 00:30
+    [appointment_type] => Follow-up
+    [purpose] => ghj
+    [notes] => kjhg
+    [patient_id] => 14
+)
+
+2025-06-04 02:58:52 - Database connection file included
+2025-06-04 02:58:52 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:58:52 - Script completed
+2025-06-04 02:59:03 - Script started
+2025-06-04 02:59:03 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-18
+    [time] => 13:30
+    [appointment_type] => Follow-up
+    [purpose] => ghj
+    [notes] => kjhg
+    [patient_id] => 14
+)
+
+2025-06-04 02:59:03 - Database connection file included
+2025-06-04 02:59:03 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:59:03 - Script completed
+2025-06-04 02:59:32 - Script started
+2025-06-04 02:59:32 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-17
+    [time] => 17:30
+    [appointment_type] => Follow-up
+    [purpose] => dcfgvbn
+    [notes] => cv bn
+    [patient_id] => 14
+)
+
+2025-06-04 02:59:32 - Database connection file included
+2025-06-04 02:59:32 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 02:59:32 - Script completed
+2025-06-04 03:01:19 - Script started
+2025-06-04 03:01:19 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-13
+    [time] => 22:40
+    [appointment_type] => Regular Checkup
+    [purpose] => hbg
+    [notes] => mnb
+    [patient_id] => 14
+)
+
+2025-06-04 03:01:19 - Database connection file included
+2025-06-04 03:01:19 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:01:19 - Script completed
+2025-06-04 03:01:25 - Script started
+2025-06-04 03:01:25 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-13
+    [time] => 10:40
+    [appointment_type] => Regular Checkup
+    [purpose] => hbg
+    [notes] => mnb
+    [patient_id] => 14
+)
+
+2025-06-04 03:01:25 - Database connection file included
+2025-06-04 03:01:25 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:01:25 - Script completed
+2025-06-04 03:13:25 - Script started
+2025-06-04 03:13:25 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 17:15
+    [appointment_type] => Follow-up
+    [purpose] => trheyjuk
+    [notes] => hrthwet
+    [patient_id] => 14
+)
+
+2025-06-04 03:13:25 - Database connection file included
+2025-06-04 03:13:25 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:13:25 - Script completed
+2025-06-04 03:13:27 - Script started
+2025-06-04 03:13:27 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 17:15
+    [appointment_type] => Follow-up
+    [purpose] => trheyjuk
+    [notes] => hrthwet
+    [patient_id] => 14
+)
+
+2025-06-04 03:13:27 - Database connection file included
+2025-06-04 03:13:27 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:13:27 - Script completed
+2025-06-04 03:13:27 - Script started
+2025-06-04 03:13:27 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 17:15
+    [appointment_type] => Follow-up
+    [purpose] => trheyjuk
+    [notes] => hrthwet
+    [patient_id] => 14
+)
+
+2025-06-04 03:13:27 - Database connection file included
+2025-06-04 03:13:27 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:13:27 - Script completed
+2025-06-04 03:13:32 - Script started
+2025-06-04 03:13:32 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 17:15
+    [appointment_type] => Follow-up
+    [purpose] => trheyjuk
+    [notes] => hrthwet
+    [patient_id] => 14
+)
+
+2025-06-04 03:13:32 - Database connection file included
+2025-06-04 03:13:32 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:13:32 - Script completed
+2025-06-04 03:13:44 - Script started
+2025-06-04 03:13:44 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 15:15
+    [appointment_type] => Follow-up
+    [purpose] => trheyjuk
+    [notes] => hrthwet
+    [patient_id] => 14
+)
+
+2025-06-04 03:13:44 - Database connection file included
+2025-06-04 03:13:44 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:13:44 - Script completed
+2025-06-04 03:13:50 - Script started
+2025-06-04 03:13:50 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 15:15
+    [appointment_type] => Follow-up
+    [purpose] => trheyjuk
+    [notes] => hrthwet
+    [patient_id] => 14
+)
+
+2025-06-04 03:13:50 - Database connection file included
+2025-06-04 03:13:50 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:13:50 - Script completed
+2025-06-04 03:14:02 - Script started
+2025-06-04 03:14:02 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 14:15
+    [appointment_type] => Follow-up
+    [purpose] => trheyjuk
+    [notes] => hrthwet
+    [patient_id] => 14
+)
+
+2025-06-04 03:14:02 - Database connection file included
+2025-06-04 03:14:02 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:14:02 - Script completed
+2025-06-04 03:14:07 - Script started
+2025-06-04 03:14:07 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 14:15
+    [appointment_type] => Follow-up
+    [purpose] => trheyjuk
+    [notes] => hrthwet
+    [patient_id] => 14
+)
+
+2025-06-04 03:14:07 - Database connection file included
+2025-06-04 03:14:07 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:14:07 - Script completed
+2025-06-04 03:14:36 - Script started
+2025-06-04 03:14:36 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-26
+    [time] => 14:20
+    [appointment_type] => Regular Checkup
+    [purpose] => gtw
+    [notes] => farg
+    [patient_id] => 14
+)
+
+2025-06-04 03:14:36 - Database connection file included
+2025-06-04 03:14:36 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:14:36 - Script completed
+2025-06-04 03:19:44 - Script started
+2025-06-04 03:19:44 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-25
+    [time] => 11:30
+    [appointment_type] => Regular Checkup
+    [purpose] => mkjn
+    [notes] => gyjhb
+    [patient_id] => 14
+)
+
+2025-06-04 03:19:44 - Database connection file included
+2025-06-04 03:19:44 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:19:44 - Script completed
+2025-06-04 03:20:18 - Script started
+2025-06-04 03:20:18 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-16
+    [time] => 11:11
+    [appointment_type] => Regular Checkup
+    [purpose] => rqefg
+    [notes] => fqerfge
+    [patient_id] => 14
+)
+
+2025-06-04 03:20:18 - Database connection file included
+2025-06-04 03:20:18 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [doctor_id] => 20
+    [secretary_id] => 63
+    [patient_id] => 14
+    [health_form_completed] => 1
+    [phone_number] => 71-854753
+    [update_success] => Profile updated successfully
+)
+
+2025-06-04 03:20:18 - Script completed
+2025-06-04 09:39:09 - Script started
+2025-06-04 09:39:09 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 23:30
+    [appointment_type] => Other
+    [purpose] => fwdcf
+    [notes] => dewq
+    [patient_id] => 14
+)
+
+2025-06-04 09:39:09 - Database connection file included
+2025-06-04 09:39:09 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 09:39:09 - Script completed
+2025-06-04 09:46:15 - Script started
+2025-06-04 09:46:15 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 11:20
+    [appointment_type] => Regular Checkup
+    [purpose] => thbgr
+    [notes] => hbgrvf
+    [patient_id] => 14
+)
+
+2025-06-04 09:46:15 - Database connection file included
+2025-06-04 09:46:15 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 09:46:15 - Script completed
+2025-06-04 09:48:17 - Script started
+2025-06-04 09:48:17 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-24
+    [time] => 15:15
+    [appointment_type] => Regular Checkup
+    [purpose] => jn6
+    [notes] => y
+    [patient_id] => 14
+)
+
+2025-06-04 09:48:17 - Database connection file included
+2025-06-04 09:48:17 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 09:48:17 - Script completed
+2025-06-04 09:48:47 - Script started
+2025-06-04 09:48:47 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 14:30
+    [appointment_type] => Urgent Care
+    [purpose] => sawc
+    [notes] => dwcx
+    [patient_id] => 14
+)
+
+2025-06-04 09:48:47 - Database connection file included
+2025-06-04 09:48:47 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 09:48:47 - Script completed
+2025-06-04 09:49:33 - Script started
+2025-06-04 09:49:33 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-24
+    [time] => 10:30
+    [appointment_type] => Urgent Care
+    [purpose] => ikyjtnhn
+    [notes] => thbgf
+    [patient_id] => 14
+)
+
+2025-06-04 09:49:33 - Database connection file included
+2025-06-04 09:49:33 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 09:49:33 - Script completed
+2025-06-04 09:54:36 - Script started
+2025-06-04 09:54:36 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 08:00
+    [appointment_type] => Other
+    [purpose] => mnhg fb
+    [notes] => bvfd
+    [patient_id] => 14
+)
+
+2025-06-04 09:54:36 - Database connection file included
+2025-06-04 09:54:36 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 09:54:36 - Script completed
+2025-06-04 10:00:15 - Script started
+2025-06-04 10:00:15 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-20
+    [time] => 08:00
+    [appointment_type] => Consultation
+    [purpose] => EHII
+    [notes] => EBYYY
+    [patient_id] => 14
+)
+
+2025-06-04 10:00:15 - Database connection file included
+2025-06-04 10:00:15 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 10:00:15 - Script completed
+2025-06-04 13:21:29 - Script started
+2025-06-04 13:21:29 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-04
+    [time] => 16:50
+    [appointment_type] => Follow-up
+    [purpose] => Sick
+    [notes] => Nothing
+
+    [patient_id] => 14
+)
+
+2025-06-04 13:21:29 - Database connection file included
+2025-06-04 13:21:29 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:21:29 - Script completed
+2025-06-04 13:21:55 - Script started
+2025-06-04 13:21:56 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-12
+    [time] => 10:30
+    [appointment_type] => Consultation
+    [purpose] => Sick
+    [notes] => Nothing
+    [patient_id] => 14
+)
+
+2025-06-04 13:21:56 - Database connection file included
+2025-06-04 13:21:56 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:21:56 - Script completed
+2025-06-04 13:22:08 - Script started
+2025-06-04 13:22:08 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-12
+    [time] => 10:30
+    [appointment_type] => Consultation
+    [purpose] => Sick
+    [notes] => Nothing
+    [patient_id] => 14
+)
+
+2025-06-04 13:22:08 - Database connection file included
+2025-06-04 13:22:08 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:22:08 - Script completed
+2025-06-04 13:28:46 - Script started
+2025-06-04 13:28:46 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-10
+    [time] => 00:30
+    [appointment_type] => Urgent Care
+    [purpose] => sick
+    [notes] => ill
+    [patient_id] => 14
+)
+
+2025-06-04 13:28:46 - Database connection file included
+2025-06-04 13:28:46 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:28:46 - Script completed
+2025-06-04 13:34:18 - Script started
+2025-06-04 13:34:18 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-10
+    [time] => 00:20
+    [appointment_type] => Follow-up
+    [purpose] => bvf
+    [notes] => vfcd
+    [patient_id] => 14
+)
+
+2025-06-04 13:34:18 - Database connection file included
+2025-06-04 13:34:18 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:34:18 - Script completed
+2025-06-04 13:35:01 - Script started
+2025-06-04 13:35:01 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-09
+    [time] => 00:20
+    [appointment_type] => Follow-up
+    [purpose] => rbdfv
+    [notes] => v
+    [patient_id] => 14
+)
+
+2025-06-04 13:35:01 - Database connection file included
+2025-06-04 13:35:01 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:35:01 - Script completed
+2025-06-04 13:35:02 - Script started
+2025-06-04 13:35:02 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-09
+    [time] => 00:20
+    [appointment_type] => Follow-up
+    [purpose] => rbdfv
+    [notes] => v
+    [patient_id] => 14
+)
+
+2025-06-04 13:35:02 - Database connection file included
+2025-06-04 13:35:02 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:35:02 - Script completed
+2025-06-04 13:42:54 - Script started
+2025-06-04 13:42:54 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-10
+    [time] => 11:00
+    [appointment_type] => Follow-up
+    [purpose] => rfgbr
+    [notes] => gvtr
+    [patient_id] => 14
+)
+
+2025-06-04 13:42:54 - Database connection file included
+2025-06-04 13:42:54 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:42:54 - Script completed
+2025-06-04 13:43:23 - Script started
+2025-06-04 13:43:23 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-10
+    [time] => 00:00
+    [appointment_type] => Follow-up
+    [purpose] => rfgbr
+    [notes] => gvtr
+    [patient_id] => 14
+)
+
+2025-06-04 13:43:23 - Database connection file included
+2025-06-04 13:43:23 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:43:23 - Script completed
+2025-06-04 13:50:36 - Script started
+2025-06-04 13:50:36 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-10
+    [time] => 14:20
+    [appointment_type] => Consultation
+    [purpose] => ntbgrv
+    [notes] => brgvf
+    [patient_id] => 14
+)
+
+2025-06-04 13:50:36 - Database connection file included
+2025-06-04 13:50:36 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:50:36 - Script completed
+2025-06-04 13:52:38 - Script started
+2025-06-04 13:52:38 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-11
+    [time] => 00:30
+    [appointment_type] => Urgent Care
+    [purpose] => gwerf
+    [notes] => gwe
+    [patient_id] => 14
+)
+
+2025-06-04 13:52:38 - Database connection file included
+2025-06-04 13:52:38 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:52:38 - Script completed
+2025-06-04 13:56:11 - Script started
+2025-06-04 13:56:11 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 00:30
+    [appointment_type] => Follow-up
+    [purpose] => vfdcw
+    [notes] => refgerf
+    [patient_id] => 14
+)
+
+2025-06-04 13:56:11 - Database connection file included
+2025-06-04 13:56:11 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:56:11 - Script completed
+2025-06-04 13:56:50 - Script started
+2025-06-04 13:56:50 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 00:30
+    [appointment_type] => Follow-up
+    [purpose] => vfdcw
+    [notes] => refgerf
+    [patient_id] => 14
+)
+
+2025-06-04 13:56:50 - Database connection file included
+2025-06-04 13:56:50 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:56:50 - Script completed
+2025-06-04 13:58:04 - Script started
+2025-06-04 13:58:04 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 00:30
+    [appointment_type] => Follow-up
+    [purpose] => vfwes
+    [notes] => efv
+    [patient_id] => 14
+)
+
+2025-06-04 13:58:04 - Database connection file included
+2025-06-04 13:58:04 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:58:04 - Script completed
+2025-06-04 13:59:18 - Script started
+2025-06-04 13:59:18 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 00:30
+    [appointment_type] => Follow-up
+    [purpose] => vfwes
+    [notes] => efv
+    [patient_id] => 14
+)
+
+2025-06-04 13:59:18 - Database connection file included
+2025-06-04 13:59:18 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:59:18 - Script completed
+2025-06-04 13:59:47 - Script started
+2025-06-04 13:59:47 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 00:30
+    [appointment_type] => Follow-up
+    [purpose] => vfwes
+    [notes] => efv
+    [patient_id] => 14
+)
+
+2025-06-04 13:59:47 - Database connection file included
+2025-06-04 13:59:47 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 13:59:47 - Script completed
+2025-06-04 14:00:00 - Script started
+2025-06-04 14:00:00 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-17
+    [time] => 00:30
+    [appointment_type] => Regular Checkup
+    [purpose] => cdfv
+    [notes] => cdfv
+    [patient_id] => 14
+)
+
+2025-06-04 14:00:00 - Database connection file included
+2025-06-04 14:00:00 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:00:00 - Script completed
+2025-06-04 14:01:13 - Script started
+2025-06-04 14:01:13 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-17
+    [time] => 00:30
+    [appointment_type] => Regular Checkup
+    [purpose] => bgv
+    [notes] => dfv
+    [patient_id] => 14
+)
+
+2025-06-04 14:01:13 - Database connection file included
+2025-06-04 14:01:13 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:01:13 - Script completed
+2025-06-04 14:01:55 - Script started
+2025-06-04 14:01:55 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 00:20
+    [appointment_type] => Urgent Care
+    [purpose] => gtrv
+    [notes] => vgwergv
+    [patient_id] => 14
+)
+
+2025-06-04 14:01:55 - Database connection file included
+2025-06-04 14:01:55 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:01:55 - Script completed
+2025-06-04 14:02:16 - Script started
+2025-06-04 14:02:16 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-17
+    [time] => 00:30
+    [appointment_type] => Regular Checkup
+    [purpose] => cfe
+    [notes] => rvdc
+    [patient_id] => 14
+)
+
+2025-06-04 14:02:16 - Database connection file included
+2025-06-04 14:02:16 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:02:16 - Script completed
+2025-06-04 14:03:00 - Script started
+2025-06-04 14:03:00 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-09
+    [time] => 00:20
+    [appointment_type] => Regular Checkup
+    [purpose] => cdqc
+    [notes] => wdc
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:00 - Database connection file included
+2025-06-04 14:03:00 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:00 - Script completed
+2025-06-04 14:03:19 - Script started
+2025-06-04 14:03:19 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 00:30
+    [appointment_type] => Follow-up
+    [purpose] => sick
+    [notes] => sick
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:19 - Database connection file included
+2025-06-04 14:03:19 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:19 - Script completed
+2025-06-04 14:03:24 - Script started
+2025-06-04 14:03:24 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 00:30
+    [appointment_type] => Follow-up
+    [purpose] => sick
+    [notes] => sick
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:24 - Database connection file included
+2025-06-04 14:03:24 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:24 - Script completed
+2025-06-04 14:03:34 - Script started
+2025-06-04 14:03:34 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 01:30
+    [appointment_type] => Follow-up
+    [purpose] => sick
+    [notes] => sick
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:34 - Database connection file included
+2025-06-04 14:03:34 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:34 - Script completed
+2025-06-04 14:03:55 - Script started
+2025-06-04 14:03:55 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-16
+    [time] => 14:30
+    [appointment_type] => Follow-up
+    [purpose] => cdwq
+    [notes] => wdc
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:55 - Database connection file included
+2025-06-04 14:03:55 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:03:55 - Script completed
+2025-06-04 14:04:16 - Script started
+2025-06-04 14:04:16 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-17
+    [time] => 16:30
+    [appointment_type] => Urgent Care
+    [purpose] => cedwwc
+    [notes] => fqwecf
+    [patient_id] => 14
+)
+
+2025-06-04 14:04:16 - Database connection file included
+2025-06-04 14:04:16 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:04:16 - Script completed
+2025-06-04 14:04:47 - Script started
+2025-06-04 14:04:47 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-17
+    [time] => 16:30
+    [appointment_type] => Urgent Care
+    [purpose] => cedwwc
+    [notes] => fqwecf
+    [patient_id] => 14
+)
+
+2025-06-04 14:04:47 - Database connection file included
+2025-06-04 14:04:47 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:04:47 - Script completed
+2025-06-04 14:04:59 - Script started
+2025-06-04 14:04:59 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-17
+    [time] => 16:30
+    [appointment_type] => Urgent Care
+    [purpose] => cedwwc
+    [notes] => fqwecf
+    [patient_id] => 14
+)
+
+2025-06-04 14:04:59 - Database connection file included
+2025-06-04 14:04:59 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:04:59 - Script completed
+2025-06-04 14:05:30 - Script started
+2025-06-04 14:05:30 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-18
+    [time] => 10:30
+    [appointment_type] => Urgent Care
+    [purpose] =>  gb
+    [notes] => n fb
+    [patient_id] => 14
+)
+
+2025-06-04 14:05:30 - Database connection file included
+2025-06-04 14:05:30 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:05:30 - Script completed
+2025-06-04 14:05:45 - Script started
+2025-06-04 14:05:45 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-18
+    [time] => 10:30
+    [appointment_type] => Urgent Care
+    [purpose] =>  gb
+    [notes] => n fb
+    [patient_id] => 14
+)
+
+2025-06-04 14:05:45 - Database connection file included
+2025-06-04 14:05:45 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:05:45 - Script completed
+2025-06-04 14:10:33 - Script started
+2025-06-04 14:10:33 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-18
+    [time] => 14:20
+    [appointment_type] => Regular Checkup
+    [purpose] => ntbhg
+    [notes] => bgfvdc
+    [patient_id] => 14
+)
+
+2025-06-04 14:10:33 - Database connection file included
+2025-06-04 14:10:33 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:10:33 - Script completed
+2025-06-04 14:10:56 - Script started
+2025-06-04 14:10:56 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-18
+    [time] => 14:20
+    [appointment_type] => Regular Checkup
+    [purpose] => ntbhg
+    [notes] => bgfvdc
+    [patient_id] => 14
+)
+
+2025-06-04 14:10:56 - Database connection file included
+2025-06-04 14:10:56 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:10:56 - Script completed
+2025-06-04 14:18:45 - Script started
+2025-06-04 14:18:45 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 12:30
+    [appointment_type] => Regular Checkup
+    [purpose] => cdfvc
+    [notes] => dfcv
+    [patient_id] => 14
+)
+
+2025-06-04 14:18:45 - Database connection file included
+2025-06-04 14:18:45 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:18:45 - Error in booking appointment: Table 'medicare_system.doctor_patient_link' doesn't exist
+2025-06-04 14:18:45 - Script ended
+2025-06-04 14:18:49 - Script started
+2025-06-04 14:18:49 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 12:30
+    [appointment_type] => Regular Checkup
+    [purpose] => cdfvc
+    [notes] => dfcv
+    [patient_id] => 14
+)
+
+2025-06-04 14:18:49 - Database connection file included
+2025-06-04 14:18:49 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:18:49 - Error in booking appointment: Table 'medicare_system.doctor_patient_link' doesn't exist
+2025-06-04 14:18:49 - Script ended
+2025-06-04 14:19:49 - Script started
+2025-06-04 14:19:49 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-12
+    [time] => 12:13
+    [appointment_type] => Regular Checkup
+    [purpose] => bg
+    [notes] => grbv
+    [patient_id] => 14
+)
+
+2025-06-04 14:19:49 - Database connection file included
+2025-06-04 14:19:49 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:19:49 - Appointment booked successfully for patient 14 with doctor 1
+2025-06-04 14:19:49 - Script ended
+2025-06-04 14:20:13 - Script started
+2025-06-04 14:20:13 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-19
+    [time] => 00:30
+    [appointment_type] => Regular Checkup
+    [purpose] => fvwv
+    [notes] => verw
+    [patient_id] => 14
+)
+
+2025-06-04 14:20:13 - Database connection file included
+2025-06-04 14:20:13 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:20:13 - Error in booking appointment: Please take an appointment between 10:00 AM and 9:00 PM on Thursday
+2025-06-04 14:20:13 - Script ended
+2025-06-04 14:20:23 - Script started
+2025-06-04 14:20:23 - Raw POST data: Array
+(
+    [speciality] => Neurology
+    [doctor_id] => 4
+    [date] => 2025-06-19
+    [time] => 12:30
+    [appointment_type] => Regular Checkup
+    [purpose] => fvwv
+    [notes] => verw
+    [patient_id] => 14
+)
+
+2025-06-04 14:20:23 - Database connection file included
+2025-06-04 14:20:23 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 14:20:24 - Appointment booked successfully for patient 14 with doctor 4
+2025-06-04 14:20:24 - Script ended
+2025-06-04 16:36:44 - Script started
+2025-06-04 16:36:44 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 12:30
+    [appointment_type] => Other
+    [purpose] => mjynhb
+    [notes] => tnhbg
+    [patient_id] => 14
+)
+
+2025-06-04 16:36:44 - Database connection file included
+2025-06-04 16:36:44 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 16:36:44 - Appointment booked successfully for patient 14 with doctor 1
+2025-06-04 16:36:44 - Script ended
+2025-06-04 18:07:58 - Script started
+2025-06-04 18:07:58 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-20
+    [time] => 14:00
+    [appointment_type] => Urgent Care
+    [purpose] => rnhd
+    [notes] => bfgb
+    [patient_id] => 14
+)
+
+2025-06-04 18:07:58 - Database connection file included
+2025-06-04 18:07:58 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 18:07:58 - Appointment booked successfully for patient 14 with doctor 1
+2025-06-04 18:07:58 - Script ended
+2025-06-04 18:19:11 - Script started
+2025-06-04 18:19:11 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-21
+    [time] => 10:30
+    [appointment_type] => Urgent Care
+    [purpose] => cdfrgtf
+    [notes] => rtg
+    [patient_id] => 14
+)
+
+2025-06-04 18:19:11 - Database connection file included
+2025-06-04 18:19:11 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 18:19:11 - Error in booking appointment: Doctor is not available on Saturday. Please book an appointment on these available days: Monday (7:30 AM - 5:30 PM), Tuesday (9:00 AM - 7:00 PM), Wednesday (9:00 AM - 7:00 PM), Thursday (7:30 AM - 3:30 PM), Friday (8:00 AM - 7:30 PM)
+2025-06-04 18:19:11 - Script ended
+2025-06-04 18:19:16 - Script started
+2025-06-04 18:19:16 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-24
+    [time] => 10:30
+    [appointment_type] => Urgent Care
+    [purpose] => cdfrgtf
+    [notes] => rtg
+    [patient_id] => 14
+)
+
+2025-06-04 18:19:16 - Database connection file included
+2025-06-04 18:19:16 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 18:19:16 - Appointment booked successfully for patient 14 with doctor 1
+2025-06-04 18:19:16 - Script ended
+2025-06-04 18:19:57 - Script started
+2025-06-04 18:19:57 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 10:30
+    [appointment_type] => Urgent Care
+    [purpose] => qwererc
+    [notes] => cvqew
+    [patient_id] => 14
+)
+
+2025-06-04 18:19:57 - Database connection file included
+2025-06-04 18:19:57 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 18:19:57 - Appointment booked successfully for patient 14 with doctor 1
+2025-06-04 18:19:57 - Script ended
+2025-06-04 18:20:14 - Script started
+2025-06-04 18:20:14 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-05
+    [time] => 11:00
+    [appointment_type] => Regular Checkup
+    [purpose] => cqr
+    [notes] => cdr
+    [patient_id] => 14
+)
+
+2025-06-04 18:20:14 - Database connection file included
+2025-06-04 18:20:14 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+)
+
+2025-06-04 18:20:14 - Appointment booked successfully for patient 14 with doctor 1
+2025-06-04 18:20:14 - Script ended
+2025-06-04 23:40:28 - Script started
+2025-06-04 23:40:28 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-19
+    [time] => 11:20
+    [appointment_type] => Urgent Care
+    [purpose] => gn b
+    [notes] => bgsfn
+    [patient_id] => 14
+)
+
+2025-06-04 23:40:28 - Database connection file included
+2025-06-04 23:40:28 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [patient_id] => 14
+    [doctor_id] => 1
+    [secretary_id] => 63
+)
+
+2025-06-04 23:40:28 - Appointment booked successfully for patient 14 with doctor 1
+2025-06-04 23:40:28 - Script ended

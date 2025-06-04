@@ -202,8 +202,8 @@ try {
              <!-- Search and Add Patient -->
             <div class="patient-actions">
                 <form method="GET" class="search-form" id="search-form">
-                    <div class="search-container">
-                        <input type="text" name="search" id="search-input" placeholder="Search patients..." value="<?php echo htmlspecialchars($search_query); ?>">
+                    <div class="search-container" >
+                        <input type="text" name="search" id="search-input" placeholder="Search patients..."  value="<?php echo htmlspecialchars($search_query); ?>">
                         <div id="search-loading" style="display: none;">
                             <i class="fas fa-spinner fa-spin"></i>
                         </div>
@@ -245,15 +245,17 @@ try {
                                 <td><?php echo $patient['last_visit_formatted']; ?></td>
                                 <td>
                                   <?php 
-                                   $qrCodePath = '../qrcodes/patient_' . $patient['patient_id'] . '.png';
-                                   if (file_exists($qrCodePath)): ?>
-                                   <a href="<?php echo $qrCodePath; ?>" class="qr-code-link" data-lightbox="qr-code" data-title="QR Code for <?php echo htmlspecialchars($patient['full_name']); ?>">
-                                      <img src="<?php echo $qrCodePath; ?>" alt="QR Code for Patient <?php echo $patient['patient_id']; ?>" class="qr-code-img" width="50" height="50">
-                                   </a>
-                                  <?php else: ?>
-                                   <span class="no-qr">No QR</span>
-                                  <?php endif; ?>
-                               </td>
+                                     $qrCodePath = '../qrcodes/patient_' . $patient['patient_id'] . '.png';
+                                     if (file_exists($qrCodePath)): ?>
+                                     <div class="qr-code-container">
+                                          <a href="#" class="qr-code-link" onclick="event.preventDefault(); showQRCode('<?php echo $qrCodePath; ?>', '<?php echo htmlspecialchars($patient['full_name']); ?>')">
+                                          <img src="<?php echo $qrCodePath; ?>" alt="QR Code for Patient <?php echo $patient['patient_id']; ?>" class="qr-code-img" width="50" height="50">
+                                     </a>
+                                     </div>
+                                     <?php else: ?>
+                                      <span class="no-qr">No QR</span>
+                                    <?php endif; ?>
+                                </td>
                                 
                             </tr>
                             <?php endforeach; ?>
@@ -505,6 +507,46 @@ try {
     
     updateDateTime();
     setInterval(updateDateTime, 60000); // Update every minute
+
+     // Add this function to show QR code in a modal
+    function showQRCode(qrCodePath, patientName) {
+        const qrModal = document.createElement('div');
+        qrModal.className = 'qr-modal-overlay';
+        qrModal.innerHTML = `
+            <div class="qr-modal-content">
+                <div class="qr-modal-header">
+                    <h3>QR Code for ${patientName}</h3>
+                </div>
+                <div class="qr-modal-body">
+                    <img src="${qrCodePath}" alt="QR Code for ${patientName}" class="qr-code-full">
+                </div>
+                <div class="qr-modal-footer">
+                    <button onclick="downloadQRCode('${qrCodePath}', 'patient_${patientName.replace(/\s+/g, '_')}_qrcode.png')" class="download-qr-btn">
+                        <i class="fas fa-download"></i> Download QR Code
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Close modal when clicking outside
+        qrModal.addEventListener('click', function(e) {
+            if (e.target === qrModal) {
+                document.body.removeChild(qrModal);
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.body.contains(qrModal)) {
+                document.body.removeChild(qrModal);
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        document.body.appendChild(qrModal);
+        document.body.style.overflow = 'hidden';
+    }
 
 document.addEventListener('DOMContentLoaded', function() {
     // Modal elements

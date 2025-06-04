@@ -1,10 +1,8 @@
 <?php
-// Enable maximum error reporting
+// Enable error reporting
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__.'/php_errors.log');
 
 ob_start();
 session_start();
@@ -13,33 +11,34 @@ header('Content-Type: application/json');
 require_once('../db-config/connection.php');
 require_once '../libs/phpqrcode/qrlib.php';
 
-function debugLog($message, $data = null) {
-    $log = "[".date('Y-m-d H:i:s')."] $message\n";
-    if ($data) $log .= print_r($data, true)."\n";
-    file_put_contents('debug.log', $log, FILE_APPEND);
-    echo "DEBUG: $message\n";
-    if ($data) echo "DATA: ".print_r($data, true)."\n";
-}
-
-function sendJsonResponse($success, $message, $data = null) {
-    $response = [
-        'success' => $success,
-        'message' => $message,
-        'data' => $data,
-        'debug' => ob_get_clean()
-    ];
-    echo json_encode($response);
-    exit();
-}
-
 // Verify database connection
 if (!$conn) {
-    sendJsonResponse(false, "Database connection failed");
+    echo json_encode(['success' => false, 'message' => "Database connection failed"]);
+    exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Extract and validate all input data
+        // Verify secretary is logged in
+        if (!isset($_SESSION['user_id'])) {
+            throw new Exception("User not logged in");
+        }
+
+        // Get doctor_id from secretary table
+        $stmt = $conn->prepare("SELECT doctor_id FROM secretary WHERE user_id = ?");
+        $stmt->bind_param("i", $_SESSION['user_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows === 0) {
+            throw new Exception("Secretary not assigned to any doctor");
+        }
+        
+        $row = $result->fetch_assoc();
+        $doctor_id = $row['doctor_id'];
+        $stmt->close();
+
+        // Rest of your validation and processing code...
         $required = [
             'full_name', 'email', 'password', 'phone_number',
             'date_of_birth', 'gender', 'blood_type',
@@ -56,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Additional validations
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email format";
         }
@@ -66,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (!empty($errors)) {
-            sendJsonResponse(false, implode(", ", $errors));
+            throw new Exception(implode(", ", $errors));
         }
 
         // Check email uniqueness
@@ -74,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("s", $data['email']);
         $stmt->execute();
         if ($stmt->get_result()->num_rows > 0) {
-            sendJsonResponse(false, "Email already registered");
+            throw new Exception("Email already registered");
         }
         $stmt->close();
 
@@ -83,20 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$hashed_password) {
             throw new Exception("Password hashing failed");
         }
-
-        // Verify doctor exists
-        $doctor_id = $_SESSION['doctor_id'] ?? null;
-        if (!$doctor_id) {
-            throw new Exception("Doctor ID not found in session");
-        }
-
-        $stmt = $conn->prepare("SELECT doctor_id FROM doctors WHERE user_id = ?");
-        $stmt->bind_param("i", $doctor_id);
-        $stmt->execute();
-        if (!$stmt->get_result()->fetch_assoc()) {
-            throw new Exception("Invalid doctor ID");
-        }
-        $stmt->close();
 
         // Start transaction
         $conn->begin_transaction();
@@ -112,15 +96,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user_id = $conn->insert_id;
             $stmt->close();
 
-            // Assign optional fields to variables (required fix for bind_param)
-            $insurance_provider = $_POST['insurance_provider'] ?? '';
-            $insurance_number = $_POST['insurance_number'] ?? '';
-            $allergies = $_POST['allergies'] ?? '';
-            $medical_conditions = $_POST['medical_conditions'] ?? '';
-            $current_medications = $_POST['current_medications'] ?? '';
-            $previous_surgeries = $_POST['previous_surgeries'] ?? '';
-            $family_history = $_POST['family_history'] ?? '';
-
             // Insert into patients
             $stmt = $conn->prepare("INSERT INTO patients (
                 user_id, date_of_birth, gender, blood_type, 
@@ -129,6 +104,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 previous_surgeries, family_history, health_form_completed
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
             
+            $insurance_provider = $_POST['insurance_provider'] ?? '';
+            $insurance_number = $_POST['insurance_number'] ?? '';
+            $allergies = $_POST['allergies'] ?? '';
+            $medical_conditions = $_POST['medical_conditions'] ?? '';
+            $current_medications = $_POST['current_medications'] ?? '';
+            $previous_surgeries = $_POST['previous_surgeries'] ?? '';
+            $family_history = $_POST['family_history'] ?? '';
+
             $stmt->bind_param("issssssssss", 
                 $user_id, $data['date_of_birth'], $data['gender'], $data['blood_type'],
                 $insurance_provider, $insurance_number, $allergies, $medical_conditions,
@@ -155,13 +138,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Emergency contact insert failed: ".$stmt->error);
             }
             $stmt->close();
+                
 
-            // Create doctor-patient relationship
+            // Create doctor-patient relationship if not already exists
+           $stmt = $conn->prepare("SELECT * FROM doctorpatient WHERE doctor_id = ? AND patient_id = ?");
+           $stmt->bind_param("ii", $doctor_id, $patient_id);
+           $stmt->execute();
+           $result = $stmt->get_result();
+
+           if ($result->num_rows > 0) {
+              // Relationship already exists, do not insert again
+              throw new Exception("Doctor-patient relationship already exists");
+            }
+            else{
+            // Relationship does not exist, insert into doctorpatient table
             $stmt = $conn->prepare("INSERT INTO doctorpatient (doctor_id, patient_id) VALUES (?, ?)");
             $stmt->bind_param("ii", $doctor_id, $patient_id);
             if (!$stmt->execute()) {
-                throw new Exception("Doctor-patient relationship failed: ".$stmt->error);
-            }
+               throw new Exception("Doctor-patient relationship failed: ".$stmt->error);
+            }}
             $stmt->close();
 
             // Generate and save QR code
@@ -170,9 +165,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Commit transaction
             $conn->commit();
 
-            sendJsonResponse(true, "Patient registered successfully", [
-                'patient_id' => $patient_id,
-                'qr_code_path' => $qrCodePath
+            echo json_encode([
+                'success' => true,
+                'message' => "Patient registered successfully",
+                'data' => [
+                    'patient_id' => $patient_id,
+                    'qr_code_path' => $qrCodePath
+                ]
             ]);
 
         } catch (Exception $e) {
@@ -181,10 +180,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
     } catch (Exception $e) {
-        sendJsonResponse(false, "Registration failed: ".$e->getMessage());
+        echo json_encode([
+            'success' => false,
+            'message' => "Registration failed: ".$e->getMessage()
+        ]);
     }
 } else {
-    sendJsonResponse(false, "Invalid request method");
+    echo json_encode(['success' => false, 'message' => "Invalid request method"]);
 }
 
 function generateAndSaveQRCode($patientId, $conn) {
@@ -197,7 +199,11 @@ function generateAndSaveQRCode($patientId, $conn) {
     $filePath = $qrDir.$fileName;
     $relativePath = 'qrcodes/'.$fileName;
 
-    $url = "http://yourdomain.com/patient_details.php?patient_id=".$patientId;
+    // QR code data - link to patient's details page
+    // Use server's IP address manually (or dynamically, see below)
+    $ip = getHostByName(getHostName()); // This gives the local IP of your computer
+    $url = "http://$ip/fyp/Patient/patient_details.php?patient_id=" . $patientId;
+
     QRcode::png($url, $filePath, QR_ECLEVEL_L, 6);
 
     $stmt = $conn->prepare("UPDATE patients SET QR_code = ? WHERE patient_id = ?");

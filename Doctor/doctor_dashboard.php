@@ -56,7 +56,7 @@ if (!empty($doctorData)) {
 
     // Appointments Today
     $today = date('Y-m-d');
-    $stmt = $conn->prepare("SELECT COUNT(*) AS count FROM appointments WHERE doctor_id = ? AND DATE(appointment_date) = ?");
+    $stmt = $conn->prepare("SELECT COUNT(*) AS count FROM appointments WHERE doctor_id = ? AND DATE(appointment_date) = ? AND NOT status = 'Cancelled'");
     $stmt->bind_param("is", $doctorId, $today);
     $stmt->execute();
     $stmt->bind_result($appointmentsToday);
@@ -64,7 +64,7 @@ if (!empty($doctorData)) {
     $stmt->close();
 
     // Urgent Cases
-    $stmt = $conn->prepare("SELECT COUNT(*) AS count FROM appointments WHERE doctor_id = ? AND appointment_type = 'Urgent Care'");
+    $stmt = $conn->prepare("SELECT COUNT(*) AS count FROM appointments WHERE doctor_id = ? AND appointment_type = 'Urgent Care' AND NOT status = 'Cancelled'");
     $stmt->bind_param("i", $doctorId);
     $stmt->execute();
     $stmt->bind_result($urgentCases);

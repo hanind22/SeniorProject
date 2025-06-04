@@ -1,4 +1,4 @@
-/* Enhanced Secretary Dashboard Styles */
+
 
 /* ===== MAIN CONTENT AREA ===== */
 .content {
@@ -563,13 +563,41 @@
 }
 
 .btn-primary {
-    background: rgb(46, 129, 184);
+    background: linear-gradient(135deg, #16c289 0%, #059669 100%);
     color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-outline {
@@ -583,6 +611,15 @@
     color: white;
 }
 
+btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary i {
+    font-size: 1.1rem;
+}
+
+/* Keep the existing btn-success styles as they're already green */
 .btn-success {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
@@ -958,11 +995,12 @@
     display: block;
 }
 
+
 .search-container {
             display: flex;
             gap: 10px;
             height: 50px;
-            
+            width: 1400px;            
         }
         .search-container input {
             flex: 1;
@@ -1093,7 +1131,7 @@
 
 /* Doctor Info Header Styles */
 .doctor-info-header {
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    background: white;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 25px;
@@ -1176,4 +1214,143 @@
     .doctor-info-header p {
         font-size: 0.9rem;
     }
+}
+
+/* Modern QR Code Modal Styles */
+.qr-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(39, 69, 94, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.qr-modal-content {
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 380px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    transform: scale(0.95);
+    animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.qr-modal-header {
+    padding: 20px;
+    background: linear-gradient(to right, #229e83, #0dcfa5);
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.qr-modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.qr-modal-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+
+.qr-modal-body {
+    padding: 32px;
+    text-align: center;
+    position: relative;
+}
+
+.qr-code-full {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    transition: transform 0.3s ease;
+}
+
+.qr-code-full:hover {
+    transform: scale(1.03);
+}
+
+.qr-modal-footer {
+    padding: 0 20px 24px;
+    text-align: center;
+}
+
+.download-qr-btn {
+    background: linear-gradient(to right, #229e83, #0dcfa5);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2), 0 2px 4px -1px rgba(79, 70, 229, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.download-qr-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3), 0 4px 6px -2px rgba(79, 70, 229, 0.1);
+}
+
+.download-qr-btn:active {
+    transform: translateY(0);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Close button (optional) */
+.qr-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    color: white;
+}
+
+.qr-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
 }

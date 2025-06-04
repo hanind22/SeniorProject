@@ -51,67 +51,97 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // ----------------- Form validation ----------------- //
-    function validateForm(formData) {
-        const errors = [];
+function validateForm(formData) {
+    const errors = [];
+    if (!formData.license_number) errors.push('License number is required');
+    if (!formData.email) errors.push('Email is required');
+    if (!formData.phone) errors.push('Phone number is required');
 
-        if (!formData.get('specialty')) errors.push('Specialty is required');
-        if (!formData.get('license_number')) errors.push('License number is required');
-        if (!formData.get('email')) errors.push('Email is required');
-        if (!formData.get('phone')) errors.push('Phone number is required');
-
-        const email = formData.get('email');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (email && !emailRegex.test(email)) {
-            errors.push('Please enter a valid email address');
-        }
-
-        const phone = formData.get('phone');
-        const phoneRegex = /^\d{8}$/;
-        if (phone && !phoneRegex.test(phone)) {
-            errors.push('Phone number must be exactly 8 digits');
-        }
-
-        return errors;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.email && !emailRegex.test(formData.email)) {
+        errors.push('Please enter a valid email address');
     }
+
+    const phoneRegex = /^\d{8}$/;
+    if (formData.phone && !phoneRegex.test(formData.phone)) {
+        errors.push('Phone number must be exactly 8 digits');
+    }
+
+    return errors;
+}
 
     // ----------------- Profile form submission ----------------- //
-    if (profileForm) {
-        profileForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+if (profileForm) {
+    profileForm.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-            const formData = new FormData(this);
-            const errors = validateForm(formData);
+        // Convert form data to a structured object
+        const formData = new FormData(this);
+        const formObject = {};
+        const availability = {};
 
-            if (errors.length > 0) {
-                showNotification(errors.join('<br>'), 'error');
-                return;
+        // Process all form fields
+        for (let [key, value] of formData.entries()) {
+            // Handle availability fields
+            if (key.startsWith('availability[')) {
+                const match = key.match(/availability\[([^\]]+)\]\[([^\]]+)\]\[([^\]]+)\]/);
+                if (match) {
+                    const day = match[1];
+                    const slotIndex = match[2];
+                    const fieldName = match[3];
+                    
+                    if (!availability[day]) availability[day] = {};
+                    if (!availability[day][slotIndex]) availability[day][slotIndex] = {};
+                    
+                    availability[day][slotIndex][fieldName] = value;
+                }
+            } else {
+                formObject[key] = value;
             }
+        }
 
-            fetch('update-profile.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    showNotification('Profile updated successfully!', 'success');
-                    closeModal(); // Close the modal on success
-                    setTimeout(() => location.reload(), 1500);
-                } else {
-                    showNotification(data.message || 'Failed to update profile', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showNotification('An error occurred. Please try again.', 'error');
-            });
-        });
+        // Add processed availability to form object
+        formObject.availability = availability;
+
+        // Validate the form data
+        const errors = validateForm(formObject);
+        if (errors.length > 0) {
+            showNotification(errors.join('<br>'), 'error');
+            return;
+        }
+
+        // Send as JSON with proper headers
+        fetch('update-profile.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formObject)
+        })
+        .then(handleResponse)
+        .catch(handleError);
+    });
+}
+
+function handleResponse(response) {
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
     }
+    return response.json().then(data => {
+        if (data.success) {
+            showNotification('Profile updated successfully!', 'success');
+            closeModal();
+            setTimeout(() => location.reload(), 1500);
+        } else {
+            showNotification(data.message || 'Failed to update profile', 'error');
+        }
+    });
+}
+
+function handleError(error) {
+    console.error('Fetch error:', error);
+    showNotification('An error occurred. Please try again.', 'error');
+}
 
     // ----------------- Notification system ----------------- //
     function showNotification(message, type = 'success', duration = 4000) {

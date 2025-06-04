@@ -117,13 +117,27 @@
                     <div class="section-content">
                         <div class="profile-overview">
                             <div class="profile-photo-container">
-                                <div class="profile-photo">
-                                    <img src="https://via.placeholder.com/150" alt="Profile Photo">
-                                    <button class="photo-edit-btn">
-                                        <i class="fas fa-camera"></i>
-                                    </button>
-                                </div>
-                            </div>
+                               <div class="initials-circle">
+                                    <?php
+                                    // Get the patient's full name from your data
+                                    $full_name = $patientData['full_name'] ?? 'JD'; // Default to "JD" if not available
+        
+                                   // Extract initials
+                                   $names = explode(' ', $full_name);
+                                   $initials = '';
+        
+                                   if (count($names) >= 2) {
+                                   // First letter of first name + first letter of last name
+                                   $initials = strtoupper(substr($names[0], 0, 1)) . strtoupper(substr(end($names), 0, 1));
+                                   } else {
+                                  // Just first two letters if only one name
+                                  $initials = strtoupper(substr($full_name, 0, 2));
+                                  }
+        
+                               echo $initials;
+                                   ?>
+                               </div>
+</div>
                             
                             <div class="profile-info">
                                 <h3 id="patient-name"><?php echo htmlspecialchars($patientData['full_name']); ?></h3>
@@ -196,15 +210,7 @@
                         <input type="text" id="update-full-name" name="full_name" value="<?php echo htmlspecialchars($patientData['full_name']); ?>" readonly >
                     </div> <br>
 
-                    <div class="form-group full-width">
-                    <label for="profile-image">Profile Image</label>
-                    <?php if (!empty($patientData['profile_image'])): ?>
-                        <div style="margin-bottom: 10px;">
-                            <img src="<?php echo htmlspecialchars($patientData['profile_image']); ?>" alt="Current Profile Image" style="max-width: 150px; border: 1px solid #ccc;">
-                        </div>
-                    <?php endif; ?>
-                    <input type="file" id="profile-image" name="profile_image" accept="image/*">
-                </div>
+                    
                     
                     <div class="form-group">
                         <label for="update-email">Email <span class="required">*</span></label>

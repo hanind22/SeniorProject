@@ -2,6 +2,7 @@
 session_start();
 include('../db-config/connection.php');
 
+
 // Initialize data
 $secretaryData = [];
 $doctorData = [];
@@ -27,11 +28,14 @@ try {
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
+        if (!$result) {
+        die("Query failed: " . $stmt->error);
+        }
         $secretaryData = $result->fetch_assoc();
         $stmt->close();
 
         if (!$secretaryData) {
-            $error = "Secretary record not found";
+            $error = "User record for ID $userId not found in 'users' table.";
         } else {
             // Get the doctor_id assigned to this secretary
             $stmt = $conn->prepare("SELECT doctor_id FROM secretary WHERE user_id = ?");
@@ -211,10 +215,8 @@ try {
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="appointments.css">
 </head>
+<body data-user-id="<?= $_SESSION['secretary_id'] ?? '' ?>">
 
-
-
-<body>
     <div class="container">
         <!-- Side-Navigationbar -->
         <aside class="sidebar">
@@ -261,7 +263,7 @@ try {
                 </div>
                 <div class="calendar-actions">
                     <button id="add-appointment-btn" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> New Appointment
+                        <i class="fas fa-plus"></i> Add New Appointment
                     </button>
                 </div>
             </div>
@@ -290,7 +292,7 @@ try {
         <div id="appointment-overlay" class="overlay">
             <div class="overlay-content">
                 <div class="overlay-header">
-                    <h3 class="overlay-title" id="overlay-date">May 10, 2025</h3>
+                    <h3 class="overlay-title" id="overlay-date"></h3>
                     <button id="close-overlay" class="close-btn">
                         <i class="fas fa-times"></i>
                     </button>
@@ -301,6 +303,7 @@ try {
                 </div>
                 
                 <div class="overlay-footer">
+                    <!-- Add this new button -->
                     <div class="legend">
                         <div class="legend-item">
                             <div class="legend-indicator" style="background-color: var(--regular-bg);"></div>
@@ -313,6 +316,9 @@ try {
                     </div>
                     <button id="add-appointment-day-btn" class="btn btn-primary btn-sm">
                         <i class="fas fa-plus"></i> Add Appointment
+                    </button>
+                     <button id="cancel-all-appointments" class="btn btn-danger btn-sm" style="display: none;" >
+                           Cancel All Appointments
                     </button>
                 </div>
             </div>
@@ -401,6 +407,192 @@ try {
 </div>
 
 
+<!-- Edit Appointment Modal (hidden by default) -->
+<div class="overlay" id="editAppointmentModal" style="display: none;">
+    <div class="modal">
+        <button class="close-btn" id="editModalCloseButton" aria-label="Close modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <h2 class="modal-title">Edit Appointment</h2>
+        
+        <form id="edit-appointment-form">
+            <div class="appointment-meta">
+                <div class="meta-item">
+                    <i class="fas fa-user"></i>
+                    <div>
+                        <span class="meta-label">Patient</span>
+                        <span class="meta-value" id="editPatientName">No patient selected</span>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span class="meta-label">Current Time</span>
+                        <span class="meta-value" id="editCurrentTime">No time selected</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="edit-appointment-time">New Time:</label>
+                <div class="time-selection">
+                    <input type="time" id="edit-appointment-time" name="appointment_time" required class="form-control">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="edit-appointment-notes">Notes:</label>
+                <textarea id="edit-appointment-notes" name="notes" class="form-control" rows="3" placeholder="Add any additional notes..."></textarea>
+            </div>
+            
+            <input type="hidden" id="edit-appointment-id" name="appointment_id">
+            
+            <div class="appointment-actions">
+                <button type="button" class="btn btn-outline" id="cancelEditBtn">
+                    <i class="fas fa-arrow-left"></i> Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Cancel Appointment Modal (hidden by default) -->
+<div class="overlay" id="cancelAppointmentModal" style="display: none;">
+    <div class="modal">
+        <button class="close-btn" id="editModalCloseButton" aria-label="Close modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <!-- Secretary ID stored here (outside the form is okay) -->
+        <input type="hidden" id="session-user-id" value="<?php echo $_SESSION['user_id']; ?>">
+
+        <button class="close-btn" id="cancelModalCloseButton" aria-label="Close modal">
+            <!-- Close icon -->
+        </button>
+        <h2 class="modal-title">Cancel Appointment</h2>
+        
+        <form id="cancel-appointment-form">
+            <!-- Only one hidden input for appointment ID -->
+            <input type="hidden" id="cancel-appointment-id" name="appointment_id" value="">
+            
+            <div class="appointment-meta">
+                <div class="meta-item">
+                    <i class="fas fa-user"></i>
+                    <div>
+                        <span class="meta-label">Patient</span>
+                        <span class="meta-value" id="cancelPatientName"></span>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span class="meta-label">Time</span>
+                        <span class="meta-value" id="cancelAppointmentTime"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cancel-reason">Reason for cancellation:</label>
+                <select id="cancel-reason" name="cancel_reason" required class="form-control">
+                    <option value="">Select a reason...</option>
+                    <option value="Patient Request">Patient Request</option>
+                    <option value="Doctor Unavailable">Doctor Unavailable</option>
+                    <option value="Emergency">Emergency</option>
+                </select>
+            </div>
+            
+            
+            
+            <div class="form-group">
+                <label for="cancel-notes">Additional Notes:</label>
+                <textarea id="reason_for_cancelling" name="reason_for_cancelling" class="form-control" rows="3"></textarea>
+            </div>
+
+            <!-- Action flag -->
+            <input type="hidden" name="action" value="cancel">
+
+            <div class="appointment-actions">
+                <button type="button" class="btn btn-outline" id="cancelCancelBtn">
+                    <i class="fas fa-arrow-left"></i> Go Back
+                </button>
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-times"></i> Confirm Cancellation
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Cancel All Appointments Modal -->
+<div id="cancelAllAppointmentsModal" class="overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <button class="close-btn" id="cancelAllModalCloseButton">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="modal-title">Cancel All Appointments</h3>
+            <p class="modal-subtitle">This Action Cannot Be Undone</p>
+        </div>
+        
+        <div class="modal-content">
+            <p class="warning-text">
+                You are about to cancel <strong>All Appointments</strong> for 
+                <span id="cancelAllDateText" data-date="2025-06-01"> the selected date</span>. 
+                Please confirm this action and select a reason for cancellation.
+            </p>
+            
+            <form id="cancelAllAppointmentsForm">
+                <div class="form-group">
+                    <label class="form-label" for="cancelAllReason">
+                        Reason for Cancellation <span class="required">*</span>
+                    </label>
+                    <select class="form-control" id="cancelAllReason" name="reason" required>
+                        <option value="">Select a reason...</option>
+                        <option value="Doctor is unavailable">Doctor is Unavailable</option>
+                        <option value="Holiday">Holiday</option>
+                        <option value="Emergency Case">Emergency Case</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="otherReasonContainer" style="display: none;">
+                    <label class="form-label" for="cancelAllOtherReason">
+                        Please specify <span class="required">*</span>
+                    </label>
+                    <textarea 
+                        class="form-control textarea" 
+                        id="cancelAllOtherReason" 
+                        name="other_reason" 
+                        placeholder="Please provide details about the reason for cancellation..."
+                    ></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancelAllModalCancelBtn">
+                        <i class="fas fa-arrow-left"></i> Go Back
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-check"></i> Yes Cancel 
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
         <!-- Notification -->
         <div id="notification" class="notification">
             <i class="fas fa-check-circle"></i>
@@ -431,7 +623,6 @@ try {
                 </div>
             </div>
         </div>
-        
         <div class="appointment-meta">
             <div class="meta-item">
                 <i class="fas fa-clock"></i>
@@ -465,7 +656,7 @@ try {
             </div>
         </div>
         
-        <div class="edit-appointment-btn">
+        <div class="edit-appointment-btn"  id="editAppointmentControls">
             <button class="btn btn-outline" id="editAppointmentBtn">
                 <i class="fas fa-edit"></i> Edit Details
             </button>
@@ -473,8 +664,31 @@ try {
                 <i class="fas fa-times"></i> Cancel Appointment
             </button>
         </div>
-        </div>
     </div>
+</div>
+
+
+<script>
+    let currentDoctorId = <?php echo json_encode($doctor_id ?? null); ?>;
+        // Shows the cancel all appointments modal
+   function showCancelAllModal(date) {
+    const modal = document.getElementById('cancelAllAppointmentsModal');
+    if (modal) {
+        // Store the date in the modal's dataset
+        modal.dataset.date = date;
+        
+        // Update the displayed date text
+        const dateText = document.getElementById('cancelAllDateText');
+        if (dateText) {
+            const displayDate = new Date(date);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateText.textContent = displayDate.toLocaleDateString('en-US', options);
+        }
+        
+        modal.classList.add('active');
+    }
+}
+</script>
     <script src="Appointment.js"></script>
 </body>
 </html>

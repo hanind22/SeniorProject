@@ -40,7 +40,8 @@ try {
             'type' => $row['appointment_type'],
             'purpose' => $row['reason_for_visit'],
             'notes' => $row['notes'],
-            'patient_id' =>$row['patient_id']
+            'patient_id' =>$row['patient_id'],
+            'status' => $row['status'] 
         ];
     }
 

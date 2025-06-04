@@ -29,25 +29,74 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentYear = new Date().getFullYear();
     let selectedDate = '';
     let sampleAppointments = {};
+    let currentDoctorId = 1;
+    let refreshInterval;
 
-    // Fetches appointments from the server with optional force refresh
+    // Notification system with fallback
+    function showNotification(message, type = 'success') {
+        try {
+            const notification = document.getElementById('notification');
+            const messageElement = document.getElementById('notification-message');
+            
+            if (!notification || !messageElement) {
+                console.warn('Notification elements not found');
+                // Fallback to console and alert
+                console.log(`${type}: ${message}`);
+                alert(`${type}: ${message}`);
+                return;
+            }
+            
+            messageElement.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('active');
+            
+            setTimeout(function() {
+                notification.classList.remove('active');
+            }, 3000);
+        } catch (error) {
+            console.error('Error showing notification:', error, message);
+            alert(`${type}: ${message}`);
+        }
+    }
+
+    // Make available globally
+    window.showNotification = showNotification;
+
+    // Fetches appointments from the server
     async function loadAppointments(forceRefresh = false) {
         try {
-            const response = await fetch('get_appointments.php', {
+            // Add cache busting if forcing refresh
+            const url = forceRefresh 
+                ? 'get_appointments.php?t=' + Date.now() 
+                : 'get_appointments.php';
+            
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Cache-Control': 'no-cache'
                 },
                 credentials: 'same-origin'
             });
             
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Server error: ${response.status} - ${errorText}`);
+            }  
+
             const data = await response.json();
-            console.log('Appointments loaded:', data);
             
-            sampleAppointments = data || {};
-            return data;
+            // Transform the data to mark all appointments on cancelled dates as cancelled
+            const transformedData = {};
+            for (const [date, appointments] of Object.entries(data)) {
+                transformedData[date] = appointments.map(appt => ({
+                    ...appt,
+                    status: appt.status || 'Scheduled' // Default to Scheduled if no status
+                }));
+            }
+            
+            sampleAppointments = transformedData;
+            return transformedData;
         } catch (error) {
             console.error('Error loading appointments:', error);
             showNotification('Failed to load appointments', 'error');
@@ -55,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Checks for success/error messages in URL parameters and session storage
+    // Checks for server messages
     function checkServerMessages() {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('success')) {
@@ -72,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Generates the calendar grid for the specified month and year
+    // Calendar generation
     async function generateCalendar(month, year) {
         await loadAppointments();
 
@@ -116,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Creates a day element for the calendar grid
+    // Creates a day element
     function createDayElement(date, month, year) {
         const dayElement = document.createElement('div');
         dayElement.className = 'calendar-day';
@@ -130,25 +179,17 @@ document.addEventListener('DOMContentLoaded', function() {
         dayNumber.textContent = date;
         dayElement.appendChild(dayNumber);
         
-        dayElement.addEventListener('click', function() {
-            showAppointmentsForDate(formattedDate);
-        });
-        
         return dayElement;
     }
 
-    // Renders appointment previews on a calendar day element
+    // Renders appointments on calendar day
     function renderCalendarAppointments(dayElement, appointments) {
         if (!dayElement) return;
         
-        // Clear existing content but preserve the day number
         const dayNumber = dayElement.querySelector('.day-number');
         dayElement.innerHTML = '';
-        if (dayNumber) {
-            dayElement.appendChild(dayNumber);
-        }
+        if (dayNumber) dayElement.appendChild(dayNumber);
         
-        // Filter out invalid appointments
         const validAppointments = appointments.filter(appt => {
             if (!appt || !appt.type || typeof appt.type !== 'string') {
                 console.warn('Skipping invalid appointment:', appt);
@@ -157,9 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return true;
         });
 
-        if (validAppointments.length === 0) {
-            return;
-        }
+        if (validAppointments.length === 0) return;
 
         const previewsContainer = document.createElement('div');
         previewsContainer.className = 'appointment-previews';
@@ -169,38 +208,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const preview = createAppointmentPreview(appt);
             if (preview) {
                 preview.setAttribute('data-appointment-id', appt.id);
-                preview.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    showAppointmentDetails(appt);
-                });
                 previewsContainer.appendChild(preview);
             }
         });
 
-        // Create appointment count element
         const appointmentCount = document.createElement('div');
         appointmentCount.className = 'appointment-count';
         appointmentCount.textContent = validAppointments.length;
         dayElement.appendChild(appointmentCount);
-        
         dayElement.appendChild(previewsContainer);
-        
-        const indicatorsContainer = document.createElement('div');
-        indicatorsContainer.className = 'appointment-indicators';
-        
-        dayElement.appendChild(indicatorsContainer);
         
         if (validAppointments.length > 0) {
             dayElement.classList.add('has-appointments');
         }
     }
 
-    // Creates an appointment preview element with proper validation
+    // Creates appointment preview
     function createAppointmentPreview(appointment) {
-        if (!appointment || !appointment.type || typeof appointment.type !== 'string') {
-            console.warn('Skipping appointment with invalid or missing type:', appointment);
-            return null;
-        }
+        if (!appointment || !appointment.type) return null;
 
         const preview = document.createElement('div');
         const typeClass = appointment.type.toLowerCase().replace(/\s+/g, '-');
@@ -208,14 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const time = document.createElement('span');
         time.className = 'appointment-time';
-        
-        // Safely handle time formatting
-        let displayTime = 'Unknown time';
-        if (appointment.time) {
-            const timeParts = appointment.time.split(' ');
-            displayTime = timeParts[0] || displayTime;
-        }
-        time.textContent = displayTime;
+        time.textContent = appointment.time?.split(' ')[0] || 'Unknown time';
 
         if (appointment.status === 'Cancelled') {
             const strike = document.createElement('span');
@@ -229,56 +247,76 @@ document.addEventListener('DOMContentLoaded', function() {
         return preview;
     }
 
-    // Displays all appointments for a specific date in the overlay
+    // Date formatting functions
+    function formatDateForAPI(dateStr) {
+        if (!dateStr) return '';
+        const date = new Date(dateStr);
+        if (isNaN(date.getTime())) return '';
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    }
+
+    function formatDateForDisplay(dateStr) {
+        if (!dateStr) return '';
+        const date = new Date(dateStr);
+        if (isNaN(date.getTime())) return '';
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+
+    // Shows appointments for a date
     function showAppointmentsForDate(date) {
         if (!date) return;
-        
+
         selectedDate = date;
         const displayDate = new Date(date + 'T00:00:00');
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        
+
         const overlayDateElement = document.getElementById('overlay-date');
         if (overlayDateElement) {
             overlayDateElement.textContent = displayDate.toLocaleDateString('en-US', options);
         }
-        
+
         const appointmentsContainer = document.getElementById('appointments-container');
         if (!appointmentsContainer) return;
-        
+
         appointmentsContainer.innerHTML = '';
-        
-        const appointments = (sampleAppointments[date] || []).filter(a => a && a.type);
-        
-        if (appointments.length === 0) {
-            appointmentsContainer.innerHTML = '<div class="no-appointments">No appointments scheduled for this day.</div>';
+
+        // Get ACTIVE appointments only (non-cancelled)
+        const activeAppointments = (sampleAppointments[date] || []).filter(a => 
+            a && a.type && (!a.status || a.status.toLowerCase() !== 'cancelled')
+        );
+
+        // Update Cancel All button - ONLY show if there are active appointments
+        const cancelAllBtn = document.getElementById('cancel-all-appointments');
+        if (cancelAllBtn) {
+            cancelAllBtn.style.display = activeAppointments.length > 0 ? 'inline-block' : 'none';
+            cancelAllBtn.setAttribute('data-date', date);
+        }
+
+        if (activeAppointments.length === 0) {
+            appointmentsContainer.innerHTML = '<div class="no-appointments">No active appointments for this day.</div>';
         } else {
-            appointments.sort((a, b) => {
-                return convertTimeToMinutes(a.time) - convertTimeToMinutes(b.time);
-            });
-            
-            appointments.forEach(appointment => {
+            activeAppointments.sort((a, b) => convertTimeToMinutes(a.time) - convertTimeToMinutes(b.time));
+            activeAppointments.forEach(appointment => {
                 const card = createAppointmentCard(appointment);
-                if (card) {
-                    appointmentsContainer.appendChild(card);
-                }
+                if (card) appointmentsContainer.appendChild(card);
             });
         }
-        
+
         const addAppointmentBtn = document.getElementById('add-appointment-day-btn');
         if (addAppointmentBtn) {
             addAppointmentBtn.setAttribute('data-date', date);
         }
-        
+
         const appointmentOverlay = document.getElementById('appointment-overlay');
         if (appointmentOverlay) {
             appointmentOverlay.classList.add('active');
         }
     }
 
-    // Converts time string (HH:MM AM/PM) to minutes for sorting
+    // Time conversion
     function convertTimeToMinutes(timeStr) {
         if (!timeStr) return 0;
-        
         const [time, period] = timeStr.split(' ');
         const [hours, minutes] = time.split(':').map(Number);
         let total = hours % 12 * 60 + minutes;
@@ -286,36 +324,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return total;
     }
 
-    // Creates a card element for an appointment with validation
+    // Creates appointment card
     function createAppointmentCard(appointment) {
         if (!appointment) return null;
         
         const typeConfig = {
-            'regular-checkup': {
-                display: 'Checkup',
-                icon: 'fa-calendar-check',
-                color: 'var(--regular-text)'
-            },
-            'follow-up': {
-                display: 'Follow Up',
-                icon: 'fa-sync-alt',
-                color: 'var(--follow-up-text)'
-            },
-            'urgent-care': {
-                display: 'Urgent',
-                icon: 'fa-exclamation-triangle',
-                color: 'var(--urgent-text)'
-            },
-            'consultation': {
-                display: 'Consult',
-                icon: 'fa-comments',
-                color: 'var(--regular-text)'
-            },
-            'other': {
-                display: 'Other',
-                icon: 'fa-ellipsis-h',
-                color: 'var(--regular-text)'
-            }
+            'regular-checkup': { display: 'Checkup', icon: 'fa-calendar-check', color: 'var(--regular-text)' },
+            'follow-up': { display: 'Follow Up', icon: 'fa-sync-alt', color: 'var(--follow-up-text)' },
+            'urgent-care': { display: 'Urgent', icon: 'fa-exclamation-triangle', color: 'var(--urgent-text)' },
+            'consultation': { display: 'Consult', icon: 'fa-comments', color: 'var(--regular-text)' },
+            'other': { display: 'Other', icon: 'fa-ellipsis-h', color: 'var(--regular-text)' }
         };
 
         const typeKey = appointment.type ? appointment.type.toLowerCase().replace(/\s+/g, '-') : 'other';
@@ -334,7 +352,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${config.display}
                 </div>
             </div>
-            
             <div class="appt-card__body">
                 <div class="patient-avatar" style="background:${config.color}20;color:${config.color}">
                     ${initials}
@@ -344,7 +361,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="patient-purpose">${appointment.purpose || 'No purpose specified'}</p>
                 </div>
             </div>
-            
             <div class="appt-card__footer">
                 <button class="appt-action view-details">
                     <span>View Details</span>
@@ -352,78 +368,97 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
 
-        const viewDetailsBtn = card.querySelector('.view-details');
-        if (viewDetailsBtn) {
-            viewDetailsBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                showAppointmentDetails(appointment);
-            });
-        }
-
         return card;
     }
 
-    // Gets initials from a full name
+    // Helper functions
     function getInitials(name) {
-        if (!name) return '';
-        return name.split(' ').map(part => part[0]).join('').toUpperCase();
+        return name ? name.split(' ').map(part => part[0]).join('').toUpperCase() : '';
     }
 
-    // Shows detailed view of an appointment in a modal
+    function setModalText(elementId, text) {
+        const element = document.getElementById(elementId);
+        if (element) element.textContent = text;
+    }
+
+    function isValidDate(date) {
+        return date instanceof Date && !isNaN(date);
+    }
+
+    // Modal functions
+    function closeModal() {
+        const modal = document.getElementById("appointmentModal");
+        if (modal) {
+            modal.style.display = 'none';
+            modal.classList.remove("active");
+        }
+    }
+    
+    function closeAllModals() {
+        document.querySelectorAll('.overlay').forEach(modal => {
+            modal.style.display = 'none';
+            modal.classList.remove('active');
+        });
+    }
+
+    // Appointment details
     function showAppointmentDetails(appointment) {
         if (!appointment) return;
         
         const appointmentDate = new Date(selectedDate);
-        
-        const fullDateOptions = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        };
-
-        const patientId = appointment.patient_id || 'N/A';
-        
+        const fullDateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const formattedAppointmentDate = isValidDate(appointmentDate) ? 
-            appointmentDate.toLocaleDateString('en-US', fullDateOptions) : 
-            'Date not available';
+        appointmentDate.toLocaleDateString('en-US', fullDateOptions) : 'Date not available';
+        const cancelAllBtn = document.getElementById('cancel-all-appointments');
         
         setModalText('modalPatientName', appointment.patientName || 'No patient name');
-        setModalText('modalPatientId', `Patient ID: ${patientId}`);
+        setModalText('modalPatientId', `Patient ID: ${appointment.patient_id || 'N/A'}`);
         setModalText('modalAppointmentId', `Appointment ID: ${appointment.id || appointment.appointment_id || 'N/A'}`);
         setModalText('modalTime', appointment.time || 'No time specified');
         setModalText('modalType', appointment.type || 'No type specified');
-        setModalText('modalPurpose', appointment.purpose || 'No purpose specified');
+        setModalText('modalPurpose', appointment.purpose || appointment.reason_for_visit || 'No purpose specified');
         
         const notesSection = document.getElementById('modalNotesSection');
         const notesContent = document.getElementById('modalNotes');
         if (notesSection && notesContent) {
-            if (appointment.notes) {
-                notesContent.textContent = appointment.notes;
-                notesSection.style.display = 'block';
-            } else {
-                notesSection.style.display = 'none';
+            notesSection.style.display = appointment.notes ? 'block' : 'none';
+            notesContent.textContent = appointment.notes || '';
+        }
+
+        // Hide or disable edit/cancel if already cancelled
+        const editControls = document.getElementById('editAppointmentControls');
+        const editBtn = document.getElementById('editAppointmentBtn');
+        const cancelBtn = document.getElementById('cancelAppointmentBtn');
+
+        const isCancelled = appointment.status && appointment.status.toLowerCase() === 'cancelled';
+
+        if (editControls) {
+            editControls.style.display = isCancelled ? 'none' : 'flex';
+        }
+
+        // Still attach handlers in case it's not cancelled
+        if (!isCancelled) {
+            if (editBtn) {
+                editBtn.onclick = function(e) {
+                    e.preventDefault();
+                    closeModal();
+                    editAppointmentDetails(appointment);
+                };
+            }
+
+            if (cancelBtn) {
+                cancelBtn.onclick = function(e) {
+                    e.preventDefault();
+                    closeModal();
+                    showCancelConfirmation(appointment);
+                };
             }
         }
-        
-        const editBtn = document.getElementById('editAppointmentBtn');
-        if (editBtn) {
-            editBtn.onclick = function(e) {
-                e.preventDefault();
-                closeModal();
-                editAppointmentDetails(appointment);
-            };
+
+        if (cancelAllBtn && selectedDate) {
+            cancelAllBtn.dataset.date = selectedDate;
         }
-        
-        const cancelBtn = document.getElementById('cancelAppointmentBtn');
-        if (cancelBtn) {
-            cancelBtn.onclick = function(e) {
-                e.preventDefault();
-                closeModal();
-                showCancelConfirmation(appointment);
-            };
-        }
-        
+
         const appointmentModal = document.getElementById("appointmentModal");
         if (appointmentModal) {
             appointmentModal.style.display = 'flex';
@@ -431,31 +466,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Helper function to set text content of modal elements
-    function setModalText(elementId, text) {
-        const element = document.getElementById(elementId);
-        if (element) {
-            element.textContent = text;
-        }
-    }
-
-    // Validates if a date object is valid
-    function isValidDate(date) {
-        return date instanceof Date && !isNaN(date);
-    }
-
-    // Update the closeModal function
-    function closeModal() {
-        const appointmentModal = document.getElementById("appointmentModal");
-        if (appointmentModal) {
-            appointmentModal.style.display = 'none';
-            appointmentModal.classList.remove("active");
-        }
-    }
-    
-    window.closeModal = closeModal;
-
-    // Update the showCancelConfirmation function to use proper modal display
+    // Cancel confirmation
     function showCancelConfirmation(appointment) {
         if (!appointment) return;
         
@@ -476,42 +487,30 @@ document.addEventListener('DOMContentLoaded', function() {
             cancelModal.classList.add('active');
         }
     }
-      
-    // Update the editAppointmentDetails function to properly display current time
+
+    // Edit appointment
     function editAppointmentDetails(appointment) {
         if (!appointment) return;
         
         closeAllModals();
         
-        // Set patient name and date
         setModalText('editPatientName', appointment.patientName || 'No patient name');
         setModalText('editAppointmentDate', selectedDate);
         
-        // Display the current appointment time
         const currentTimeElement = document.getElementById('editCurrentTime');
         if (currentTimeElement && appointment.time) {
             currentTimeElement.textContent = formatTimeForDisplay(appointment.time);
         }
         
-        // Set the time input field
         const editTime = document.getElementById('edit-appointment-time');
-        if (editTime) {
-            editTime.value = convertTo24Hour(appointment.time);
-        }
+        if (editTime) editTime.value = convertTo24Hour(appointment.time);
         
-        // Set notes
         const editNotes = document.getElementById('edit-appointment-notes');
-        if (editNotes) {
-            editNotes.value = appointment.notes || '';
-        }
+        if (editNotes) editNotes.value = appointment.notes || '';
         
-        // Set appointment ID
         const editAppointmentId = document.getElementById('edit-appointment-id');
-        if (editAppointmentId) {
-            editAppointmentId.value = appointment.id;
-        }
+        if (editAppointmentId) editAppointmentId.value = appointment.id;
         
-        // Show the modal
         const editModal = document.getElementById('editAppointmentModal');
         if (editModal) {
             editModal.style.display = 'flex';
@@ -519,89 +518,105 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Improved time formatting function
+    // Time formatting
     function formatTimeForDisplay(timeStr) {
         if (!timeStr) return 'No time specified';
+        if (timeStr.includes('AM') || timeStr.includes('PM')) return timeStr;
         
-        // If already in AM/PM format, return as is
-        if (timeStr.includes('AM') || timeStr.includes('PM')) {
-            return timeStr;
-        }
-        
-        // If in 24-hour format (HH:MM), convert to 12-hour format
         const timeParts = timeStr.split(':');
         if (timeParts.length === 2) {
             let hours = parseInt(timeParts[0]);
             const minutes = timeParts[1];
             const ampm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12;
-            hours = hours ? hours : 12; // Convert 0 to 12
+            hours = hours ? hours : 12;
             return `${hours}:${minutes} ${ampm}`;
         }
-        
-        // Fallback for unexpected formats
         return timeStr;
     }
 
-    // Update the closeAllModals function to handle both display and class
-    function closeAllModals() {
-        document.querySelectorAll('.overlay').forEach(modal => {
-            modal.style.display = 'none';
-            modal.classList.remove('active');
-        });
-    }
-
-    // Finds an appointment by ID in the sampleAppointments object
-    function findAppointmentById(id) {
-        for (const date in sampleAppointments) {
-            const appointment = sampleAppointments[date].find(a => a.id == id);
-            if (appointment) return appointment;
-        }
-        return null;
-    }
-
-    // Converts 12-hour time string to 24-hour format
     function convertTo24Hour(time12h) {
         if (!time12h) return '';
-        
         const [time, period] = time12h.split(' ');
         if (!period) return time;
         
         let [hours, minutes] = time.split(':');
-        
         if (period === 'PM' && hours !== '12') {
             hours = parseInt(hours, 10) + 12;
         } else if (period === 'AM' && hours === '12') {
             hours = '00';
         }
-        
         return `${hours}:${minutes}`;
     }
 
-    // Refreshes the calendar display
+    // Calendar navigation
     function refreshCalendar() {
         loadAppointments(true).then(() => {
             generateCalendar(currentMonth, currentYear);
         });
     }
 
-    // Shows a notification message
-    function showNotification(message, type = 'success') {
-        const notification = document.getElementById('notification');
-        const messageElement = document.getElementById('notification-message');
-        
-        if (!notification || !messageElement) return;
-        
-        messageElement.textContent = message;
-        notification.className = `notification ${type}`;
-        notification.classList.add('active');
-        
-        setTimeout(function() {
-            notification.classList.remove('active');
-        }, 3000);
+    // Cancel all appointments
+    function showCancelAllModal() {
+        if (!selectedDate) {
+            showNotification('Please select a date first', 'error');
+            return;
+        }
+
+        const modal = document.getElementById('cancelAllAppointmentsModal');
+        if (modal) {
+            modal.dataset.date = selectedDate;
+            modal.classList.add('active');
+
+            const dateText = document.getElementById('cancelAllDateText');
+            if (dateText) {
+                dateText.textContent = formatDateForDisplay(selectedDate);
+                dateText.dataset.date = selectedDate;
+            }
+        }
     }
 
-    // Update the setupCloseButton function to properly close modals
+    function closeCancelAllModal(fullReset = false) {
+        const modal = document.getElementById('cancelAllAppointmentsModal');
+        if (!modal) return;
+        
+        modal.classList.remove('active');
+        
+        if (fullReset) {
+            // Reset form and state
+            const form = document.getElementById('cancelAllAppointmentsForm');
+            if (form) form.reset();
+            
+            // Clear any error messages
+            const errorElements = modal.querySelectorAll('.error-message');
+            errorElements.forEach(el => el.remove());
+            
+            // Reset the selected date
+            selectedDate = '';
+        }
+    }
+
+    async function cancelAllAppointmentsForDate() {
+        if (!selectedDate) {
+            showNotification('Please select a date first', 'error');
+            return;
+        }
+        
+        if (!currentDoctorId) {
+            showNotification('Doctor ID is not set', 'error');
+            return;
+        }
+        
+        const appointments = sampleAppointments[selectedDate] || [];
+        if (appointments.length === 0) {
+            showNotification('No appointments to cancel for this date', 'warning');
+            return;
+        }
+        
+        showCancelAllModal();
+    }
+
+    // Setup functions
     function setupCloseButton(buttonId, modalId) {
         const button = document.getElementById(buttonId);
         const modal = document.getElementById(modalId);
@@ -613,7 +628,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Sets up a close button for an overlay
     function setupOverlayCloseButton(buttonId, overlayId) {
         const button = document.getElementById(buttonId);
         const overlay = document.getElementById(overlayId);
@@ -624,278 +638,437 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initialize calendar and event listeners
+    // Initialize calendar
     generateCalendar(currentMonth, currentYear);
     checkServerMessages();
 
-    // Month navigation
-    const prevMonthBtn = document.getElementById('prev-month');
-    if (prevMonthBtn) {
-        prevMonthBtn.addEventListener('click', function() {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
+    // Set up periodic refresh (every 5 minutes)
+    refreshInterval = setInterval(() => {
+        loadAppointments(true).then(() => {
             generateCalendar(currentMonth, currentYear);
-        });
-    }
-
-    const nextMonthBtn = document.getElementById('next-month');
-    if (nextMonthBtn) {
-        nextMonthBtn.addEventListener('click', function() {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            generateCalendar(currentMonth, currentYear);
-        });
-    }
-
-    // Close overlays
-    setupOverlayCloseButton('close-overlay', 'appointment-overlay');
-    setupOverlayCloseButton('close-add-overlay', 'add-appointment-overlay');
-    setupOverlayCloseButton('cancel-appointment', 'add-appointment-overlay');
-
-    // Form handlers
-    const addAppointmentBtn = document.getElementById('add-appointment-btn');
-    if (addAppointmentBtn) {
-        addAppointmentBtn.addEventListener('click', function() {
-            const appointmentForm = document.getElementById('appointment-form');
-            const appointmentIdField = document.getElementById('appointment-id');
-            const appointmentDateField = document.getElementById('appointment-date');
-            const overlayTitle = document.querySelector('#add-appointment-overlay h3');
-            const submitButton = document.querySelector('#appointment-form button[type="submit"]');
-            const addAppointmentOverlay = document.getElementById('add-appointment-overlay');
-            
-            if (!appointmentForm || !appointmentDateField || !overlayTitle || !submitButton || !addAppointmentOverlay) return;
-            
-            appointmentForm.reset();
-            
-            if (appointmentIdField) {
-                appointmentIdField.remove();
-            }
-            
-            appointmentDateField.value = new Date().toISOString().split('T')[0];
-            
-            overlayTitle.textContent = 'Add New Appointment';
-            submitButton.innerHTML = '<i class="fas fa-save"></i> Save Appointment';
-            appointmentForm.removeAttribute('data-mode');
-            
-            addAppointmentOverlay.classList.add('active');
-        });
-    }
-
-    const addAppointmentDayBtn = document.getElementById('add-appointment-day-btn');
-    if (addAppointmentDayBtn) {
-        addAppointmentDayBtn.addEventListener('click', function() {
-            const appointmentForm = document.getElementById('appointment-form');
-            const appointmentIdField = document.getElementById('appointment-id');
-            const appointmentDateField = document.getElementById('appointment-date');
-            const overlayTitle = document.querySelector('#add-appointment-overlay h3');
-            const submitButton = document.querySelector('#appointment-form button[type="submit"]');
-            const addAppointmentOverlay = document.getElementById('add-appointment-overlay');
-            
-            if (!appointmentForm || !appointmentDateField || !overlayTitle || !submitButton || !addAppointmentOverlay) return;
-            
-            appointmentForm.reset();
-            
-            if (appointmentIdField) {
-                appointmentIdField.remove();
-            }
-            
-            appointmentDateField.value = this.getAttribute('data-date');
-            
-            overlayTitle.textContent = 'Add New Appointment';
-            submitButton.innerHTML = '<i class="fas fa-save"></i> Save Appointment';
-            appointmentForm.removeAttribute('data-mode');
-            
-            addAppointmentOverlay.classList.add('active');
-        });
-    }
-
-    // Patient ID lookup
-    const patientIdField = document.getElementById('appointment-patient-id');
-    if (patientIdField) {
-        patientIdField.addEventListener('change', async function() {
-            const patientId = this.value;
-            const patientNameField = document.getElementById('appointment-patient-name');
-            
-            if (!patientNameField) return;
-            
-            if (!patientId) {
-                patientNameField.value = '';
-                return;
-            }
-
-            try {
-                const response = await fetch(`get_patient_name.php?patient_id=${patientId}`);
-                if (!response.ok) throw new Error('Network response was not ok');
-                
-                const data = await response.json();
-                if (data.success) {
-                    patientNameField.value = data.patient_name;
-                } else {
-                    patientNameField.value = 'Patient not found';
-                }
-            } catch (error) {
-                console.error('Error fetching patient:', error);
-                patientNameField.value = 'Error fetching patient';
+            if (selectedDate) {
+                showAppointmentsForDate(selectedDate);
             }
         });
-    }
+    }, 300000); // 5 minutes in milliseconds
 
-    // Update the modal event listeners
-    const modalCloseButton = document.getElementById("modalCloseButton");
-    if (modalCloseButton) {
-        modalCloseButton.addEventListener('click', function() {
+    // Event delegation for dynamic elements
+    document.addEventListener('click', function(e) {
+        // Calendar day click
+        if (e.target.closest('.calendar-day')) {
+            const dayElement = e.target.closest('.calendar-day');
+            const date = dayElement.getAttribute('data-date');
+            selectedDate = date;
+            document.getElementById('overlay-date').textContent = date;
+            document.getElementById('cancelAllDateText').textContent = date;
+            document.getElementById('cancelAllDateText').dataset.date = date;
+
+            // Show cancel all button if there are appointments
+            const appointments = sampleAppointments[date] || [];
+            document.getElementById('cancel-all-appointments').style.display = appointments.length ? 'inline-block' : 'none';
+
+            // Store selectedDate in modal as well
+            const modal = document.getElementById('cancelAllAppointmentsModal');
+            if (modal) modal.dataset.date = date;
+
+            showAppointmentsForDate(date);
+        }
+
+        // Appointment preview click
+        if (e.target.closest('.appointment-preview')) {
+            const preview = e.target.closest('.appointment-preview');
+            const appointmentId = preview.getAttribute('data-appointment-id');
+            const date = preview.closest('.calendar-day').getAttribute('data-date');
+            const appointment = (sampleAppointments[date] || []).find(a => a.id == appointmentId);
+            if (appointment) {
+                showAppointmentDetails(appointment);
+            }
+        }
+
+        // View details button click
+        if (e.target.closest('.view-details')) {
+            const card = e.target.closest('.appt-card');
+            const patientName = card.querySelector('.patient-name').textContent;
+            const date = selectedDate;
+            const appointment = (sampleAppointments[date] || []).find(a => a.patientName === patientName);
+            if (appointment) {
+                showAppointmentDetails(appointment);
+            }
+        }
+
+        // Modal close buttons
+        if (e.target.id === 'modalCloseButton') {
             closeModal();
-        });
-    }
-
-    const editModalCloseButton = document.getElementById('editModalCloseButton');
-    if (editModalCloseButton) {
-        editModalCloseButton.addEventListener('click', function() {
+        }
+        if (e.target.id === 'editModalCloseButton') {
             const editModal = document.getElementById('editAppointmentModal');
             if (editModal) {
                 editModal.style.display = 'none';
                 editModal.classList.remove('active');
             }
-        });
-    }
-
-    const cancelModalCloseButton = document.getElementById('cancelModalCloseButton');
-    if (cancelModalCloseButton) {
-        cancelModalCloseButton.addEventListener('click', function() {
+        }
+        if (e.target.id === 'cancelModalCloseButton') {
             const cancelModal = document.getElementById('cancelAppointmentModal');
             if (cancelModal) {
                 cancelModal.style.display = 'none';
                 cancelModal.classList.remove('active');
             }
-        });
-    }
+        }
+        if (e.target.id === 'cancelAllModalCloseButton') {
+            closeCancelAllModal(true);
+        }
 
-    const appointmentModal = document.getElementById("appointmentModal");
-    if (appointmentModal) {
-        appointmentModal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+        // Click outside modals
+        if (e.target === document.getElementById('appointmentModal')) {
             closeModal();
         }
+        if (e.target === document.getElementById('editAppointmentModal')) {
+            const editModal = document.getElementById('editAppointmentModal');
+            if (editModal) {
+                editModal.style.display = 'none';
+                editModal.classList.remove('active');
+            }
+        }
+        if (e.target === document.getElementById('cancelAppointmentModal')) {
+            const cancelModal = document.getElementById('cancelAppointmentModal');
+            if (cancelModal) {
+                cancelModal.style.display = 'none';
+                cancelModal.classList.remove('active');
+            }
+        }
+        if (e.target === document.getElementById('cancelAllAppointmentsModal')) {
+            closeCancelAllModal(true);
+        }
     });
 
-    // Update the form submission handlers to properly close modals
-    const editForm = document.getElementById('edit-appointment-form');
-    if (editForm) {
-        editForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            try {
-                const formData = new FormData(this);
-                formData.append('action', 'update_time');
-                
-                const response = await fetch('update_appointment.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showNotification('Appointment updated successfully', 'success');
-                    const editModal = document.getElementById('editAppointmentModal');
-                    if (editModal) {
-                        editModal.style.display = 'none';
-                        editModal.classList.remove('active');
-                    }
-                    refreshCalendar();
-                } else {
-                    showNotification('Error updating appointment: ' + (result.message || 'Please try again'), 'error');
-                }
-            } catch (error) {
-                console.error('Error updating appointment:', error);
-                showNotification('Error updating appointment. Please try again.', 'error');
-            }
-        });
-    }
+    // Calendar navigation buttons
+    document.getElementById('prev-month')?.addEventListener('click', function() {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        generateCalendar(currentMonth, currentYear);
+    });
 
-    const cancelForm = document.getElementById('cancel-appointment-form');
-    if (cancelForm) {
-        cancelForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            try {
-                const formData = new FormData(this);
-                
-                const response = await fetch('update_appointment.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showNotification('Appointment cancelled successfully', 'success');
-                    const cancelModal = document.getElementById('cancelAppointmentModal');
-                    if (cancelModal) {
-                        cancelModal.style.display = 'none';
-                        cancelModal.classList.remove('active');
-                    }
-                    refreshCalendar();
-                } else {
-                    showNotification('Error cancelling appointment: ' + (result.message || 'Please try again'), 'error');
-                }
-            } catch (error) {
-                console.error('Error cancelling appointment:', error);
-                showNotification('Error cancelling appointment. Please try again.', 'error');
-            }
-        });
-    }
+    document.getElementById('next-month')?.addEventListener('click', function() {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        generateCalendar(currentMonth, currentYear);
+    });
 
     // Close buttons
-    setupCloseButton('editModalCloseButton', 'editAppointmentModal');
-    setupCloseButton('cancelModalCloseButton', 'cancelAppointmentModal');
-    setupCloseButton('cancelEditBtn', 'editAppointmentModal');
-    setupCloseButton('cancelCancelBtn', 'cancelAppointmentModal');
+    setupOverlayCloseButton('close-overlay', 'appointment-overlay');
+    setupOverlayCloseButton('close-add-overlay', 'add-appointment-overlay');
+    setupOverlayCloseButton('cancel-appointment', 'add-appointment-overlay');
 
-    // Show/hide other reason field
-    const cancelReason = document.getElementById('cancel-reason');
-    if (cancelReason) {
-        cancelReason.addEventListener('change', function() {
-            const otherReasonContainer = document.getElementById('other-reason-container');
-            if (otherReasonContainer) {
-                otherReasonContainer.style.display = this.value === 'Other' ? 'block' : 'none';
-            }
-        });
-    }
+    // Cancel all appointments button
+    document.getElementById('cancel-all-appointments')?.addEventListener('click', cancelAllAppointmentsForDate);
 
-    // Close modals when clicking outside
-    document.addEventListener('mousedown', function(e) {
-        const appointmentModal = document.getElementById("appointmentModal");
-        if (appointmentModal) {
-            const modalContent = appointmentModal.querySelector(".modal");
-            if (appointmentModal.classList.contains("active") && modalContent && !modalContent.contains(e.target)) {
-                appointmentModal.classList.remove("active");
-            }
-        }
+    // Add appointment buttons
+    document.getElementById('add-appointment-btn')?.addEventListener('click', function() {
+        const appointmentForm = document.getElementById('appointment-form');
+        const appointmentIdField = document.getElementById('appointment-id');
+        const appointmentDateField = document.getElementById('appointment-date');
+        const overlayTitle = document.querySelector('#add-appointment-overlay h3');
+        const submitButton = document.querySelector('#appointment-form button[type="submit"]');
+        const addAppointmentOverlay = document.getElementById('add-appointment-overlay');
         
-        const addOverlay = document.getElementById("add-appointment-overlay");
-        if (addOverlay) {
-            const addOverlayContent = addOverlay.querySelector(".overlay-content");
-            if (addOverlay.classList.contains("active") && addOverlayContent && !addOverlayContent.contains(e.target)) {
-                addOverlay.classList.remove("active");
-            }
+        if (!appointmentForm || !appointmentDateField || !overlayTitle || !submitButton || !addAppointmentOverlay) return;
+        
+        appointmentForm.reset();
+        if (appointmentIdField) appointmentIdField.remove();
+        
+        appointmentDateField.value = new Date().toISOString().split('T')[0];
+        overlayTitle.textContent = 'Add New Appointment';
+        submitButton.innerHTML = '<i class="fas fa-save"></i> Save Appointment';
+        appointmentForm.removeAttribute('data-mode');
+        addAppointmentOverlay.classList.add('active');
+    });
+
+    document.getElementById('add-appointment-day-btn')?.addEventListener('click', function() {
+        const appointmentForm = document.getElementById('appointment-form');
+        const appointmentIdField = document.getElementById('appointment-id');
+        const appointmentDateField = document.getElementById('appointment-date');
+        const overlayTitle = document.querySelector('#add-appointment-overlay h3');
+        const submitButton = document.querySelector('#appointment-form button[type="submit"]');
+        const addAppointmentOverlay = document.getElementById('add-appointment-overlay');
+        
+        if (!appointmentForm || !appointmentDateField || !overlayTitle || !submitButton || !addAppointmentOverlay) return;
+        
+        appointmentForm.reset();
+        if (appointmentIdField) appointmentIdField.remove();
+        
+        appointmentDateField.value = this.getAttribute('data-date');
+        overlayTitle.textContent = 'Add New Appointment';
+        submitButton.innerHTML = '<i class="fas fa-save"></i> Save Appointment';
+        appointmentForm.removeAttribute('data-mode');
+        addAppointmentOverlay.classList.add('active');
+    });
+
+    // Patient ID lookup
+    document.getElementById('appointment-patient-id')?.addEventListener('change', async function() {
+        const patientId = this.value;
+        const patientNameField = document.getElementById('appointment-patient-name');
+        
+        if (!patientNameField) return;
+        if (!patientId) {
+            patientNameField.value = '';
+            return;
+        }
+
+        try {
+            const response = await fetch(`get_patient_name.php?patient_id=${patientId}`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            const data = await response.json();
+            patientNameField.value = data.success ? data.patient_name : 'Patient not found';
+        } catch (error) {
+            console.error('Error fetching patient:', error);
+            patientNameField.value = 'Error fetching patient';
         }
     });
 
-    // Notification bell functionality
+    // Reason selection
+    document.getElementById('cancel-reason')?.addEventListener('change', function() {
+        const otherReasonContainer = document.getElementById('other-reason-container');
+        if (otherReasonContainer) {
+            otherReasonContainer.style.display = this.value === 'Other' ? 'block' : 'none';
+        }
+    });
+
+    document.getElementById('cancelAllReason')?.addEventListener('change', function() {
+        const otherReasonContainer = document.getElementById('otherReasonContainer');
+        if (otherReasonContainer) {
+            otherReasonContainer.style.display = this.value === 'Other' ? 'block' : 'none';
+        }
+    });
+
+    // Form submissions
+    document.getElementById('edit-appointment-form')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        try {
+            const formData = new FormData(this);
+            formData.append('action', 'update_time');
+            
+            
+            const response = await fetch('update_appointment.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showNotification('Appointment updated successfully', 'success');
+                const editModal = document.getElementById('editAppointmentModal');
+                if (editModal) {
+                    editModal.style.display = 'none';
+                    editModal.classList.remove('active');
+                }
+                refreshCalendar();
+            } else {
+                showNotification('Error updating appointment: ' + (result.message || 'Please try again'), 'error');
+            }
+        } catch (error) {
+            console.error('Error updating appointment:', error);
+            showNotification('Error updating appointment. Please try again.', 'error');
+        }
+    });
+
+    document.getElementById('cancel-appointment-form')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        try {
+            const appointmentId = document.getElementById('cancel-appointment-id')?.value;
+            const reason = document.getElementById('cancel-reason')?.value;
+            const otherReason = document.getElementById('other-reason')?.value;
+            const notes = document.getElementById('cancel-notes')?.value;
+            const note_about_cancelling = document.getElementById('reason_for_cancelling')?.value;
+            const secretaryId = document.getElementById('session-user-id')?.value;
+
+            const finalReason = reason === 'Other' && otherReason ? otherReason : reason;
+
+            if (!appointmentId || !finalReason || !secretaryId) {
+                showNotification('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('appointment_id', appointmentId);
+            formData.append('cancelled_reason', finalReason);
+            formData.append('notes', notes);
+            formData.append('reason_for_cancelling', note_about_cancelling);
+            formData.append('cancelled_by', secretaryId);
+            formData.append('action', 'cancel');
+
+            const response = await fetch('update_appointment.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            const result = await response.json();
+
+            if (result.success) {
+                showNotification('Appointment cancelled successfully', 'success');
+                const cancelModal = document.getElementById('cancelAppointmentModal');
+                if (cancelModal) {
+                    cancelModal.style.display = 'none';
+                    cancelModal.classList.remove('active');
+                }
+
+                const date = selectedDate;
+            if (sampleAppointments[date]) {
+                const appointmentIndex = sampleAppointments[date].findIndex(a => a.id == appointmentId);
+                if (appointmentIndex !== -1) {
+                    sampleAppointments[date][appointmentIndex].status = 'Cancelled';
+                    
+                    // Update the count display
+                    const dayElement = document.querySelector(`.calendar-day[data-date="${date}"]`);
+                    if (dayElement) {
+                        const activeAppointments = sampleAppointments[date].filter(a => 
+                            !a.status || a.status.toLowerCase() !== 'cancelled'
+                        );
+                        
+                        const countElement = dayElement.querySelector('.appointment-count');
+                        if (countElement) {
+                            countElement.textContent = activeAppointments.length;
+                        }
+                        
+                        // Update the previews
+                        renderCalendarAppointments(dayElement, sampleAppointments[date]);
+                    }
+                }
+            }
+                // Also update the appointments list in the overlay
+                showAppointmentsForDate(date);
+                refreshCalendar();
+            } else {
+                showNotification(result.message || 'Failed to cancel appointment', 'error');
+            }
+        } catch (err) {
+            console.error('Error:', err);
+            showNotification('An error occurred. Please try again.', 'error');
+        }
+    });
+
+    // Cancel all appointments form
+    document.getElementById('cancelAllAppointmentsForm')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        try {
+            const modal = document.getElementById('cancelAllAppointmentsModal');
+            const date = modal?.dataset.date;
+            
+            if (!date) {
+                showNotification('No date selected for cancellation', 'error');
+                return;
+            }
+            
+            const reasonSelect = document.getElementById('cancelAllReason');
+            const otherReasonInput = document.getElementById('cancelAllOtherReason');
+            
+            if (!reasonSelect?.value) {
+                showNotification('Please select a cancellation reason', 'error');
+                return;
+            }
+
+            let finalReason = reasonSelect.value;
+            if (reasonSelect.value === 'Other') {
+                const otherReason = otherReasonInput?.value.trim();
+                if (!otherReason) {
+                    showNotification('Please specify the cancellation reason', 'error');
+                    return;
+                }
+                finalReason = otherReason;
+            }
+
+            const cancelledBy = document.body.getAttribute('data-user-id');
+            if (!cancelledBy) {
+                showNotification('User information not found', 'error');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('action', 'cancel_all');
+            formData.append('date', date);
+            formData.append('reason', finalReason);
+            formData.append('cancelled_by', cancelledBy);
+            formData.append('cancelled_by', cancelledBy);
+            formData.append('notes', `Bulk cancellation: ${finalReason}`);
+
+            const response = await fetch('update_appointment.php', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showNotification(`Cancelled ${result.count} appointments`, 'success');
+                this.reset();
+                document.getElementById('otherReasonContainer').style.display = 'none';
+                closeCancelAllModal();
+                
+                // COMPLETELY refresh the appointments data
+                sampleAppointments = {};
+                await loadAppointments(true);
+                
+                // Force update the calendar
+                generateCalendar(currentMonth, currentYear);
+                 // Update the local data
+            if (sampleAppointments[date]) {
+                sampleAppointments[date].forEach(appt => {
+                    appt.status = 'Cancelled';
+                });
+                
+                // Update the calendar day
+                const dayElement = document.querySelector(`.calendar-day[data-date="${date}"]`);
+                if (dayElement) {
+                    const countElement = dayElement.querySelector('.appointment-count');
+                    if (countElement) {
+                        countElement.textContent = '0';
+                    }
+                    
+                    // Update the previews
+                    renderCalendarAppointments(dayElement, sampleAppointments[date]);
+                    
+                    // Remove has-appointments class
+                    dayElement.classList.remove('has-appointments');
+                }
+            }
+                
+                // Re-open the date to show updated state
+                showAppointmentsForDate(date);
+                
+                // Explicitly hide the cancel all button
+                const cancelAllBtn = document.getElementById('cancel-all-appointments');
+                if (cancelAllBtn) cancelAllBtn.style.display = 'none';
+            } else {
+                showNotification(result.message || 'Failed to cancel appointments', 'error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification('Failed to cancel appointments. Please try again.', 'error');
+        }
+    });
+
+    function clearAppointmentCache() {
+        sampleAppointments = {};
+        const calendarGrid = document.getElementById('calendar-grid');
+        if (calendarGrid) calendarGrid.innerHTML = '';
+    }
+
+    // Notification bell
     const notificationBell = document.getElementById('notificationBell');
     const notificationDropdown = document.getElementById('notificationDropdown');
 
@@ -905,50 +1078,62 @@ document.addEventListener('DOMContentLoaded', function() {
             notificationDropdown.classList.toggle('show');
         });
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {
             if (!notificationDropdown.contains(e.target)) {
                 notificationDropdown.classList.remove('show');
             }
         });
 
-        // Prevent dropdown from closing when clicking inside it
         notificationDropdown.addEventListener('click', function(e) {
             e.stopPropagation();
         });
     }
-});
 
-// Logout functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the logout elements
+    // Logout functionality
     const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
     const logoutOverlay = document.getElementById('logoutOverlay');
     const confirmLogout = document.getElementById('confirmLogout');
     const cancelLogout = document.getElementById('cancelLogout');
 
-    if (!logoutLink || !logoutOverlay || !confirmLogout || !cancelLogout) return;
+    if (logoutLink && logoutOverlay && confirmLogout && cancelLogout) {
+        logoutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            logoutOverlay.classList.add('show');
+        });
 
-    // Show overlay when logout is clicked
-    logoutLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        logoutOverlay.classList.add('show');
-    });
-
-    // Hide overlay when cancel is clicked
-    cancelLogout.addEventListener('click', function() {
-        logoutOverlay.classList.remove('show');
-    });
-
-    // Handle actual logout
-    confirmLogout.addEventListener('click', function() {
-        window.location.href = '../Registration-Login/index.php';
-    });
-
-    // Close overlay when clicking outside the confirmation box
-    logoutOverlay.addEventListener('click', function(e) {
-        if (e.target === logoutOverlay) {
+        cancelLogout.addEventListener('click', function() {
             logoutOverlay.classList.remove('show');
-        }
+        });
+
+        confirmLogout.addEventListener('click', function() {
+            window.location.href = '../Registration-Login/index.php';
+        });
+
+        logoutOverlay.addEventListener('click', function(e) {
+            if (e.target === logoutOverlay) {
+                logoutOverlay.classList.remove('show');
+            }
+        });
+    }
+
+    // Calendar day click
+    document.querySelectorAll('.calendar-day').forEach(day => {
+    day.addEventListener('click', function () {
+        selectedDate = this.dataset.date; // Assuming each day has data-date="YYYY-MM-DD"
+        document.getElementById('overlay-date').textContent = selectedDate;
+        document.getElementById('cancelAllDateText').textContent = selectedDate;
+        document.getElementById('cancelAllDateText').dataset.date = selectedDate;
+
+        // Show cancel all button if there are appointments
+        const appointments = sampleAppointments[selectedDate] || [];
+        document.getElementById('cancel-all-appointments').style.display = appointments.length ? 'inline-block' : 'none';
+
+        // Store selectedDate in modal as well
+        const modal = document.getElementById('cancelAllAppointmentsModal');
+        if (modal) modal.dataset.date = selectedDate;
+
+        showOverlay(); // Show the overlay
     });
+});
+
 });

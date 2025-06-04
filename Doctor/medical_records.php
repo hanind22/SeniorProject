@@ -1,5 +1,7 @@
 <?php
 session_start();
+// Debug: Log all received POST data
+error_log("Received POST data: " . print_r($_POST, true));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -204,7 +206,7 @@ session_start();
                                 </div>
                                 <div class="form-group">
                                     <label>Next Appointment Time</label>
-                                    <input type="time" class="form-control"  id="next-appointment-time" name="next_appointment_time" step="900" value="<?php echo date('Y-m-d'); ?>">
+                                    <input type="time" class="form-control" id="next-appointment-time" name="next_appointment_time" step="900" value="09:00">
                                 </div>
                                 <div class="form-group">
                                     <label>Visit Date</label>
@@ -231,10 +233,76 @@ session_start();
         </div>
     </div>
 </div>
+
+<!-- Success Message Overlay -->
+<div class="success-overlay" id="successOverlay">
+    <div class="success-message">
+        <i class="fas fa-check-circle"></i>
+        <h3>Success!</h3>
+        <p>Medical record & prescription have successfully been saved and sent to the patient.</p>
+        <button class="btn-ok" id="successOk">OK</button>
+    </div>
+</div>
 <!-- -------------- -->
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    // Handle form submission via AJAX
+    const appointmentForm = document.getElementById('appointment-form');
+    if (appointmentForm) {
+        appointmentForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            fetch('process_medical_record.php', {
+    method: 'POST',
+    body: formData
+})
+.then(response => {
+    // First check if the response is JSON
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+        return response.json();
+    }
+    return response.text().then(text => {
+        throw new Error(`Expected JSON but got: ${text}`);
+    });
+})
+.then(data => {
+    if (data.success) {
+        const successOverlay = document.getElementById('successOverlay');
+        if (successOverlay) {
+            successOverlay.classList.add('show');
+        }
+        // Optional: Reset form after success
+        // appointmentForm.reset();
+    } else {
+        alert(data.error || 'An error occurred while saving the medical record.');
+    }
+})
+.catch(error => {
+    console.error('AJAX error:', error);
+    alert(`Error: ${error.message}\n\nPlease check the console for details.`);
+});
+    });
+}
+
+    // Handle OK button in success overlay
+    const successOk = document.getElementById('successOk');
+    if (successOk) {
+        successOk.addEventListener('click', function () {
+            const successOverlay = document.getElementById('successOverlay');
+            if (successOverlay) {
+                successOverlay.classList.remove('show');
+            }
+            // Optional: Reset form or redirect after success
+            // appointmentForm.reset();
+            // window.location.href = 'medical_records.php';
+        });
+    }
+
+
+
     // Update date and time every second
     function updateDateTime() {
         const dateTimeElement = document.getElementById('date-time');
@@ -247,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(updateDateTime, 1000);
 
     // Function to fetch all patient info
-    async function fetchPatientInfo() {
+    window.fetchPatientInfo = async function () {
         const patientIdField = document.getElementById("appointment-patient-id");
         if (!patientIdField) return;
 

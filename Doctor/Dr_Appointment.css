@@ -100,18 +100,67 @@
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
-  color: white;
+    background: linear-gradient(135deg, #16c289 0%, #059669 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    font-family: 'Poppins', sans-serif;
 }
 
-.btn-primary:hover {
-  background-color: var(--primary-hover);
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-outline {
   background-color: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-medium);
+}
+
+.next-step-btn{
+  width: 100px;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary i {
+    font-size: 1.1rem;
+}
+
+/* Keep the existing btn-success styles as they're already green */
+.btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 .btn-outline:hover {
@@ -326,17 +375,19 @@
   opacity: 1;
 }
 
-.overlay-content, .modal {
+
+.overlay-content {
   background-color: var(--white);
   border-radius: 0.75rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  width: 90%;
+  width: 80%;
   max-width: 800px;
   max-height: 90vh;
   overflow: hidden;
   transform: translateY(20px);
   transition: transform 0.3s ease;
   padding: 2rem;
+  
 }
 
 .modal {
@@ -381,6 +432,19 @@
 .close-btn:hover {
   background-color: var(--light-bg);
 } */
+
+.appointment-preview.cancelled {
+    position: relative;
+    color: #666;
+    background-color: #f5f5f5 !important;
+    border-left: 3px solid #999 !important;
+}
+.appointment-preview.cancelled {
+    opacity: 0.7;
+}
+.appointment-preview:last-child {
+    margin-bottom: 0;
+}
 
 .appointments-container {
   padding: 1.5rem;
@@ -1493,6 +1557,7 @@
     position: relative;
     display: inline-block;
 }
+
 
 .strikethrough-line {
     position: absolute;

@@ -1807,3 +1807,45 @@ Array
 [2025-05-31 15:40:36] Transaction committed
 [2025-05-31 15:40:36] Session variables set. Registration successful for HayatIbrahim@gmail.com
 [2025-05-31 15:40:36] Redirecting to: ../Secretary/secretary_dashboard.php
+[2025-06-03 20:32:21] Script started. Request method: POST
+[2025-06-03 20:32:21] Received POST data: Array
+(
+    [fullName] => Sawsan Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => susus@gmail.com
+    [Password] => 12345678
+    [phone] => 81467365
+)
+
+[2025-06-03 20:32:21] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab22@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [doctor_id] => 1
+    [secretary_id] => 63
+    [patient_id] => 12
+)
+
+[2025-06-03 20:32:21] Processed input data:
+[2025-06-03 20:32:21] Full Name: Sawsan Diab
+[2025-06-03 20:32:21] Email: susus@gmail.com
+[2025-06-03 20:32:21] Phone: 81467365
+[2025-06-03 20:32:21] User Type: patient
+[2025-06-03 20:32:21] Specialty: 
+[2025-06-03 20:32:21] License: 
+[2025-06-03 20:32:21] Secretary Specialty: 
+[2025-06-03 20:32:21] Assigned Doctor: 
+[2025-06-03 20:32:21] Validation errors: Array
+(
+)
+
+[2025-06-03 20:32:21] Transaction started
+[2025-06-03 20:32:21] Password hashed
+[2025-06-03 20:32:21] User inserted with ID: 91
+[2025-06-03 20:32:21] Patient record inserted
+[2025-06-03 20:32:21] Transaction committed
+[2025-06-03 20:32:21] Session variables set. Registration successful for susus@gmail.com
+[2025-06-03 20:32:21] Redirecting to: ../Patient/patient_dashboard.php

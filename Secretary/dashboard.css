@@ -1,10 +1,4 @@
-.content {
-    flex-grow: 1;
-    padding: 30px;
-    overflow-y: fixed;
-    height: 100vh;
-    background: #f8f9fa; /* Light background for content */
-}
+
 
 /* Notifications Section */
 .notifications-card {
@@ -123,7 +117,7 @@
 
 /* Doctor Info Header Styles */
 .doctor-info-header {
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    background: white;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 25px;
@@ -390,6 +384,10 @@
     min-width: 700px;
     height: 800px;
 }
+.content {
+        padding: 30px;
+        width: 85%;
+    }
 
 /* Responsive styles */
 @media (max-width: 1024px) {
@@ -432,7 +430,5 @@
         margin-right: 0;
     }
 
-    .content {
-        margin-left: 80px;
-    }
+    
 }

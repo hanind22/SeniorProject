@@ -504,18 +504,7 @@ try {
                 
                 <!-- Personal Info Fields -->
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="specialty">Speciality</label>
-                        <select id="specialty" name="specialty" required>
-                             <?php
-        $specialities = ['Cardiologist', 'Dermatologist', 'Neurologist', 'Pediatrician', 'Surgeon', 'General Practitioner'];
-        foreach ($specialities as $spec) {
-            $selected = ($doctorData['specialty'] ?? '') === $spec ? 'selected' : '';
-            echo '<option value="' . htmlspecialchars($spec) . '" ' . $selected . '>' . htmlspecialchars($spec) . '</option>';
-        }
-        ?>
-                        </select>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="license_number">License Number</label>
                         <input type="text" id="license_number" name="license_number" value="<?php echo htmlspecialchars($doctorData['license_number'] ?? ''); ?>" required>
@@ -585,14 +574,7 @@ try {
                                 <span>to</span>
                                 <input type="time" name="availability[' . $day . '][0][end_time]" class="time-input" value="17:00">
                                 <input type="text" class="place-input" name="availability[' . $day . '][0][place_name]" placeholder="Location (e.g., Main Clinic)">
-                                <div class="time-slot-controls">
-                                    <button type="button" class="add-slot-btn" onclick="addTimeSlot(this)">
-                                        <i class="fas fa-plus"></i> Add Slot
-                                    </button>
-                                    <button type="button" class="remove-slot" onclick="removeTimeSlot(this)">
-                                        <i class="fas fa-times"></i> Remove
-                                    </button>
-                                </div>
+                                
                             </div>';
                         } else {
                             foreach ($dayEntries as $index => $entry) {
@@ -606,14 +588,7 @@ try {
                                     <input type="time" name="availability[' . $day . '][' . $index . '][end_time]" class="time-input" value="' . substr($entry['end_time'], 0, 5) . '">
                                     <input type="text" class="place-input" name="availability[' . $day . '][' . $index . '][place_name]" 
                                            value="' . htmlspecialchars($entry['place_name']) . '" placeholder="Location name">
-                                    <div class="time-slot-controls">
-                                        <button type="button" class="add-slot-btn" onclick="addTimeSlot(this)">
-                                            <i class="fas fa-plus"></i> Add Slot
-                                        </button>
-                                        <button type="button" class="remove-slot" onclick="removeTimeSlot(this)">
-                                            <i class="fas fa-times"></i> Remove
-                                        </button>
-                                    </div>
+                                    
                                 </div>';
                             }
                         }

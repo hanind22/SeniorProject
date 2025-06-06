@@ -270,6 +270,7 @@ if (isset($_SESSION['user_id'])) {
     </style>
 </head>
 <body>
+     <?php include('notifications.php'); ?>
     <div class="container">
         <!-- Side-Navigationbar -->
         <aside class="sidebar">

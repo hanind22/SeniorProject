@@ -158,7 +158,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->close();
                 $debugLog("Secretary record inserted");
                 
-            } else { // Patient
+            }elseif($user_type === 'admin'){
+
+                 $stmt = $conn->prepare("INSERT INTO admins (user_id) VALUES (?)");
+                if (!$stmt) throw new Exception("Admin prepare failed: " . $conn->error);
+                
+                $stmt->bind_param("i", $user_id);
+                if (!$stmt->execute()) throw new Exception("Doctor insert failed: " . $stmt->error);
+                
+                $stmt->close();
+                $debugLog("Admin record inserted");
+    
+
+            }
+             else { // Patient
                 $stmt = $conn->prepare("INSERT INTO patients (user_id) VALUES (?)");
                 if (!$stmt) throw new Exception("Patient prepare failed: " . $conn->error);
                 
@@ -185,7 +198,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $redirect_paths = [
                 'doctor' => '../Doctor/doctor_dashboard.php',
                 'secretary' => '../Secretary/secretary_dashboard.php',
-                'patient' => '../Patient/patient_dashboard.php'
+                'patient' => '../Patient/patient_dashboard.php',
+                'admin' => '../Admin/Admin_Dashboard.php'
             ];
             
             $redirect = $redirect_paths[strtolower($uc_user_type)] ?? 'index.php';

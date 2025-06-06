@@ -2397,3 +2397,629 @@
 
 2025-06-04 23:40:28 - Appointment booked successfully for patient 14 with doctor 1
 2025-06-04 23:40:28 - Script ended
+2025-06-05 08:38:38 - Script started
+2025-06-05 08:38:38 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 10:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:38:38 - Database connection file included
+2025-06-05 08:38:38 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:38:38 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-05 08:38:38 - Script ended
+2025-06-05 08:38:42 - Script started
+2025-06-05 08:38:42 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 10:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:38:42 - Database connection file included
+2025-06-05 08:38:42 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:38:42 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-05 08:38:42 - Script ended
+2025-06-05 08:38:46 - Script started
+2025-06-05 08:38:46 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 10:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:38:46 - Database connection file included
+2025-06-05 08:38:46 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:38:46 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-05 08:38:46 - Script ended
+2025-06-05 08:38:49 - Script started
+2025-06-05 08:38:49 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 10:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:38:49 - Database connection file included
+2025-06-05 08:38:49 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:38:49 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-05 08:38:49 - Script ended
+2025-06-05 08:38:56 - Script started
+2025-06-05 08:38:56 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-11
+    [time] => 03:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:38:56 - Database connection file included
+2025-06-05 08:38:56 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:38:56 - Error in booking appointment: Please take an appointment between 9:00 AM and 7:00 PM on Wednesday
+2025-06-05 08:38:56 - Script ended
+2025-06-05 08:39:02 - Script started
+2025-06-05 08:39:02 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-22
+    [time] => 03:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:39:02 - Database connection file included
+2025-06-05 08:39:02 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:39:02 - Error in booking appointment: Doctor is not available on Sunday. Please book an appointment on these available days: Monday (7:30 AM - 6:30 PM), Tuesday (9:00 AM - 7:00 PM), Wednesday (9:00 AM - 7:00 PM), Thursday (7:30 AM - 3:30 PM), Friday (8:00 AM - 7:30 PM), Saturday (9:00 AM - 6:00 PM)
+2025-06-05 08:39:02 - Script ended
+2025-06-05 08:39:15 - Script started
+2025-06-05 08:39:15 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-20
+    [time] => 11:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:39:15 - Database connection file included
+2025-06-05 08:39:15 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:39:15 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-05 08:39:15 - Script ended
+2025-06-05 08:39:20 - Script started
+2025-06-05 08:39:20 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-20
+    [time] => 11:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:39:20 - Database connection file included
+2025-06-05 08:39:20 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:39:20 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-05 08:39:20 - Script ended
+2025-06-05 08:39:23 - Script started
+2025-06-05 08:39:24 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-20
+    [time] => 11:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:39:24 - Database connection file included
+2025-06-05 08:39:24 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:39:24 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-05 08:39:24 - Script ended
+2025-06-05 08:39:27 - Script started
+2025-06-05 08:39:27 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-20
+    [time] => 11:30
+    [appointment_type] => Consultation
+    [purpose] => rtght
+    [notes] => yhe
+    [patient_id] => 95
+)
+
+2025-06-05 08:39:27 - Database connection file included
+2025-06-05 08:39:27 - Session started. Session data: Array
+(
+    [user_id] => 95
+    [email] => jawaddiab@gmail.com
+    [full_name] => Jawad Diab
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-05 08:39:27 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-05 08:39:27 - Script ended
+2025-06-06 17:08:31 - Script started
+2025-06-06 17:08:31 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 10:30
+    [appointment_type] => Follow-up
+    [purpose] => Tired and bleeding from the nose
+    [notes] => bleeding happens usually at night
+    [patient_id] => 100
+)
+
+2025-06-06 17:08:31 - Database connection file included
+2025-06-06 17:08:31 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-06 17:08:31 - Error in booking appointment: This time slot is already booked. Please choose another time
+2025-06-06 17:08:31 - Script ended
+2025-06-06 17:08:40 - Script started
+2025-06-06 17:08:40 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 10:30
+    [appointment_type] => Follow-up
+    [purpose] => Tired and bleeding from the nose
+    [notes] => bleeding happens usually at night
+    [patient_id] => 100
+)
+
+2025-06-06 17:08:40 - Database connection file included
+2025-06-06 17:08:40 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-06 17:08:40 - Error in booking appointment: This time slot is already booked. Please choose another time
+2025-06-06 17:08:40 - Script ended
+2025-06-06 17:08:47 - Script started
+2025-06-06 17:08:47 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 11:30
+    [appointment_type] => Follow-up
+    [purpose] => Tired and bleeding from the nose
+    [notes] => bleeding happens usually at night
+    [patient_id] => 100
+)
+
+2025-06-06 17:08:47 - Database connection file included
+2025-06-06 17:08:47 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-06 17:08:47 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-06 17:08:47 - Script ended
+2025-06-06 17:09:20 - Script started
+2025-06-06 17:09:20 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 10:30
+    [appointment_type] => Regular Checkup
+    [purpose] => Blleding from nose
+    [notes] => usually happens at night
+    [patient_id] => 100
+)
+
+2025-06-06 17:09:20 - Database connection file included
+2025-06-06 17:09:20 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-06 17:09:20 - Error in booking appointment: This time slot is already booked. Please choose another time
+2025-06-06 17:09:20 - Script ended
+2025-06-06 17:09:27 - Script started
+2025-06-06 17:09:27 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 11:30
+    [appointment_type] => Regular Checkup
+    [purpose] => Blleding from nose
+    [notes] => usually happens at night
+    [patient_id] => 100
+)
+
+2025-06-06 17:09:27 - Database connection file included
+2025-06-06 17:09:27 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-06 17:09:27 - Error in booking appointment: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`appointments`, CONSTRAINT `fk_appointments_patients` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`patient_id`) ON DELETE CASCADE)
+2025-06-06 17:09:27 - Script ended
+2025-06-06 17:29:00 - Script started
+2025-06-06 17:29:00 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 10:30
+    [appointment_type] => Regular Checkup
+    [purpose] => SDCDC
+    [notes] => DCC
+    [patient_id] => 100
+)
+
+2025-06-06 17:29:00 - Database connection file included
+2025-06-06 17:29:00 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-06 17:29:00 - Error in booking appointment: This time slot is already booked. Please choose another time
+2025-06-06 17:29:00 - Script ended
+2025-06-06 17:29:06 - Script started
+2025-06-06 17:29:06 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 11:30
+    [appointment_type] => Regular Checkup
+    [purpose] => SDCDC
+    [notes] => DCC
+    [patient_id] => 100
+)
+
+2025-06-06 17:29:06 - Database connection file included
+2025-06-06 17:29:06 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-06 17:29:06 - Appointment booked successfully for patient 100 with doctor 1
+2025-06-06 17:29:06 - Script ended
+2025-06-06 18:00:35 - Script started
+2025-06-06 18:00:35 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-26
+    [time] => 13:15
+    [appointment_type] => Other
+    [purpose] => ...
+    [notes] => ...
+    [patient_id] => 100
+)
+
+2025-06-06 18:00:35 - Database connection file included
+2025-06-06 18:00:35 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+)
+
+2025-06-06 18:00:35 - Appointment booked successfully for patient 100 with doctor 1
+2025-06-06 18:00:35 - Script ended
+2025-06-06 18:28:30 - Script started
+2025-06-06 18:28:30 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-18
+    [time] => 19:30
+    [appointment_type] => Regular Checkup
+    [purpose] => cc
+    [notes] => cc
+    [patient_id] => 14
+)
+
+2025-06-06 18:28:30 - Database connection file included
+2025-06-06 18:28:30 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+    [patient_id] => 14
+)
+
+2025-06-06 18:28:30 - Error in booking appointment: Please take an appointment between 9:00 AM and 7:00 PM on Wednesday
+2025-06-06 18:28:30 - Script ended
+2025-06-06 18:28:35 - Script started
+2025-06-06 18:28:35 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-18
+    [time] => 19:00
+    [appointment_type] => Regular Checkup
+    [purpose] => cc
+    [notes] => cc
+    [patient_id] => 14
+)
+
+2025-06-06 18:28:35 - Database connection file included
+2025-06-06 18:28:35 - Session started. Session data: Array
+(
+    [user_id] => 14
+    [email] => banin@gmail.com
+    [full_name] => Banin Terro
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+    [patient_id] => 14
+)
+
+2025-06-06 18:28:35 - Appointment booked successfully for patient 14 with doctor 1
+2025-06-06 18:28:35 - Script ended
+2025-06-06 19:53:58 - Script started
+2025-06-06 19:53:58 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-10
+    [time] => 11:00
+    [appointment_type] => Regular Checkup
+    [purpose] => tnhrj
+    [notes] => then
+    [patient_id] => 100
+)
+
+2025-06-06 19:53:58 - Database connection file included
+2025-06-06 19:53:58 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+    [patient_id] => 100
+)
+
+2025-06-06 19:53:58 - Appointment booked successfully for patient 100 with doctor 1
+2025-06-06 19:53:58 - Script ended
+2025-06-06 19:55:24 - Script started
+2025-06-06 19:55:24 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-09
+    [time] => 11:30
+    [appointment_type] => Regular Checkup
+    [purpose] => cdqc
+    [notes] => cdqwdc
+    [patient_id] => 100
+)
+
+2025-06-06 19:55:24 - Database connection file included
+2025-06-06 19:55:24 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+    [patient_id] => 100
+)
+
+2025-06-06 19:55:24 - Error in booking appointment: This time slot is already booked. Please choose another time
+2025-06-06 19:55:24 - Script ended
+2025-06-06 19:56:08 - Script started
+2025-06-06 19:56:08 - Raw POST data: Array
+(
+    [speciality] => Cardiology
+    [doctor_id] => 1
+    [date] => 2025-06-18
+    [time] => 10:35
+    [appointment_type] => Regular Checkup
+    [purpose] => nhb
+    [notes] => enhtr
+    [patient_id] => 100
+)
+
+2025-06-06 19:56:08 - Database connection file included
+2025-06-06 19:56:08 - Session started. Session data: Array
+(
+    [user_id] => 100
+    [email] => jawad@gmail.com
+    [full_name] => Jawad Shhadi
+    [user_type] => Patient
+    [secretary_id] => 63
+    [doctor_id] => 1
+    [health_form_completed] => 1
+    [patient_id] => 100
+)
+
+2025-06-06 19:56:08 - Appointment booked successfully for patient 100 with doctor 1
+2025-06-06 19:56:08 - Script ended

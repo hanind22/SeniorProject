@@ -1000,7 +1000,8 @@ btn-primary:active {
             display: flex;
             gap: 10px;
             height: 50px;
-            width: 1400px;            
+            width: 1300px;   
+            margin-right: 40px;         
         }
         .search-container input {
             flex: 1;

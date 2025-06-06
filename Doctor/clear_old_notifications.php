@@ -10,6 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 try {
+    // First get the doctor_id associated with this user
     $stmt = $conn->prepare("SELECT doctor_id FROM doctors WHERE user_id = ?");
     $stmt->bind_param("i", $_SESSION['user_id']);
     $stmt->execute();
@@ -23,30 +24,16 @@ try {
     $doctorData = $result->fetch_assoc();
     $doctorId = $doctorData['doctor_id'];
 
+    // Delete notifications older than the current week
     $stmt = $conn->prepare("
-        SELECT 
-            n.notification_id AS id,
-            n.message,
-            n.type_notification AS type,
-            n.created_at,
-            n.is_read,
-            u.full_name AS sender_name
-        FROM notifications n
-        JOIN users u ON n.sender_id = u.user_id
-        WHERE n.receiver_id = ?
-        ORDER BY n.created_at DESC
+        DELETE FROM notifications 
+        WHERE receiver_id = ?
+        AND YEARWEEK(created_at, 1) < YEARWEEK(CURDATE(), 1)
     ");
-    
     $stmt->bind_param("i", $doctorId);
     $stmt->execute();
-    $result = $stmt->get_result();
 
-    $notifications = [];
-    while ($row = $result->fetch_assoc()) {
-        $notifications[] = $row;
-    }
-
-    echo json_encode($notifications);
+    echo json_encode(['success' => true, 'deleted' => $stmt->affected_rows]);
     
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);

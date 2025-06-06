@@ -9,7 +9,20 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$patientId = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
+
+// Step 1: Get the patient_id from the patients table
+$patientQuery = $conn->prepare("SELECT patient_id FROM patients WHERE user_id = ?");
+$patientQuery->bind_param("i", $userId);
+$patientQuery->execute();
+$patientResult = $patientQuery->get_result();
+
+if ($patientResult->num_rows === 0) {
+    echo json_encode(['error' => 'Patient not found for this user']);
+    exit;
+}
+
+$patientId = $patientResult->fetch_assoc()['patient_id'];
 
 try {
     $stmt = $conn->prepare("
@@ -37,8 +50,10 @@ try {
     while ($row = $result->fetch_assoc()) {
         $appointments[] = $row;
     }
-    
+
     echo json_encode($appointments);
+
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }
+?>

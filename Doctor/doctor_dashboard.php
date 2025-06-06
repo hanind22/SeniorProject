@@ -47,7 +47,7 @@ if (!empty($doctorData)) {
     $doctorId = $doctorData['doctor_id'];
 
     // Total Patients
-    $stmt = $conn->prepare("SELECT COUNT(DISTINCT patient_id) AS total FROM appointments WHERE doctor_id = ?");
+    $stmt = $conn->prepare("SELECT COUNT(DISTINCT patient_id) AS total FROM doctorpatient WHERE doctor_id = ?");
     $stmt->bind_param("i", $doctorId);
     $stmt->execute();
     $stmt->bind_result($totalPatients);
@@ -142,44 +142,6 @@ if (!empty($doctorData)) {
         <p><?php echo $urgentCases; ?></p>
     </div>
 </div>
-
-            <!-- Notifications Section -->
-            <div class="notifications-card" id="notifications-section">
-                <h3><i class="fas fa-bell"></i> Recent Notifications</h3>
-                <ul class="notification-list">
-                    <li class="notification-item">
-                        <div class="notification-icon urgent">
-                            <i class="fas fa-exclamation-circle"></i>
-                        </div>
-                        <div class="notification-content">
-                            <h4>Emergency: Patient Vitals Alert</h4>
-                            <p>Sarah Johnson's blood pressure has reached critical levels</p>
-                        </div>
-                        <span class="notification-time">10 mins ago</span>
-                    </li>
-                    <li class="notification-item">
-                        <div class="notification-icon normal">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                        <div class="notification-content">
-                            <h4>Test Results Ready</h4>
-                            <p>Blood work results for Michael Smith are available for review</p>
-                        </div>
-                        <span class="notification-time">1 hour ago</span>
-                    </li>
-                    <li class="notification-item">
-                        <div class="notification-icon normal">
-                            <i class="fas fa-calendar"></i>
-                        </div>
-                        <div class="notification-content">
-                            <h4>Appointment Confirmation</h4>
-                            <p>New appointment scheduled with Emily Davis at 3:30 PM</p>
-                        </div>
-                        <span class="notification-time">2 hours ago</span>
-                    </li>
-                </ul>
-            </div>
-            
             <!-- Data Visualization Section -->
             <div class="data-section">
                <div class="chart-card">
@@ -206,44 +168,6 @@ if (!empty($doctorData)) {
 </div>
 <!-- -------------- -->
 <script >
-     document.addEventListener('DOMContentLoaded', function() {
-    function updateDateTime() {
-        const now = new Date();
-        const options = {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        };
-        document.getElementById('date-time').textContent = now.toLocaleDateString('en-US', options);
-    }
-    updateDateTime();
-    setInterval(updateDateTime, 60000);
-
-    // Notification bell functionality
-            const notificationBell = document.getElementById('notificationBell');
-            const notificationDropdown = document.getElementById('notificationDropdown');
-
-            notificationBell.addEventListener('click', function(e) {
-                e.stopPropagation();
-                notificationDropdown.classList.toggle('show');
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!notificationDropdown.contains(e.target)) {
-                    notificationDropdown.classList.remove('show');
-                }
-            });
-
-            // Prevent dropdown from closing when clicking inside it
-            notificationDropdown.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-        });
-
 document.addEventListener('DOMContentLoaded', function() {
     
     const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
@@ -270,8 +194,89 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Update date and time
+    function updateDateTime() {
+        const now = new Date();
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        document.getElementById('date-time').textContent = now.toLocaleDateString('en-US', options);
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 60000);
+
+    //For the chart
+    fetchWeeklyAppointments();
+
+function fetchWeeklyAppointments() {
+    fetch('get_weekly_appointments.php')
+        .then(response => response.json())
+        .then(data => {
+            renderChart(data);
+        })
+        .catch(error => console.error('Error fetching chart data:', error));
+}
+
+function renderChart(appointmentData) {
+    const ctx = document.getElementById('weeklyAppointmentsChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            datasets: [{
+                label: 'Appointments',
+                data: appointmentData,
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                borderColor: '#3498db',
+                borderWidth: 3,
+                pointBackgroundColor: '#2980b9',
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.05)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        boxWidth: 12,
+                        padding: 20
+                    }
+                }
+            }
+        }
+    });
+}
+
+});
     
 </script>
-<script src="doctor's_dashboard.js"></script>
 </body>
 </html>

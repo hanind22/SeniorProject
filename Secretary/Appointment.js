@@ -1068,27 +1068,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (calendarGrid) calendarGrid.innerHTML = '';
     }
 
-    // Notification bell
-    const notificationBell = document.getElementById('notificationBell');
-    const notificationDropdown = document.getElementById('notificationDropdown');
-
-    if (notificationBell && notificationDropdown) {
-        notificationBell.addEventListener('click', function(e) {
-            e.stopPropagation();
-            notificationDropdown.classList.toggle('show');
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!notificationDropdown.contains(e.target)) {
-                notificationDropdown.classList.remove('show');
-            }
-        });
-
-        notificationDropdown.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    }
-
     // Logout functionality
     const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
     const logoutOverlay = document.getElementById('logoutOverlay');

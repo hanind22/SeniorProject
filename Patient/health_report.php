@@ -3,26 +3,35 @@ session_start();
 include('../db-config/connection.php');
 
 // Initialize variables
-$patientId = $_SESSION['user_id'] ?? null;
+$userId = $_SESSION['user_id'] ?? null;
 $doctors = [];
 $error = '';
 $success = '';
 
-// Fetch doctors this patient has appointments with
-if ($patientId) {
+// Fetch doctors related to this patient via doctorpatient table
+if ($userId) {
     try {
-        $stmt = $conn->prepare("
-            SELECT DISTINCT d.doctor_id, u.full_name, d.specialty 
-            FROM appointments a
-            JOIN doctors d ON a.doctor_id = d.doctor_id
+        // Retrieve patient_id from users table
+        $stmtPatientId = $conn->prepare("SELECT patient_id FROM patients WHERE user_id = ?");
+        $stmtPatientId->bind_param("i", $userId);
+        $stmtPatientId->execute();
+        $resultPatientId = $stmtPatientId->get_result();
+        $rowPatientId = $resultPatientId->fetch_assoc();
+        $patientId = $rowPatientId['patient_id'];
+
+        // Fetch doctors
+        $stmtDoctors = $conn->prepare("
+            SELECT DISTINCT d.doctor_id, u.full_name, d.specialty
+            FROM doctorpatient dp
+            JOIN doctors d ON dp.doctor_id = d.doctor_id
             JOIN users u ON d.user_id = u.user_id
-            WHERE a.patient_id = ?
+            WHERE dp.patient_id = ?
             ORDER BY u.full_name
         ");
-        $stmt->bind_param("i", $patientId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $doctors = $result->fetch_all(MYSQLI_ASSOC);
+        $stmtDoctors->bind_param("i", $patientId);
+        $stmtDoctors->execute();
+        $resultDoctors = $stmtDoctors->get_result();
+        $doctors = $resultDoctors->fetch_all(MYSQLI_ASSOC);
     } catch (Exception $e) {
         $error = "Error fetching doctors: " . $e->getMessage();
     }
@@ -78,14 +87,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_report'])) {
             }
             
             // Insert into database
-            $stmt = $conn->prepare("
+            $stmtInsert = $conn->prepare("
                 INSERT INTO patientuploads 
                 (doctor_id, patient_id, report_type, file_path, uploaded_at, DateOfTest, notes) 
                 VALUES (?, ?, ?, ?, NOW(), ?, ?)
             ");
-            $stmt->bind_param("iissss", $doctorId, $patientId, $reportType, $filePath, $dateOfTest, $notes);
+            $stmtInsert->bind_param("iissss", $doctorId, $patientId, $reportType, $filePath, $dateOfTest, $notes);
             
-            if ($stmt->execute()) {
+            if ($stmtInsert->execute()) {
                  header("Location: health_report.php?success=1");
                  exit();
             } else {
@@ -453,6 +462,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_report'])) {
     </style>
 </head>
 <body>
+    <?php include('notifications.php'); ?>
     <div class="container">
         <aside class="sidebar">
             <div class="sidebar-header">

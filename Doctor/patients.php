@@ -24,10 +24,11 @@ try {
 
         if ($result->num_rows === 1) {
             $doctorData = $result->fetch_assoc();
-            
-            // Get patients who have appointments with this doctor
+            $doctorId = $doctorData['doctor_id'];
+
+            // Updated query: patients via appointments OR doctorpatient (DISTINCT)
             $patientStmt = $conn->prepare("
-                SELECT 
+                SELECT DISTINCT 
                     p.patient_id,
                     p.user_id,
                     u.full_name,
@@ -49,29 +50,33 @@ try {
                     END as status
                 FROM patients p
                 JOIN users u ON p.user_id = u.user_id
-                JOIN appointments a ON p.patient_id = a.patient_id
-                WHERE a.doctor_id = ?
+                LEFT JOIN appointments a ON p.patient_id = a.patient_id AND a.doctor_id = ?
+                WHERE p.patient_id IN (
+                    SELECT DISTINCT patient_id FROM appointments WHERE doctor_id = ?
+                    UNION
+                    SELECT DISTINCT patient_id FROM doctorpatient WHERE doctor_id = ?
+                )
                 GROUP BY p.patient_id
                 ORDER BY u.full_name ASC
             ");
-            
-            // Bind the doctor_id parameter
-            $patientStmt->bind_param("i", $doctorData['doctor_id']);
+
+            // Bind the doctor_id 3 times (for JOIN + 2 subqueries)
+            $patientStmt->bind_param("iii", $doctorId, $doctorId, $doctorId);
             $patientStmt->execute();
             $patientResult = $patientStmt->get_result();
             
             if ($patientResult->num_rows > 0) {
                 while ($row = $patientResult->fetch_assoc()) {
-                    // Calculate age from date_of_birth
+                    // Calculate age
                     $dob = new DateTime($row['date_of_birth']);
                     $now = new DateTime();
                     $age = $dob->diff($now)->y;
-                    
-                    // Format last visit date if exists
+
+                    // Format last visit
                     $last_visit = isset($row['last_visit']) && $row['last_visit'] ? 
                         date('M j, Y', strtotime($row['last_visit'])) : 'Never';
-                    
-                    // Add calculated fields to patient data
+
+                    // Add calculated fields
                     $row['age'] = $age;
                     $row['last_visit_formatted'] = $last_visit;
                     $patients[] = $row;
@@ -90,12 +95,13 @@ try {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Section</title>
+    <title>Doctors Patient Section</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="Sidebar.css">
     <link rel="stylesheet" href="patients.css">
@@ -196,6 +202,7 @@ try {
                     <thead>
                         <tr>
                             <th>Patient Name</th>
+                            <th> Patient ID</th>
                             <th>Age/Gender</th>
                             <th>Blood Type</th>
                             <th>Last Visit</th>
@@ -211,6 +218,7 @@ try {
                                     <span class="patient-name"><?php echo htmlspecialchars($patient['full_name']); ?></span>
                                 </div>
                             </td>
+                            <td><?php echo htmlspecialchars($patient['patient_id']); ?></td>
                             <td><?php echo $patient['age'] . ' / ' . htmlspecialchars($patient['gender']); ?></td>
                             <td><span class="blood-badge"><?php echo htmlspecialchars($patient['blood_type']); ?></span></td>
                             <td><?php echo $patient['last_visit_formatted']; ?></td>
@@ -634,32 +642,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     setupLogout();
 
-    // -------------------------------
-    // Notification Handling
-    // -------------------------------
-    function setupNotifications() {
-        const notificationBell = document.getElementById('notificationBell');
-        const notificationDropdown = document.getElementById('notificationDropdown');
-
-        if (notificationBell && notificationDropdown) {
-            notificationBell.addEventListener('click', function(e) {
-                e.stopPropagation();
-                notificationDropdown.classList.toggle('show');
-            });
-
-            document.addEventListener('click', function(e) {
-                if (!notificationDropdown.contains(e.target)) {
-                    notificationDropdown.classList.remove('show');
-                }
-            });
-
-            notificationDropdown.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-        }
-    }
-    
-    setupNotifications();
 });
 
 // -------------------------------

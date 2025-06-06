@@ -305,12 +305,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Update date and time every second
     function updateDateTime() {
-        const dateTimeElement = document.getElementById('date-time');
-        if (dateTimeElement) {
-            const now = new Date();
-            dateTimeElement.textContent = now.toLocaleString();
-        }
+        const now = new Date();
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        document.getElementById('date-time').textContent = now.toLocaleDateString('en-US', options);
     }
+    updateDateTime();
+    setInterval(updateDateTime, 60000);
     updateDateTime();
     setInterval(updateDateTime, 1000);
 
@@ -475,26 +482,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Make removeMedication function available globally
     window.removeMedication = removeMedication;
-// Notification bell functionality
-            const notificationBell = document.getElementById('notificationBell');
-            const notificationDropdown = document.getElementById('notificationDropdown');
-
-            notificationBell.addEventListener('click', function(e) {
-                e.stopPropagation();
-                notificationDropdown.classList.toggle('show');
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!notificationDropdown.contains(e.target)) {
-                    notificationDropdown.classList.remove('show');
-                }
-            });
-
-            // Prevent dropdown from closing when clicking inside it
-            notificationDropdown.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
+            
         });
         
 document.addEventListener('DOMContentLoaded', function() {

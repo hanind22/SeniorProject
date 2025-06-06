@@ -216,7 +216,8 @@ try {
     <link rel="stylesheet" href="appointments.css">
 </head>
 <body data-user-id="<?= $_SESSION['secretary_id'] ?? '' ?>">
-
+    
+    <?php include('notifications.php'); ?>
     <div class="container">
         <!-- Side-Navigationbar -->
         <aside class="sidebar">

@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const addAppointmentBtn = document.getElementById('add-appointment-btn');
     const addAppointmentDayBtn = document.getElementById('add-appointment-day-btn');
     const appointmentModal = document.getElementById('appointmentModal');
-    const newAppointmentModal = document.getElementById('newAppointmentModal');
+    const addAppointmentOverlay = document.getElementById('add-appointment-overlay');
+    const closeAddOverlayBtn = document.getElementById('close-add-overlay');
 
     // Initialize the application
     initApplication();
@@ -38,6 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Setup event listeners
         setupEventListeners();
+        setupPatientLookup();
+        setupModalHandlers();
     }
 
     function updateDateTime() {
@@ -56,76 +59,77 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-async function loadAppointments(forceRefresh = false) {
-    try {
-        const response = await fetch('get_appointments.php', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json'
-            },
-            credentials: 'same-origin'
-        });
-        
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        
-        // First check if response has content
-        const text = await response.text();
-        if (!text) {
-            console.warn('Empty response from server');
-            return {};
-        }
-        
-        // Try to parse as JSON
-        let data;
+    async function loadAppointments(forceRefresh = false) {
         try {
-            data = JSON.parse(text);
-        } catch (e) {
-            throw new Error('Invalid JSON response');
-        }
-        
-        // Verify data is an array
-        if (!Array.isArray(data)) {
-            console.warn('Expected array but got:', typeof data);
-            if (data.appointments) { // Handle case where data is {appointments: [...]}
-                data = data.appointments;
-            } else {
+            const response = await fetch('get_appointments.php', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin'
+            });
+            
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            
+            const text = await response.text();
+            if (!text) {
+                console.warn('Empty response from server');
                 return {};
             }
-        }
-        
-        appointmentsData = transformAppointmentData(data);
-        return appointmentsData;
-    } catch (error) {
-        console.error('Error loading appointments:', error);
-        showNotification('Failed to load appointments', 'error');
-        return {};
-    }
-}
-
-    function transformAppointmentData(rawData) {
-        const formattedData = {};
-        rawData.forEach(appointment => {
-            const date = appointment.appointment_date;
-            if (!formattedData[date]) {
-                formattedData[date] = [];
+            
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                throw new Error('Invalid JSON response');
             }
             
-            formattedData[date].push({
-                id: appointment.id,
-                time: formatTime(appointment.appointment_time),
-                formatted_time: formatTime12Hour(appointment.appointment_time),
-                title: appointment.reason_for_visit,
-                type: appointment.appointment_type,
-                description: `With Dr. ${appointment.doctor_name} (${appointment.specialty})`,
-                status: appointment.status,
-                doctorName: appointment.doctor_name,
-                specialty: appointment.specialty,
-                purpose: appointment.reason_for_visit,
-                notes: appointment.notes || '',
-                patientName: appointment.patient_name || 'Unknown',
-                patient_id: appointment.patient_id || 'N/A'
+            if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+                appointmentsData = transformObjectAppointmentData(data);
+                return appointmentsData;
+            }
+            
+            if (Array.isArray(data)) {
+                appointmentsData = transformAppointmentData(data);
+                return appointmentsData;
+            }
+            
+            console.warn('Unexpected data format:', typeof data);
+            return {};
+            
+        } catch (error) {
+            console.error('Error loading appointments:', error);
+            showNotification('Failed to load appointments', 'error');
+            return {};
+        }
+    }
+
+    function transformObjectAppointmentData(rawData) {
+        const formattedData = {};
+        
+        Object.keys(rawData).forEach(date => {
+            const appointments = rawData[date];
+            formattedData[date] = [];
+            
+            appointments.forEach(appointment => {
+                formattedData[date].push({
+                    id: appointment.id,
+                    time: appointment.time,
+                    formatted_time: appointment.time,
+                    title: appointment.purpose,
+                    type: appointment.type,
+                    description: `Patient: ${appointment.patientName}`,
+                    status: appointment.status,
+                    doctorName: '',
+                    specialty: '',
+                    purpose: appointment.purpose,
+                    notes: appointment.notes === 'undefined' ? '' : (appointment.notes || ''),
+                    patientName: appointment.patientName || 'Unknown',
+                    patient_id: appointment.patient_id || 'N/A'
+                });
             });
         });
+        
         return formattedData;
     }
 
@@ -141,6 +145,7 @@ async function loadAppointments(forceRefresh = false) {
         return time.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});
     }
 
+        // Checks for server messages
     function checkServerMessages() {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('success')) {
@@ -148,12 +153,27 @@ async function loadAppointments(forceRefresh = false) {
         } else if (urlParams.has('error')) {
             showNotification(urlParams.get('error'), 'error');
         }
+        
+        if (sessionStorage.getItem('refreshCalendar')) {
+            loadAppointments(true).then(() => {
+                generateCalendar(currentMonth, currentYear);
+                sessionStorage.removeItem('refreshCalendar');
+            });
+        }
     }
 
+    function refreshCalendar() {
+    loadAppointments(true).then(() => {
+        generateCalendar(currentMonth, currentYear);
+    });
+}
+
     function isAppointmentCancelled(appointment) {
-        if (!appointment || !appointment.status) return false;
-        return appointment.status.toLowerCase().includes('cancel');
-    }
+    if (!appointment || !appointment.status) return false;
+    return appointment.status.toLowerCase().includes('cancel') || 
+           appointment.status.toLowerCase().includes('cancelled') ||
+           appointment.status.toLowerCase() === 'canceled';
+}
 
     function generateCalendar(month, year) {
         if (!calendarGrid) return;
@@ -180,6 +200,11 @@ async function loadAppointments(forceRefresh = false) {
             if (appointmentsData[formattedDate]) {
                 renderCalendarAppointments(dayElement, appointmentsData[formattedDate]);
             }
+            
+            // Add click handler to show appointments for this date
+            dayElement.addEventListener('click', () => {
+                showAppointmentsForDate(formattedDate);
+            });
             
             calendarGrid.appendChild(dayElement);
         }
@@ -267,7 +292,11 @@ async function loadAppointments(forceRefresh = false) {
         const displayDate = new Date(date + 'T00:00:00');
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         
-        document.getElementById('overlay-date').textContent = displayDate.toLocaleDateString('en-US', options);
+        const overlayDateElement = document.getElementById('overlay-date');
+        if (overlayDateElement) {
+            overlayDateElement.textContent = displayDate.toLocaleDateString('en-US', options);
+        }
+        
         appointmentsContainer.innerHTML = '';
         
         const appointments = (appointmentsData[date] || []).filter(a => a && a.type);
@@ -361,55 +390,58 @@ async function loadAppointments(forceRefresh = false) {
     }
 
     function showAppointmentDetails(appointment) {
-        if (!appointment || !appointmentModal) return;
-        
-        const isCancelled = isAppointmentCancelled(appointment);
-        
-        // Populate modal content
-        document.getElementById('modalPatientName').textContent = appointment.patientName || 'No patient name';
-        document.getElementById('modalPatientId').textContent = `Patient ID: ${appointment.patient_id || 'N/A'}`;
-        document.getElementById('modalAppointmentId').textContent = `Appointment ID: ${appointment.id || 'N/A'}`;
-        document.getElementById('modalTime').textContent = `${appointment.formatted_time || ''}${isCancelled ? ' (CANCELLED)' : ''}`;
-        document.getElementById('modalType').textContent = appointment.type || 'No type specified';
-        document.getElementById('modalPurpose').textContent = appointment.purpose || 'No purpose specified';
-        
-        const notesSection = document.getElementById('modalNotesSection');
-        const notesContent = document.getElementById('modalNotes');
-        if (notesSection && notesContent) {
-            notesSection.style.display = appointment.notes ? 'block' : 'none';
-            notesContent.textContent = appointment.notes || '';
-        }
-
-        // Handle edit/cancel buttons
-        const editControls = document.getElementById('editAppointmentControls');
-        if (editControls) {
-            editControls.style.display = isCancelled ? 'none' : 'flex';
-            
-            if (!isCancelled) {
-                const editBtn = document.getElementById('editAppointmentBtn');
-                const cancelBtn = document.getElementById('cancelAppointmentBtn');
-                
-                if (editBtn) {
-                    editBtn.onclick = function(e) {
-                        e.preventDefault();
-                        closeModal();
-                        editAppointmentDetails(appointment);
-                    };
-                }
-                
-                if (cancelBtn) {
-                    cancelBtn.onclick = function(e) {
-                        e.preventDefault();
-                        closeModal();
-                        showCancelConfirmation(appointment);
-                    };
-                }
-            }
-        }
-
-        appointmentModal.style.display = 'flex';
-        appointmentModal.classList.add('active');
+    if (!appointment || !appointmentModal) return;
+    
+    const isCancelled = isAppointmentCancelled(appointment);
+    
+    // Populate modal content
+    const modalPatientName = document.getElementById('modalPatientName');
+    const modalPatientId = document.getElementById('modalPatientId');
+    const modalAppointmentId = document.getElementById('modalAppointmentId');
+    const modalTime = document.getElementById('modalTime');
+    const modalType = document.getElementById('modalType');
+    const modalPurpose = document.getElementById('modalPurpose');
+    
+    if (modalPatientName) modalPatientName.textContent = appointment.patientName || 'No patient name';
+    if (modalPatientId) modalPatientId.textContent = `Patient ID: ${appointment.patient_id || 'N/A'}`;
+    if (modalAppointmentId) modalAppointmentId.textContent = `Appointment ID: ${appointment.id || 'N/A'}`;
+    if (modalTime) modalTime.textContent = `${appointment.formatted_time || ''}${isCancelled ? ' (CANCELLED)' : ''}`;
+    if (modalType) modalType.textContent = appointment.type || 'No type specified';
+    if (modalPurpose) modalPurpose.textContent = appointment.purpose || 'No purpose specified';
+    
+    const notesSection = document.getElementById('modalNotesSection');
+    const notesContent = document.getElementById('modalNotes');
+    if (notesSection && notesContent) {
+        notesSection.style.display = appointment.notes ? 'block' : 'none';
+        notesContent.textContent = appointment.notes || '';
     }
+
+    // Store appointment data for edit/cancel functions
+    appointmentModal.dataset.appointmentId = appointment.id;
+    appointmentModal.dataset.appointmentData = JSON.stringify(appointment);
+
+    // Show/hide action buttons based on cancellation status
+    const editBtn = document.getElementById('editAppointmentBtn');
+    const cancelBtn = document.getElementById('cancelAppointmentBtn');
+    
+    if (editBtn && cancelBtn) {
+        if (isCancelled) {
+            editBtn.style.display = 'none';
+            cancelBtn.style.display = 'none';
+        } else {
+            editBtn.style.display = 'block';
+            cancelBtn.style.display = 'block';
+        }
+    }
+
+    appointmentModal.style.display = 'flex';
+    appointmentModal.classList.add('active');
+    
+    // Close appointment overlay if it's open
+    if (appointmentOverlay) {
+        appointmentOverlay.classList.remove('active');
+    }
+}
 
     function closeModal() {
         if (appointmentModal) {
@@ -422,26 +454,120 @@ async function loadAppointments(forceRefresh = false) {
         const editModal = document.getElementById('editAppointmentModal');
         if (!editModal) return;
         
-        // Populate edit form
-        document.getElementById('editPatientName').textContent = appointment.patientName || 'No patient name';
-        document.getElementById('editCurrentTime').textContent = appointment.formatted_time || '';
-        document.getElementById('edit-appointment-time').value = formatTime(appointment.time) || '';
-        document.getElementById('edit-appointment-notes').value = appointment.notes || '';
-        document.getElementById('edit-appointment-id').value = appointment.id || '';
+        const editPatientName = document.getElementById('editPatientName');
+        const editCurrentTime = document.getElementById('editCurrentTime');
+        const editAppointmentTime = document.getElementById('edit-appointment-time');
+        const editAppointmentNotes = document.getElementById('edit-appointment-notes');
+        const editAppointmentId = document.getElementById('edit-appointment-id');
+        
+        if (editPatientName) editPatientName.textContent = appointment.patientName || 'No patient name';
+        if (editCurrentTime) editCurrentTime.textContent = appointment.formatted_time || '';
+        if (editAppointmentTime) editAppointmentTime.value = formatTime(appointment.time) || '';
+        if (editAppointmentNotes) editAppointmentNotes.value = appointment.notes || '';
+        if (editAppointmentId) editAppointmentId.value = appointment.id || '';
         
         editModal.style.display = 'flex';
         editModal.classList.add('active');
     }
 
+// Form submissions
+    document.getElementById('edit-appointment-form')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        try {
+            const formData = new FormData(this);
+            formData.append('action', 'update_time');
+            
+            
+            const response = await fetch('update_appointment.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showNotification('Appointment updated successfully', 'success');
+                const editModal = document.getElementById('editAppointmentModal');
+                if (editModal) {
+                    editModal.style.display = 'none';
+                    editModal.classList.remove('active');
+                }
+                refreshCalendar();
+            } else {
+                showNotification('Error updating appointment: ' + (result.message || 'Please try again'), 'error');
+            }
+        } catch (error) {
+            console.error('Error updating appointment:', error);
+            showNotification('Error updating appointment. Please try again.', 'error');
+        }
+    });
+
+    document.getElementById('cancel-appointment-form')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    try {
+        const appointmentId = document.getElementById('cancel-appointment-id')?.value;
+        const reason = document.getElementById('cancel-reason')?.value;
+        const otherReason = document.getElementById('other-reason')?.value;
+        const notes = document.getElementById('cancel-notes')?.value;
+        
+        // Get the current user ID from session (doctor cancelling the appointment)
+
+        if (!appointmentId || !reason || !cancelledBy) {
+            showNotification('Please fill in all required fields.', 'error');
+            return;
+        }
+
+        const finalReason = reason === 'Other' && otherReason ? otherReason : reason;
+
+        const formData = new FormData(this);
+        formData.append('appointment_id', appointmentId);
+        formData.append('cancel_reason', finalReason);
+        formData.append('cancel_notes', notes);
+        formData.append('cancelled_by', cancelledBy);
+        formData.append('action', 'cancel');
+
+        const response = await fetch('update_appointment.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const result = await response.json();
+
+        if (result.success) {
+            showNotification('Appointment cancelled successfully', 'success');
+            const cancelModal = document.getElementById('cancelAppointmentModal');
+            if (cancelModal) {
+                cancelModal.style.display = 'none';
+                cancelModal.classList.remove('active');
+            }
+            refreshCalendar();
+        } else {
+            showNotification(result.message || 'Failed to cancel appointment', 'error');
+        }
+    } catch (err) {
+        console.error('Error:', err);
+        showNotification('An error occurred. Please try again.', 'error');
+    }
+});
+
+
+
+
     function showCancelConfirmation(appointment) {
         const cancelModal = document.getElementById('cancelAppointmentModal');
         if (!cancelModal) return;
         
-        // Populate cancel form
-        document.getElementById('cancelPatientName').textContent = appointment.patientName || 'No patient name';
-        document.getElementById('cancelAppointmentDate').textContent = selectedDate;
-        document.getElementById('cancelAppointmentTime').textContent = appointment.formatted_time || '';
-        document.getElementById('cancel-appointment-id').value = appointment.id || '';
+        const cancelPatientName = document.getElementById('cancelPatientName');
+        const cancelAppointmentTime = document.getElementById('cancelAppointmentTime');
+        const cancelAppointmentId = document.getElementById('cancel-appointment-id');
+        
+        if (cancelPatientName) cancelPatientName.textContent = appointment.patientName || 'No patient name';
+        if (cancelAppointmentTime) cancelAppointmentTime.textContent = appointment.formatted_time || '';
+        if (cancelAppointmentId) cancelAppointmentId.value = appointment.id || '';
         
         cancelModal.style.display = 'flex';
         cancelModal.classList.add('active');
@@ -455,29 +581,218 @@ async function loadAppointments(forceRefresh = false) {
         return months[monthIndex];
     }
 
+// Notification system with fallback
     function showNotification(message, type = 'success') {
-        const notification = document.createElement('div');
-        notification.className = `alert alert-${type}`;
-        notification.innerHTML = `
-            ${message}
-            <span class="alert-close">&times;</span>
-        `;
+        try {
+            const notification = document.getElementById('notification');
+            const messageElement = document.getElementById('notification-message');
+            
+            if (!notification || !messageElement) {
+                console.warn('Notification elements not found');
+                // Fallback to console and alert
+                console.log(`${type}: ${message}`);
+                alert(`${type}: ${message}`);
+                return;
+            }
+            
+            messageElement.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('active');
+            
+            setTimeout(function() {
+                notification.classList.remove('active');
+            }, 3000);
+        } catch (error) {
+            console.error('Error showing notification:', error, message);
+            alert(`${type}: ${message}`);
+        }
+    }
+
+    // Make available globally
+    window.showNotification = showNotification;
+
+    // Setup patient lookup functionality
+    function setupPatientLookup() {
+        const patientIdInput = document.getElementById('appointment-patient-id');
+        const patientNameInput = document.getElementById('appointment-patient-name');
         
-        document.body.prepend(notification);
+        if (!patientIdInput || !patientNameInput) return;
         
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            setTimeout(() => notification.remove(), 300);
-        }, 5000);
+        let debounceTimer;
         
-        notification.querySelector('.alert-close').addEventListener('click', () => {
-            notification.remove();
+        patientIdInput.addEventListener('input', function() {
+            const patientId = this.value.trim();
+            
+            // Clear previous timer
+            clearTimeout(debounceTimer);
+            
+            if (!patientId) {
+                patientNameInput.value = '';
+                return;
+            }
+            
+            // Debounce the API call
+            debounceTimer = setTimeout(() => {
+                fetchPatientName(patientId);
+            }, 500);
         });
+        
+        // Also trigger on Enter key
+        patientIdInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const patientId = this.value.trim();
+                if (patientId) {
+                    clearTimeout(debounceTimer);
+                    fetchPatientName(patientId);
+                }
+            }
+        });
+    }
+
+    async function fetchPatientName(patientId) {
+        const patientNameInput = document.getElementById('appointment-patient-name');
+        if (!patientNameInput) return;
+        
+        try {
+            patientNameInput.value = 'Loading...';
+            
+            const response = await fetch(`get_patient_name.php?patient_id=${encodeURIComponent(patientId)}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin'
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                patientNameInput.value = data.patient_name;
+            } else {
+                patientNameInput.value = '';
+                showNotification(data.message || 'Patient not found', 'error');
+            }
+            
+        } catch (error) {
+            console.error('Error fetching patient name:', error);
+            patientNameInput.value = '';
+            showNotification('Error fetching patient information', 'error');
+        }
+    }
+
+    // Setup modal handlers
+    function setupModalHandlers() {
+        // Main appointment modal close handlers
+        const modalCloseBtn = document.getElementById('modalCloseButton');
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closeModal);
+        }
+        
+        // Edit appointment button
+        const editAppointmentBtn = document.getElementById('editAppointmentBtn');
+        if (editAppointmentBtn) {
+            editAppointmentBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const appointmentData = appointmentModal.dataset.appointmentData;
+                if (appointmentData) {
+                    try {
+                        const appointment = JSON.parse(appointmentData);
+                        closeModal();
+                        editAppointmentDetails(appointment);
+                    } catch (error) {
+                        console.error('Error parsing appointment data:', error);
+                        showNotification('Error loading appointment details', 'error');
+                    }
+                }
+            });
+        }
+        
+        // Cancel appointment button
+        const cancelAppointmentBtn = document.getElementById('cancelAppointmentBtn');
+        if (cancelAppointmentBtn) {
+            cancelAppointmentBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const appointmentData = appointmentModal.dataset.appointmentData;
+                if (appointmentData) {
+                    try {
+                        const appointment = JSON.parse(appointmentData);
+                        closeModal();
+                        showCancelConfirmation(appointment);
+                    } catch (error) {
+                        console.error('Error parsing appointment data:', error);
+                        showNotification('Error loading appointment details', 'error');
+                    }
+                }
+            });
+        }
+
+        // Edit modal handlers
+        const editModalCloseBtn = document.getElementById('editModalCloseButton');
+        if (editModalCloseBtn) {
+            editModalCloseBtn.addEventListener('click', function() {
+                const editModal = document.getElementById('editAppointmentModal');
+                if (editModal) {
+                    editModal.style.display = 'none';
+                    editModal.classList.remove('active');
+                }
+            });
+        }
+
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        if (cancelEditBtn) {
+            cancelEditBtn.addEventListener('click', function() {
+                const editModal = document.getElementById('editAppointmentModal');
+                if (editModal) {
+                    editModal.style.display = 'none';
+                    editModal.classList.remove('active');
+                }
+            });
+        }
+
+        // Cancel modal handlers
+        const cancelModalCloseBtn = document.getElementById('cancelModalCloseButton');
+        if (cancelModalCloseBtn) {
+            cancelModalCloseBtn.addEventListener('click', function() {
+                const cancelModal = document.getElementById('cancelAppointmentModal');
+                if (cancelModal) {
+                    cancelModal.style.display = 'none';
+                    cancelModal.classList.remove('active');
+                }
+            });
+        }
+
+        const cancelCancelBtn = document.getElementById('cancelCancelBtn');
+        if (cancelCancelBtn) {
+            cancelCancelBtn.addEventListener('click', function() {
+                const cancelModal = document.getElementById('cancelAppointmentModal');
+                if (cancelModal) {
+                    cancelModal.style.display = 'none';
+                    cancelModal.classList.remove('active');
+                }
+            });
+        }
+
+        // Handle cancel reason dropdown
+        const cancelReasonSelect = document.getElementById('cancel-reason');
+        const otherReasonContainer = document.getElementById('other-reason-container');
+        if (cancelReasonSelect && otherReasonContainer) {
+            cancelReasonSelect.addEventListener('change', function() {
+                if (this.value === 'Other') {
+                    otherReasonContainer.style.display = 'block';
+                } else {
+                    otherReasonContainer.style.display = 'none';
+                }
+            });
+        }
     }
 
     function setupEventListeners() {
         // Month navigation
-        
         if (prevMonthBtn) {
             prevMonthBtn.addEventListener('click', () => {
                 currentMonth--;
@@ -498,6 +813,16 @@ async function loadAppointments(forceRefresh = false) {
                 }
                 generateCalendar(currentMonth, currentYear);
             });
+        }
+
+        // Add appointment modal close button
+        if (closeAddOverlayBtn) {
+            closeAddOverlayBtn.addEventListener('click', closeAddAppointmentModal);
+        }
+
+        const cancelAppointmentFormBtn = document.getElementById('cancel-appointment');
+        if (cancelAppointmentFormBtn) {
+            cancelAppointmentFormBtn.addEventListener('click', closeAddAppointmentModal);
         }
         
         // Close buttons
@@ -523,7 +848,7 @@ async function loadAppointments(forceRefresh = false) {
             });
         }
         
-        // Modal close handlers
+        // Modal close handlers for clicking outside
         document.addEventListener('click', (e) => {
             if (e.target === appointmentOverlay) {
                 appointmentOverlay.classList.remove('active');
@@ -532,32 +857,89 @@ async function loadAppointments(forceRefresh = false) {
             if (e.target === appointmentModal) {
                 closeModal();
             }
+
+            if (e.target === addAppointmentOverlay) {
+                closeAddAppointmentModal();
+            }
         });
+
+        // Logout functionality
+        setupLogoutHandlers();
+    }
+
+    function setupLogoutHandlers() {
+        const logoutLink = document.querySelector('a[href="#"]');
+        const logoutOverlay = document.getElementById('logoutOverlay');
+        const confirmLogout = document.getElementById('confirmLogout');
+        const cancelLogout = document.getElementById('cancelLogout');
+
+        if (logoutLink && logoutOverlay) {
+            logoutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutOverlay.style.display = 'flex';
+            });
+        }
+
+        if (confirmLogout) {
+            confirmLogout.addEventListener('click', function() {
+                window.location.href = '../logout.php';
+            });
+        }
+
+        if (cancelLogout && logoutOverlay) {
+            cancelLogout.addEventListener('click', function() {
+                logoutOverlay.style.display = 'none';
+            });
+        }
+
+        // Close logout modal when clicking outside
+        if (logoutOverlay) {
+            logoutOverlay.addEventListener('click', function(e) {
+                if (e.target === logoutOverlay) {
+                    logoutOverlay.style.display = 'none';
+                }
+            });
+        }
     }
 
     function openNewAppointmentModal(date = '') {
-        if (!newAppointmentModal) return;
+        if (!addAppointmentOverlay) {
+            console.error('Add appointment overlay not found');
+            return;
+        }
         
-        newAppointmentModal.style.display = 'block';
-        setTimeout(() => newAppointmentModal.classList.add('active'), 10);
+        // Show the modal
+        addAppointmentOverlay.style.display = 'flex';
+        setTimeout(() => addAppointmentOverlay.classList.add('active'), 10);
         
         // Reset form
-        const form = document.getElementById('new-appointment-form');
-        if (form) form.reset();
+        const form = document.getElementById('appointment-form');
+        if (form) {
+            form.reset();
+        }
         
         // Set date if provided
         if (date) {
             const dateInput = document.getElementById('appointment-date');
-            if (dateInput) dateInput.value = date;
+            if (dateInput) {
+                dateInput.value = date;
+            }
         }
         
         // Set minimum date to today
         const today = new Date().toISOString().split('T')[0];
         const dateInput = document.getElementById('appointment-date');
-        if (dateInput) dateInput.min = today;
-        
-      
+        if (dateInput) {
+            dateInput.min = today;
+        }
     }
 
-
+    function closeAddAppointmentModal() {
+        if (addAppointmentOverlay) {
+            addAppointmentOverlay.classList.remove('active');
+            setTimeout(() => {
+                addAppointmentOverlay.style.display = 'none';
+            }, 300);
+        }
+    }
 });

@@ -41,6 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['secretary_id'] = $user['user_id'];
                     header("Location: ../Secretary/Secretary_dashboard.php");
                 }
+                elseif($user['user_type'] === 'Admin'){
+                    $_SESSION['admin_id'] = $user['user_id'];
+                    header("Location: /fyp/Admin/Admin_Dashboard.php");
+                }
                 else {
                      $_SESSION['patient_id'] = $user['user_id'];
                     header("Location: ../Patient/patient_dashboard.php");

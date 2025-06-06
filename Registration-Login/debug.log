@@ -1849,3 +1849,169 @@ Array
 [2025-06-03 20:32:21] Transaction committed
 [2025-06-03 20:32:21] Session variables set. Registration successful for susus@gmail.com
 [2025-06-03 20:32:21] Redirecting to: ../Patient/patient_dashboard.php
+[2025-06-05 08:35:03] Script started. Request method: POST
+[2025-06-05 08:35:03] Received POST data: Array
+(
+    [fullName] => Jawad Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => jawaddiab@gmail.com
+    [Password] => 12345678
+    [phone] => 70235652
+)
+
+[2025-06-05 08:35:03] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab22@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [secretary_id] => 63
+    [doctor_id] => 1
+)
+
+[2025-06-05 08:35:03] Processed input data:
+[2025-06-05 08:35:03] Full Name: Jawad Diab
+[2025-06-05 08:35:03] Email: jawaddiab@gmail.com
+[2025-06-05 08:35:03] Phone: 70235652
+[2025-06-05 08:35:03] User Type: patient
+[2025-06-05 08:35:03] Specialty: 
+[2025-06-05 08:35:03] License: 
+[2025-06-05 08:35:03] Secretary Specialty: 
+[2025-06-05 08:35:03] Assigned Doctor: 
+[2025-06-05 08:35:03] Validation errors: Array
+(
+)
+
+[2025-06-05 08:35:03] Transaction started
+[2025-06-05 08:35:03] Password hashed
+[2025-06-05 08:35:03] User inserted with ID: 95
+[2025-06-05 08:35:03] Patient record inserted
+[2025-06-05 08:35:03] Transaction committed
+[2025-06-05 08:35:03] Session variables set. Registration successful for jawaddiab@gmail.com
+[2025-06-05 08:35:03] Redirecting to: ../Patient/patient_dashboard.php
+[2025-06-06 16:57:41] Script started. Request method: POST
+[2025-06-06 16:57:41] Received POST data: Array
+(
+    [fullName] => Jawad Shhadi
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => jawad@gmail.com
+    [Password] => 12345678
+    [phone] => 71770219
+)
+
+[2025-06-06 16:57:41] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab222@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [secretary_id] => 63
+    [doctor_id] => 1
+)
+
+[2025-06-06 16:57:41] Processed input data:
+[2025-06-06 16:57:41] Full Name: Jawad Shhadi
+[2025-06-06 16:57:41] Email: jawad@gmail.com
+[2025-06-06 16:57:41] Phone: 71770219
+[2025-06-06 16:57:41] User Type: patient
+[2025-06-06 16:57:41] Specialty: 
+[2025-06-06 16:57:41] License: 
+[2025-06-06 16:57:41] Secretary Specialty: 
+[2025-06-06 16:57:41] Assigned Doctor: 
+[2025-06-06 16:57:41] Validation errors: Array
+(
+)
+
+[2025-06-06 16:57:41] Transaction started
+[2025-06-06 16:57:42] Password hashed
+[2025-06-06 16:57:42] User inserted with ID: 100
+[2025-06-06 16:57:42] Patient record inserted
+[2025-06-06 16:57:42] Transaction committed
+[2025-06-06 16:57:42] Session variables set. Registration successful for jawad@gmail.com
+[2025-06-06 16:57:42] Redirecting to: ../Patient/patient_dashboard.php
+[2025-06-07 01:19:22] Script started. Request method: POST
+[2025-06-07 01:19:22] Received POST data: Array
+(
+    [fullName] => IUL
+    [userType] => admin
+    [licenseNumber] => 
+    [Email] => Iul@gmail.com
+    [Password] => Iul12345678
+    [phone] => 70214000
+)
+
+[2025-06-07 01:19:22] Session data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [patient_id] => 12
+    [doctor_id] => 1
+    [secretary_id] => 63
+)
+
+[2025-06-07 01:19:22] Processed input data:
+[2025-06-07 01:19:22] Full Name: IUL
+[2025-06-07 01:19:22] Email: Iul@gmail.com
+[2025-06-07 01:19:22] Phone: 70214000
+[2025-06-07 01:19:22] User Type: admin
+[2025-06-07 01:19:22] Specialty: 
+[2025-06-07 01:19:22] License: 
+[2025-06-07 01:19:22] Secretary Specialty: 
+[2025-06-07 01:19:22] Assigned Doctor: 
+[2025-06-07 01:19:22] Validation errors: Array
+(
+)
+
+[2025-06-07 01:19:22] Transaction started
+[2025-06-07 01:19:22] Password hashed
+[2025-06-07 01:19:22] User inserted with ID: 101
+[2025-06-07 01:19:22] Patient record inserted
+[2025-06-07 01:19:22] Transaction committed
+[2025-06-07 01:19:22] Session variables set. Registration successful for Iul@gmail.com
+[2025-06-07 01:19:22] Redirecting to: index.php
+[2025-06-07 01:28:17] Script started. Request method: POST
+[2025-06-07 01:28:17] Received POST data: Array
+(
+    [fullName] => IUL
+    [userType] => admin
+    [licenseNumber] => 
+    [Email] => Iul@gmail.com
+    [Password] => 12345678
+    [phone] => 70214000
+)
+
+[2025-06-07 01:28:17] Session data: Array
+(
+    [user_id] => 63
+    [email] => HayatIbrahim@gmail.com
+    [full_name] => Hayat Ibrahim
+    [user_type] => Secretary
+    [patient_id] => 12
+    [doctor_id] => 1
+    [secretary_id] => 63
+)
+
+[2025-06-07 01:28:17] Processed input data:
+[2025-06-07 01:28:17] Full Name: IUL
+[2025-06-07 01:28:17] Email: Iul@gmail.com
+[2025-06-07 01:28:17] Phone: 70214000
+[2025-06-07 01:28:17] User Type: admin
+[2025-06-07 01:28:17] Specialty: 
+[2025-06-07 01:28:17] License: 
+[2025-06-07 01:28:17] Secretary Specialty: 
+[2025-06-07 01:28:17] Assigned Doctor: 
+[2025-06-07 01:28:17] Validation errors: Array
+(
+)
+
+[2025-06-07 01:28:17] Transaction started
+[2025-06-07 01:28:17] Password hashed
+[2025-06-07 01:28:17] User inserted with ID: 102
+[2025-06-07 01:28:17] Admin record inserted
+[2025-06-07 01:28:17] Transaction committed
+[2025-06-07 01:28:17] Session variables set. Registration successful for Iul@gmail.com
+[2025-06-07 01:28:17] Redirecting to: ../Admin/Admin_Dashboard.php

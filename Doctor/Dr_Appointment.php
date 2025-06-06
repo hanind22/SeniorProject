@@ -293,7 +293,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </div>
 </div>
-
+ 
 
         <!-- Notification -->
         <div id="notification" class="notification">
@@ -438,57 +438,40 @@ if (isset($_SESSION['user_id'])) {
         <h2 class="modal-title">Cancel Appointment</h2>
         
         <form id="cancel-appointment-form">
-            <div class="appointment-meta">
-                <div class="meta-item">
-                    <i class="fas fa-user"></i>
-                    <div>
-                        <span class="meta-label">Patient</span>
-                        <span class="meta-value" id="cancelPatientName"></span>
-                    </div>
-                </div>
-                
-                <div class="meta-item">
-                    <i class="fas fa-clock"></i>
-                    <div>
-                        <span class="meta-label">Time</span>
-                        <span class="meta-value" id="cancelAppointmentTime"></span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="cancel-reason">Reason for cancellation:</label>
-                <select id="cancel-reason" name="cancel_reason" required class="form-control">
-                    <option value="">Select a reason...</option>
-                    <option value="Patient Request">Patient Request</option>
-                    <option value="Doctor Unavailable">Doctor Unavailable</option>
-                    <option value="Emergency">Emergency</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            
-            <div class="form-group" id="other-reason-container" style="display: none;">
-                <label for="other-reason">Please specify:</label>
-                <input type="text" id="other-reason" name="other_reason" class="form-control">
-            </div>
-            
-            <div class="form-group">
-                <label for="cancel-notes">Additional Notes:</label>
-                <textarea id="cancel-notes" name="cancel_notes" class="form-control" rows="3"></textarea>
-            </div>
-            
-            <input type="hidden" id="cancel-appointment-id" name="appointment_id">
-            <input type="hidden" name="action" value="cancel">
-            
-            <div class="appointment-actions">
-                <button type="button" class="btn btn-outline" id="cancelCancelBtn">
-                    <i class="fas fa-arrow-left"></i> Go Back
-                </button>
-                <button type="submit" class="btn btn-danger">
-                    <i class="fas fa-times"></i> Confirm Cancellation
-                </button>
-            </div>
-        </form>
+    <input type="hidden" id="cancel-appointment-id" name="appointment_id">
+    
+    <div class="form-group">
+        <label for="cancel-reason">Reason for cancellation:</label>
+        <select id="cancel-reason" name="cancel_reason" required class="form-control">
+            <option value="">Select a reason...</option>
+            <option value="Patient Request">Patient Request</option>
+            <option value="Doctor Unavailable">Doctor Unavailable</option>
+            <option value="Emergency">Emergency</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    
+    <div class="form-group" id="other-reason-container" style="display: none;">
+        <label for="other-reason">Please specify:</label>
+        <input type="text" id="other-reason" name="other_reason" class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <label for="cancel-notes">Additional Notes:</label>
+        <textarea id="cancel-notes" name="cancel_notes" class="form-control" rows="3"></textarea>
+    </div>
+    
+    <input type="hidden" name="action" value="cancel">
+    
+    <div class="appointment-actions">
+        <button type="button" class="btn btn-outline" id="cancelCancelBtn">
+            <i class="fas fa-arrow-left"></i> Go Back
+        </button>
+        <button type="submit" class="btn btn-danger">
+            <i class="fas fa-times"></i> Confirm Cancellation
+        </button>
+    </div>
+</form>
     </div>
 </div>
 
@@ -506,7 +489,12 @@ if (isset($_SESSION['user_id'])) {
 </div>
 <!-- -------------- -->
 
+<script>
+// In your HTML/PHP file, define this first
+const cancelledBy = <?php echo isset($_SESSION['user_id']) ? json_encode($_SESSION['user_id']) : 'null'; ?>;
+</script>
 <script src="Appointment.js"></script>
+
 <!-- <script> window.appointmentsData = <?php echo json_encode($appointments); ?>;</script> -->
 </body>
 </html>

@@ -1,0 +1,9 @@
+Array
+(
+    [appointment_id] => 394
+    [cancel_reason] => Patient Request
+    [other_reason] => 
+    [cancel_notes] => vefvaev
+    [action] => cancel
+    [cancelled_by] => 1
+)

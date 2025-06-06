@@ -10,6 +10,7 @@
 
 </head>
 <body>
+     
     <?php
     session_start();
     include('../db-config/connection.php');
@@ -64,7 +65,7 @@
     }
     $patientId = $patientData['patient_id'] ?? null;
     ?>
-
+<?php include('notifications.php'); ?>
     <div class="container">
         <!-- Side-Navigationbar -->
         <aside class="sidebar">

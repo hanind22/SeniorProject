@@ -67,10 +67,9 @@ try {
                 $stmt->close();
 
                 if ($doctorData) {
-                    // Get statistics for the dashboard
                     // Total patients
                     $stmt = $conn->prepare("
-                        SELECT COUNT(*) AS total 
+                        SELECT COUNT(DISTINCT patient_id) AS total 
                         FROM doctorpatient 
                         WHERE doctor_id = ?
                     ");
@@ -402,6 +401,7 @@ $ageDistributionJson = json_encode($ageDistribution);
     </style>
 </head>
 <body>
+    <?php include('notifications.php'); ?>
     <div class="container">
         <!-- Side-Navigationbar -->
         <aside class="sidebar">

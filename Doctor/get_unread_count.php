@@ -10,6 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 try {
+    // Get doctor_id
     $stmt = $conn->prepare("SELECT doctor_id FROM doctors WHERE user_id = ?");
     $stmt->bind_param("i", $_SESSION['user_id']);
     $stmt->execute();
@@ -23,30 +24,18 @@ try {
     $doctorData = $result->fetch_assoc();
     $doctorId = $doctorData['doctor_id'];
 
+    // Get unread count
     $stmt = $conn->prepare("
-        SELECT 
-            n.notification_id AS id,
-            n.message,
-            n.type_notification AS type,
-            n.created_at,
-            n.is_read,
-            u.full_name AS sender_name
-        FROM notifications n
-        JOIN users u ON n.sender_id = u.user_id
-        WHERE n.receiver_id = ?
-        ORDER BY n.created_at DESC
+        SELECT COUNT(*) AS unreadCount 
+        FROM notifications 
+        WHERE receiver_id = ? AND is_read = 0
     ");
-    
     $stmt->bind_param("i", $doctorId);
     $stmt->execute();
     $result = $stmt->get_result();
+    $count = $result->fetch_assoc()['unreadCount'];
 
-    $notifications = [];
-    while ($row = $result->fetch_assoc()) {
-        $notifications[] = $row;
-    }
-
-    echo json_encode($notifications);
+    echo json_encode(['unreadCount' => $count]);
     
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);

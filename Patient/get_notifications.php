@@ -10,18 +10,18 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 try {
-    $stmt = $conn->prepare("SELECT doctor_id FROM doctors WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT patient_id FROM patients WHERE user_id = ?");
     $stmt->bind_param("i", $_SESSION['user_id']);
     $stmt->execute();
     $result = $stmt->get_result();
     
     if ($result->num_rows === 0) {
-        echo json_encode(['error' => 'Doctor not found']);
+        echo json_encode(['error' => 'Patient not found']);
         exit;
     }
     
-    $doctorData = $result->fetch_assoc();
-    $doctorId = $doctorData['doctor_id'];
+    $patientData = $result->fetch_assoc();
+    $doctorId = $patientData['patient_id'];
 
     $stmt = $conn->prepare("
         SELECT 

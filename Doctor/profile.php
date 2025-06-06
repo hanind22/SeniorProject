@@ -110,6 +110,41 @@ try {
             background-color: #f9f9f9;
             transition: all 0.3s ease;
         }
+        /* Availability Section Styles */
+.day-availability.available {
+    background:rgb(240, 246, 249);
+    border-left: 4px solid rgb(76, 111, 175);
+}
+
+.day-availability.available .day {
+    color: rgb(53, 101, 189);
+}
+
+.day-availability.available .time {
+    color:rgb(53, 101, 189);
+}
+
+.day-availability.unavailable {
+    background: #fff5f5;
+    border-left: 4px solid #f44336;
+}
+
+.day-availability.unavailable .day {
+    color: #c62828;
+}
+
+.day-availability.unavailable .time {
+    color: #c62828;
+    text-decoration: line-through;
+}
+
+.day-availability.weekend.available {
+    background: #f0f9f0;
+}
+
+.day-availability.weekend.unavailable {
+    background: #fff5f5;
+}
         .day-availability:hover {
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
@@ -123,7 +158,7 @@ try {
             color: #333;
         }
         .place-name {
-            color: #555;
+            color: black;
             margin-bottom: 10px;
             font-size: 0.9em;
         }
@@ -454,40 +489,39 @@ try {
                 <div class="availability-section">
                     <h3><i class="fas fa-calendar-alt"></i> Availability</h3>
                     <div class="availability-grid" id="availability-grid">
-                        <?php
-                        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                        foreach ($days as $day) {
-                            $dayEntries = array_filter($availabilityData, function($item) use ($day) {
-                                return strtolower($item['day']) === strtolower($day);
-                            });
-                            
-                            $isWeekend = in_array($day, ['Saturday', 'Sunday']);
-                            $place_name = isset($entry['place_name']) ? $entry['place_name'] : 'Unknown Location';
-
-                            if (empty($dayEntries)) {
-                                echo '<div class="day-availability ' . ($isWeekend ? 'weekend' : '') . '">
-                                    <span class="day">' . $day . '</span>
-                                    <span class-"place_name">' . $place_name .'</span>
-                                    <span class="time">Not Available</span>
-                                </div>';
-                            } else {
-                                foreach ($dayEntries as $entry) {
-                                    echo '<div class="day-availability ' . ($isWeekend ? 'weekend' : '') . '">
-                                        <span class="day">' . $day . '</span>';
-                                    
-                                    if (!empty($entry['place_name'])) {
-                                        echo '<span class="place-name">' . htmlspecialchars($entry['place_name']) . '</span>';
-                                    }
-                                    
-                                    echo '<br> <span class="time">' . 
-                                         htmlspecialchars($entry['start_time']) . ' - ' . 
-                                         htmlspecialchars($entry['end_time']) . '</span>
-                                    </div>';
-                                }
-                            }
-                        }
-                        ?>
-                    </div>
+    <?php
+    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    foreach ($days as $day) {
+        $dayEntries = array_filter($availabilityData, function($item) use ($day) {
+            return strtolower($item['day']) === strtolower($day);
+        });
+        
+        $isWeekend = in_array($day, ['Saturday', 'Sunday']);
+        
+        if (empty($dayEntries)) {
+            echo '<div class="day-availability ' . ($isWeekend ? 'weekend' : '') . ' unavailable">
+                <span class="day">' . $day . '</span>
+                <span class="time">Not Available</span>
+            </div>';
+        } else {
+            foreach ($dayEntries as $entry) {
+                $statusClass = ($entry['status'] === 'available') ? 'available' : 'unavailable';
+                echo '<div class="day-availability ' . ($isWeekend ? 'weekend' : '') . ' ' . $statusClass . '">
+                    <span class="day">' . $day . '</span>';
+                
+                if (!empty($entry['place_name'])) {
+                    echo '<span class="place-name">' . htmlspecialchars($entry['place_name']) . '</span>';
+                }
+                
+                echo '<span class="time"><br>' . 
+                     htmlspecialchars($entry['start_time']) . ' - ' . 
+                     htmlspecialchars($entry['end_time']) . '</span>
+                </div>';
+            }
+        }
+    }
+    ?>
+</div>
                 </div>
             </section>
         </div>

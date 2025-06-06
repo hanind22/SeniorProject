@@ -10,19 +10,33 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 try {
-    $stmt = $conn->prepare("SELECT doctor_id FROM doctors WHERE user_id = ?");
+    // First check if user is a secretary
+    $stmt = $conn->prepare("SELECT doctor_id FROM secretary WHERE user_id = ?");
     $stmt->bind_param("i", $_SESSION['user_id']);
     $stmt->execute();
     $result = $stmt->get_result();
     
-    if ($result->num_rows === 0) {
-        echo json_encode(['error' => 'Doctor not found']);
-        exit;
+    if ($result->num_rows > 0) {
+        // User is a secretary - get their associated doctor_id
+        $userData = $result->fetch_assoc();
+        $doctorId = $userData['doctor_id'];
+    } else {
+        // If not a secretary, check if they're a doctor
+        $stmt = $conn->prepare("SELECT doctor_id FROM doctors WHERE user_id = ?");
+        $stmt->bind_param("i", $_SESSION['user_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows === 0) {
+            echo json_encode(['error' => 'User is neither a doctor nor a secretary']);
+            exit;
+        }
+        
+        $userData = $result->fetch_assoc();
+        $doctorId = $userData['doctor_id'];
     }
-    
-    $doctorData = $result->fetch_assoc();
-    $doctorId = $doctorData['doctor_id'];
 
+    // Get all notifications for the doctor
     $stmt = $conn->prepare("
         SELECT 
             n.notification_id AS id,

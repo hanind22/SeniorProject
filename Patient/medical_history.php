@@ -228,6 +228,7 @@ $patientId = $patientData['patient_id'] ?? null;
     </style>
 </head>
 <body>
+    <?php include('notifications.php'); ?>
     <div class="container">
         <aside class="sidebar">
             <div class="sidebar-header">

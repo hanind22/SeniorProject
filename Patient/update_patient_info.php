@@ -49,7 +49,7 @@ try {
     }
 
     // Update users table (email)
-    $stmt = $conn->prepare("UPDATE users SET email = ? AND phone_number = ? WHERE user_id = ?");
+    $stmt = $conn->prepare("UPDATE users SET email = ? , phone_number = ? WHERE user_id = ?");
     $stmt->bind_param("ssi", $email, $phone, $_SESSION['user_id']);
     
     if (!$stmt->execute()) {

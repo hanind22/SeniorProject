@@ -56,6 +56,7 @@ try {
         $doctor_id = $appointment['doctor_id'];
         $doctor_user_id = $appointment['doctor_user_id'];
         $patient_user_id = $appointment['patient_user_id'];
+        $patient_id = $appointment['patient_id'];
         $dayName = date('l', strtotime($date));
         $parsed_time = date('H:i:s', strtotime($newTime));
 
@@ -107,13 +108,32 @@ try {
                 throw new Exception("Failed to update appointment");
             }
 
-            // 4. Send notification to doctor
+            // 4. Get patient's full name properly
+            $patientNameQuery = "SELECT u.full_name 
+                               FROM patients p
+                               JOIN users u ON p.user_id = u.user_id
+                               WHERE p.patient_id = ?";
+            $patientNameStmt = $conn->prepare($patientNameQuery);
+            $patientNameStmt->bind_param("i", $patient_id);
+            $patientNameStmt->execute();
+            $patientNameResult = $patientNameStmt->get_result();
+            
+            if ($patientNameResult->num_rows === 0) {
+                throw new Exception("Could not find patient name");
+            }
+            
+            $patientData = $patientNameResult->fetch_assoc();
+            $patientName = $patientData['full_name'];
+
+            // 5. Send notification to doctor
             $formattedDate = date('F j, Y', strtotime($date));
             $formattedTime = date('g:i A', strtotime($parsed_time));
-            $doctorName = "Dr. " . $appointment['doctor_name'];
-            $message = "Your appointment with $doctorName has been rescheduled to $formattedDate at $formattedTime.";
-error_log("Patient user_id: $patient_user_id");
-error_log("Doctor user_id: $doctor_user_id");
+            
+            // Updated notification message format
+            $message = "$patientName has Rescheduled their appointment to $formattedDate at $formattedTime.";
+
+            error_log("Patient user_id: $patient_user_id");
+            error_log("Doctor user_id: $doctor_user_id");
 
             $notificationQuery = "INSERT INTO notifications 
                 (sender_id, receiver_id, message, type_notification, created_at, is_read, appointment_id) 

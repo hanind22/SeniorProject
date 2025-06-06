@@ -1,7 +1,11 @@
 <?php
 session_start();
+file_put_contents('debug_cancel.txt', print_r($_POST, true));
+
+
 header('Content-Type: application/json');
 require_once('../db-config/connection.php');
+
 
 try {
     if (!isset($_SESSION['user_id'])) {
@@ -158,6 +162,7 @@ try {
         if (!empty($cancelNotes)) {
             $combinedNotes .= "\nAdditional Notes: $cancelNotes";
         }
+        
 
         // Step 2: Cancel appointment
         $updateStmt = $conn->prepare("

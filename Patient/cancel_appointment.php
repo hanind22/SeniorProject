@@ -105,7 +105,7 @@ try {
     $appointmentDate = $appointment['appointment_date'];
     $appointmentTime = $appointment['appointment_time'];
 
-    $message = "Appointment with Dr. {$doctorName} on {$appointmentDate} at {$appointmentTime} has been cancelled by patient {$patientName}";
+    $message = "Patient {$patientName} has Cancelled their Appointment on {$appointmentDate} at {$appointmentTime} with Dr. {$doctorName} ";
     $type = "appointment_cancellation";
 
     $notifStmt = $conn->prepare("

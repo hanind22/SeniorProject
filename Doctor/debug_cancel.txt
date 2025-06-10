@@ -1,9 +1,9 @@
 Array
 (
-    [appointment_id] => 394
-    [cancel_reason] => Patient Request
+    [appointment_id] => 385
+    [cancel_reason] => Doctor Unavailable
     [other_reason] => 
-    [cancel_notes] => vefvaev
+    [cancel_notes] => zz
     [action] => cancel
     [cancelled_by] => 1
 )

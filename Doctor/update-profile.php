@@ -1,19 +1,16 @@
 <?php
 header('Content-Type: application/json');
-
-// Enable error reporting
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
-
 require_once('../db-config/connection.php');
+
 if ($conn->connect_error) {
     die(json_encode(['success' => false, 'message' => "Connection failed: " . $conn->connect_error]));
 }
 
-// Get JSON input
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
@@ -39,10 +36,14 @@ try {
     $certifications = $conn->real_escape_string($data['certifications'] ?? '');
     $bio = $conn->real_escape_string($data['bio'] ?? '');
     $availability = $data['availability'] ?? [];
+    
+    // Secretary data
+    $secretary_name = $conn->real_escape_string($data['secretary_name'] ?? '');
+    $secretary_email = $conn->real_escape_string($data['secretary_email'] ?? '');
 
     $conn->begin_transaction();
 
-    // 1. First get the user_id associated with this doctor
+    // 1. Get the user_id associated with this doctor
     $stmtGetUser = $conn->prepare("SELECT user_id FROM doctors WHERE doctor_id = ?");
     $stmtGetUser->bind_param("i", $doctor_id);
     $stmtGetUser->execute();
@@ -73,14 +74,73 @@ try {
         throw new Exception("Failed to update doctor: " . $stmtUpdateDoctor->error);
     }
 
-    // 4. Update availability - first delete existing
+    // 4. Handle secretary data
+    if (!empty($secretary_name) && !empty($secretary_email)) {
+        // Check if secretary already exists in users table
+        $stmtCheckSecretary = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
+        $stmtCheckSecretary->bind_param("s", $secretary_email);
+        $stmtCheckSecretary->execute();
+        $secretaryResult = $stmtCheckSecretary->get_result();
+        
+        $secretary_user_id = null;
+        
+        if ($secretaryResult->num_rows > 0) {
+            // Secretary exists - get user_id
+            $secretaryData = $secretaryResult->fetch_assoc();
+            $secretary_user_id = $secretaryData['user_id'];
+            
+            // Update secretary info
+            $stmtUpdateSecretary = $conn->prepare("UPDATE users SET 
+                full_name = ?
+                WHERE user_id = ?");
+            $stmtUpdateSecretary->bind_param("si", $secretary_name, $secretary_user_id);
+            if (!$stmtUpdateSecretary->execute()) {
+                throw new Exception("Failed to update secretary: " . $stmtUpdateSecretary->error);
+            }
+        } else {
+            // Create new secretary user (without password)
+            $stmtCreateSecretary = $conn->prepare("INSERT INTO users 
+                (full_name, email, user_type, created_at) 
+                VALUES (?, ?, 'Secretary', NOW())");
+            $stmtCreateSecretary->bind_param("ss", $secretary_name, $secretary_email);
+            if (!$stmtCreateSecretary->execute()) {
+                throw new Exception("Failed to create secretary: " . $stmtCreateSecretary->error);
+            }
+            $secretary_user_id = $conn->insert_id;
+        }
+        
+        // Update secretary association with doctor
+        // First delete any existing association
+        $stmtDeleteSecretary = $conn->prepare("DELETE FROM secretary WHERE doctor_id = ?");
+        $stmtDeleteSecretary->bind_param("i", $doctor_id);
+        if (!$stmtDeleteSecretary->execute()) {
+            throw new Exception("Failed to clear secretary association: " . $stmtDeleteSecretary->error);
+        }
+        
+        // Create new association
+        if ($secretary_user_id) {
+            $stmtAssignSecretary = $conn->prepare("INSERT INTO secretary 
+                (doctor_id, user_id) VALUES (?, ?)");
+            $stmtAssignSecretary->bind_param("ii", $doctor_id, $secretary_user_id);
+            if (!$stmtAssignSecretary->execute()) {
+                throw new Exception("Failed to assign secretary: " . $stmtAssignSecretary->error);
+            }
+        }
+    } else {
+        // If no secretary data provided, remove any existing association
+        $stmtDeleteSecretary = $conn->prepare("DELETE FROM secretary WHERE doctor_id = ?");
+        $stmtDeleteSecretary->bind_param("i", $doctor_id);
+        $stmtDeleteSecretary->execute(); // We don't throw error if this fails
+    }
+
+    // 5. Update availability - first delete existing
     $stmtDeleteAvailability = $conn->prepare("DELETE FROM work_place WHERE doctor_id = ?");
     $stmtDeleteAvailability->bind_param("i", $doctor_id);
     if (!$stmtDeleteAvailability->execute()) {
         throw new Exception("Failed to clear availability: " . $stmtDeleteAvailability->error);
     }
 
-    // 5. Insert new availability slots
+    // 6. Insert new availability slots
     foreach ($availability as $day => $slots) {
         foreach ($slots as $slot) {
             if (empty($slot['place_name']) || empty($slot['start_time']) || empty($slot['end_time'])) {
@@ -106,21 +166,9 @@ try {
 
     $conn->commit();
 
-    // Verify the updates
-    $result = $conn->query("SELECT email, phone_number FROM users WHERE user_id = $user_id");
-    $currentValues = $result->fetch_assoc();
-    
     echo json_encode([
         'success' => true,
-        'message' => 'Profile updated successfully',
-        'debug' => [
-            'user_id' => $user_id,
-            'doctor_id' => $doctor_id,
-            'email_updated' => $email,
-            'phone_updated' => $phone,
-            'current_email' => $currentValues['email'],
-            'current_phone' => $currentValues['phone_number']
-        ]
+        'message' => 'Profile updated successfully'
     ]);
     
 } catch (Exception $e) {
@@ -128,8 +176,7 @@ try {
     http_response_code(500);
     echo json_encode([
         'success' => false, 
-        'message' => 'Error: ' . $e->getMessage(),
-        'trace' => $e->getTrace()
+        'message' => 'Error: ' . $e->getMessage()
     ]);
 } finally {
     $conn->close();

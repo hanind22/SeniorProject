@@ -10,18 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 try {
-    $stmt = $conn->prepare("SELECT doctor_id FROM doctors WHERE user_id = ?");
-    $stmt->bind_param("i", $_SESSION['user_id']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows === 0) {
-        echo json_encode(['error' => 'Doctor not found']);
-        exit;
-    }
-    
-    $doctorData = $result->fetch_assoc();
-    $doctorId = $doctorData['doctor_id'];
+    $userId = $_SESSION['user_id'];
 
     $stmt = $conn->prepare("
         SELECT 
@@ -36,8 +25,8 @@ try {
         WHERE n.receiver_id = ?
         ORDER BY n.created_at DESC
     ");
-    
-    $stmt->bind_param("i", $doctorId);
+
+    $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -47,7 +36,7 @@ try {
     }
 
     echo json_encode($notifications);
-    
+
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }

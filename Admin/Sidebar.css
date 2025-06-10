@@ -23,9 +23,10 @@ body {
     padding: 25px;
     height: 100vh;
     top: 0;
-    position: sticky;
+    position: fixed;
     display: flex;
     flex-direction: column;
+    z-index: 1000;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -168,4 +169,13 @@ body {
     .cancel-logout:hover {
         background-color: #bdc3c7;
     }
+
+    .content {
+        margin-left: 280px;
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: fixed;
+    height: 100vh;
+    background: #f8f9fa; /* Light background for content */
+}
 

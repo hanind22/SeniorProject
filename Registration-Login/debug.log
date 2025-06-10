@@ -2015,3 +2015,434 @@ Array
 [2025-06-07 01:28:17] Transaction committed
 [2025-06-07 01:28:17] Session variables set. Registration successful for Iul@gmail.com
 [2025-06-07 01:28:17] Redirecting to: ../Admin/Admin_Dashboard.php
+[2025-06-07 23:01:18] Script started. Request method: POST
+[2025-06-07 23:01:18] Received POST data: Array
+(
+    [fullName] => Ali Abdallah
+    [userType] => doctor
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => MD12347
+    [Email] => aliabdallah@gmail.com
+    [Password] => 12345678
+    [phone] => 03002103
+)
+
+[2025-06-07 23:01:18] Session data: Array
+(
+    [user_id] => 102
+    [email] => Iul@gmail.com
+    [full_name] => IUL
+    [user_type] => Admin
+    [admin_id] => 102
+)
+
+[2025-06-07 23:01:18] Processed input data: fullName=Ali Abdallah, email=aliabdallah@gmail.com, phone=03002103, userType=doctor, specialty=Neurology, license=MD12347, secretarySpecialty=, assignedDoctor=
+[2025-06-07 23:01:18] Validation errors: Array
+(
+)
+
+[2025-06-07 23:01:18] Transaction started
+[2025-06-07 23:01:18] Password hashed
+[2025-06-07 23:01:18] User inserted with ID: 106
+[2025-06-07 23:01:18] Doctor record updated with user_id: 106
+[2025-06-07 23:01:18] Transaction committed
+[2025-06-07 23:01:18] Redirecting to: ../Doctor/doctor_dashboard.php
+[2025-06-07 23:04:52] Script started. Request method: POST
+[2025-06-07 23:04:52] Received POST data: Array
+(
+    [fullName] => Ali Abdallah
+    [userType] => doctor
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => MD12347
+    [Email] => aliabdallah@gmail.com
+    [Password] => 12345678
+    [phone] => 03002103
+)
+
+[2025-06-07 23:04:52] Session data: Array
+(
+    [user_id] => 102
+    [email] => Iul@gmail.com
+    [full_name] => IUL
+    [user_type] => Admin
+    [admin_id] => 102
+)
+
+[2025-06-07 23:04:52] Processed input data: fullName=Ali Abdallah, email=aliabdallah@gmail.com, phone=03002103, userType=doctor, specialty=Neurology, license=MD12347, secretarySpecialty=, assignedDoctor=
+[2025-06-07 23:04:52] Validation errors: Array
+(
+)
+
+[2025-06-07 23:04:52] Transaction started
+[2025-06-07 23:04:53] Password hashed
+[2025-06-07 23:04:53] User inserted with ID: 108
+[2025-06-07 23:04:53] Doctor record updated with user_id: 108
+[2025-06-07 23:04:53] Transaction committed
+[2025-06-07 23:04:53] Redirecting to: ../Doctor/doctor_dashboard.php
+[2025-06-07 23:28:45] Script started. Request method: POST
+[2025-06-07 23:28:45] Received POST data: Array
+(
+    [fullName] => hassan kareem
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => hasanwefwerf@gmail.com
+    [Password] => 12345678
+    [phone] => 71102222
+)
+
+[2025-06-07 23:28:45] Session data: Array
+(
+    [user_id] => 102
+    [email] => Iul@gmail.com
+    [full_name] => IUL
+    [user_type] => Admin
+    [admin_id] => 102
+    [errors] => Array
+        (
+            [0] => Email is already registered
+        )
+
+)
+
+[2025-06-07 23:28:45] Processed input data:
+[2025-06-07 23:28:45] Full Name: hassan kareem
+[2025-06-07 23:28:45] Email: hasanwefwerf@gmail.com
+[2025-06-07 23:28:45] Phone: 71102222
+[2025-06-07 23:28:45] User Type: patient
+[2025-06-07 23:28:45] Specialty: 
+[2025-06-07 23:28:45] License: 
+[2025-06-07 23:28:45] Secretary Specialty: 
+[2025-06-07 23:28:45] Assigned Doctor: 
+[2025-06-07 23:28:45] Validation errors: Array
+(
+)
+
+[2025-06-07 23:28:45] Transaction started
+[2025-06-07 23:28:45] Password hashed
+[2025-06-07 23:28:45] User inserted with ID: 113
+[2025-06-07 23:28:45] Patient record inserted
+[2025-06-07 23:28:45] Transaction committed
+[2025-06-07 23:28:45] Session variables set. Registration successful for hasanwefwerf@gmail.com
+[2025-06-07 23:28:45] Redirecting to: ../Patient/patient_dashboard.php
+[2025-06-07 23:33:17] Script started. Request method: POST
+[2025-06-07 23:33:17] Received POST data: Array
+(
+    [fullName] => Falak Reda
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => falak@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-07 23:33:17] Session data: Array
+(
+    [user_id] => 113
+    [email] => hasanwefwerf@gmail.com
+    [full_name] => hassan kareem
+    [user_type] => Patient
+    [admin_id] => 102
+    [errors] => Array
+        (
+            [0] => Email is already registered
+        )
+
+)
+
+[2025-06-07 23:33:17] Processed input data:
+[2025-06-07 23:33:17] Full Name: Falak Reda
+[2025-06-07 23:33:17] Email: falak@gmail.com
+[2025-06-07 23:33:17] Phone: 71024587
+[2025-06-07 23:33:17] User Type: patient
+[2025-06-07 23:33:17] Specialty: 
+[2025-06-07 23:33:17] License: 
+[2025-06-07 23:33:17] Secretary Specialty: 
+[2025-06-07 23:33:17] Assigned Doctor: 
+[2025-06-07 23:33:17] Validation errors: Array
+(
+)
+
+[2025-06-07 23:33:17] Transaction started
+[2025-06-07 23:33:17] Password hashed
+[2025-06-07 23:33:17] User inserted with ID: 115
+[2025-06-07 23:33:17] Patient record inserted
+[2025-06-07 23:33:17] Transaction committed
+[2025-06-07 23:33:17] Session variables set. Registration successful for falak@gmail.com
+[2025-06-07 23:33:17] Redirecting to: ../Patient/patient_dashboard.php
+[2025-06-07 23:48:20] Script started. Request method: POST
+[2025-06-07 23:48:20] Received POST data: Array
+(
+    [fullName] => Ali Diab
+    [userType] => doctor
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => MD12347
+    [Email] => aliDiab@gmail.com
+    [Password] => 12345678
+    [phone] => 71214757
+)
+
+[2025-06-07 23:48:20] Session data: Array
+(
+    [user_id] => 102
+    [email] => Iul@gmail.com
+    [full_name] => IUL
+    [user_type] => Admin
+    [admin_id] => 102
+    [errors] => Array
+        (
+            [0] => Email is already registered
+        )
+
+    [health_form_completed] => 1
+)
+
+[2025-06-07 23:48:20] Processed input data:
+[2025-06-07 23:48:20] Full Name: Ali Diab
+[2025-06-07 23:48:20] Email: aliDiab@gmail.com
+[2025-06-07 23:48:20] Phone: 71214757
+[2025-06-07 23:48:20] User Type: doctor
+[2025-06-07 23:48:20] Specialty: Neurology
+[2025-06-07 23:48:20] License: MD12347
+[2025-06-07 23:48:20] Secretary Specialty: 
+[2025-06-07 23:48:20] Assigned Doctor: 
+[2025-06-07 23:48:20] Validation errors: Array
+(
+)
+
+[2025-06-07 23:48:20] Transaction started
+[2025-06-07 23:48:21] Password hashed
+[2025-06-07 23:48:21] User inserted with ID: 117
+[2025-06-07 23:48:21] Registration failed: Duplicate entry 'aliDiab@gmail.com' for key 'email'
+[2025-06-07 23:55:21] Script started. Request method: POST
+[2025-06-07 23:55:21] Received POST data: Array
+(
+    [fullName] => Ali Diab
+    [userType] => doctor
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => MD89645
+    [Email] => aliDiab@gmail.com
+    [Password] => 12345678
+    [phone] => 71214757
+)
+
+[2025-06-07 23:55:21] Session data: Array
+(
+    [user_id] => 102
+    [email] => Iul@gmail.com
+    [full_name] => IUL
+    [user_type] => Admin
+    [admin_id] => 102
+    [errors] => Array
+        (
+            [0] => Email is already registered
+        )
+
+    [health_form_completed] => 1
+)
+
+[2025-06-07 23:55:21] Processed input data:
+[2025-06-07 23:55:21] Full Name: Ali Diab
+[2025-06-07 23:55:21] Email: aliDiab@gmail.com
+[2025-06-07 23:55:21] Phone: 71214757
+[2025-06-07 23:55:21] User Type: doctor
+[2025-06-07 23:55:21] Specialty: Neurology
+[2025-06-07 23:55:21] License: MD89645
+[2025-06-07 23:55:21] Secretary Specialty: 
+[2025-06-07 23:55:21] Assigned Doctor: 
+[2025-06-07 23:55:21] Validation errors: Array
+(
+)
+
+[2025-06-07 23:55:21] Doctor not found in pre-registered records
+[2025-06-07 23:55:21] Redirecting back with errors
+[2025-06-07 23:55:37] Script started. Request method: POST
+[2025-06-07 23:55:37] Received POST data: Array
+(
+    [fullName] => Ali Diab
+    [userType] => doctor
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => MD12347
+    [Email] => aliDiab@gmail.com
+    [Password] => 12345678
+    [phone] => 71214757
+)
+
+[2025-06-07 23:55:37] Session data: Array
+(
+    [user_id] => 102
+    [email] => Iul@gmail.com
+    [full_name] => IUL
+    [user_type] => Admin
+    [admin_id] => 102
+    [errors] => Array
+        (
+            [0] => Doctor information not found in our records. Please contact the administrator to register your account first.
+        )
+
+    [health_form_completed] => 1
+)
+
+[2025-06-07 23:55:37] Processed input data:
+[2025-06-07 23:55:37] Full Name: Ali Diab
+[2025-06-07 23:55:37] Email: aliDiab@gmail.com
+[2025-06-07 23:55:37] Phone: 71214757
+[2025-06-07 23:55:37] User Type: doctor
+[2025-06-07 23:55:37] Specialty: Neurology
+[2025-06-07 23:55:37] License: MD12347
+[2025-06-07 23:55:37] Secretary Specialty: 
+[2025-06-07 23:55:37] Assigned Doctor: 
+[2025-06-07 23:55:37] Validation errors: Array
+(
+)
+
+[2025-06-07 23:55:37] Transaction started
+[2025-06-07 23:55:37] Password hashed
+[2025-06-07 23:55:37] Doctor record updated for user_id: 118
+[2025-06-07 23:55:37] Transaction committed
+[2025-06-07 23:55:37] Session variables set. Registration successful for aliDiab@gmail.com
+[2025-06-07 23:55:37] Redirecting to: ../Doctor/doctor_dashboard.php
+[2025-06-07 23:56:50] Script started. Request method: POST
+[2025-06-07 23:56:50] Received POST data: Array
+(
+    [fullName] => Malak Reda
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => mimi21@gmail.com
+    [Password] => 12345678
+    [phone] => 71450012
+)
+
+[2025-06-07 23:56:50] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab22@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [admin_id] => 102
+    [errors] => Array
+        (
+            [0] => Doctor information not found in our records. Please contact the administrator to register your account first.
+        )
+
+    [health_form_completed] => 1
+    [doctor_id] => 1
+)
+
+[2025-06-07 23:56:50] Processed input data:
+[2025-06-07 23:56:50] Full Name: Malak Reda
+[2025-06-07 23:56:50] Email: mimi21@gmail.com
+[2025-06-07 23:56:50] Phone: 71450012
+[2025-06-07 23:56:50] User Type: patient
+[2025-06-07 23:56:50] Specialty: 
+[2025-06-07 23:56:50] License: 
+[2025-06-07 23:56:50] Secretary Specialty: 
+[2025-06-07 23:56:50] Assigned Doctor: 
+[2025-06-07 23:56:50] Validation errors: Array
+(
+)
+
+[2025-06-07 23:56:50] Transaction started
+[2025-06-07 23:56:50] Password hashed
+[2025-06-07 23:56:50] User inserted with ID: 119
+[2025-06-07 23:56:50] Patient record inserted
+[2025-06-07 23:56:50] Transaction committed
+[2025-06-07 23:56:50] Session variables set. Registration successful for mimi21@gmail.com
+[2025-06-07 23:56:50] Redirecting to: ../Patient/patient_dashboard.php
+[2025-06-08 00:25:39] Script started. Request method: POST
+[2025-06-08 00:25:39] Received POST data: Array
+(
+    [fullName] => Ali Diab
+    [userType] => doctor
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => 123456
+    [Email] => aliDiab@gmail.com
+    [Password] => 12345678
+    [phone] => 71214757
+)
+
+[2025-06-08 00:25:39] Session data: Array
+(
+    [user_id] => 119
+    [email] => mimi21@gmail.com
+    [full_name] => Malak Reda
+    [user_type] => Patient
+    [admin_id] => 102
+    [errors] => Array
+        (
+            [0] => Doctor information not found in our records. Please contact the administrator to register your account first.
+        )
+
+    [health_form_completed] => 1
+    [doctor_id] => 118
+    [patient_id] => 119
+)
+
+[2025-06-08 00:25:39] Processed input data:
+[2025-06-08 00:25:39] Full Name: Ali Diab
+[2025-06-08 00:25:39] Email: aliDiab@gmail.com
+[2025-06-08 00:25:39] Phone: 71214757
+[2025-06-08 00:25:39] User Type: doctor
+[2025-06-08 00:25:39] Specialty: Neurology
+[2025-06-08 00:25:39] License: 123456
+[2025-06-08 00:25:39] Secretary Specialty: 
+[2025-06-08 00:25:39] Assigned Doctor: 
+[2025-06-08 00:25:39] Validation errors: Array
+(
+)
+
+[2025-06-08 00:25:39] Transaction started
+[2025-06-08 00:25:39] Password hashed
+[2025-06-08 00:25:39] User inserted with ID: 121
+[2025-06-08 00:25:39] Doctor record inserted
+[2025-06-08 00:25:39] Transaction committed
+[2025-06-08 00:25:39] Session variables set. Registration successful for aliDiab@gmail.com
+[2025-06-08 00:25:39] Redirecting to: ../Doctor/doctor_dashboard.php
+[2025-06-08 00:29:42] Script started. Request method: POST
+[2025-06-08 00:29:42] Received POST data: Array
+(
+    [fullName] => Sara Hammoud
+    [userType] => doctor
+    [doctorSpecialty] => Cardiology
+    [licenseNumber] => 123456MD
+    [Email] => saraHammoud@gmail.com
+    [Password] => 12345678
+    [phone] => 71452103
+)
+
+[2025-06-08 00:29:42] Session data: Array
+(
+    [user_id] => 102
+    [email] => Iul@gmail.com
+    [full_name] => IUL
+    [user_type] => Admin
+    [admin_id] => 102
+    [errors] => Array
+        (
+            [0] => Doctor information not found in our records. Please contact the administrator to register your account first.
+        )
+
+    [health_form_completed] => 1
+    [doctor_id] => 121
+    [patient_id] => 119
+)
+
+[2025-06-08 00:29:42] Processed input data:
+[2025-06-08 00:29:42] Full Name: Sara Hammoud
+[2025-06-08 00:29:42] Email: saraHammoud@gmail.com
+[2025-06-08 00:29:42] Phone: 71452103
+[2025-06-08 00:29:42] User Type: doctor
+[2025-06-08 00:29:42] Specialty: Cardiology
+[2025-06-08 00:29:42] License: 123456MD
+[2025-06-08 00:29:42] Secretary Specialty: 
+[2025-06-08 00:29:42] Assigned Doctor: 
+[2025-06-08 00:29:42] Validation errors: Array
+(
+)
+
+[2025-06-08 00:29:42] Transaction started
+[2025-06-08 00:29:42] Password hashed
+[2025-06-08 00:29:42] User inserted with ID: 123
+[2025-06-08 00:29:42] Doctor record inserted
+[2025-06-08 00:29:42] Transaction committed
+[2025-06-08 00:29:42] Session variables set. Registration successful for saraHammoud@gmail.com
+[2025-06-08 00:29:42] Redirecting to: ../Doctor/doctor_dashboard.php

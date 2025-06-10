@@ -530,10 +530,10 @@ document.addEventListener('DOMContentLoaded', function() {
         editModal.originalAppointment = appointment;
     }
 
-    function cancelAppointment(appointment) {
+function cancelAppointment(appointment) {
     const cancelReason = document.getElementById('cancelReasonInput').value.trim();
     const form = document.getElementById('new-appointment-form');
-    const cancelledBy = form ? form.dataset.patientId : null; // Or fetch the real patient_id from session/user data
+    const cancelledBy = form ? form.dataset.patientId : null;
 
     if (!cancelReason) {
         alert("Please provide a reason for cancellation.");
@@ -552,28 +552,47 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     })
     .then(res => res.text())
-.then(text => {
-    console.log("Raw response text:", text);
-    try {
-        const data = JSON.parse(text);
-        console.log("Parsed response:", data);
+    .then(text => {
+        console.log("Raw response text:", text);
+        try {
+            const data = JSON.parse(text);
+            console.log("Parsed response:", data);
 
-        if (data.success) {
-            
-            closeModal();
-        } else {
-            alert("Error cancelling appointment: " + data.message);
+            if (data.success) {
+                // Close all modals
+                document.getElementById('cancelModal').style.display = 'none';
+                closeModal();
+                
+                // Show success message
+                showNotification(data.message || 'Appointment cancelled successfully', 'success');
+                
+                // Force refresh the appointments and calendar
+                return loadAppointments(true);
+            } else {
+                throw new Error(data.message || 'Failed to cancel appointment');
+            }
+        } catch (err) {
+            console.error("JSON parse error:", err);
+            throw new Error("Server response is not valid JSON:\n" + text);
         }
-    } catch (err) {
-        console.error("JSON parse error:", err);
-        alert("Server response is not valid JSON:\n" + text);
-    }
-})
-
+    })
+    .then(() => {
+        // Regenerate the calendar with updated data
+        generateCalendar(currentMonth, currentYear);
+        
+        // If viewing appointments for a specific date, refresh that view too
+        if (selectedDate) {
+            showAppointmentsForDate(selectedDate);
+        }
+    })
+    .catch(error => {
+        console.error('Error cancelling appointment:', error);
+        showNotification(error.message || 'Failed to cancel appointment', 'error');
+    });
 }
 
 
-    function showCancelConfirmation(appointment) {
+function showCancelConfirmation(appointment) {
     console.log("Appointment passed to showCancelConfirmation:", appointment);
 
     const cancelModal = document.getElementById('cancelModal');
@@ -587,7 +606,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('cancelDate').textContent = appointment.formatted_date || 'DATE';
     document.getElementById('cancelTime').textContent = appointment.formatted_time || 'TIME';
     cancelModal.classList.add('active');
-    // Reset reason select
+    // Reset reason input
     document.getElementById('cancelReasonInput').value = '';
 
     // Show the modal
@@ -611,14 +630,11 @@ document.addEventListener('DOMContentLoaded', function() {
     newConfirmBtn.onclick = function() {
         const reason = document.getElementById('cancelReasonInput').value;
         if (!reason) {
-            alert('Please select a reason for cancellation.');
+            alert('Please provide a reason for cancellation.');
             return;
         }
         cancelModal.style.display = 'none';
-        cancelAppointment({
-        id: appointment.id,
-        cancel_reason: reason
-    });
+        cancelAppointment(appointment);
     };
 
     newDenyBtn.onclick = function() {
@@ -980,4 +996,41 @@ if (editModal) {
 
     // Initialize the calendar
     initCalendar();
+});
+
+       
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the logout elements
+    const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
+    const logoutOverlay = document.getElementById('logoutOverlay');
+    const confirmLogout = document.getElementById('confirmLogout');
+    const cancelLogout = document.getElementById('cancelLogout');
+
+    // Show overlay when logout is clicked
+    logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        logoutOverlay.classList.add('show');
+    });
+
+    // Hide overlay when cancel is clicked
+    cancelLogout.addEventListener('click', function() {
+        logoutOverlay.classList.remove('show');
+    });
+
+    // Handle actual logout
+    confirmLogout.addEventListener('click', function() {
+        // In a real implementation, this would redirect to your logout script
+        window.location.href = '../Welcome/Index.php';
+        
+        // For demonstration, we'll just show an alert
+        // alert('Logging out...');
+        // logoutOverlay.classList.remove('show');
+    });
+
+    // Close overlay when clicking outside the confirmation box
+    logoutOverlay.addEventListener('click', function(e) {
+        if (e.target === logoutOverlay) {
+            logoutOverlay.classList.remove('show');
+        }
+    });
 });

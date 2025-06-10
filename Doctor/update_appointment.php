@@ -42,7 +42,11 @@ try {
     $appointmentDate = $appointment['appointment_date'];
 
     // Get patient's full name
-    $patientQuery = $conn->prepare("SELECT full_name FROM users WHERE user_id = ?");
+    $patientQuery = $conn->prepare("SELECT u.full_name 
+    FROM patients p
+    JOIN users u ON p.user_id = u.user_id
+    WHERE p.patient_id = ?");
+    
     $patientQuery->bind_param("i", $patientId);
     $patientQuery->execute();
     $patientResult = $patientQuery->get_result();

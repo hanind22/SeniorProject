@@ -190,33 +190,41 @@ error_log("Received POST data: " . print_r($_POST, true));
     </div>
 </div>
                 <!-- Follow-up -->
-                <div class="overlay-content">
-                    <div class="form-container">
-                        <div class="section">
-                            <h3 class="section-header"><i class="fas fa-calendar-check"></i> Treatment Plan & Follow-up</h3>
-                            <div class="treatment-plan-section">
-                                <h4 class="treatment-subheader">Treatment Plan</h4>
-                                <div class="form-group">
-                                    <label>Follow-up Instructions</label>
-                                    <textarea class="form-control" id="follow-up-instructions"  name="follow_up_instructions" placeholder="Detailed follow-up instructions"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Next Appointment Date</label>
-                                    <input type="date" class="form-control" id="next-appointment" name="next_appointment">
-                                </div>
-                                <div class="form-group">
-                                    <label>Next Appointment Time</label>
-                                    <input type="time" class="form-control" id="next-appointment-time" name="next_appointment_time" step="900" value="09:00">
-                                </div>
-                                <div class="form-group">
-                                    <label>Visit Date</label>
-                                    <input type="date" class="form-control" name="visit_date" value="<?php echo date('Y-m-d'); ?>">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-submit">Submit</button>
-                        </div>
+                <!-- Follow-up -->
+<div class="overlay-content">
+    <div class="form-container">
+        <div class="section">
+            <h3 class="section-header"><i class="fas fa-calendar-check"></i> Treatment Plan & Follow-up</h3>
+            <div class="treatment-plan-section">
+                <h4 class="treatment-subheader">Treatment Plan</h4>
+                <div class="form-group">
+                    <label>Follow-up Instructions</label>
+                    <textarea class="form-control" id="follow-up-instructions" name="follow_up_instructions" placeholder="Detailed follow-up instructions"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="require-followup" name="require_followup"> Schedule Follow-up Appointment
+                    </label>
+                </div>
+                <div id="followup-fields" style="display: none;">
+                    <div class="form-group">
+                        <label>Next Appointment Date<span class="required">*</span></label>
+                        <input type="date" class="form-control" id="next-appointment" name="next_appointment">
+                    </div>
+                    <div class="form-group">
+                        <label>Next Appointment Time<span class="required">*</span></label>
+                        <input type="time" class="form-control" id="next-appointment-time" name="next_appointment_time" step="900">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>Visit Date</label>
+                    <input type="date" class="form-control" name="visit_date" value="<?php echo date('Y-m-d'); ?>">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-submit">Submit</button>
+        </div>
+    </div>
+</div>
             </form>
         </div>
     </div>
@@ -246,6 +254,26 @@ error_log("Received POST data: " . print_r($_POST, true));
 <!-- -------------- -->
 
 <script>
+
+    // Show/hide follow-up appointment fields based on checkbox
+const followupCheckbox = document.getElementById('require-followup');
+if (followupCheckbox) {
+    followupCheckbox.addEventListener('change', function() {
+        const followupFields = document.getElementById('followup-fields');
+        if (this.checked) {
+            followupFields.style.display = 'block';
+            // Set minimum date for follow-up to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('next-appointment').min = tomorrow.toISOString().split('T')[0];
+        } else {
+            followupFields.style.display = 'none';
+            // Clear the values when unchecked
+            document.getElementById('next-appointment').value = '';
+            document.getElementById('next-appointment-time').value = '';
+        }
+    });
+}
 document.addEventListener("DOMContentLoaded", function () {
     // Handle form submission via AJAX
     const appointmentForm = document.getElementById('appointment-form');
@@ -506,7 +534,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle actual logout
     confirmLogout.addEventListener('click', function() {
         // In a real implementation, this would redirect to your logout script
-        window.location.href = '../Registration-Login/index.php';
+        window.location.href = '../Welcome/Index.php';
         
         // For demonstration, we'll just show an alert
         // alert('Logging out...');

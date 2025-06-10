@@ -1,0 +1,791 @@
+[2025-06-08 22:02:38] Script started. Request method: POST
+[2025-06-08 22:02:38] Received POST data: Array
+(
+    [fullName] => Zein Khalifeh
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => Zein@hotmail.com
+    [Password] => 12345678
+    [phone] => 78020774
+)
+
+[2025-06-08 22:02:38] Session data: Array
+(
+    [user_id] => 12
+    [email] => hasan123@gmail.com
+    [full_name] => Hasan Chrab
+    [user_type] => Patient
+    [doctor_id] => 1
+    [patient_id] => 12
+    [admin_id] => 102
+    [secretary_id] => 63
+)
+
+[2025-06-08 22:02:38] Processed input data:
+[2025-06-08 22:02:38] Full Name: Zein Khalifeh
+[2025-06-08 22:02:38] Email: Zein@hotmail.com
+[2025-06-08 22:02:38] Phone: 78020774
+[2025-06-08 22:02:38] User Type: patient
+[2025-06-08 22:02:38] Specialty: 
+[2025-06-08 22:02:38] License: 
+[2025-06-08 22:02:38] Secretary Specialty: 
+[2025-06-08 22:02:38] Assigned Doctor: 
+[2025-06-08 22:02:38] Validation errors: Array
+(
+)
+
+[2025-06-08 22:02:38] Transaction started
+[2025-06-08 22:02:38] Password hashed
+[2025-06-08 22:02:38] User inserted with ID: 125
+[2025-06-08 22:02:38] Patient record inserted
+[2025-06-08 22:02:38] Transaction committed
+[2025-06-08 22:02:38] Session variables set. Registration successful for Zein@hotmail.com
+[2025-06-08 22:02:38] Redirecting to: ../Patient/patient_dashboard.php
+[2025-06-09 00:52:37] Script started. Request method: POST
+[2025-06-09 00:52:37] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD85423
+    [Email] => haydar@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-09 00:52:37] Processed input data:
+[2025-06-09 00:52:37] Full Name: Haydar Chokor
+[2025-06-09 00:52:37] Email: haydar@gmail.com
+[2025-06-09 00:52:37] Phone: 71024587
+[2025-06-09 00:52:37] User Type: doctor
+[2025-06-09 00:52:37] Specialty: Dermatology
+[2025-06-09 00:52:37] License: MD85423
+[2025-06-09 00:52:37] Secretary Specialty: 
+[2025-06-09 00:52:37] Assigned Doctor: 
+[2025-06-09 00:52:37] Validation errors: Array
+(
+)
+
+[2025-06-09 00:52:37] Redirecting back with errors
+[2025-06-09 00:53:26] Script started. Request method: POST
+[2025-06-09 00:53:26] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-09 00:53:26] Processed input data:
+[2025-06-09 00:53:26] Full Name: Haydar Chokor
+[2025-06-09 00:53:26] Email: haydar@gmail.com
+[2025-06-09 00:53:26] Phone: 71024587
+[2025-06-09 00:53:26] User Type: doctor
+[2025-06-09 00:53:26] Specialty: Dermatology
+[2025-06-09 00:53:26] License: MD0127910
+[2025-06-09 00:53:26] Secretary Specialty: 
+[2025-06-09 00:53:26] Assigned Doctor: 
+[2025-06-09 00:53:26] Validation errors: Array
+(
+)
+
+[2025-06-09 00:53:26] Redirecting back with errors
+[2025-06-09 01:01:14] Script started. Request method: POST
+[2025-06-09 01:01:14] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-09 01:01:14] Processed input data:
+[2025-06-09 01:01:14] Full Name: Haydar Chokor
+[2025-06-09 01:01:14] Email: haydar@gmail.com
+[2025-06-09 01:01:14] Phone: 71024587
+[2025-06-09 01:01:14] User Type: doctor
+[2025-06-09 01:01:14] Specialty: Dermatology
+[2025-06-09 01:01:14] License: MD0127910
+[2025-06-09 01:01:14] Secretary Specialty: 
+[2025-06-09 01:01:14] Assigned Doctor: 
+[2025-06-09 01:01:14] Validation errors: Array
+(
+)
+
+[2025-06-09 01:01:14] Redirecting back with errors
+[2025-06-09 01:05:24] Script started. Request method: POST
+[2025-06-09 01:05:24] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD12347
+    [Email] => haydar@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-09 01:05:24] Processed input data:
+[2025-06-09 01:05:24] Full Name: Haydar Chokor
+[2025-06-09 01:05:24] Email: haydar@gmail.com
+[2025-06-09 01:05:24] Phone: 71024587
+[2025-06-09 01:05:24] User Type: doctor
+[2025-06-09 01:05:24] Specialty: Dermatology
+[2025-06-09 01:05:24] License: MD12347
+[2025-06-09 01:05:24] Secretary Specialty: 
+[2025-06-09 01:05:24] Assigned Doctor: 
+[2025-06-09 01:05:24] Validation errors: Array
+(
+)
+
+[2025-06-09 01:05:24] Redirecting back with errors
+[2025-06-09 01:05:55] Script started. Request method: POST
+[2025-06-09 01:05:55] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-09 01:05:55] Processed input data:
+[2025-06-09 01:05:55] Full Name: Haydar Chokor
+[2025-06-09 01:05:55] Email: haydar@gmail.com
+[2025-06-09 01:05:55] Phone: 71024587
+[2025-06-09 01:05:55] User Type: doctor
+[2025-06-09 01:05:55] Specialty: Dermatology
+[2025-06-09 01:05:55] License: MD0127910
+[2025-06-09 01:05:55] Secretary Specialty: 
+[2025-06-09 01:05:55] Assigned Doctor: 
+[2025-06-09 01:05:55] Validation errors: Array
+(
+)
+
+[2025-06-09 01:05:55] Redirecting back with errors
+[2025-06-09 01:06:21] Script started. Request method: POST
+[2025-06-09 01:06:21] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [licenseNumber] => MD0127910
+    [Email] => haydar@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-09 01:06:21] Processed input data:
+[2025-06-09 01:06:21] Full Name: Haydar Chokor
+[2025-06-09 01:06:21] Email: haydar@gmail.com
+[2025-06-09 01:06:21] Phone: 71024587
+[2025-06-09 01:06:21] User Type: doctor
+[2025-06-09 01:06:21] Specialty: 
+[2025-06-09 01:06:21] License: MD0127910
+[2025-06-09 01:06:21] Secretary Specialty: 
+[2025-06-09 01:06:21] Assigned Doctor: 
+[2025-06-09 01:06:21] Validation errors: Array
+(
+    [0] => Specialty is required for doctors
+)
+
+[2025-06-09 01:06:21] Redirecting back with errors
+[2025-06-09 01:07:03] Script started. Request method: POST
+[2025-06-09 01:07:03] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-09 01:07:03] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab22@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [doctor_id] => 1
+    [patient_id] => 125
+    [admin_id] => 102
+    [secretary_id] => 63
+    [health_form_completed] => 1
+    [errors] => Array
+        (
+            [0] => Specialty is required for doctors
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Haydar Chokor
+            [userType] => doctor
+            [licenseNumber] => MD0127910
+            [Email] => haydar@gmail.com
+            [Password] => 12345678
+            [phone] => 71024587
+        )
+
+)
+
+[2025-06-09 01:07:03] Processed input data:
+[2025-06-09 01:07:03] Full Name: Haydar Chokor
+[2025-06-09 01:07:03] Email: haydar@gmail.com
+[2025-06-09 01:07:03] Phone: 71024587
+[2025-06-09 01:07:03] User Type: doctor
+[2025-06-09 01:07:03] Specialty: Dermatology
+[2025-06-09 01:07:03] License: MD0127910
+[2025-06-09 01:07:03] Secretary Specialty: 
+[2025-06-09 01:07:03] Assigned Doctor: 
+[2025-06-09 01:07:03] Validation errors: Array
+(
+)
+
+[2025-06-09 01:07:03] Redirecting back with errors
+[2025-06-09 01:08:00] Script started. Request method: POST
+[2025-06-09 01:08:00] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-09 01:08:00] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab22@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [doctor_id] => 1
+    [patient_id] => 125
+    [admin_id] => 102
+    [secretary_id] => 63
+    [health_form_completed] => 1
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Haydar Chokor
+            [userType] => doctor
+            [doctorSpecialty] => Dermatology
+            [licenseNumber] => MD0127910
+            [Email] => haydar@gmail.com
+            [Password] => 12345678
+            [phone] => 71024587
+        )
+
+)
+
+[2025-06-09 01:08:00] Processed input data:
+[2025-06-09 01:08:00] Full Name: Haydar Chokor
+[2025-06-09 01:08:00] Email: haydar@gmail.com
+[2025-06-09 01:08:00] Phone: 71024587
+[2025-06-09 01:08:00] User Type: doctor
+[2025-06-09 01:08:00] Specialty: Dermatology
+[2025-06-09 01:08:00] License: MD0127910
+[2025-06-09 01:08:00] Secretary Specialty: 
+[2025-06-09 01:08:00] Assigned Doctor: 
+[2025-06-09 01:08:00] Validation errors: Array
+(
+)
+
+[2025-06-09 01:08:00] Redirecting back with errors
+[2025-06-09 01:09:43] Script started. Request method: POST
+[2025-06-09 01:09:43] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar@gmail.com
+    [Password] => 12345678
+    [phone] => 71024587
+)
+
+[2025-06-09 01:09:43] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab22@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [doctor_id] => 1
+    [patient_id] => 125
+    [admin_id] => 102
+    [secretary_id] => 63
+    [health_form_completed] => 1
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Haydar Chokor
+            [userType] => doctor
+            [doctorSpecialty] => Dermatology
+            [licenseNumber] => MD0127910
+            [Email] => haydar@gmail.com
+            [Password] => 12345678
+            [phone] => 71024587
+        )
+
+)
+
+[2025-06-09 01:09:43] Processed input data:
+[2025-06-09 01:09:43] Full Name: Haydar Chokor
+[2025-06-09 01:09:43] Email: haydar@gmail.com
+[2025-06-09 01:09:43] Phone: 71024587
+[2025-06-09 01:09:43] User Type: doctor
+[2025-06-09 01:09:43] Specialty: Dermatology
+[2025-06-09 01:09:43] License: MD0127910
+[2025-06-09 01:09:43] Secretary Specialty: 
+[2025-06-09 01:09:43] Assigned Doctor: 
+[2025-06-09 01:09:43] Validation errors: Array
+(
+)
+
+[2025-06-09 01:09:43] Redirecting back with errors
+[2025-06-09 01:12:26] Script started. Request method: POST
+[2025-06-09 01:12:26] Received POST data: Array
+(
+    [fullName] => Karin Diab
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => karinn@gmail.com
+    [Password] => 12345678
+    [phone] => 71452990
+)
+
+[2025-06-09 01:12:26] Session data: Array
+(
+    [user_id] => 1
+    [email] => hanindiab22@gmail.com
+    [full_name] => Hanin Diab
+    [user_type] => Doctor
+    [doctor_id] => 1
+    [patient_id] => 125
+    [admin_id] => 102
+    [secretary_id] => 63
+    [health_form_completed] => 1
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Haydar Chokor
+            [userType] => doctor
+            [doctorSpecialty] => Dermatology
+            [licenseNumber] => MD0127910
+            [Email] => haydar@gmail.com
+            [Password] => 12345678
+            [phone] => 71024587
+        )
+
+)
+
+[2025-06-09 01:12:26] Processed input data:
+[2025-06-09 01:12:26] Full Name: Karin Diab
+[2025-06-09 01:12:26] Email: karinn@gmail.com
+[2025-06-09 01:12:26] Phone: 71452990
+[2025-06-09 01:12:26] User Type: patient
+[2025-06-09 01:12:26] Specialty: 
+[2025-06-09 01:12:26] License: 
+[2025-06-09 01:12:26] Secretary Specialty: 
+[2025-06-09 01:12:26] Assigned Doctor: 
+[2025-06-09 01:12:26] Validation errors: Array
+(
+)
+
+[2025-06-09 01:12:26] Transaction started
+[2025-06-09 01:12:26] Password hashed
+[2025-06-09 01:12:26] User inserted with ID: 135
+[2025-06-09 01:12:26] Patient record inserted
+[2025-06-09 01:12:26] Transaction committed
+[2025-06-09 01:12:26] Session variables set. Registration successful for karinn@gmail.com
+[2025-06-09 01:12:26] Redirecting to: ../Patient/patient_dashboard.php
+[2025-06-09 01:13:54] Script started. Request method: POST
+[2025-06-09 01:13:54] Received POST data: Array
+(
+    [fullName] => Mahmoud Aziz
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD7850264
+    [Email] => mhmoud@gmail.com
+    [Password] => 12345678
+    [phone] => 71584721
+)
+
+[2025-06-09 01:13:54] Session data: Array
+(
+    [user_id] => 135
+    [email] => karinn@gmail.com
+    [full_name] => Karin Diab
+    [user_type] => Patient
+    [doctor_id] => 1
+    [patient_id] => 125
+    [admin_id] => 102
+    [secretary_id] => 63
+    [health_form_completed] => 1
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Haydar Chokor
+            [userType] => doctor
+            [doctorSpecialty] => Dermatology
+            [licenseNumber] => MD0127910
+            [Email] => haydar@gmail.com
+            [Password] => 12345678
+            [phone] => 71024587
+        )
+
+)
+
+[2025-06-09 01:13:54] Processed input data:
+[2025-06-09 01:13:54] Full Name: Mahmoud Aziz
+[2025-06-09 01:13:54] Email: mhmoud@gmail.com
+[2025-06-09 01:13:54] Phone: 71584721
+[2025-06-09 01:13:54] User Type: doctor
+[2025-06-09 01:13:54] Specialty: Dermatology
+[2025-06-09 01:13:54] License: MD7850264
+[2025-06-09 01:13:54] Secretary Specialty: 
+[2025-06-09 01:13:54] Assigned Doctor: 
+[2025-06-09 01:13:54] Validation errors: Array
+(
+)
+
+[2025-06-09 01:13:54] Transaction started
+[2025-06-09 01:13:54] Password hashed
+[2025-06-09 01:13:54] User inserted with ID: 136
+[2025-06-09 01:13:54] Doctor record inserted
+[2025-06-09 01:13:54] Transaction committed
+[2025-06-09 01:13:54] Session variables set. Registration successful for mhmoud@gmail.com
+[2025-06-09 01:13:54] Redirecting to: ../Doctor/doctor_dashboard.php
+[2025-06-09 01:15:06] Script started. Request method: POST
+[2025-06-09 01:15:06] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar2@gmail.com
+    [Password] => 12345678
+    [phone] => 71145874
+)
+
+[2025-06-09 01:15:06] Session data: Array
+(
+    [user_id] => 136
+    [email] => mhmoud@gmail.com
+    [full_name] => Mahmoud Aziz
+    [user_type] => Doctor
+    [doctor_id] => 1
+    [patient_id] => 125
+    [admin_id] => 102
+    [secretary_id] => 63
+    [health_form_completed] => 1
+    [errors] => Array
+        (
+            [0] => Email already registered
+        )
+
+    [form_data] => Array
+        (
+            [fullName] => Haydar Chokor
+            [userType] => doctor
+            [doctorSpecialty] => Dermatology
+            [licenseNumber] => MD0127910
+            [Email] => haydar@gmail.com
+            [Password] => 12345678
+            [phone] => 71024587
+        )
+
+)
+
+[2025-06-09 01:15:06] Processed input data:
+[2025-06-09 01:15:06] Full Name: Haydar Chokor
+[2025-06-09 01:15:06] Email: haydar2@gmail.com
+[2025-06-09 01:15:06] Phone: 71145874
+[2025-06-09 01:15:06] User Type: doctor
+[2025-06-09 01:15:06] Specialty: Dermatology
+[2025-06-09 01:15:06] License: MD0127910
+[2025-06-09 01:15:06] Secretary Specialty: 
+[2025-06-09 01:15:06] Assigned Doctor: 
+[2025-06-09 01:15:06] Validation errors: Array
+(
+)
+
+[2025-06-09 01:15:07] Transaction started
+[2025-06-09 01:15:07] Password hashed
+[2025-06-09 01:15:07] User inserted with ID: 137
+[2025-06-09 01:15:07] Doctor record inserted
+[2025-06-09 01:15:07] Transaction committed
+[2025-06-09 01:15:07] Session variables set. Registration successful for haydar2@gmail.com
+[2025-06-09 01:15:07] Redirecting to: ../Doctor/doctor_dashboard.php
+[2025-06-09 01:22:05] Script started. Request method: POST
+[2025-06-09 01:22:05] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar2@gmail.com
+    [Password] => 12345678
+    [phone] => 71145874
+)
+
+[2025-06-09 01:22:05] Processed input data:
+[2025-06-09 01:22:05] Full Name: Haydar Chokor
+[2025-06-09 01:22:05] Email: haydar2@gmail.com
+[2025-06-09 01:22:05] Phone: 71145874
+[2025-06-09 01:22:05] User Type: doctor
+[2025-06-09 01:22:05] Specialty: Dermatology
+[2025-06-09 01:22:05] License: MD0127910
+[2025-06-09 01:22:05] Secretary Specialty: 
+[2025-06-09 01:22:05] Assigned Doctor: 
+[2025-06-09 01:22:05] Validation errors: Array
+(
+)
+
+[2025-06-09 01:22:05] Found matching doctor record with user_id: 138
+[2025-06-09 01:22:05] Transaction started
+[2025-06-09 01:22:05] Password hashed
+[2025-06-09 01:22:05] Registration failed: Unknown column 'approved' in 'field list'
+[2025-06-09 01:29:39] Script started. Request method: POST
+[2025-06-09 01:29:39] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar2@gmail.com
+    [Password] => 12345678
+    [phone] => 71145874
+)
+
+[2025-06-09 01:29:39] Processed input data:
+[2025-06-09 01:29:39] Full Name: Haydar Chokor
+[2025-06-09 01:29:39] Email: haydar2@gmail.com
+[2025-06-09 01:29:39] Phone: 71145874
+[2025-06-09 01:29:39] User Type: doctor
+[2025-06-09 01:29:39] Specialty: Dermatology
+[2025-06-09 01:29:39] License: MD0127910
+[2025-06-09 01:29:39] Secretary Specialty: 
+[2025-06-09 01:29:39] Assigned Doctor: 
+[2025-06-09 01:29:39] Validation errors: Array
+(
+)
+
+[2025-06-09 01:29:39] Found matching doctor record with user_id: 138
+[2025-06-09 01:29:39] Transaction started
+[2025-06-09 01:29:39] Password hashed
+[2025-06-09 01:29:39] Registration failed: Unknown column 'approved' in 'field list'
+[2025-06-09 01:33:42] Script started. Request method: POST
+[2025-06-09 01:33:42] Received POST data: Array
+(
+    [fullName] => Haydar Chokor
+    [userType] => doctor
+    [doctorSpecialty] => Dermatology
+    [licenseNumber] => MD0127910
+    [Email] => haydar2@gmail.com
+    [Password] => 12345678
+    [phone] => 71145874
+)
+
+[2025-06-09 01:33:42] Processed input data:
+[2025-06-09 01:33:42] Full Name: Haydar Chokor
+[2025-06-09 01:33:42] Email: haydar2@gmail.com
+[2025-06-09 01:33:42] Phone: 71145874
+[2025-06-09 01:33:42] User Type: doctor
+[2025-06-09 01:33:42] Specialty: Dermatology
+[2025-06-09 01:33:42] License: MD0127910
+[2025-06-09 01:33:42] Validation errors: Array
+(
+)
+
+[2025-06-09 01:33:42] Starting doctor verification process
+[2025-06-09 01:33:42] Searching for doctor with:
+[2025-06-09 01:33:42] Full Name: Haydar Chokor
+[2025-06-09 01:33:42] License: MD0127910
+[2025-06-09 01:33:42] Specialty: Dermatology
+[2025-06-09 01:33:42] Found 1 matching doctor records
+[2025-06-09 01:33:42] Matching records: Array
+(
+    [0] => Array
+        (
+            [user_id] => 138
+            [full_name] => Haydar Chokor
+            [specialty] => Dermatology
+            [license_number] => MD0127910
+            [email] => 
+        )
+
+)
+
+[2025-06-09 01:33:42] Found 1 unregistered doctor records
+[2025-06-09 01:33:42] Found matching unregistered doctor record with user_id: 138
+[2025-06-09 01:33:42] Transaction started
+[2025-06-09 01:33:43] Password hashed
+[2025-06-09 01:33:43] Updating doctor record for user_id: 138
+[2025-06-09 01:33:43] Registration failed: Unknown column 'approved' in 'field list'
+[2025-06-09 01:34:15] Script started. Request method: POST
+[2025-06-09 01:34:15] Received POST data: Array
+(
+    [fullName] => HayDA
+    [userType] => doctor
+    [doctorSpecialty] => Pediatrics
+    [licenseNumber] => FDSVR
+    [Email] => haydar2@gmail.com
+    [Password] => 12345678
+    [phone] => 71145874
+)
+
+[2025-06-09 01:34:15] Processed input data:
+[2025-06-09 01:34:15] Full Name: HayDA
+[2025-06-09 01:34:15] Email: haydar2@gmail.com
+[2025-06-09 01:34:15] Phone: 71145874
+[2025-06-09 01:34:15] User Type: doctor
+[2025-06-09 01:34:15] Specialty: Pediatrics
+[2025-06-09 01:34:15] License: FDSVR
+[2025-06-09 01:34:15] Validation errors: Array
+(
+)
+
+[2025-06-09 01:34:15] Starting doctor verification process
+[2025-06-09 01:34:15] Searching for doctor with:
+[2025-06-09 01:34:15] Full Name: HayDA
+[2025-06-09 01:34:15] License: FDSVR
+[2025-06-09 01:34:15] Specialty: Pediatrics
+[2025-06-09 01:34:15] Found 0 matching doctor records
+[2025-06-09 01:34:15] Matching records: Array
+(
+)
+
+[2025-06-09 01:34:15] Found 0 unregistered doctor records
+[2025-06-09 01:34:15] Doctor verification failed - no matching unregistered record found
+[2025-06-09 01:34:15] Redirecting back with errors: The data you input is incorrect or this doctor is already registered. Please contact the admin
+[2025-06-09 10:26:46] Script started. Request method: POST
+[2025-06-09 10:26:46] Processing signup for: haydar2@gmail.com, User Type: doctor
+[2025-06-09 10:26:46] Basic validation errors: Array
+(
+)
+
+[2025-06-09 10:26:46] Starting doctor verification process
+[2025-06-09 10:26:46] Verifying doctor: Name='Haydar Chokor', License='MD0127910', Specialty='Dermatology'
+[2025-06-09 10:26:46] Doctor verification query returned 1 rows
+[2025-06-09 10:26:46] Found doctor record: Array
+(
+    [user_id] => 138
+    [full_name] => Haydar Chokor
+    [specialty] => Dermatology
+    [license_number] => MD0127910
+    [email] => 
+)
+
+[2025-06-09 10:26:46] Doctor verification successful. User ID: 138
+[2025-06-09 10:26:46] Transaction started
+[2025-06-09 10:26:46] Doctor record updated successfully with ID: 138
+[2025-06-09 10:26:46] Transaction committed successfully
+[2025-06-09 10:26:46] Registration successful for haydar2@gmail.com
+[2025-06-09 10:26:46] Redirecting to: ../Doctor/doctor_dashboard.php
+[2025-06-09 10:28:22] Script started. Request method: POST
+[2025-06-09 10:28:22] Processing signup for: jawadAhmadto@gmail.com, User Type: doctor
+[2025-06-09 10:28:22] Basic validation errors: Array
+(
+)
+
+[2025-06-09 10:28:22] Starting doctor verification process
+[2025-06-09 10:28:22] Verifying doctor: Name='Jawad Ahmad', License='MD140568', Specialty='Pediatrics'
+[2025-06-09 10:28:22] Doctor verification query returned 0 rows
+[2025-06-09 10:28:22] Doctor verification failed - no matching record found
+[2025-06-09 10:28:22] Validation failed. Errors: Data is incorrect. Please contact the administrator.
+[2025-06-10 22:07:04] Script started. Request method: POST
+[2025-06-10 22:07:04] Processing signup for: AMER2@gmail.com, User Type: doctor
+[2025-06-10 22:07:04] Basic validation errors: Array
+(
+)
+
+[2025-06-10 22:07:04] Starting doctor verification process
+[2025-06-10 22:07:04] Verifying doctor: Name='Amar deeb', License='MD5421', Specialty='Neurology'
+[2025-06-10 22:07:04] Doctor verification query returned 0 rows
+[2025-06-10 22:07:04] Doctor verification failed - no matching record found
+[2025-06-10 22:07:04] Validation failed. Errors: Data is incorrect. Please contact the administrator.
+[2025-06-10 22:07:38] Script started. Request method: POST
+[2025-06-10 22:07:38] Received POST data: Array
+(
+    [fullName] => Amar deeb
+    [userType] => doctor
+    [doctorSpecialty] => Neurology
+    [licenseNumber] => 95623
+    [Email] => AMER2@gmail.com
+    [Password] => 12345678
+    [phone] => 71175060
+)
+
+[2025-06-10 22:07:38] Processed input data:
+[2025-06-10 22:07:38] Full Name: Amar deeb
+[2025-06-10 22:07:38] Email: AMER2@gmail.com
+[2025-06-10 22:07:38] Phone: 71175060
+[2025-06-10 22:07:38] User Type: doctor
+[2025-06-10 22:07:38] Specialty: Neurology
+[2025-06-10 22:07:38] License: 95623
+[2025-06-10 22:07:38] Validation errors: Array
+(
+)
+
+[2025-06-10 22:07:38] Starting doctor verification process
+[2025-06-10 22:07:38] Searching for doctor with:
+[2025-06-10 22:07:38] Full Name: Amar deeb
+[2025-06-10 22:07:38] License: 95623
+[2025-06-10 22:07:38] Specialty: Neurology
+[2025-06-10 22:07:38] Found 0 matching doctor records
+[2025-06-10 22:07:38] Matching records: Array
+(
+)
+
+[2025-06-10 22:07:38] Found 0 unregistered doctor records
+[2025-06-10 22:07:38] Doctor verification failed - no matching unregistered record found
+[2025-06-10 22:07:38] Redirecting back with errors: The data you input is incorrect or this doctor is already registered. Please contact the admin
+[2025-06-10 22:07:56] Script started. Request method: POST
+[2025-06-10 22:07:56] Processing signup for: AMER2@gmail.com, User Type: doctor
+[2025-06-10 22:07:56] Basic validation errors: Array
+(
+)
+
+[2025-06-10 22:07:56] Starting doctor verification process
+[2025-06-10 22:07:56] Verifying doctor: Name='Amar deeb', License='MD0127910', Specialty='Neurology'
+[2025-06-10 22:07:56] Doctor verification query returned 0 rows
+[2025-06-10 22:07:56] Doctor verification failed - no matching record found
+[2025-06-10 22:07:56] Validation failed. Errors: Data is incorrect. Please contact the administrator.
+[2025-06-10 22:08:14] Script started. Request method: POST
+[2025-06-10 22:08:14] Processing signup for: AMER2@gmail.com, User Type: doctor
+[2025-06-10 22:08:14] Basic validation errors: Array
+(
+)
+
+[2025-06-10 22:08:14] Starting doctor verification process
+[2025-06-10 22:08:14] Verifying doctor: Name='Amar deeb', License='MD0127910', Specialty='Cardiology'
+[2025-06-10 22:08:14] Doctor verification query returned 0 rows
+[2025-06-10 22:08:14] Doctor verification failed - no matching record found
+[2025-06-10 22:08:14] Validation failed. Errors: Data is incorrect. Please contact the administrator.

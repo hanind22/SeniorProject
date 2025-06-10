@@ -82,33 +82,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_appointment'])) 
         $relationshipStmt->bind_param("ii", $doctor_id, $patient_id);
         $relationshipStmt->execute();
 
-        // 5. Create notification (with proper user_id as sender)
-        // First get the doctor's user information
-        $doctorQuery = "SELECT u.user_id, u.full_name FROM doctors d JOIN users u ON d.user_id = u.user_id WHERE d.doctor_id = ?";
-        $doctorStmt = $conn->prepare($doctorQuery);
-        $doctorStmt->bind_param("i", $doctor_id);
-        $doctorStmt->execute();
-        $doctorResult = $doctorStmt->get_result();
+        // 5. Create notification (sender = logged-in doctor, receiver = patient's user_id)
+$sender_id = $_SESSION['user_id']; // Doctor's user_id from session
 
-        if ($doctorResult->num_rows > 0) {
-            $doctor = $doctorResult->fetch_assoc();
-            $message = "You have an appointment with Dr. {$doctor['full_name']} on $date at $time.";
-            $notification_type = "new_appointment";
+// Get doctor's full name (optional, for message)
+$doctorNameQuery = "SELECT full_name FROM users WHERE user_id = ?";
+$doctorNameStmt = $conn->prepare($doctorNameQuery);
+$doctorNameStmt->bind_param("i", $sender_id);
+$doctorNameStmt->execute();
+$doctorNameResult = $doctorNameStmt->get_result();
+$doctorName = ($doctorNameResult->num_rows > 0) ? $doctorNameResult->fetch_assoc()['full_name'] : 'your doctor';
 
-            $notificationQuery = "
-                INSERT INTO notifications 
-                (sender_id, receiver_id, appointment_id, message, type_notification, created_at)
-                VALUES (?, ?, ?, ?, ?, NOW())
-            ";
-            $notificationStmt = $conn->prepare($notificationQuery);
-            $notificationStmt->bind_param("iiiss", $doctor['user_id'], $patient_id, $appointment_id, $message, $notification_type);
-            
-            if (!$notificationStmt->execute()) {
-                error_log("Notification failed: " . $notificationStmt->error);
-                // Don't throw exception - appointment was created successfully
-            }
-        }
+// Get receiver user_id from patient_id
+$patientUserQuery = "SELECT user_id FROM patients WHERE patient_id = ?";
+$patientUserStmt = $conn->prepare($patientUserQuery);
+$patientUserStmt->bind_param("i", $patient_id);
+$patientUserStmt->execute();
+$patientUserResult = $patientUserStmt->get_result();
 
+if ($patientUserResult->num_rows > 0) {
+    $receiver_id = $patientUserResult->fetch_assoc()['user_id'];
+    $message = "You have an appointment with Dr. {$doctorName} on $date at $time.";
+    $notification_type = "new_appointment";
+
+    $notificationQuery = "
+        INSERT INTO notifications 
+        (sender_id, receiver_id, appointment_id, message, type_notification, created_at)
+        VALUES (?, ?, ?, ?, ?, NOW())
+    ";
+    $notificationStmt = $conn->prepare($notificationQuery);
+    $notificationStmt->bind_param("iiiss", $sender_id, $receiver_id, $appointment_id, $message, $notification_type);
+
+    if (!$notificationStmt->execute()) {
+        error_log("Notification failed: " . $notificationStmt->error);
+        // Silent fail, log only
+    }
+}
         // Commit transaction if all operations succeeded
         $conn->commit();
 

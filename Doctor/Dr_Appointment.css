@@ -100,21 +100,22 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #16c289 0%, #059669 100%);
+    background: linear-gradient(135deg, #2fdbb9 0%, #11a083 90%);
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 12px;
     font-weight: 600;
-    border: none;
+    border: 1px solid   #1ac09f;
     cursor: pointer;
     display: inline-flex;
-    align-items: center;
+    align-items: center; 
     gap: 0.5rem;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
     font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
 }
 
 .btn-primary::before {

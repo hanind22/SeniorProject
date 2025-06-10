@@ -10,19 +10,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 try {
-    $stmt = $conn->prepare("SELECT patient_id FROM patients WHERE user_id = ?");
-    $stmt->bind_param("i", $_SESSION['user_id']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows === 0) {
-        echo json_encode(['error' => 'Patient not found']);
-        exit;
-    }
-    
-    $patientData = $result->fetch_assoc();
-    $doctorId = $patientData['patient_id'];
+    $userId = $_SESSION['user_id'];
 
+    // Fetch notifications where receiver_id = user_id directly
     $stmt = $conn->prepare("
         SELECT 
             n.notification_id AS id,
@@ -36,8 +26,8 @@ try {
         WHERE n.receiver_id = ?
         ORDER BY n.created_at DESC
     ");
-    
-    $stmt->bind_param("i", $doctorId);
+
+    $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -47,7 +37,7 @@ try {
     }
 
     echo json_encode($notifications);
-    
+
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }

@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     confirmLogout.addEventListener('click', function() {
-        window.location.href = '../Registration-Login/index.php';
+        window.location.href = '../Welcome/Index.php';
     });
 
     logoutOverlay.addEventListener('click', function(e) {

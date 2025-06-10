@@ -246,3 +246,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+       
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the logout elements
+    const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
+    const logoutOverlay = document.getElementById('logoutOverlay');
+    const confirmLogout = document.getElementById('confirmLogout');
+    const cancelLogout = document.getElementById('cancelLogout');
+
+    // Show overlay when logout is clicked
+    logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        logoutOverlay.classList.add('show');
+    });
+
+    // Hide overlay when cancel is clicked
+    cancelLogout.addEventListener('click', function() {
+        logoutOverlay.classList.remove('show');
+    });
+
+    // Handle actual logout
+    confirmLogout.addEventListener('click', function() {
+        // In a real implementation, this would redirect to your logout script
+        window.location.href = '../Welcome/Index.php';
+        
+        // For demonstration, we'll just show an alert
+        // alert('Logging out...');
+        // logoutOverlay.classList.remove('show');
+    });
+
+    // Close overlay when clicking outside the confirmation box
+    logoutOverlay.addEventListener('click', function(e) {
+        if (e.target === logoutOverlay) {
+            logoutOverlay.classList.remove('show');
+        }
+    });
+});

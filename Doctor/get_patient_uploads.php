@@ -4,7 +4,6 @@ header('Content-Type: application/json');
 
 include('../db-config/connection.php');
 
-
 try {
     if (!isset($_SESSION['user_id'])) {
         throw new Exception("User not logged in");
@@ -15,9 +14,22 @@ try {
     }
 
     $patientId = $_GET['patient_id'];
-    $doctorId = $_SESSION['user_id']; // Or get doctor_id from session if stored differently
+    $userId = $_SESSION['user_id'];
 
-    // Get patient uploads
+    // First, get the doctor_id from the doctors table using the user_id
+    $doctorStmt = $conn->prepare("SELECT doctor_id FROM doctors WHERE user_id = ?");
+    $doctorStmt->bind_param("i", $userId);
+    $doctorStmt->execute();
+    $doctorResult = $doctorStmt->get_result();
+
+    if ($doctorResult->num_rows === 0) {
+        throw new Exception("You are not authorized as a doctor");
+    }
+
+    $doctorRow = $doctorResult->fetch_assoc();
+    $doctorId = $doctorRow['doctor_id'];
+
+    // Get patient uploads - only those uploaded by this doctor
     $stmt = $conn->prepare("
         SELECT 
             pu.upload_id,
@@ -29,11 +41,12 @@ try {
             pu.DateOfTest,
             pu.notes
         FROM patientuploads pu
-        WHERE pu.patient_id = ?
+        WHERE pu.patient_id = ? 
+        AND pu.doctor_id = ?  -- Only show uploads by this doctor
         ORDER BY pu.uploaded_at DESC
     ");
     
-    $stmt->bind_param("i", $patientId);
+    $stmt->bind_param("ii", $patientId, $doctorId);
     $stmt->execute();
     $result = $stmt->get_result();
 

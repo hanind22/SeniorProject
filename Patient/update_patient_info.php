@@ -21,8 +21,7 @@ try {
     // Update patients table
     $stmt = $conn->prepare("
         UPDATE patients 
-        SET 
-            
+        SET     
             insurance_provider = ?,
             insurance_number = ?,
             allergies = ?,

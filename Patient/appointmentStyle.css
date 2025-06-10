@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #3b82f6;
-  --primary-hover: #2563eb;
+  --primary-color: #3b92f6;
+  --primary-hover: #257beb;
   --secondary-color: #64748b;
   --danger-color: #ef4444;
   --danger-hover: #dc2626;
@@ -28,8 +28,7 @@
 }
 
 .main-content {
-    margin-top: 20px;
-  flex-grow: 1;
+  flex: 1;
   padding: 30px;
   overflow-y: fixed;
   height: 100vh;
@@ -126,15 +125,16 @@
 
 /* Calendar Navigation */
 .calendar-nav {
-  display: flex;
+  display:block;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
 .calendar-actions {
   display: flex;
+  margin-top: 40px;
+  margin-left: 10px;
   gap: 1rem;
   height: 50px;
 }
@@ -166,7 +166,7 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #16c289 0%, #059669 100%);
+    background: linear-gradient(135deg, #19d1a3 0%, #10a786 100%);
     color: white;
     font-size: 0.85rem;
     letter-spacing: 1px;
@@ -272,7 +272,7 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   padding: 1.5rem;
   overflow: hidden;
-  margin-top: 55px;
+  margin-top: 25px;
 }
 
 .weekday-header {
@@ -1371,7 +1371,7 @@
 
 .patient-details h3 {
     margin: 0 0 5px 0;
-    color: #2c3e50;
+    color: #233a52;
 }
 
 .patient-details p {
@@ -1476,9 +1476,12 @@
     font-weight: 500;
     color: #2c3e50;
 }
-
+.body{
+  line-height: 1.6;
+}
 .content-section {
     margin-bottom: 15px;
+    display: none;
 }
 
 
@@ -1682,7 +1685,7 @@
   left: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), #8ab6ff);
+  background: linear-gradient(90deg, #1a7bbc, #78caf0);
   border-radius: 3px;
 }
 
@@ -1789,7 +1792,9 @@
     display: inline-block;
 }
 
-
+.container{
+  position: relative;
+}
 .strikethrough-line {
     position: absolute;
     top: 50%;

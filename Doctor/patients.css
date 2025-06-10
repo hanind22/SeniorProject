@@ -455,7 +455,8 @@ textarea {
 }
 
 .submit-btn {
-    background: linear-gradient(135deg, #16c289 0%, #059669 100%);
+    background:  #28c5a6;
+    border: 1px solid  #19997f;
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 12px;
@@ -993,7 +994,7 @@ textarea {
 
 .qr-modal-header {
     padding: 20px;
-    background: linear-gradient(to right, #229e83, #0dcfa5);
+    background: #2fdbb9;
     color: white;
     text-align: center;
     position: relative;
@@ -1043,7 +1044,7 @@ textarea {
 }
 
 .download-qr-btn {
-    background: linear-gradient(to right, #229e83, #0dcfa5);
+    background:  #2fdbb9;
     color: white;
     border: none;
     padding: 12px 24px;
@@ -1120,17 +1121,18 @@ textarea {
 
 .modal-header {
     padding: 20px;
-    background: linear-gradient(to right, #229e83, #0dcfa5);
-    color: white;
+    background: #e0e0e085;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.158);
+    color: #2c3e50;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .modal-header h3 {
-    color: white;
+    color: #2c3e50;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 
@@ -1141,7 +1143,7 @@ textarea {
 .close-modal {
     background: none;
     border: none;
-    color: white;
+    color: #2c3e50;
     font-size: 1.8rem;
     cursor: pointer;
     padding: 0 10px;

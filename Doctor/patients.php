@@ -262,7 +262,7 @@ try {
 <div class="modal-overlay" id="edit-health-modal" style="display: none;">
     <div class="modal" style="max-width: 600px;">
         <div class="modal-header">
-            <h3><i class="fas fa-edit"></i> Edit Patient Health Information</h3>
+            <h3><i class="fas fa-edit"></i> Edit Patient Information</h3>
             <!-- <button class="close-modal" id="close-edit-modal">&times;</button> -->
         </div>
         <div class="modal-body">
@@ -627,7 +627,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (confirmLogout) {
             confirmLogout.addEventListener('click', function() {
-                window.location.href = '../Registration-Login/index.php';
+                window.location.href = '../Welcome/Index.php';
             });
         }
 

@@ -4,6 +4,7 @@ include('../db-config/connection.php');
 
 // Initialize variables
 $doctorData = [];
+$secretaryData = [];
 $availabilityData = [];
 $error = '';
 
@@ -11,11 +12,19 @@ try {
     if (isset($_SESSION['user_id'])) {
         $userId = $_SESSION['user_id'];
 
-        // 1. Get full doctor and user profile
+        // 1. Get full doctor and user profile along with secretary data
         $stmt = $conn->prepare("
-            SELECT u.*, d.*
+            SELECT 
+                u.*, 
+                d.*,
+                s.user_id AS secretary_id,
+                s.full_name AS secretary_name,
+                s.email AS secretary_email,
+                s.phone_number AS secretary_phone
             FROM users u
             LEFT JOIN doctors d ON u.user_id = d.user_id
+            LEFT JOIN secretary sec ON d.doctor_id = sec.doctor_id
+            LEFT JOIN users s ON sec.user_id = s.user_id
             WHERE u.user_id = ?
         ");
         $stmt->bind_param("i", $userId);
@@ -24,11 +33,26 @@ try {
 
         if ($result->num_rows === 1) {
             $doctorData = $result->fetch_assoc();
+            
+            // Extract secretary data if exists
+            if (!empty($doctorData['secretary_id'])) {
+                $secretaryData = [
+                    'user_id' => $doctorData['secretary_id'],
+                    'full_name' => $doctorData['secretary_name'],
+                    'email' => $doctorData['secretary_email'],
+                    'phone_number' => $doctorData['secretary_phone']
+                ];
+                // Remove secretary data from doctorData to avoid confusion
+                unset($doctorData['secretary_id']);
+                unset($doctorData['secretary_name']);
+                unset($doctorData['secretary_email']);
+                unset($doctorData['secretary_phone']);
+            }
 
             // 2. If doctor_id exists, fetch availability from work_place (with address)
             if (!empty($doctorData['doctor_id'])) {
                 $stmt = $conn->prepare("
-                    SELECT day, start_time, end_time, address, status,place_name
+                    SELECT day, start_time, end_time, address, status, place_name
                     FROM work_place
                     WHERE doctor_id = ?
                     ORDER BY 
@@ -437,6 +461,24 @@ try {
                                 <p><i class="fas fa-envelope"></i> <span id="doctor-email"><?php echo htmlspecialchars($doctorData['email']); ?></span></p>
                                 <p><i class="fas fa-phone"></i> <span id="doctor-phone">+961 <?php echo htmlspecialchars($doctorData['phone_number']); ?></span></p>
                             </div>
+
+                            <div class="contact-info">
+    <p style="margin-bottom: 20px;"><strong>My Secretary Info</strong></p>
+    <p><i class="fa-solid fa-user-nurse"></i>
+        <?php echo isset($secretaryData['full_name']) ? htmlspecialchars($secretaryData['full_name']) : 'No secretary assigned yet'; ?>
+    </p>
+    <p><i class="fas fa-envelope"></i>
+        <span id="secretary-email">
+            <?php echo isset($secretaryData['email']) ? htmlspecialchars($secretaryData['email']) : 'Not available'; ?>
+        </span>
+    </p>
+    <p><i class="fas fa-phone"></i>
+        <span id="secretary-phone">
+            <?php echo isset($secretaryData['phone_number']) ? '+961 ' . htmlspecialchars($secretaryData['phone_number']) : 'Not available'; ?>
+        </span>
+    </p>
+</div>
+
                         </div>
                     </div>
 
@@ -541,7 +583,7 @@ try {
                     
                     <div class="form-group">
                         <label for="license_number">License Number</label>
-                        <input type="text" id="license_number" name="license_number" value="<?php echo htmlspecialchars($doctorData['license_number'] ?? ''); ?>" required>
+                        <input type="text" id="license_number" name="license_number" value="<?php echo htmlspecialchars($doctorData['license_number'] ?? '' ); ?>" readonly>
                     </div>
                 </div>
 
@@ -556,10 +598,16 @@ try {
                     </div>
                 </div>
 
-                <!-- <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($doctorData['address'] ?? ''); ?>" required>
-                </div> -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Secretary Name</label>
+                        <input type="text" id="secretary_name" name="secretary_name" value="<?php echo htmlspecialchars($secretaryData['full_name'] ?? ''); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Secretary Email</label>
+                        <input type="email" id="secretary_email" name="secretary_email" value="<?php echo htmlspecialchars($secretaryData['email'] ?? ''); ?>" >
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="education">Education (One per line)</label>

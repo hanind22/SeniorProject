@@ -94,6 +94,9 @@
                 <a href="health_chatbot.php" class="nav-item">
                     <i class="fa-solid fa-comment-medical"></i> Health Chatbot
                 </a>
+                <a href="#" class="nav-item logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                </a>
             </nav>
             <div class="date-time-box">
                 <p id="date-time"></p>
@@ -409,7 +412,17 @@
             </div>
         </div>
     </div>
-
+<!-- Add this HTML right before the closing </body> tag -->
+<div class="logout-overlay" id="logoutOverlay">
+    <div class="logout-confirmation">
+        <h3>Confirm Logout</h3>
+        <p>Are you sure you want to logout ?</p>
+        <div class="logout-buttons">
+            <button class="logout-btn confirm-logout" id="confirmLogout">Yes, Logout</button>
+            <button class="logout-btn cancel-logout" id="cancelLogout">Cancel</button>
+        </div>
+    </div>
+</div>
     <script src="patient_dashboard.js"></script>
 
 </body>

@@ -114,14 +114,14 @@ body {
     margin-top: 60px;
     --circle-size: 120px;
     --primary-color: #2c3e50;
-    --accent-color: #38e4c1;
+    --accent-color:  #1abc9c;
 }
 
 .initials-circle {
     width: var(--circle-size);
     height: var(--circle-size);
     border-radius: 50%;
-    background: linear-gradient(145deg, var(--accent-color), #16a085);
+    background: var(--accent-color);
     color: white;
     display: flex;
     align-items: center;
@@ -347,20 +347,20 @@ body {
 }
 
 .btn-outline:hover {
-    background-color: var(--primary);
+    background-color: #1abc9c;
     color: white;
     transform: translateY(-2px);
 }
 
 .btn-secondary {
-    background-color: var(--primary);
+    background-color: #1abc9c;
     color: white;
     box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
     width: 100%;
 }
 
 .btn-secondary:hover {
-    background-color: var(--primary-dark);
+    background-color: #1acca8;
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
 }
@@ -823,15 +823,15 @@ textarea.form-control {
         }
         
         .btn-primary {
-            background-color: #3498db;
+            background-color: #1abc9c;
             color: white;
             border: none;
         }
         
         .btn-outline {
             background-color: white;
-            color: #3498db;
-            border: 1px solid #3498db;
+            color: #129279;
+            border: 1px solid #0f8b73;
         }
         
         .btn:hover {

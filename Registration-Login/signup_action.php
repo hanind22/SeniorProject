@@ -199,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'doctor' => '../Doctor/doctor_dashboard.php',
                 'secretary' => '../Secretary/secretary_dashboard.php',
                 'patient' => '../Patient/patient_dashboard.php',
-                'admin' => '../Admin/Admin_Dashboard.php'
+                'admin' => '../Admin/MainPage.php'
             ];
             
             $redirect = $redirect_paths[strtolower($uc_user_type)] ?? 'index.php';

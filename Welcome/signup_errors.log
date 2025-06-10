@@ -1,0 +1,296 @@
+2025-06-09 13:35:22 - Received form data - Name: Hasan Cheaib, Email: DrHasan@gmail.com, User Type: doctor
+2025-06-09 13:35:22 - Doctor data - Specialty: Dermatology, License: MD950012
+2025-06-09 13:35:22 - Executing query: SELECT email FROM users WHERE email = 'DrHasan@gmail.com'
+2025-06-09 13:35:22 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Hasan Cheaib'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD950012'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('Dermatology'))
+            
+2025-06-09 13:35:22 - Found existing unregistered doctor - ID: 140
+2025-06-09 13:35:22 - Starting database transaction
+2025-06-09 13:35:22 - Executing doctor update query: 
+                    UPDATE users 
+                    SET email = 'DrHasan@gmail.com', 
+                        password_hash = '$2y$10$tK27uN8urQpC7H0o8U3WCO4jZpKYhymuEAL0Zpe.FDZrIfmX9x2qi', 
+                        phone_number = '70087795',
+                        created_at = NOW()
+                    WHERE user_id = 140
+                
+2025-06-09 13:35:22 - Executing doctor approval query: UPDATE doctors SET approved = 1 WHERE user_id = 140
+2025-06-09 13:35:22 - Transaction committed successfully
+2025-06-09 13:35:22 - Registration successful, redirecting to: ../Doctor/doctor_dashboard.php
+2025-06-09 13:36:19 - Received form data - Name: Carole Smeha, Email: DrHxsasan@gmail.com, User Type: doctor
+2025-06-09 13:36:19 - Doctor data - Specialty: General, License: MD45821
+2025-06-09 13:36:19 - Executing query: SELECT email FROM users WHERE email = 'DrHxsasan@gmail.com'
+2025-06-09 13:36:19 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD45821'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('General'))
+            
+2025-06-09 13:36:19 - Doctor verification failed: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 13:36:19 - Input - Name: Carole Smeha, License: MD45821, Specialty: General
+2025-06-09 13:36:19 - Validation errors: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 13:46:33 - Received form data - Name: Carole Smeha, Email: Carole@gmail.com, User Type: doctor
+2025-06-09 13:46:33 - Doctor data - Specialty: General, License: MD1084656
+2025-06-09 13:46:33 - Executing query: SELECT email FROM users WHERE email = 'Carole@gmail.com'
+2025-06-09 13:46:33 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD1084656'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('General'))
+            
+2025-06-09 13:46:33 - Doctor verification failed: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 13:46:33 - Input - Name: Carole Smeha, License: MD1084656, Specialty: General
+2025-06-09 13:46:33 - Validation errors: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:00:04 - Received form data - Name: Carole Smeha, Email: Carole@gmail.com, User Type: doctor
+2025-06-09 14:00:04 - Doctor data - Specialty: General, License: MD870325
+2025-06-09 14:00:04 - Executing query: SELECT email FROM users WHERE email = 'Carole@gmail.com'
+2025-06-09 14:00:04 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD870325'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('General'))
+            
+2025-06-09 14:00:04 - Doctor verification failed: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:00:04 - Input - Name: Carole Smeha, License: MD870325, Specialty: General
+2025-06-09 14:00:04 - Validation errors: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:00:22 - Received form data - Name: Carole Smeha, Email: Carole@gmail.com, User Type: doctor
+2025-06-09 14:00:22 - Doctor data - Specialty: General, License: MD870325
+2025-06-09 14:00:22 - Executing query: SELECT email FROM users WHERE email = 'Carole@gmail.com'
+2025-06-09 14:00:22 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD870325'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('General'))
+            
+2025-06-09 14:00:22 - Doctor verification failed: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:00:22 - Input - Name: Carole Smeha, License: MD870325, Specialty: General
+2025-06-09 14:00:22 - Validation errors: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:00:30 - Received form data - Name: Carole Smeha, Email: Carole@gmail.com, User Type: doctor
+2025-06-09 14:00:30 - Doctor data - Specialty: General, License: MD102030
+2025-06-09 14:00:30 - Executing query: SELECT email FROM users WHERE email = 'Carole@gmail.com'
+2025-06-09 14:00:30 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD102030'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('General'))
+            
+2025-06-09 14:00:30 - Doctor verification failed: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:00:30 - Input - Name: Carole Smeha, License: MD102030, Specialty: General
+2025-06-09 14:00:30 - Validation errors: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:00:31 - Received form data - Name: Carole Smeha, Email: Carole@gmail.com, User Type: doctor
+2025-06-09 14:00:31 - Doctor data - Specialty: General, License: MD102030
+2025-06-09 14:00:31 - Executing query: SELECT email FROM users WHERE email = 'Carole@gmail.com'
+2025-06-09 14:00:31 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD102030'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('General'))
+            
+2025-06-09 14:00:31 - Doctor verification failed: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:00:31 - Input - Name: Carole Smeha, License: MD102030, Specialty: General
+2025-06-09 14:00:31 - Validation errors: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:01:06 - Received form data - Name: Carole Smeha, Email: Carole@gmail.com, User Type: doctor
+2025-06-09 14:01:06 - Doctor data - Specialty: General, License: MD102030
+2025-06-09 14:01:06 - Executing query: SELECT email FROM users WHERE email = 'Carole@gmail.com'
+2025-06-09 14:01:06 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD102030'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('General'))
+            
+2025-06-09 14:01:06 - Doctor verification failed: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:01:06 - Input - Name: Carole Smeha, License: MD102030, Specialty: General
+2025-06-09 14:01:06 - Validation errors: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:01:30 - Received form data - Name: Carole Smeha, Email: Carole@gmail.com, User Type: doctor
+2025-06-09 14:01:30 - Doctor data - Specialty: Ophthalmology, License: MD102030
+2025-06-09 14:01:30 - Executing query: SELECT email FROM users WHERE email = 'Carole@gmail.com'
+2025-06-09 14:01:30 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD102030'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('Ophthalmology'))
+            
+2025-06-09 14:01:30 - Found existing unregistered doctor - ID: 141
+2025-06-09 14:01:30 - Starting database transaction
+2025-06-09 14:01:30 - Executing doctor update query: 
+                    UPDATE users 
+                    SET email = 'Carole@gmail.com', 
+                        password_hash = '$2y$10$MHYjZH8L6iB1LTW53LYmIeCCdFUD2m2ertn5LgzEd2RIReIRd17FK', 
+                        phone_number = '07254187',
+                        created_at = NOW()
+                    WHERE user_id = 141
+                
+2025-06-09 14:01:30 - Executing doctor approval query: UPDATE doctors SET approved = 1 WHERE user_id = 141
+2025-06-09 14:01:30 - Transaction committed successfully
+2025-06-09 14:01:30 - Registration successful, redirecting to: ../Doctor/doctor_dashboard.php
+2025-06-09 14:02:01 - Received form data - Name: Carole Smeha, Email: Carole@gmail.com, User Type: doctor
+2025-06-09 14:02:01 - Doctor data - Specialty: Ophthalmology, License: MD102030
+2025-06-09 14:02:01 - Executing query: SELECT email FROM users WHERE email = 'Carole@gmail.com'
+2025-06-09 14:02:01 - Email already exists: Carole@gmail.com
+2025-06-09 14:02:01 - Validation errors: Email already registered
+2025-06-09 14:34:40 - Received form data - Name: Carole Smeha, Email: CaFCDEFrole@gmail.com, User Type: doctor
+2025-06-09 14:34:40 - Doctor data - Specialty: Pediatrics, License: MD0127910
+2025-06-09 14:34:40 - Executing query: SELECT email FROM users WHERE email = 'CaFCDEFrole@gmail.com'
+2025-06-09 14:34:40 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD0127910'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('Pediatrics'))
+            
+2025-06-09 14:34:40 - Doctor verification failed: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-09 14:34:40 - Input - Name: Carole Smeha, License: MD0127910, Specialty: Pediatrics
+2025-06-09 14:34:40 - Validation errors: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-10 14:19:12 - Received form data - Name: Carole Smeha, Email: CaFCDEFrxsole@gmail.com, User Type: doctor
+2025-06-10 14:19:12 - Doctor data - Specialty: Pediatrics, License: MD0127910
+2025-06-10 14:19:12 - Executing query: SELECT email FROM users WHERE email = 'CaFCDEFrxsole@gmail.com'
+2025-06-10 14:19:12 - Executing doctor verification query: 
+                SELECT u.user_id, u.full_name, d.specialty, d.license_number, u.email
+                FROM users u
+                JOIN doctors d ON u.user_id = d.user_id
+                WHERE TRIM(LOWER(u.full_name)) = TRIM(LOWER('Carole Smeha'))
+                AND u.user_type = 'doctor'
+                AND d.license_number = 'MD0127910'
+                AND TRIM(LOWER(d.specialty)) = TRIM(LOWER('Pediatrics'))
+            
+2025-06-10 14:19:12 - Doctor verification failed: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-10 14:19:12 - Input - Name: Carole Smeha, License: MD0127910, Specialty: Pediatrics
+2025-06-10 14:19:12 - Validation errors: The information you entered doesn't match our records. Please contact the administrator to verify your details.
+2025-06-10 20:45:02 - Exception caught: Duplicate entry '142' for key 'user_id'
+2025-06-10 20:46:25 - Exception caught: Duplicate entry '142' for key 'user_id'
+2025-06-10 21:13:19 - Exception caught: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`secretary`, CONSTRAINT `secretary_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`doctor_id`))
+2025-06-10 21:13:19 - Stack trace: #0 C:\xampp\htdocs\fyp\Welcome\signup_action.php(173): mysqli_query(Object(mysqli), 'UPDATE secretar...')
+#1 {main}
+2025-06-10 21:13:57 - Exception caught: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`secretary`, CONSTRAINT `secretary_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`doctor_id`))
+2025-06-10 21:13:57 - Stack trace: #0 C:\xampp\htdocs\fyp\Welcome\signup_action.php(173): mysqli_query(Object(mysqli), 'UPDATE secretar...')
+#1 {main}
+2025-06-10 21:18:15 - ================ NEW SIGNUP ATTEMPT ================
+2025-06-10 21:18:15 - POST data received: Array
+(
+    [fullName] => Sara Diab
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Neurology
+    [assignedDoctor] => 20
+    [Email] => Diabsara@gmail.com
+    [Password] => 12345678
+    [phone] => 03210968
+)
+
+2025-06-10 21:18:15 - Session form data set: Array
+(
+    [fullName] => Sara Diab
+    [userType] => secretary
+    [licenseNumber] => 
+    [secretarySpecialty] => Neurology
+    [assignedDoctor] => 20
+    [Email] => Diabsara@gmail.com
+    [Password] => 12345678
+    [phone] => 03210968
+)
+
+2025-06-10 21:18:15 - Processed input - Name: Sara Diab, Email: Diabsara@gmail.com, Type: secretary
+2025-06-10 21:18:15 - Secretary specialty: Neurology, Doctor ID: 20
+2025-06-10 21:18:15 - Basic validation errors: Array
+(
+)
+
+2025-06-10 21:18:15 - Secretary verification query: 
+                SELECT u.user_id 
+                FROM users u
+                WHERE LOWER(TRIM(u.email)) = LOWER(TRIM('Diabsara@gmail.com'))
+                AND LOWER(TRIM(u.full_name)) = LOWER(TRIM('Sara Diab'))
+                AND LOWER(u.user_type) = 'secretary'
+                AND (u.password_hash IS NULL OR u.password_hash = '')
+            
+2025-06-10 21:18:15 - Found existing secretary ID: 142
+2025-06-10 21:18:15 - Doctor check query: SELECT user_id FROM users WHERE user_id = '20' AND LOWER(user_type) = 'doctor'
+2025-06-10 21:18:15 - Starting database transaction
+2025-06-10 21:18:15 - Password hashed
+2025-06-10 21:18:15 - Secretary update query: 
+                UPDATE users 
+                SET password_hash = '$2y$10$TjAUQlvJ3wiZHTu4VE50wuGONeSIZFv0nnVqIOE5zWi/tTcDc41Z2', 
+                    phone_number = '03210968',
+                    created_at = NOW()
+                WHERE user_id = 142
+            
+2025-06-10 21:18:15 - Assignment check query: SELECT 1 FROM secretary WHERE user_id = 142
+2025-06-10 21:18:15 - Updating existing secretary assignment: UPDATE secretary SET doctor_id = 20 WHERE user_id = 142
+2025-06-10 21:18:15 - EXCEPTION CAUGHT: Cannot add or update a child row: a foreign key constraint fails (`medicare_system`.`secretary`, CONSTRAINT `secretary_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`doctor_id`))
+2025-06-10 21:18:15 - Stack trace: #0 C:\xampp\htdocs\fyp\Welcome\signup_action.php(219): mysqli_query(Object(mysqli), 'UPDATE secretar...')
+#1 {main}
+2025-06-10 21:18:15 - Redirecting back to form after exception
+2025-06-10 21:55:18 - ================ NEW SIGNUP ATTEMPT ================
+2025-06-10 21:55:18 - POST data received: Array
+(
+    [fullName] => Amar deeb
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => amaro@gmail.com
+    [Password] => 12345678
+    [phone] => 71458965
+)
+
+2025-06-10 21:55:18 - Session form data set: Array
+(
+    [fullName] => Amar deeb
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => amaro@gmail.com
+    [Password] => 12345678
+    [phone] => 71458965
+)
+
+2025-06-10 21:55:34 - ================ NEW SIGNUP ATTEMPT ================
+2025-06-10 21:55:34 - POST data received: Array
+(
+    [fullName] => Amar deeb
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => amaro@gmail.com
+    [Password] => 12345678
+    [phone] => 71458965
+)
+
+2025-06-10 21:55:34 - Session form data set: Array
+(
+    [fullName] => Amar deeb
+    [userType] => patient
+    [licenseNumber] => 
+    [Email] => amaro@gmail.com
+    [Password] => 12345678
+    [phone] => 71458965
+)
+

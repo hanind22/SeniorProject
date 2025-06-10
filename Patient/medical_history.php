@@ -253,6 +253,9 @@ $patientId = $patientData['patient_id'] ?? null;
                 <a href="health_chatbot.php" class="nav-item">
                     <i class="fa-solid fa-comment-medical"></i> Health Chatbot
                 </a>
+                <a href="#" class="nav-item logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                </a>
             </nav>
             <div class="date-time-box">
                 <p id="date-time"></p>
@@ -268,7 +271,7 @@ $patientId = $patientData['patient_id'] ?? null;
 
             <div class="patient-info">
                 <div class="patient-name"><?php echo htmlspecialchars($patientData['full_name'] ?? 'Patient'); ?></div>
-                <div class="patient-id">Patient ID: #<?php echo htmlspecialchars($patientData['patient_id'] ?? 'N/A'); ?></div>
+                <div class="patient-id">Patient ID: <?php echo htmlspecialchars($patientData['patient_id'] ?? 'N/A'); ?></div>
             </div>
 
             <div class="search-filter">
@@ -424,6 +427,17 @@ $patientId = $patientData['patient_id'] ?? null;
         </div>
     </div>
 </div>
+<!-- Add this HTML right before the closing </body> tag -->
+<div class="logout-overlay" id="logoutOverlay">
+    <div class="logout-confirmation">
+        <h3>Confirm Logout</h3>
+        <p>Are you sure you want to logout ?</p>
+        <div class="logout-buttons">
+            <button class="logout-btn confirm-logout" id="confirmLogout">Yes, Logout</button>
+            <button class="logout-btn cancel-logout" id="cancelLogout">Cancel</button>
+        </div>
+    </div>
+</div>
     <script>
         // JavaScript for filtering functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -557,6 +571,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+       
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the logout elements
+    const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
+    const logoutOverlay = document.getElementById('logoutOverlay');
+    const confirmLogout = document.getElementById('confirmLogout');
+    const cancelLogout = document.getElementById('cancelLogout');
+
+    // Show overlay when logout is clicked
+    logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        logoutOverlay.classList.add('show');
+    });
+
+    // Hide overlay when cancel is clicked
+    cancelLogout.addEventListener('click', function() {
+        logoutOverlay.classList.remove('show');
+    });
+
+    // Handle actual logout
+    confirmLogout.addEventListener('click', function() {
+        // In a real implementation, this would redirect to your logout script
+        window.location.href = '../Welcome/Index.php';
+        
+        // For demonstration, we'll just show an alert
+        // alert('Logging out...');
+        // logoutOverlay.classList.remove('show');
+    });
+
+    // Close overlay when clicking outside the confirmation box
+    logoutOverlay.addEventListener('click', function(e) {
+        if (e.target === logoutOverlay) {
+            logoutOverlay.classList.remove('show');
+        }
+    });
+});
+
     </script>
 </body>
 </html>

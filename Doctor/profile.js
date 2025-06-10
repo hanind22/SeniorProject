@@ -42,106 +42,136 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ----------------- Modal event listeners ----------------- //
     if (openBtn) openBtn.addEventListener('click', openModal);
-    if (changeAvatarBtn) changeAvatarBtn.addEventListener('click', openModal);
+    if (changeAvatarBtn) changeAvatarBtn.addEventListener('click', () => {
+        if (avatarUpload) avatarUpload.click();
+    });
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) closeModal();
-    });
+    if (modal) {
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) closeModal();
+        });
+    }
 
     // ----------------- Form validation ----------------- //
-function validateForm(formData) {
-    const errors = [];
-    if (!formData.license_number) errors.push('License number is required');
-    if (!formData.email) errors.push('Email is required');
-    if (!formData.phone) errors.push('Phone number is required');
+    function validateForm(formData) {
+        const errors = [];
+        if (!formData.license_number) errors.push('License number is required');
+        if (!formData.email) errors.push('Email is required');
+        if (!formData.phone) errors.push('Phone number is required');
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (formData.email && !emailRegex.test(formData.email)) {
-        errors.push('Please enter a valid email address');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (formData.email && !emailRegex.test(formData.email)) {
+            errors.push('Please enter a valid email address');
+        }
+
+        const phoneRegex = /^\d{8}$/;
+        if (formData.phone && !phoneRegex.test(formData.phone)) {
+            errors.push('Phone number must be exactly 8 digits');
+        }
+
+        return errors;
     }
-
-    const phoneRegex = /^\d{8}$/;
-    if (formData.phone && !phoneRegex.test(formData.phone)) {
-        errors.push('Phone number must be exactly 8 digits');
-    }
-
-    return errors;
-}
 
     // ----------------- Profile form submission ----------------- //
-if (profileForm) {
-    profileForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+    if (profileForm) {
+        profileForm.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        // Convert form data to a structured object
-        const formData = new FormData(this);
-        const formObject = {};
-        const availability = {};
+            // Safely get form values with null checks
+            const getFormValue = (selector) => {
+                const element = document.querySelector(selector);
+                return element ? element.value : null;
+            };
 
-        // Process all form fields
-        for (let [key, value] of formData.entries()) {
-            // Handle availability fields
-            if (key.startsWith('availability[')) {
-                const match = key.match(/availability\[([^\]]+)\]\[([^\]]+)\]\[([^\]]+)\]/);
-                if (match) {
-                    const day = match[1];
-                    const slotIndex = match[2];
-                    const fieldName = match[3];
-                    
-                    if (!availability[day]) availability[day] = {};
-                    if (!availability[day][slotIndex]) availability[day][slotIndex] = {};
-                    
-                    availability[day][slotIndex][fieldName] = value;
-                }
-            } else {
-                formObject[key] = value;
+            const formData = {
+                doctor_id: getFormValue('input[name="doctor_id"]'),
+                email: getFormValue('#email'),
+                phone: getFormValue('#phone'),
+                license_number: getFormValue('#license_number'),
+                education: getFormValue('#education'),
+                certifications: getFormValue('#certifications'),
+                bio: getFormValue('#bio'),
+                secretary_name: getFormValue('#secretary_name'),
+                secretary_email: getFormValue('#secretary_email'),
+                availability: {}
+            };
+
+            // Validate required fields
+            if (!formData.doctor_id || !formData.email || !formData.phone || !formData.license_number) {
+                showNotification('Please fill all required fields', 'error');
+                return;
             }
-        }
 
-        // Add processed availability to form object
-        formObject.availability = availability;
+            // Collect availability data with null checks
+            const dayGroups = document.querySelectorAll('.availability-day-group');
+            if (dayGroups) {
+                dayGroups.forEach(group => {
+                    const day = group.dataset.day;
+                    if (!day) return;
+                    
+                    const capitalizedDay = day.charAt(0).toUpperCase() + day.slice(1);
+                    formData.availability[capitalizedDay] = [];
+                    
+                    const timeSlots = group.querySelectorAll('.time-slot');
+                    timeSlots.forEach((slot, index) => {
+                        const statusSelect = slot.querySelector('.status-select');
+                        const startTimeInput = slot.querySelector('input[type="time"]:first-of-type');
+                        const endTimeInput = slot.querySelector('input[type="time"]:last-of-type');
+                        const placeInput = slot.querySelector('.place-input');
+                        
+                        if (statusSelect && startTimeInput && endTimeInput && placeInput) {
+                            formData.availability[capitalizedDay].push({
+                                status: statusSelect.value,
+                                start_time: startTimeInput.value,
+                                end_time: endTimeInput.value,
+                                place_name: placeInput.value
+                            });
+                        }
+                    });
+                });
+            }
 
-        // Validate the form data
-        const errors = validateForm(formObject);
-        if (errors.length > 0) {
-            showNotification(errors.join('<br>'), 'error');
-            return;
-        }
+            // Show loading state
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            submitBtn.disabled = true;
 
-        // Send as JSON with proper headers
-        fetch('update-profile.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formObject)
-        })
-        .then(handleResponse)
-        .catch(handleError);
-    });
-}
-
-function handleResponse(response) {
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+            // Send data to server
+            fetch('update_profile.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    showNotification('Profile updated successfully!', 'success');
+                    closeModal();
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showNotification(data.message || 'Failed to update profile', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('An error occurred while updating profile', 'error');
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
     }
-    return response.json().then(data => {
-        if (data.success) {
-            showNotification('Profile updated successfully!', 'success');
-            closeModal();
-            setTimeout(() => location.reload(), 1500);
-        } else {
-            showNotification(data.message || 'Failed to update profile', 'error');
-        }
-    });
-}
-
-function handleError(error) {
-    console.error('Fetch error:', error);
-    showNotification('An error occurred. Please try again.', 'error');
-}
 
     // ----------------- Notification system ----------------- //
     function showNotification(message, type = 'success', duration = 4000) {
@@ -173,6 +203,8 @@ function handleError(error) {
         if (!dayGroup) return;
 
         const day = dayGroup.dataset.day;
+        if (!day) return;
+
         const dayCapitalized = day.charAt(0).toUpperCase() + day.slice(1);
         const slotCount = dayGroup.querySelectorAll('.time-slot').length;
 
@@ -205,48 +237,52 @@ function handleError(error) {
         if (!slot) return;
 
         const dayGroup = slot.closest('.availability-day-group');
+        if (!dayGroup) return;
+
         if (dayGroup.querySelectorAll('.time-slot').length > 1) {
             slot.remove();
         } else {
             // Reset the single remaining slot instead of removing it
-            slot.querySelector('.status-select').value = 'unavailable';
-            slot.querySelectorAll('.time-input').forEach(input => input.value = '');
-            slot.querySelector('.place-input').value = '';
+            const statusSelect = slot.querySelector('.status-select');
+            const timeInputs = slot.querySelectorAll('.time-input');
+            const placeInput = slot.querySelector('.place-input');
+            
+            if (statusSelect) statusSelect.value = 'unavailable';
+            if (timeInputs) timeInputs.forEach(input => input.value = '');
+            if (placeInput) placeInput.value = '';
         }
     };
-})        
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the logout elements
+
+    // ----------------- Logout functionality ----------------- //
     const logoutLink = document.querySelector('.nav-links .nav-item:last-child');
     const logoutOverlay = document.getElementById('logoutOverlay');
     const confirmLogout = document.getElementById('confirmLogout');
     const cancelLogout = document.getElementById('cancelLogout');
 
-    // Show overlay when logout is clicked
-    logoutLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        logoutOverlay.classList.add('show');
-    });
+    if (logoutLink && logoutOverlay) {
+        logoutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            logoutOverlay.classList.add('show');
+        });
+    }
 
-    // Hide overlay when cancel is clicked
-    cancelLogout.addEventListener('click', function() {
-        logoutOverlay.classList.remove('show');
-    });
-
-    // Handle actual logout
-    confirmLogout.addEventListener('click', function() {
-        // In a real implementation, this would redirect to your logout script
-        window.location.href = '../Registration-Login/index.php';
-        
-        // For demonstration, we'll just show an alert
-        // alert('Logging out...');
-        // logoutOverlay.classList.remove('show');
-    });
-
-    // Close overlay when clicking outside the confirmation box
-    logoutOverlay.addEventListener('click', function(e) {
-        if (e.target === logoutOverlay) {
+    if (cancelLogout && logoutOverlay) {
+        cancelLogout.addEventListener('click', function() {
             logoutOverlay.classList.remove('show');
-        }
-    });
+        });
+    }
+
+    if (confirmLogout) {
+        confirmLogout.addEventListener('click', function() {
+            window.location.href = '../Welcome/Index.php';
+        });
+    }
+
+    if (logoutOverlay) {
+        logoutOverlay.addEventListener('click', function(e) {
+            if (e.target === logoutOverlay) {
+                logoutOverlay.classList.remove('show');
+            }
+        });
+    }
 });

@@ -296,6 +296,9 @@ if (isset($_SESSION['user_id'])) {
                 <a href="health_chatbot.php" class="nav-item">
                     <i class="fa-solid fa-comment-medical"></i> Health Chatbot
                 </a>
+                <a href="#" class="nav-item logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                </a>
             </nav>
             <div class="date-time-box">
                 <p id="date-time"></p>
@@ -397,6 +400,7 @@ if (isset($_SESSION['user_id'])) {
                     <option value="Pediatrics">Pediatrics</option>
                     <option value="Orthopedics">Orthopedics</option>
                     <option value="Dermatology">Dermatology</option>
+                    <option value="Ophthalmology">Ophthalmology</option>
                     <option value="General">General Practice</option>
                 </select>
             </div>
@@ -553,7 +557,6 @@ if (isset($_SESSION['user_id'])) {
     </div>
 </div>
 
-
 <!-- Edit Appointment Modal (hidden by default) -->
 <div class="overlay" id="editAppointmentModal" style="display: none;">
     <div class="modal">
@@ -607,6 +610,18 @@ if (isset($_SESSION['user_id'])) {
                 </button>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Add this HTML right before the closing </body> tag -->
+<div class="logout-overlay" id="logoutOverlay">
+    <div class="logout-confirmation">
+        <h3>Confirm Logout</h3>
+        <p>Are you sure you want to logout ?</p>
+        <div class="logout-buttons">
+            <button class="logout-btn confirm-logout" id="confirmLogout">Yes, Logout</button>
+            <button class="logout-btn cancel-logout" id="cancelLogout">Cancel</button>
+        </div>
     </div>
 </div>
 

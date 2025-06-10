@@ -7,53 +7,73 @@ include("../db-config/connection.php");
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
 // Debug: Log all received POST data
 error_log("Received POST data: " . print_r($_POST, true));
 
 // Verify session and permissions
 if (!isset($_SESSION['user_id'])) {
-    die("Unauthorized access");
+    die(json_encode(["success" => false, "error" => "Unauthorized access"]));
 }
 
 // Verify database connection
 if (!$conn) {
-    die("Database connection failed: " . mysqli_connect_error());
+    die(json_encode(["success" => false, "error" => "Database connection failed"]));
 }
 error_log("Database connection successful");
-
-// Collect and sanitize form data
-$doctor_id = $_SESSION['user_id'];
-$patient_id = filter_input(INPUT_POST, 'patient_id', FILTER_VALIDATE_INT);
-$visit_date = $_POST['visit_date'] ?? date('Y-m-d');
-$reason_for_visit = mysqli_real_escape_string($conn, $_POST['reason_for_visit'] ?? '');
-$observations = mysqli_real_escape_string($conn, $_POST['observations'] ?? '');
-$diagnosis = mysqli_real_escape_string($conn, $_POST['diagnosis'] ?? '');
-$treatment_plan = mysqli_real_escape_string($conn, $_POST['treatment_plan'] ?? '');
-$follow_up_instructions = mysqli_real_escape_string($conn, $_POST['follow_up_instructions'] ?? null);
-$next_appointment_date = $_POST['next_appointment'] ?? null;
-$next_appointment_time = $_POST['next_appointment_time'] ?? '09:00:00';
-
-// Validate required fields
-if (empty($patient_id) || empty($reason_for_visit) || empty($observations) || empty($diagnosis) || empty($treatment_plan)) {
-    header('Location: medical_records.php?error=' . urlencode('All required fields must be filled'));
-    exit();
-}
 
 // Start transaction
 mysqli_begin_transaction($conn);
 error_log("Transaction started");
 
 try {
-    // Get doctor's user_id
-    $doctor_user_query = "SELECT user_id FROM doctors WHERE doctor_id = ?";
-    $doctor_user_stmt = mysqli_prepare($conn, $doctor_user_query);
-    mysqli_stmt_bind_param($doctor_user_stmt, "i", $doctor_id);
-    mysqli_stmt_execute($doctor_user_stmt);
-    $doctor_user_result = mysqli_stmt_get_result($doctor_user_stmt);
-    $doctor_user_row = mysqli_fetch_assoc($doctor_user_result);
-    $sender_id = $doctor_user_row['user_id'];
-    mysqli_stmt_close($doctor_user_stmt);
+    // FIRST get the actual doctor_id from the user_id in session
+    $get_doctor_query = "SELECT doctor_id FROM doctors WHERE user_id = ?";
+    $get_doctor_stmt = mysqli_prepare($conn, $get_doctor_query);
+    mysqli_stmt_bind_param($get_doctor_stmt, "i", $_SESSION['user_id']);
+    mysqli_stmt_execute($get_doctor_stmt);
+    $doctor_result = mysqli_stmt_get_result($get_doctor_stmt);
+    $doctor_data = mysqli_fetch_assoc($doctor_result);
+    mysqli_stmt_close($get_doctor_stmt);
+
+    if (!$doctor_data) {
+        throw new Exception("Doctor profile not found for this user");
+    }
+    
+    $doctor_id = $doctor_data['doctor_id'];
+    error_log("Retrieved doctor_id: $doctor_id");
+
+    // Collect and sanitize form data
+    $patient_id = filter_input(INPUT_POST, 'patient_id', FILTER_VALIDATE_INT);
+    $visit_date = $_POST['visit_date'] ?? date('Y-m-d');
+    $reason_for_visit = mysqli_real_escape_string($conn, $_POST['reason_for_visit'] ?? '');
+    $observations = mysqli_real_escape_string($conn, $_POST['observations'] ?? '');
+    $diagnosis = mysqli_real_escape_string($conn, $_POST['diagnosis'] ?? '');
+    $treatment_plan = mysqli_real_escape_string($conn, $_POST['treatment_plan'] ?? '');
+    $follow_up_instructions = mysqli_real_escape_string($conn, $_POST['follow_up_instructions'] ?? null);
+    
+    // Check if follow-up is required and validate fields
+    $require_followup = isset($_POST['require_followup']) && $_POST['require_followup'] == 'on';
+    $next_appointment_date = $require_followup ? ($_POST['next_appointment'] ?? null) : null;
+    $next_appointment_time = $require_followup ? ($_POST['next_appointment_time'] ?? '09:00:00') : null;
+
+    // Validate required fields
+    if (empty($patient_id) || empty($reason_for_visit) || empty($observations) || empty($diagnosis) || empty($treatment_plan)) {
+        throw new Exception("All required fields must be filled");
+    }
+
+    // Validate follow-up appointment fields if required
+    if ($require_followup) {
+        if (empty($next_appointment_date) || empty($next_appointment_time)) {
+            throw new Exception("Follow-up appointment date and time are required when scheduling a follow-up");
+        }
+        
+        // Ensure follow-up date is in the future
+        $today = new DateTime();
+        $followup_date = new DateTime($next_appointment_date);
+        if ($followup_date <= $today) {
+            throw new Exception("Follow-up appointment must be scheduled for a future date");
+        }
+    }
 
     // Get patient's user_id
     $patient_user_query = "SELECT user_id FROM patients WHERE patient_id = ?";
@@ -62,6 +82,11 @@ try {
     mysqli_stmt_execute($patient_user_stmt);
     $patient_user_result = mysqli_stmt_get_result($patient_user_stmt);
     $patient_user_row = mysqli_fetch_assoc($patient_user_result);
+    
+    if (!$patient_user_row) {
+        throw new Exception("Patient not found");
+    }
+    
     $receiver_id = $patient_user_row['user_id'];
     mysqli_stmt_close($patient_user_stmt);
 
@@ -94,6 +119,7 @@ try {
     
     $record_id = mysqli_insert_id($conn);
     error_log("Inserted medical record with ID: $record_id");
+    mysqli_stmt_close($stmt);
     
     // Insert prescriptions if they exist
     if (!empty($_POST['med_name']) && is_array($_POST['med_name'])) {
@@ -136,7 +162,7 @@ try {
     
     $medical_record_stmt = mysqli_prepare($conn, $medical_record_notif);
     mysqli_stmt_bind_param($medical_record_stmt, "iis", 
-        $sender_id, 
+        $_SESSION['user_id'], // sender_id is the doctor's user_id from session
         $receiver_id,
         $medical_record_message
     );
@@ -147,8 +173,8 @@ try {
     error_log("Created medical record notification");
     mysqli_stmt_close($medical_record_stmt);
     
-    // Create follow-up appointment if requested
-    if (!empty($next_appointment_date)) {
+    // Create follow-up appointment if requested and validated
+    if ($require_followup && !empty($next_appointment_date)) {
         error_log("Creating follow-up appointment...");
         
         // Check for existing appointment
@@ -208,7 +234,7 @@ try {
         
         $appointment_notif_stmt = mysqli_prepare($conn, $appointment_notif);
         mysqli_stmt_bind_param($appointment_notif_stmt, "iiis", 
-            $sender_id, 
+            $_SESSION['user_id'], // sender_id is the doctor's user_id from session
             $receiver_id,
             $appointment_id,
             $appointment_message
@@ -223,7 +249,7 @@ try {
     
     mysqli_commit($conn);
     error_log("Transaction committed successfully");
-    // Return JSON instead of redirect
+    
     echo json_encode([
         'success' => true,
         'redirect' => 'medical_records.php?success=1'
@@ -233,18 +259,24 @@ try {
 } catch (Exception $e) {
     mysqli_rollback($conn);
     error_log("Error: " . $e->getMessage());
-    // Return JSON error
+    
     echo json_encode([
         'success' => false,
         'error' => $e->getMessage()
     ]);
     exit();
 } finally {
-    if (isset($stmt)) mysqli_stmt_close($stmt);
-    if (isset($prescriptionStmt)) mysqli_stmt_close($prescriptionStmt);
-    if (isset($appointmentStmt)) mysqli_stmt_close($appointmentStmt);
-    if (isset($checkStmt)) mysqli_stmt_close($checkStmt);
-    if (isset($medical_record_stmt)) mysqli_stmt_close($medical_record_stmt);
-    if (isset($appointment_notif_stmt)) mysqli_stmt_close($appointment_notif_stmt);
-    mysqli_close($conn);
+    // Close all statements if they exist
+    $statements = ['get_doctor_stmt', 'patient_user_stmt', 'stmt', 'prescriptionStmt', 
+                  'appointmentStmt', 'checkStmt', 'medical_record_stmt', 'appointment_notif_stmt'];
+    
+    foreach ($statements as $stmt_var) {
+        if (isset($$stmt_var)) {
+            mysqli_stmt_close($$stmt_var);
+        }
+    }
+    
+    if ($conn) {
+        mysqli_close($conn);
+    }
 }

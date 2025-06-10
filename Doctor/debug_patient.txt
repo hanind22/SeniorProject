@@ -1,0 +1,18 @@
+Array
+(
+    [appointment_id] => 407
+    [doctor_id] => 16
+    [patient_id] => 89
+    [appointment_date] => 2025-06-09
+    [appointment_time] => 10:30:00
+    [appointment_type] => Regular Checkup
+    [status] => Scheduled
+    [reason_for_visit] => ..
+    [notes] => ..
+    [created_at] => 2025-06-08 01:27:31
+    [updated_at] => 2025-06-08 01:27:31
+    [cancelled_by] => 
+    [cancelled_reason] => 
+    [reason_for_cancelling] => 
+    [doctor_name] => Ali Diab
+)

@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 elseif($user['user_type'] === 'Admin'){
                     $_SESSION['admin_id'] = $user['user_id'];
-                    header("Location: /fyp/Admin/Admin_Dashboard.php");
+                    header("Location: /fyp/Admin/MainPage.php");
                 }
                 else {
                      $_SESSION['patient_id'] = $user['user_id'];

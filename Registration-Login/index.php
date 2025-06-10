@@ -83,6 +83,7 @@
     </style>
 </head>
 <body>
+    
     <div class="form-container" id="formContainer">
         <!-- Login Form -->
         <div class="form-side login-side" id="login-form">
@@ -147,6 +148,7 @@
                             <option value="Pediatrics">Pediatrics</option>
                             <option value="Orthopedics">Orthopedics</option>
                             <option value="Dermatology">Dermatology</option>
+                            <option value="Ophthalmology">Ophthalmology</option>
                             <option value="General">General Practice</option>
                         </select>
                     </div>
@@ -165,6 +167,7 @@
                             <option value="Pediatrics">Pediatrics</option>
                             <option value="Orthopedics">Orthopedics</option>
                             <option value="Dermatology">Dermatology</option>
+                            <option value="Ophthalmology">Ophthalmology</option>
                             <option value="General">General Practice</option>
                         </select>
                     </div>
@@ -228,7 +231,8 @@
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  
     <script src="index.js"></script>
 </body>
 </html>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

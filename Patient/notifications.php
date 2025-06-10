@@ -8,8 +8,8 @@
     }
 
     .bell-btn {
-        background: #4a90e2;
-        border: 1px solid rgba(0, 64, 148, 0.69);
+        background: #1abc9c;
+        border: 1.5px solid rgb(15, 143, 117);
         border-radius: 50%;
         width: 50px;
         height: 50px;
@@ -22,7 +22,7 @@
     }
 
     .bell-btn:hover {
-        background: #357abd;
+        background:rgb(19, 167, 137);
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
@@ -315,17 +315,23 @@
 
         // Fetch notifications
         async function fetchNotifications() {
-            try {
-                console.log('Fetching notifications...');
-                const response = await fetch('get_notifications.php');
-                const data = await response.json();
-                console.log('Notifications data:', data);
-                renderNotifications(data);
-            } catch (error) {
-                console.error('Error fetching notifications:', error);
-                list.innerHTML = '<div class="dropdown-notification-item">Error loading notifications</div>';
-            }
-        }
+    try {
+        console.log('Fetching notifications...');
+        const [notifResponse, countResponse] = await Promise.all([
+            fetch('get_notifications.php'),
+            fetch('get_unread_count.php')
+        ]);
+        
+        const notifData = await notifResponse.json();
+        const countData = await countResponse.json();
+        
+        renderNotifications(notifData);
+        updateBadge(countData.unreadCount || 0);
+    } catch (error) {
+        console.error('Error fetching notifications:', error);
+        list.innerHTML = '<div class="dropdown-notification-item">Error loading notifications</div>';
+    }
+}
 
         // Render notifications
         function renderNotifications(data) {
@@ -373,25 +379,30 @@
 
         // Mark notification as read
         async function markAsRead(notificationId, element) {
-            try {
-                console.log('Marking notification as read:', notificationId);
-                const response = await fetch('mark_notification_read.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ notification_id: notificationId })
-                });
-                
-                if (response.ok) {
-                    element.classList.remove('unread');
-                    element.classList.add('read');
-                    updateBadge(parseInt(badge.textContent) - 1);
-                }
-            } catch (error) {
-                console.error('Error marking as read:', error);
-            }
+    try {
+        console.log('Marking notification as read:', notificationId);
+        const response = await fetch('mark_notification_read.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ notification_id: notificationId })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            element.classList.remove('unread');
+            element.classList.add('read');
+            updateBadge(result.unreadCount || 0);
+            
+            // Remove the click handler to prevent multiple marks
+            element.removeEventListener('click', markAsRead);
         }
+    } catch (error) {
+        console.error('Error marking as read:', error);
+    }
+}
 
         function updateBadge(count) {
             badge.textContent = count;
@@ -425,6 +436,14 @@
                 console.error('Error fetching unread count:', error);
             }
         }
+
+        // Initial fetch of both notifications and unread count
+    Promise.all([
+        fetchNotifications(),
+        fetchUnreadCount()
+    ]).catch(error => {
+        console.error('Initial load error:', error);
+    });
 
         console.log('Notification system initialized');
     });

@@ -1,3 +1,23 @@
+// Listen for messages from parent window
+    window.addEventListener('message', function(event) {
+        if (event.data.action === 'showForm') {
+            if (event.data.formType === 'signup') {
+                document.getElementById('show-signup-btn').click();
+            } else {
+                document.getElementById('show-login-btn').click();
+            }
+        }
+    });
+
+    // When forms are submitted, notify parent window to close
+    document.getElementById('login-form').addEventListener('submit', function() {
+        window.parent.postMessage({ action: 'closeModal' }, '*');
+    });
+
+    document.getElementById('signup-form').addEventListener('submit', function() {
+        window.parent.postMessage({ action: 'closeModal' }, '*');
+    });
+
 document.addEventListener('DOMContentLoaded', function() {
     // Form container and tab handling
     const formContainer = document.getElementById('formContainer');
@@ -134,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (specialty) {
             try {
                 console.log(`Fetching doctors for specialty: ${specialty}`);
-                const response = await fetch('/fyp/Registration-Login/get_doctors.php?specialty=' + encodeURIComponent(specialty), {
+                const response = await fetch('/fyp/Welcome/get_doctors.php?specialty=' + encodeURIComponent(specialty), {
                     headers: {
                         'Accept': 'application/json'
                     }
